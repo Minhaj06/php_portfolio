@@ -954,11 +954,12 @@ $(".edit_service_btn").click(function(e) {
     // Get data from input fields
     let service_name = $("#edit_service_name").val();
     let service_icon = $("#edit_service_icon").val();
-    console.log(td_service_icon)
-    console.log(service_icon)
 
-    // Check service already exists or not for add service
+    // Check service already exists or not for edit service
     $("#edit_service_name").keyup(function(e) {
+
+        let service_name = $("#edit_service_name").val();
+
         $.ajax({
             type: "POST",
             url: "code.php",
@@ -968,7 +969,7 @@ $(".edit_service_btn").click(function(e) {
             },
 
             success: function(response) {
-                if (responses != "0" && service_name != td_service_name) {
+                if ((response != "0") && (service_name != td_service_name)) {
                     $(".edit_service_error").html(
                         "<span class='text-danger'>Service name already taken!</span>"
                     );
@@ -982,6 +983,27 @@ $(".edit_service_btn").click(function(e) {
             }
         });
 
+    });
+
+    // Check service icon valid or not for edit service
+    $("#edit_service_icon").keyup(function(e) {
+
+        let service_icon = $("#edit_service_icon").val();
+
+        let condition1 = service_icon.includes('<i class="');
+        let condition2 = service_icon.includes('"></i>');
+
+        if (!(condition1 && condition2)) {
+            $(".edit_service_icon_error").html(
+                "<span class='text-danger'>Not valid fontawesome icon</span>"
+            );
+            $("#update_service_btn").attr("disabled", true);
+        } else {
+            $(".edit_service_icon_error").html(
+                "<span class='text-success'>Valid icon</span>"
+            );
+            $("#update_service_btn").attr("disabled", false);
+        }
     });
 
 

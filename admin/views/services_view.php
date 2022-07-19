@@ -144,7 +144,7 @@
                     <input type="text" class="form-control fs-4" id="add_service_icon" name="add_service_icon"
                         placeholder='<i class="fa-brands fa-html5"></i>'>
                     <p class="mt-2 mb-0 text-success text-decoration-underline fs-4">
-                        Use free fontawesome icon class like
+                        Use only free fontawesome icon class like
                     </p>
                     <pre
                         class="text-success fw-bold text-lowercase"><code id="code"><i class="fa-brands fa-html5"></i></code></pre>
@@ -185,7 +185,7 @@
                     <input type="text" class="form-control fs-4" id="edit_service_icon" name="edit_service_icon"
                         placeholder='<i class="fa-brands fa-html5"></i>'>
                     <p class="mt-2 mb-0 text-success text-decoration-underline fs-4">
-                        Use free fontawesome icon class like
+                        Use only free fontawesome icon class like
                     </p>
                     <pre
                         class="text-success fw-bold text-lowercase"><code id="editCodeSample"><i class="fa-brands fa-html5"></i></code></pre>

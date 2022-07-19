@@ -417,25 +417,23 @@ if (isset($_POST['add_service'])) {
 
 
 // Edit service starts here
+
 // Check service name already exists or not
-if (isset($_POST['checkAddServiceName'])) {
-    $service_name = $_POST['add_service_name'];
-    $check_service_name_query = mysqli_query($conn, "SELECT service_name FROM service_items WHERE service_name = '$service_name' ");
-
-    echo mysqli_num_rows($check_service_name_query);
-}
-
-function exist($requestFrom, $checkData, $table_name, $column)
+function check_exist($checkData, $table_name, $column)
 {
     global $conn;
 
-    if (isset($requestFrom)) {
-        $service_name = $_POST['add_service_name'];
-        $check_service_name_query = mysqli_query($conn, "SELECT service_name FROM service_items WHERE service_name = '$service_name' ");
+    $check_query = mysqli_query($conn, "SELECT $column FROM $table_name WHERE $column = '$checkData' ");
 
-        echo mysqli_num_rows($check_service_name_query);
-    }
+    echo mysqli_num_rows($check_query);
 }
+
+if (isset($_POST['checkEditServiceName'])) {
+    check_exist($_POST['edit_service_name'], 'service_items', 'service_name');
+}
+
+
+
 // Edit service ends here
 
 
