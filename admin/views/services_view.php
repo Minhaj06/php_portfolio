@@ -21,7 +21,7 @@
     <!-- About Card Starts Here -->
     <div class="row g-4">
         <?php include("../admin/assets/includes/message.php"); ?>
-        <div class="card1 col-xl-6">
+        <div class="card1 col-lg-6">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h2 class="mb-0">Service Content</h2>
@@ -41,7 +41,7 @@
             </div>
         </div>
 
-        <div class="card2 col-xl-6">
+        <div class="card2 col-lg-6">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h2 class="mb-0">Service Items</h2>
