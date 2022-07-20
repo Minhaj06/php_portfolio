@@ -63,14 +63,15 @@
                                         id="skill_percentage"><?= $select["skill_percentage"] ?></span>%</span>
 
                                 <div class="skill_edit_delete">
-                                    <span data-id="<?= $select['skill_id'] ?>" class="fs-4 text-capitalize"
-                                        id="edit_skill_btn" role="button" data-bs-target="#edit_skill_modal"
-                                        data-bs-toggle="modal">
+                                    <span data-id="<?= $select['skill_id'] ?>"
+                                        class="fs-4 text-capitalize edit_skill_btn" role="button"
+                                        data-bs-target="#edit_skill_modal" data-bs-toggle="modal">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </span>
 
-                                    <span data-id="<?= $select['skill_id'] ?>" class="fs-4 text-capitalize ms-4"
-                                        id="delete_skill_btn" role="button" data-bs-target="#" data-bs-toggle="">
+                                    <span data-id="<?= $select['skill_id'] ?>"
+                                        class="fs-4 text-capitalize ms-4 delete_skill_btn" role="button"
+                                        data-bs-target="#" data-bs-toggle="">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </span>
                                 </div>
@@ -119,14 +120,15 @@
                                 id="skill_percentage"><?= $select["skill_percentage"] ?></span>%</span>
 
                         <div class="skill_edit_delete">
-                            <span data-id="<?= $select['skill_id'] ?>" class="fs-4 text-capitalize" id="edit_skill_btn"
+                            <span data-id="<?= $select['skill_id'] ?>" class="fs-4 text-capitalize edit_skill_btn"
                                 role="button" data-bs-target="#edit_skill_modal"
                                 onclick="$('#edit_skill_modal').modal('toggle')">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </span>
 
-                            <span data-id="<?= $select['skill_id'] ?>" class="fs-4 text-capitalize ms-4"
-                                id="delete_skill_btn" role="button" data-bs-target="#" data-bs-toggle="">
+                            <span data-id="<?= $select['skill_id'] ?>"
+                                class="fs-4 text-capitalize ms-4 delete_skill_btn" role="button" data-bs-target="#"
+                                data-bs-toggle="">
                                 <i class="fa-solid fa-trash-can"></i>
                             </span>
                         </div>
@@ -353,14 +355,11 @@
 
 <!-- Update Modal Ends Here -->
 
-
 <!-- Delete Modal Starts Here -->
 <?php
-
 $confirm_title = "Delete skill";
 $confirm_text = "Do you want to delete this skill?";
 
 include_once "../admin/assets/includes/confirmBox.php";
-
 ?>
 <!-- Delete Modal Starts Here -->

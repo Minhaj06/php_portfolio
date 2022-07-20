@@ -335,10 +335,7 @@ if (isset($_POST['update_skill'])) {
     $skill_percentage = $_POST['skill_percentage'];
     $skill_color = $_POST['skill_color'];
 
-    // echo $skill_color . $skill_name . $skill_id . $skill_percentage;
-
     // check skill already exists or not
-
     $prev_skill_name = mysqli_fetch_assoc(mysqli_query($conn, "SELECT skill_name FROM `skills` WHERE skill_id='$skill_id' "))['skill_name'];
 
 
@@ -416,7 +413,7 @@ if (isset($_POST['add_service'])) {
 // Add service ends here
 
 
-// Edit service starts here
+// Edit service item start here
 
 // Check service name already exists or not
 function check_exist($checkData, $table_name, $column)
@@ -432,9 +429,33 @@ if (isset($_POST['checkEditServiceName'])) {
     check_exist($_POST['edit_service_name'], 'service_items', 'service_name');
 }
 
+// update data
+if (isset($_POST['update_service'])) {
+
+    $service_id = $_POST['service_id'];
+    $service_name = $_POST['service_name'];
+    $service_icon = $_POST['service_icon'];
+
+    $query = mysqli_query($conn, "UPDATE  `service_items` SET service_name = '$service_name', service_icon = '$service_icon' WHERE serv_item_id = '$service_id' ");
+
+    if ($query) {
+        echo "Service added successfully";
+    } else {
+        echo "Something went wrong";
+    }
+}
+// Edit service item start here
 
 
-// Edit service ends here
+// Delete service item start here
+if (isset($_POST['delete_service'])) {
+    $service_delete_id = $_POST['service_delete_id'];
+
+    $query = mysqli_query($conn, "DELETE FROM `service_items` WHERE serv_item_id = '$service_delete_id' ");
+
+    echo "Service deleted succfully";
+}
+// Delete service item end here
 
 
 // Service content ends

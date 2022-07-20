@@ -89,7 +89,7 @@
 
                                 <td class="align-middle">
                                     <span data-id="<?= $serv_item_result['serv_item_id'] ?>"
-                                        class="fs-4 text-capitalize edit_service_btn" role="button"
+                                        class="fs-4 text-capitalize" id="edit_service_btn" role="button"
                                         data-bs-target="#edit_service_modal" data-bs-toggle="modal">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </span>
@@ -116,7 +116,6 @@
     </div>
     <!-- About Card Ends Here -->
 </div>
-
 
 
 <!-- Add Sevice Itme Modal Starts -->
@@ -146,8 +145,7 @@
                     <p class="mt-2 mb-0 text-success text-decoration-underline fs-4">
                         Use only free fontawesome icon class like
                     </p>
-                    <pre
-                        class="text-success fw-bold text-lowercase"><code id="code"><i class="fa-brands fa-html5"></i></code></pre>
+                    <pre class="text-success fw-bold text-lowercase"><code id="code"></code></pre>
                 </div>
             </div>
             <div class="modal-footer">
@@ -182,24 +180,31 @@
                     <span class="edit_service_icon_error ms-3">
                         <span class="text-danger"></span>
                     </span>
-                    <input type="text" class="form-control fs-4" id="edit_service_icon" name="edit_service_icon"
-                        placeholder='<i class="fa-brands fa-html5"></i>'>
+                    <input type="text" class="form-control fs-4 text-lowercase" id="edit_service_icon"
+                        name="edit_service_icon" placeholder='<i class="fa-brands fa-html5"></i>'>
                     <p class="mt-2 mb-0 text-success text-decoration-underline fs-4">
                         Use only free fontawesome icon class like
                     </p>
-                    <pre
-                        class="text-success fw-bold text-lowercase"><code id="editCodeSample"><i class="fa-brands fa-html5"></i></code></pre>
+                    <pre class="text-success fw-bold text-lowercase"><code id="editCodeSample"></code></pre>
                 </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>
-                <button type="submit" id="update_service_btn" class="btn btn-secondary fs-4">Update Service</button>
+                <button type="" id="update_service_btn" class="btn btn-secondary fs-4">Update Service</button>
             </div>
         </div>
     </div>
 </div>
 <!-- Edit Sevice Itme Modal Ends -->
 
+<!-- Delete Modal Starts Here -->
+<?php
+$confirm_title = "Delete service";
+$confirm_text = "Do you want to delete this service?";
+
+include_once "../admin/assets/includes/confirmBox.php";
+?>
+<!-- Delete Modal Starts Here -->
 
 <!-- Update Sevice Content Modal Starts -->
 <div class="modal fade text-capitalize" id="edit_service_content_modal" data-bs-backdrop="static">
@@ -231,7 +236,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>
-                <button type="submit" id="update_service_btn" class="btn btn-secondary fs-4">Update</button>
+                <button type="submit" id="update_service_content_btn" class="btn btn-secondary fs-4">Update</button>
             </div>
         </div>
     </div>

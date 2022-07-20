@@ -237,9 +237,9 @@ outline: 0px !important;
 box-shadow: none !important;
 }
 
-.message_show {
+/*.message_show {
 display: none;
-}
+}*/
 
 .progress_color[type="radio"] {
 width: 3.5rem;

@@ -73,9 +73,27 @@ dropdown2.addEventListener("click", () => {
 
 // #########################################################################
 
+// Data table ready function
 $(document).ready(function() {
     $("#usersDataTable").DataTable();
 });
+
+// alert message function
+function showMessage() {
+    document.querySelector(".message_show").classList.remove("d-none");
+}
+document.querySelector(".btn-close").addEventListener("click", function() {
+    document.querySelector(".message_show").classList.add("d-none");
+})
+
+// Reload location On dismiss modal
+function modalDismiss() {
+    document.querySelectorAll('[data-bs-dismiss="modal"]').forEach(item => {
+        item.addEventListener("click", function() {
+            location.reload();
+        })
+    })
+}
 
 // $(document).ready(function() {
 // check username exists or not
@@ -181,7 +199,7 @@ $(document).on("submit", "#add_user_form", function(e) {
                     $("#add_user_modal").modal("toggle");
 
                     // Messsage Show
-                    $(".message_show").show();
+                    showMessage();
                     $(".message_show .ation_message").html(response);
 
                     // Refresh Table Data
@@ -206,8 +224,11 @@ $(document).on("submit", "#add_user_form", function(e) {
 // Update User Data
 // $(document).ready(function() {
 $(document).on("click", "span[data-role=edit]", function() {
-    // Store data by id
+
     let id = $(this).data("id");
+    modalDismiss();
+
+    // Store data by id
     let fname = $("#" + id)
         .children("td[data-target=fname]")
         .text();
@@ -272,7 +293,7 @@ $(document).on("click", "span[data-role=edit]", function() {
             },
 
             success: function(data) {
-                if (data != "0" && username != td_username) {
+                if ((data != "0") && ((username.toLowerCase()) != (td_username.toLowerCase()))) {
                     $(".username_error").html(
                         "<span class='text-danger'>Username already taken!</span>"
                     );
@@ -391,7 +412,7 @@ $(document).on("click", "span[data-role=edit]", function() {
                         }
 
                         // Messsage Show
-                        $(".message_show").show();
+                        showMessage();
                         $(".message_show .ation_message").html(response);
 
                         $("#role_select").html(
@@ -457,8 +478,11 @@ $(document).on("click", "span[data-role=view]", function() {
 
 // Delete user code starts here
 $(document).on("click", "span[data-role=delete]", function() {
+
     $("#confirmBox").modal("show");
     let id = $(this).data("id");
+    modalDismiss();
+
     let username = $("#" + id)
         .children("td[data-target=username]")
         .text();
@@ -477,7 +501,7 @@ $(document).on("click", "span[data-role=delete]", function() {
                 $("#" + id).hide();
 
                 // Message Show
-                $(".message_show").show();
+                showMessage();
                 if (role == 'Admin') {
                     $(".message_show .ation_message").html("Admin deleted successfully...");
                 } else {
@@ -550,7 +574,7 @@ $(".edit_home_btn").click(function(e) {
                     $("#home_content").load(location.href + " #home_content>*", "");
 
                     // Messsage Show
-                    $(".message_show").show();
+                    showMessage();
                     $(".message_show .ation_message").html(response);
                 },
                 error: function(request, error) {
@@ -610,7 +634,8 @@ $(".edit_about_btn").click(function(e) {
                     $("#about_content").load(location.href + " #about_content>*", "");
 
                     // Messsage Show
-                    $(".message_show").show();
+                    // showMessage();
+                    showMessage();
                     $(".message_show .ation_message").html(response);
                 },
                 error: function(request, error) {
@@ -661,7 +686,7 @@ $("#add_skill_btn").click(function(e) {
                 // $("#about_content").load(location.href + " #about_content>*", "");
 
                 // Messsage Show
-                $(".message_show").show();
+                showMessage();
                 $(".message_show .ation_message").html(response);
             }
         });
@@ -672,10 +697,11 @@ $("#add_skill_btn").click(function(e) {
 
 
 // Edit Skill
-$(document).on("click", "#edit_skill_btn", function(e) {
+$(document).on("click", ".edit_skill_btn", function(e) {
     e.preventDefault();
 
     let skill_id = $(this).data("id");
+    modalDismiss();
 
     // Storing data by id
     let skill_name = $("#" + skill_id + " #skill_name").text(); //
@@ -714,9 +740,7 @@ $(document).on("click", "#edit_skill_btn", function(e) {
         // Get data from input fields
         let skill_name = $("#edit_skill_name").val();
         let skill_percentage = $("#edit_skill_percentage").val();
-
         let skill_color = $("input[name='edit_skill_color']:checked").val();
-
 
         $.ajax({
             type: "POST",
@@ -737,7 +761,7 @@ $(document).on("click", "#edit_skill_btn", function(e) {
                 $("#view_all_skills").load(location.href + " #view_all_skills>*", "");
 
                 // Messsage Show
-                $(".message_show").show();
+                showMessage();
                 $(".message_show .ation_message").html(response);
             }
         });
@@ -748,15 +772,13 @@ $(document).on("click", "#edit_skill_btn", function(e) {
 
 
 // Delete Skill
-$(document).on("click", "#delete_skill_btn", function(e) {
+$(document).on("click", ".delete_skill_btn", function(e) {
 
     $("#confirmBox").modal("show");
     let skill_id = $(this).data("id");
+    modalDismiss();
 
     $("#confirm_ok").click(function() {
-
-
-
         $.ajax({
             url: "code.php",
             type: "POST",
@@ -773,15 +795,13 @@ $(document).on("click", "#delete_skill_btn", function(e) {
                 $("#about_content").load(location.href + " #about_content>*", "");
 
                 // Messsage Show
-                $(".message_show").show();
+                showMessage();
                 $(".message_show .ation_message").html(response);
                 $("#view_all_skills").load(location.href + " #view_all_skills>*", "");
 
             },
         });
     });
-
-
 });
 // Update About Section Ends Here
 
@@ -791,7 +811,7 @@ $(document).on("click", "#delete_skill_btn", function(e) {
 // Service Section Starts Here
 
 // Update service content
-$("#update_service_btn").click(function(e) {
+$("#update_service_content_btn").click(function(e) {
     e.preventDefault();
 
     let service_title = $("#service_title").val();
@@ -819,11 +839,11 @@ $("#update_service_btn").click(function(e) {
                 // hide modal
                 $("#edit_service_content_modal").modal("toggle");
 
-                // Refresh Skill Content
+                // Refresh Service Content
                 $("#service_content").load(location.href + " #service_content>*", "");
 
                 // Messsage Show
-                $(".message_show").show();
+                showMessage();
                 $(".message_show .ation_message").html(response);
             }
         });
@@ -835,8 +855,8 @@ $("#update_service_btn").click(function(e) {
 // Add Service Starts Here
 $("#add_service").click(function(e) {
     e.preventDefault();
-    const code = document.getElementById("code").innerHTML;
-    const replaceCode = document.getElementById("code").innerText = code;
+
+    $("#code").text('<i class="fa-brands fa-html5"></i>');
 
     // Check service already exists or not for add service
     $("#add_service_name").keyup(function(e) {
@@ -917,11 +937,13 @@ $("#add_service").click(function(e) {
                     // hide modal
                     $("#add_service_modal").modal("toggle");
 
-                    // Refresh Skill Content
+                    // Refresh Services
                     $("#service_items").load(location.href + " #service_items>*", "");
+                    // Refresh form
+                    $("#add_service_modal").load(location.href + " #add_service_modal>*", "");
 
                     // Messsage Show
-                    $(".message_show").show();
+                    showMessage();
                     $(".message_show .ation_message").html(response);
                 }
             });
@@ -930,18 +952,18 @@ $("#add_service").click(function(e) {
 });
 
 
-// Add Service Ends Here
+// // Add Service Ends Here
 
 
 
 // Edit service start here
-$(".edit_service_btn").click(function(e) {
+// $("#edit_service_btn").click(function(e) {
+$(document).on("click", "#edit_service_btn", function(e) {
     e.preventDefault();
 
-    const editCodeSample = document.getElementById("editCodeSample").innerHTML;
-    const replaceeditCodeSample = document.getElementById("editCodeSample").innerText = editCodeSample;
-
     let service_id = $(this).data("id");
+    $("#editCodeSample").text('<i class="fa-brands fa-html5"></i>');
+    modalDismiss();
 
     // Get data from table td
     let td_service_name = $.trim($("#" + service_id).children("td[data-target=service_name]").text());
@@ -969,16 +991,24 @@ $(".edit_service_btn").click(function(e) {
             },
 
             success: function(response) {
-                if ((response != "0") && (service_name != td_service_name)) {
+                if ((response != "0") && ((service_name.toLowerCase()) != (td_service_name.toLowerCase()))) {
                     $(".edit_service_error").html(
                         "<span class='text-danger'>Service name already taken!</span>"
                     );
                     $("#update_service_btn").attr("disabled", true);
+                    $("#edit_service_icon").attr("disabled", true);
+                } else if (service_name === "") {
+                    $(".edit_service_error").html(
+                        "<span class='text-danger'>Couldn't be empty</span>"
+                    );
+                    $("#update_service_btn").attr("disabled", true);
+                    $("#edit_service_icon").attr("disabled", true);
                 } else {
                     $(".edit_service_error").html(
                         "<span class='text-success'>It's available</span>"
                     );
                     $("#update_service_btn").attr("disabled", false);
+                    $("#edit_service_icon").attr("disabled", false);
                 }
             }
         });
@@ -998,17 +1028,88 @@ $(".edit_service_btn").click(function(e) {
                 "<span class='text-danger'>Not valid fontawesome icon</span>"
             );
             $("#update_service_btn").attr("disabled", true);
+            $("#edit_service_name").attr("disabled", true);
+        } else if (service_icon === "") {
+            $(".edit_service_error").html(
+                "<span class='text-danger'>Couldn't be empty</span>"
+            );
+            $("#update_service_btn").attr("disabled", true);
+            $("#edit_service_name").attr("disabled", true);
         } else {
             $(".edit_service_icon_error").html(
                 "<span class='text-success'>Valid icon</span>"
             );
             $("#update_service_btn").attr("disabled", false);
+            $("#edit_service_name").attr("disabled", false);
         }
     });
 
 
+    $("#update_service_btn").click(function(e) {
+        e.preventDefault();
+        let service_name = $("#edit_service_name").val();
+        let service_icon = $("#edit_service_icon").val();
+
+        $.ajax({
+            type: "POST",
+            url: "code.php",
+            data: {
+                update_service: 1,
+                service_id: service_id,
+                service_name: service_name,
+                service_icon: service_icon
+            },
+            success: function(response) {
+                // hide modal
+                $("#edit_service_modal").modal("toggle");
+
+                // Refresh Skill Content
+                $("#service_items").load(location.href + " #service_items>*", "");
+
+                // Messsage Show
+                showMessage();
+                $(".message_show .ation_message").html(response);
+            }
+        });
+    });
+
 });
+// });
 // Edit service end here
+
+
+// Delete service starts here
+$(document).on("click", "#delete_service_btn", function(e) {
+    e.preventDefault();
+
+    $("#confirmBox").modal("show");
+    let service_delete_id = $(this).data("id");
+    modalDismiss();
+
+    $("#confirm_ok").click(function() {
+        $.ajax({
+            url: "code.php",
+            type: "POST",
+            data: {
+                delete_service: 1,
+                service_delete_id: service_delete_id,
+            },
+            success: function(response) {
+
+                // hide modal
+                $("#confirmBox").modal("toggle");
+
+                // Refresh Services
+                $("#service_items").load(location.href + " #service_items>*", "");
+
+                // Messsage Show
+                showMessage();
+                $(".message_show .ation_message").html(response);
+            },
+        });
+    });
+});
+// Delete service end here
 
 
 // Service Section Ends Here

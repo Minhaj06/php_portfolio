@@ -32,9 +32,11 @@ if (!isset($_SESSION['auth'])) {
 
     <!-- main content starts here -->
 
-    <?php include_once("assets/includes/header.php") ?>
-    <?php include_once("assets/includes/alertBox.php") ?>
-    <main class="main">
+    <?php
+    include_once("assets/includes/header.php");
+    include_once("assets/includes/alertBox.php");
+    ?>
+    <main class="main" id="main">
         <?php
 
         if (isset($view)) {
