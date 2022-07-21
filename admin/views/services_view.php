@@ -4,7 +4,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item breadcrumb-active"><a href="index.php">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="services_update.php">All Services</a></li>
+            <li class="breadcrumb-item"><a href="services_update.php">Services</a></li>
         </ol>
     </nav>
 

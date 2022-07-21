@@ -376,6 +376,7 @@ background: var(--sidebar-color);
 padding: 1rem;
 padding-top: 2rem;
 transition: var(--tran-03);
+z-index: 1020;
 }
 
 .sidebar li {
@@ -1196,6 +1197,18 @@ transition: var(--tran-03);
 
 /* media queries starts here */
 
+@media (max-width: 1400px) {
+.main {
+left: 8rem;
+width: calc(100% - 8rem)
+}
+
+#footer {
+left: 8rem;
+width: calc(100% - 8rem);
+}
+}
+
 @media (max-width: 1200px) {
 .share_single i {
 margin-left: 0;
@@ -1240,12 +1253,12 @@ grid-template-areas: "Counter" "Write_new" "Shares" "Comments" "Used" "TopArt" "
 }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 500px) {
 html {
-font-size: 50%;
+font-size: 55%;
 }
 .sidebar.close {
-display: none;
+left: -300px;
 }
 .sidebar.close~.main {
 left: 0;
@@ -1259,8 +1272,4 @@ transition: var(--tran-03);
 font-size: 2.5rem;
 }
 }
-
-@media (max-width: 320px) {}
-
-
 /* media queries ends here */
