@@ -1253,9 +1253,9 @@ grid-template-areas: "Counter" "Write_new" "Shares" "Comments" "Used" "TopArt" "
 }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 400px) {
 html {
-font-size: 55%;
+font-size: 50%;
 }
 .sidebar.close {
 left: -300px;
@@ -1270,6 +1270,14 @@ transition: var(--tran-03);
 }
 .total_shares strong {
 font-size: 2.5rem;
+}
+#footer {
+left: 0;
+width: 100%;
+}
+.sidebar.close~.main #footer {
+left: 0;
+width: 100%;
 }
 }
 /* media queries ends here */
