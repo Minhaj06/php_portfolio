@@ -53,7 +53,7 @@
                 <h2 class="modal-title">All Services</h2>
                 <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
             </div>
-            <div class="modal-body">
+            <div class="modal-body py-5">
                 <div class="inner_service container vertical_path">
                     <div class="content">
                         <h2 class="heading">
@@ -63,7 +63,7 @@
                             <?= $select['service_desc'] ?>
                         </p>
                     </div>
-                    <div class="service_box row g-5">
+                    <div class="service_box row g-5 justify-content-center">
 
                         <?php
                         $serv_itmes_query = mysqli_query($conn, "SELECT * FROM `service_items`");

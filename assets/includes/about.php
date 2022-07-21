@@ -52,7 +52,7 @@
                     <h2 class="modal-title">All Skills</h2>
                     <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
                 </div>
-                <div class="modal-body pb-5">
+                <div class="modal-body py-5">
 
                     <ul class="skill_progress">
                         <div class="row g-5">
