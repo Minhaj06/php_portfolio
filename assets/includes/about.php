@@ -46,29 +46,36 @@
 
     <!-- Show All Skills Modal Starts -->
     <div class="modal fade text-capitalize" id="view_all_skills" data-bs-backdrop="static">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl modal-fullscreen-g-down">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="modal-title">All Skills</h2>
                     <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body pb-5">
+
                     <ul class="skill_progress">
-                        <?php
+                        <div class="row g-5">
+                            <?php
 
-                        $skill_query = mysqli_query($conn, "SELECT * FROM `skills`");
+                            $skill_query = mysqli_query($conn, "SELECT * FROM `skills`");
 
-                        if (mysqli_num_rows($skill_query) > 0) {
-                            while ($skill_result = mysqli_fetch_array($skill_query)) {
-                        ?>
+                            if (mysqli_num_rows($skill_query) > 0) {
+                                while ($skill_result = mysqli_fetch_array($skill_query)) {
+                            ?>
 
-                        <li class="<?= $skill_result["skill_name"] . $skill_result["skill_id"] ?>">
-                            <?= $skill_result["skill_name"] . " " . $skill_result["skill_percentage"] ?>%</li>
+                            <div class="col-lg-6">
+                                <li style="margin: 0;"
+                                    class="<?= $skill_result["skill_name"] . $skill_result["skill_id"] ?>">
+                                    <?= $skill_result["skill_name"] . " " . $skill_result["skill_percentage"] ?>%</li>
+                            </div>
 
-                        <?php }
-                        }
-                        ?>
+                            <?php }
+                            }
+                            ?>
+                        </div>
                     </ul>
+
                 </div>
                 <div class="modal-footer">
                     <button class="btn fs-4" data-bs-dismiss="modal"

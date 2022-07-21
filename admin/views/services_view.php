@@ -20,6 +20,11 @@
 
     <!-- About Card Starts Here -->
     <div class="row g-4">
+        <style>
+        .message_show {
+            margin-bottom: 0 !important;
+        }
+        </style>
         <?php include("../admin/assets/includes/message.php"); ?>
         <div class="card1 col-lg-6">
             <div class="card">
