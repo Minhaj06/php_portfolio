@@ -124,14 +124,38 @@
 
             <div class="modal-body">
 
-                <div class="form-group">
-                    <label for="experience" class="label-control">Year of Experience</label>
+                <div class="form-group mb-3">
+                    <label for="experience" class="label-control">Clients</label>
                     <div class="input_icon d-flex align-items-center">
                         <i class="fa-solid fa-people-carry-box fs-4 px-3"></i>
-                        <input class="form-control fs-4" type="number" name="clients" id="clients"
+                        <input class="form-control fs-4" type="number" name="clients_all" id="clients_all"
                             placeholder="Number of clients" value="<?= $clients ?>">
+                    </div>
+                </div>
 
+                <div class="form-group mb-3">
+                    <label for="experience" class="label-control">Projects</label>
+                    <div class="input_icon d-flex align-items-center">
+                        <i class="fa-solid fa-people-carry-box fs-4 px-3"></i>
+                        <input class="form-control fs-4" type="number" name="projects_all" id="projects_all"
+                            placeholder="Number of clients" value="<?= $projects ?>">
+                    </div>
+                </div>
 
+                <div class="form-group mb-3">
+                    <label for="experience" class="label-control">Awards</label>
+                    <div class="input_icon d-flex align-items-center">
+                        <i class="fa-solid fa-people-carry-box fs-4 px-3"></i>
+                        <input class="form-control fs-4" type="number" name="awards_all" id="awards_all"
+                            placeholder="Number of clients" value="<?= $awards ?>">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="experience" class="label-control">Awards</label>
+                    <div class="input_icon d-flex align-items-center">
+                        <i class="fa-solid fa-people-carry-box fs-4 px-3"></i>
+                        <input class="form-control fs-4" type="number" name="experience_all" id="experience_all"
+                            placeholder="Number of clients" value="<?= $experience ?>">
                     </div>
                 </div>
 
