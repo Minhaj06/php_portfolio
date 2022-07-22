@@ -6,9 +6,11 @@
                 <img src="assets/images/<?= $select['about_image'] ?>" alt="skill_img" />
                 <div class="experience_highlight">
                     <div class="experience_content">
-                        <h3><?= $select['experience'] ?></h3>
-                        <h4>Years of</h4>
-                        <h4>Experience</h4>
+                        <div class="text-center">
+                            <h3><?php echo (str_pad($select['experience'], 2, '0', STR_PAD_LEFT)) ?></h3>
+                            <h4>Years of</h4>
+                            <h4>Experience</h4>
+                        </div>
                     </div>
                 </div>
             </div>

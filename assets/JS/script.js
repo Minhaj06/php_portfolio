@@ -86,14 +86,14 @@ window.addEventListener("load", () => {
 
                 if (count < target) {
                     counter.innerText = Math.ceil(count + increament);
-                    setTimeout(updateCount, 70);
+                    setTimeout(updateCount, 150);
                 } else {
                     counter.innerText = target;
                 }
             };
             updateCount();
         });
-    }, 6000);
+    }, 600);
 });
 //testimonial swiper
 var swiper = new Swiper(".testimonial_slider", {

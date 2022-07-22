@@ -33,7 +33,8 @@
                     <h3 class="h1"> <?= $result['about_title'] ?> </h3>
                     <p class="mt-3"><?= $result['about_desc'] ?></p>
                     <h3 class="mb-3">Working Experience: <span
-                            class="text-decoration-underline"><?= $result['experience'] ?> Years</span>
+                            class="text-decoration-underline"><?php echo (str_pad($result['experience'], 2, '0', STR_PAD_LEFT)) ?>
+                            Years</span>
                     </h3>
 
                     <!-- style="color: var(--primary-color)" -->
