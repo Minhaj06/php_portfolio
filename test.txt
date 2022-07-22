@@ -9,7 +9,7 @@
     </nav>
 
 
-    <?php include("../admin/assets/includes/message.php"); ?>
+
     <!-- Achievements Card Starts Here -->
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
@@ -113,7 +113,7 @@
 
 
 <!-- Edit All Achievements Start Here -->
-<div class="modal fade" id="edit_all_achive_modal">
+<!-- <div class="modal fade" id="edit_all_achive_modal">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -138,5 +138,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Edit All Achievements End Here -->

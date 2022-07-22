@@ -1125,7 +1125,6 @@ window.addEventListener("load", () => {
             let updateCount = () => {
                 let target = counter.getAttribute("data-target");
                 let count = +counter.innerText;
-
                 let increament = target / time;
 
                 if (count < target) {
