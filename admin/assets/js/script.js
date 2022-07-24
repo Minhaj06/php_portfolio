@@ -1116,7 +1116,8 @@ $(document).on("click", "#delete_service_btn", function(e) {
 
 // Achievements Section Starts Here
 // Achivements counter
-window.addEventListener("load", () => {
+
+function animCounter() {
     setTimeout(function() {
         let counters = document.querySelectorAll(".counter");
         let time = 300;
@@ -1137,5 +1138,42 @@ window.addEventListener("load", () => {
             updateCount();
         });
     }, 700);
+}
+
+animCounter();
+
+
+$(document).on("click", "#update_achivements", function(e) {
+    e.preventDefault();
+
+    let clients_all = $("#clients_all").val();
+    let projects_all = $("#projects_all").val();
+    let awards_all = $("#awards_all").val();
+    let experience_all = $("#experience_all").val();
+
+    $.ajax({
+        type: "POST",
+        url: "code.php",
+        data: {
+            update_achievements: 1,
+            clients_all: clients_all,
+            projects_all: projects_all,
+            awards_all: awards_all,
+            experience_all: experience_all,
+        },
+        success: function(response) {
+            // hide modal
+            $("#edit_all_achive_modal").modal("toggle");
+
+            // Refresh Services
+            $("#achievements_content").load(location.href + " #achievements_content>*", "");
+
+            // Messsage Show
+            showMessage();
+            $(".message_show .ation_message").html(response);
+
+            animCounter();
+        }
+    });
 });
 // Achievements Section Ends Here

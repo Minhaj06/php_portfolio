@@ -453,9 +453,32 @@ if (isset($_POST['delete_service'])) {
 
     $query = mysqli_query($conn, "DELETE FROM `service_items` WHERE serv_item_id = '$service_delete_id' ");
 
-    echo "Service deleted succfully";
+    if ($query) {
+        echo "Service deleted succfully";
+    } else {
+        echo "Service not deleted";
+    }
 }
 // Delete service item end here
 
-
 // Service content ends
+
+
+// Achievements content start
+
+if (isset($_POST['update_achievements'])) {
+    $clients_all = $_POST['clients_all'];
+    $projects_all = $_POST['projects_all'];
+    $awards_all = $_POST['awards_all'];
+    $experience_all = $_POST['experience_all'];
+
+    $query = mysqli_query($conn, "UPDATE `achievements` SET clients = '$clients_all', projects = '$projects_all', awards = '$awards_all', experience = '$experience_all' WHERE achieve_id = 1");
+
+    if ($query) {
+        echo "Achivements updated successfully";
+    } else {
+        echo "Achievements not updated";
+    }
+}
+
+// Achievements content end

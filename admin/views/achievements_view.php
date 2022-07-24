@@ -11,7 +11,7 @@
 
     <?php include("../admin/assets/includes/message.php"); ?>
     <!-- Achievements Card Starts Here -->
-    <div class="card">
+    <div class="card" id="achievements_content">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h2 class="mb-0">Achievements</h2>
 
@@ -59,7 +59,7 @@
                 <div class="col-md-6 col-xl-3">
                     <div class="card rounded-3">
                         <div class="card-header rounded-top d-flex justify-content-between align-items-center">
-                            <h3>Clients</h3>
+                            <h3>Projects</h3>
                             <span role="button"><i class="fa-solid fa-pen-to-square"></i>Edit</span>
                         </div>
                         <div class="card-body py-5 d-flex flex-column justify-content-center align-items-center"
@@ -75,7 +75,7 @@
                 <div class="col-md-6 col-xl-3">
                     <div class="card rounded-3">
                         <div class="card-header rounded-top d-flex justify-content-between align-items-center">
-                            <h3>Clients</h3>
+                            <h3>Awards</h3>
                             <span role="button"><i class="fa-solid fa-pen-to-square"></i>Edit</span>
                         </div>
                         <div class="card-body py-5 d-flex flex-column justify-content-center align-items-center"
@@ -91,7 +91,7 @@
                 <div class="col-md-6 col-xl-3">
                     <div class="card rounded-3">
                         <div class="card-header rounded-top d-flex justify-content-between align-items-center">
-                            <h3>Clients</h3>
+                            <h3>Experience</h3>
                             <span role="button"><i class="fa-solid fa-pen-to-square"></i>Edit</span>
                         </div>
                         <div class="card-body py-5 d-flex flex-column justify-content-center align-items-center"
@@ -113,7 +113,7 @@
 
 
 <!-- Edit All Achievements Start Here -->
-<div class="modal fade" id="edit_all_achive_modal">
+<div class="modal fade" id="edit_all_achive_modal" data-bs-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -127,8 +127,8 @@
                 <div class="form-group mb-3">
                     <label for="experience" class="label-control">Clients</label>
                     <div class="input_icon d-flex align-items-center">
-                        <i class="fa-solid fa-people-carry-box fs-4 px-3"></i>
-                        <input class="form-control fs-4" type="number" name="clients_all" id="clients_all"
+                        <i class="fa-solid fa-people-carry-box fs-3 px-3"></i>
+                        <input class="form-control fs-4" type="number" min="1" name="clients_all" id="clients_all"
                             placeholder="Number of clients" value="<?= $clients ?>">
                     </div>
                 </div>
@@ -136,8 +136,8 @@
                 <div class="form-group mb-3">
                     <label for="experience" class="label-control">Projects</label>
                     <div class="input_icon d-flex align-items-center">
-                        <i class="fa-solid fa-people-carry-box fs-4 px-3"></i>
-                        <input class="form-control fs-4" type="number" name="projects_all" id="projects_all"
+                        <i class="fa-solid fa-square-check fs-2 px-3"></i>
+                        <input class="form-control fs-4" type="number" min="1" name="projects_all" id="projects_all"
                             placeholder="Number of clients" value="<?= $projects ?>">
                     </div>
                 </div>
@@ -145,20 +145,24 @@
                 <div class="form-group mb-3">
                     <label for="experience" class="label-control">Awards</label>
                     <div class="input_icon d-flex align-items-center">
-                        <i class="fa-solid fa-people-carry-box fs-4 px-3"></i>
-                        <input class="form-control fs-4" type="number" name="awards_all" id="awards_all"
+                        <i class="fa-solid fa-award fs-2 px-3"></i>
+                        <input class="form-control fs-4" type="number" min="1" name="awards_all" id="awards_all"
                             placeholder="Number of clients" value="<?= $awards ?>">
                     </div>
                 </div>
                 <div class="form-group mb-3">
                     <label for="experience" class="label-control">Awards</label>
                     <div class="input_icon d-flex align-items-center">
-                        <i class="fa-solid fa-people-carry-box fs-4 px-3"></i>
-                        <input class="form-control fs-4" type="number" name="experience_all" id="experience_all"
+                        <i class="fa-solid fa-clock-rotate-left fs-3 px-3"></i>
+                        <input class="form-control fs-4" type="number" min="1" name="experience_all" id="experience_all"
                             placeholder="Number of clients" value="<?= $experience ?>">
                     </div>
                 </div>
 
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>
+                <button type="submit" id="update_achivements" class="btn btn-secondary fs-4">Update</button>
             </div>
         </div>
     </div>
