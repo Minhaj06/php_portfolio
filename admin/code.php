@@ -466,6 +466,7 @@ if (isset($_POST['delete_service'])) {
 
 // Achievements content start
 
+// Update all achievements
 if (isset($_POST['update_achievements'])) {
     $clients_all = $_POST['clients_all'];
     $projects_all = $_POST['projects_all'];
@@ -478,6 +479,58 @@ if (isset($_POST['update_achievements'])) {
         echo "Achivements updated successfully";
     } else {
         echo "Achievements not updated";
+    }
+}
+
+// Update total clients
+if (isset($_POST['update_clients'])) {
+    $clients_total = $_POST['clients_total'];
+
+    $query = mysqli_query($conn, "UPDATE `achievements` SET clients = '$clients_total' WHERE achieve_id = 1");
+
+    if ($query) {
+        echo "Clients updated successfully";
+    } else {
+        echo "Clients not updated";
+    }
+}
+
+// Update total projects
+if (isset($_POST['update_projects'])) {
+    $projects_total = $_POST['projects_total'];
+
+    $query = mysqli_query($conn, "UPDATE `achievements` SET projects = '$projects_total' WHERE achieve_id = 1");
+
+    if ($query) {
+        echo "Projects updated successfully";
+    } else {
+        echo "Projects not updated";
+    }
+}
+
+// Update total awards
+if (isset($_POST['update_awards'])) {
+    $awards_total = $_POST['awards_total'];
+
+    $query = mysqli_query($conn, "UPDATE `achievements` SET awards = '$awards_total' WHERE achieve_id = 1");
+
+    if ($query) {
+        echo "Awards updated successfully";
+    } else {
+        echo "Awards not updated";
+    }
+}
+
+// Update total awards
+if (isset($_POST['update_experience'])) {
+    $experience_total = $_POST['experience_total'];
+
+    $query = mysqli_query($conn, "UPDATE `achievements` SET experience = '$experience_total' WHERE achieve_id = 1");
+
+    if ($query) {
+        echo "Experience updated successfully";
+    } else {
+        echo "Experience not updated";
     }
 }
 

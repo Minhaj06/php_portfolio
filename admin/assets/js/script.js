@@ -1143,13 +1143,14 @@ function animCounter() {
 animCounter();
 
 
+// Update all achievements
 $(document).on("click", "#update_achivements", function(e) {
     e.preventDefault();
 
-    let clients_all = $("#clients_all").val();
-    let projects_all = $("#projects_all").val();
-    let awards_all = $("#awards_all").val();
-    let experience_all = $("#experience_all").val();
+    let clients_all = $("#clients").val();
+    let projects_all = $("#projects").val();
+    let awards_all = $("#awards").val();
+    let experience_all = $("#experience").val();
 
     $.ajax({
         type: "POST",
@@ -1176,4 +1177,126 @@ $(document).on("click", "#update_achivements", function(e) {
         }
     });
 });
+
+
+// Update total clients
+$(document).on("click", "#update_clients", function(e) {
+    e.preventDefault();
+
+    let clients_total = $("#clients_total").val();
+
+    $.ajax({
+        type: "POST",
+        url: "code.php",
+        data: {
+            update_clients: 1,
+            clients_total: clients_total,
+        },
+        success: function(response) {
+            // hide modal
+            $("#edit_total_clients_modal").modal("toggle");
+
+            // Refresh Services
+            $("#achievements_content").load(location.href + " #achievements_content>*", "");
+
+            // Messsage Show
+            showMessage();
+            $(".message_show .ation_message").html(response);
+
+            animCounter();
+        }
+    });
+});
+
+
+// Update total projects
+$(document).on("click", "#update_projects", function(e) {
+    e.preventDefault();
+
+    let projects_total = $("#projects_total").val();
+
+    $.ajax({
+        type: "POST",
+        url: "code.php",
+        data: {
+            update_projects: 1,
+            projects_total: projects_total,
+        },
+        success: function(response) {
+            // hide modal
+            $("#edit_total_projects_modal").modal("toggle");
+
+            // Refresh Services
+            $("#achievements_content").load(location.href + " #achievements_content>*", "");
+
+            // Messsage Show
+            showMessage();
+            $(".message_show .ation_message").html(response);
+
+            animCounter();
+        }
+    });
+});
+
+
+// Update total awards
+$(document).on("click", "#update_awards", function(e) {
+    e.preventDefault();
+
+    let awards_total = $("#awards_total").val();
+
+    $.ajax({
+        type: "POST",
+        url: "code.php",
+        data: {
+            update_awards: 1,
+            awards_total: awards_total,
+        },
+        success: function(response) {
+            // hide modal
+            $("#edit_total_awards_modal").modal("toggle");
+
+            // Refresh Services
+            $("#achievements_content").load(location.href + " #achievements_content>*", "");
+
+            // Messsage Show
+            showMessage();
+            $(".message_show .ation_message").html(response);
+
+            animCounter();
+        }
+    });
+});
+
+
+// Update experience
+$(document).on("click", "#update_experience", function(e) {
+    e.preventDefault();
+
+    let experience_total = $("#experience_total").val();
+
+    $.ajax({
+        type: "POST",
+        url: "code.php",
+        data: {
+            update_experience: 1,
+            experience_total: experience_total,
+        },
+        success: function(response) {
+            // hide modal
+            $("#edit_experience_modal").modal("toggle");
+
+            // Refresh Services
+            $("#achievements_content").load(location.href + " #achievements_content>*", "");
+
+            // Messsage Show
+            showMessage();
+            $(".message_show .ation_message").html(response);
+
+            animCounter();
+        }
+    });
+});
+
+
 // Achievements Section Ends Here

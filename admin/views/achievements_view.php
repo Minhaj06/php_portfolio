@@ -44,7 +44,8 @@
                     <div class="card rounded-3">
                         <div class="card-header rounded-top d-flex justify-content-between align-items-center">
                             <h3>Clients</h3>
-                            <span role="button"><i class="fa-solid fa-pen-to-square"></i>Edit</span>
+                            <span role="button" data-bs-target="#edit_total_clients_modal" data-bs-toggle="modal"><i
+                                    class="fa-solid fa-pen-to-square"></i>Edit</span>
                         </div>
                         <div class="card-body py-5 d-flex flex-column justify-content-center align-items-center"
                             style="color: var(--primary-color);background: var(--body-color);">
@@ -60,7 +61,8 @@
                     <div class="card rounded-3">
                         <div class="card-header rounded-top d-flex justify-content-between align-items-center">
                             <h3>Projects</h3>
-                            <span role="button"><i class="fa-solid fa-pen-to-square"></i>Edit</span>
+                            <span role="button" data-bs-target="#edit_total_projects_modal" data-bs-toggle="modal"><i
+                                    class="fa-solid fa-pen-to-square"></i>Edit</span>
                         </div>
                         <div class="card-body py-5 d-flex flex-column justify-content-center align-items-center"
                             style="color: var(--primary-color);background: var(--body-color);">
@@ -76,7 +78,8 @@
                     <div class="card rounded-3">
                         <div class="card-header rounded-top d-flex justify-content-between align-items-center">
                             <h3>Awards</h3>
-                            <span role="button"><i class="fa-solid fa-pen-to-square"></i>Edit</span>
+                            <span role="button" data-bs-target="#edit_total_awards_modal" data-bs-toggle="modal"><i
+                                    class="fa-solid fa-pen-to-square"></i>Edit</span>
                         </div>
                         <div class="card-body py-5 d-flex flex-column justify-content-center align-items-center"
                             style="color: var(--primary-color);background: var(--body-color);">
@@ -92,7 +95,8 @@
                     <div class="card rounded-3">
                         <div class="card-header rounded-top d-flex justify-content-between align-items-center">
                             <h3>Experience</h3>
-                            <span role="button"><i class="fa-solid fa-pen-to-square"></i>Edit</span>
+                            <span role="button" data-bs-target="#edit_experience_modal" data-bs-toggle="modal"><i
+                                    class="fa-solid fa-pen-to-square"></i>Edit</span>
                         </div>
                         <div class="card-body py-5 d-flex flex-column justify-content-center align-items-center"
                             style="color: var(--primary-color);background: var(--body-color);">
@@ -112,49 +116,49 @@
 </div>
 
 
-<!-- Edit All Achievements Start Here -->
+<!-- Edit All Achievements Modal Start Here -->
 <div class="modal fade" id="edit_all_achive_modal" data-bs-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
 
             <div class="modal-header">
-                <h2 class="modal-title">Edit About Content</h2>
+                <h2 class="modal-title">Update Achievements</h2>
                 <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
             </div>
 
             <div class="modal-body">
 
                 <div class="form-group mb-3">
-                    <label for="experience" class="label-control">Clients</label>
+                    <label for="clients" class="label-control">Clients</label>
                     <div class="input_icon d-flex align-items-center">
                         <i class="fa-solid fa-people-carry-box fs-3 px-3"></i>
-                        <input class="form-control fs-4" type="number" min="1" name="clients_all" id="clients_all"
+                        <input class="form-control fs-4" type="number" min="1" name="clients" id="clients"
                             placeholder="Number of clients" value="<?= $clients ?>">
                     </div>
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="experience" class="label-control">Projects</label>
+                    <label for="projects" class="label-control">Projects</label>
                     <div class="input_icon d-flex align-items-center">
                         <i class="fa-solid fa-square-check fs-2 px-3"></i>
-                        <input class="form-control fs-4" type="number" min="1" name="projects_all" id="projects_all"
+                        <input class="form-control fs-4" type="number" min="1" name="projects" id="projects"
                             placeholder="Number of clients" value="<?= $projects ?>">
                     </div>
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="experience" class="label-control">Awards</label>
+                    <label for="awards" class="label-control">Awards</label>
                     <div class="input_icon d-flex align-items-center">
                         <i class="fa-solid fa-award fs-2 px-3"></i>
-                        <input class="form-control fs-4" type="number" min="1" name="awards_all" id="awards_all"
+                        <input class="form-control fs-4" type="number" min="1" name="awards" id="awards"
                             placeholder="Number of clients" value="<?= $awards ?>">
                     </div>
                 </div>
                 <div class="form-group mb-3">
-                    <label for="experience" class="label-control">Awards</label>
+                    <label for="experience" class="label-control">Experience (Year)</label>
                     <div class="input_icon d-flex align-items-center">
                         <i class="fa-solid fa-clock-rotate-left fs-3 px-3"></i>
-                        <input class="form-control fs-4" type="number" min="1" name="experience_all" id="experience_all"
+                        <input class="form-control fs-4" type="number" min="1" name="experience" id="experience"
                             placeholder="Number of clients" value="<?= $experience ?>">
                     </div>
                 </div>
@@ -167,4 +171,136 @@
         </div>
     </div>
 </div>
-<!-- Edit All Achievements End Here -->
+<!-- Edit All Achievements Modal End Here -->
+
+
+
+
+
+
+<!-- Edit Total Clients Modal Start Here -->
+<div class="modal fade" id="edit_total_clients_modal" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2 class="modal-title">Update Total Clients</h2>
+                <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="form-group mb-3">
+                    <label for="clients_total" class="label-control">Clients</label>
+                    <div class="input_icon d-flex align-items-center">
+                        <i class="fa-solid fa-people-carry-box fs-3 px-3"></i>
+                        <input class="form-control fs-4" type="number" min="1" name="clients_total" id="clients_total"
+                            placeholder="Number of clients" value="<?= $clients ?>">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>
+                <button type="submit" id="update_clients" class="btn btn-secondary fs-4">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit Total Clients Modal End Here -->
+
+
+<!-- Edit Total Projects Modal Start Here -->
+<div class="modal fade" id="edit_total_projects_modal" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2 class="modal-title">Update Total Clients</h2>
+                <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="form-group mb-3">
+                    <label for="projects_total" class="label-control">Projects</label>
+                    <div class="input_icon d-flex align-items-center">
+                        <i class="fa-solid fa-square-check fs-2 px-3"></i>
+                        <input class="form-control fs-4" type="number" min="1" name="projects_total" id="projects_total"
+                            placeholder="Number of clients" value="<?= $projects ?>">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>
+                <button type="submit" id="update_projects" class="btn btn-secondary fs-4">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit Total Projects Modal End Here -->
+
+
+<!-- Edit Total Awards Modal Start Here -->
+<div class="modal fade" id="edit_total_awards_modal" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2 class="modal-title">Update Total Awards</h2>
+                <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="form-group mb-3">
+                    <label for="awards_total" class="label-control">Awards</label>
+                    <div class="input_icon d-flex align-items-center">
+                        <i class="fa-solid fa-award fs-2 px-3"></i>
+                        <input class="form-control fs-4" type="number" min="1" name="awards_total" id="awards_total"
+                            placeholder="Number of clients" value="<?= $awards ?>">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>
+                <button type="submit" id="update_awards" class="btn btn-secondary fs-4">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit Total Awards Modal End Here -->
+
+
+<!-- Edit Experience Modal Start Here -->
+<div class="modal fade" id="edit_experience_modal" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2 class="modal-title">Update Experience</h2>
+                <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="form-group mb-3">
+                    <label for="experience_total" class="label-control">Experience (Year)</label>
+                    <div class="input_icon d-flex align-items-center">
+                        <i class="fa-solid fa-clock-rotate-left fs-3 px-3"></i>
+                        <input class="form-control fs-4" type="number" min="1" name="experience_total"
+                            id="experience_total" placeholder="Number of clients" value="<?= $experience ?>">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>
+                <button type="submit" id="update_experience" class="btn btn-secondary fs-4">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit Experience Modal End Here -->
