@@ -22,7 +22,7 @@
                 <i class="fa-solid fa-magnifying-glass icon"></i>
                 <input type="text" placeholder="Search...">
             </li>
-            <ul class="menu_links">
+            <ul class="menu_links p-0">
                 <li class="nav_link">
                     <a class="active" href="index.php">
                         <i class='fa-solid fa-gauge icon'></i>

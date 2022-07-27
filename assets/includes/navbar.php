@@ -1,6 +1,6 @@
     <!-- header starts here -->
     <header id="navbar" class="position-fixed w-100 top-0">
-        <div class="container-fluid">
+        <div class="container">
             <nav class="inner_nav d-flex align-items-center justify-content-between">
                 <div class="logo">
                     <a href="index.php"><img src="assets/images/logo.png" alt="" /></a>

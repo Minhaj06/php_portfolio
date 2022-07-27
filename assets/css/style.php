@@ -15,6 +15,13 @@ padding: 0;
 margin: 0;
 }
 
+ul,
+ol,
+li {
+padding: 0;
+margin: 0;
+}
+
 html {
 font-size: 62.5%;
 }
@@ -55,7 +62,7 @@ overflow: hidden;
 padding-top: 10rem;
 }
 
-@media (min-width: 1600px) {
+/* @media (min-width: 1600px) {
 #navbar .container-fluid {
 max-width: 96%;
 }
@@ -65,8 +72,7 @@ max-width: 96%;
 #navbar .container-fluid {
 max-width: 90%;
 }
-}
-
+} */
 
 @media (min-width: 1275px) {
 .container {
@@ -244,7 +250,7 @@ $result = mysqli_fetch_assoc($sql);
 ?>
 
 .inner_hero {
-background-image: url("../images/<?= $result['image'] ?>");
+background-image: url("../../uploaded_img/<?= $result['image'] ?>");
 background-repeat: no-repeat;
 background-position-x: right;
 background-position-y: center;
@@ -291,6 +297,7 @@ position: relative;
 .skill_image img {
 width: 100%;
 height: 100%;
+border-radius: .5rem;
 }
 
 .skills h3 {

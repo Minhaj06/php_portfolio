@@ -35,7 +35,7 @@ if (isset($_POST['add_email'])) {
     $image = $_FILES['add_image']['name'];
     $image_tmp_name = $_FILES['add_image']['tmp_name'];
     $image_size = $_FILES['add_image']['size'];
-    $image_folder = '../uploaded_img/' . $username . ".jpg";
+    $image_folder = '.../uploaded_img/' . $username . ".jpg";
     $rename_image = $username . ".jpg";
 
 
@@ -112,8 +112,8 @@ username='$username', email='$email', contact_no='$contact_no', image='$rename_i
 
         $rename_image = $username . ".jpg";
 
-        $from = "../uploaded_img/" . $data['username'] . ".jpg";
-        $to = "../uploaded_img/" . $username . ".jpg";
+        $from = ".../uploaded_img/" . $data['username'] . ".jpg";
+        $to = ".../uploaded_img/" . $username . ".jpg";
         rename($from, $to);
 
         echo "User updated successfully";
@@ -131,7 +131,7 @@ if (isset($_POST['delete_id'])) {
     $select = mysqli_fetch_assoc($query);
     $image = $select['image'];
 
-    if (unlink('../uploaded_img/' . $image)) {
+    if (unlink('.../uploaded_img/' . $image)) {
         mysqli_query($conn, "DELETE FROM users_info WHERE id='$delete_id'");
     }
 }
@@ -159,14 +159,14 @@ if (isset($_POST['home_fname'])) {
         $dotpos = stripos($home_img, '.') + 1;
         $ext = substr($home_img, $dotpos);
         $rand = rand(100000, 1000000);
-        $img_folder = '../assets/images/' . $home_img;
+        $img_folder = '../uploaded_img/' . $home_img;
 
         $sql_img = mysqli_fetch_assoc(mysqli_query($GLOBALS['conn'], "SELECT image FROM home WHERE id='1'"))['image'];
 
         if ($sql_img == "") {
             if (file_exists($img_folder)) {
                 $newImg = $rand . '.' . $ext;
-                move_uploaded_file($home_img_tmp_name, "../assets/images/" . $newImg);
+                move_uploaded_file($home_img_tmp_name, "../uploaded_img/" . $newImg);
 
                 mysqli_query($GLOBALS['conn'], "UPDATE home SET fname='$home_fname', lname='$home_lname',occupation='$home_occu', subtitle='$home_desc', image='$newImg' WHERE id = 1");
             } else {
@@ -175,11 +175,11 @@ if (isset($_POST['home_fname'])) {
                 mysqli_query($GLOBALS['conn'], "UPDATE home SET fname='$home_fname', lname='$home_lname',occupation='$home_occu', subtitle='$home_desc', image='$home_img' WHERE id = 1");
             }
         } else {
-            unlink("../assets/images/" . $sql_img);
+            unlink("../uploaded_img/" . $sql_img);
 
             if (file_exists($img_folder)) {
                 $newImg = $rand . '.' . $ext;
-                move_uploaded_file($home_img_tmp_name, "../assets/images/" . $newImg);
+                move_uploaded_file($home_img_tmp_name, "../uploaded_img/" . $newImg);
 
                 mysqli_query($GLOBALS['conn'], "UPDATE home SET fname='$home_fname', lname='$home_lname',occupation='$home_occu', subtitle='$home_desc', image='$newImg' WHERE id = 1");
             } else {
@@ -271,12 +271,12 @@ if (isset($_POST['about_title'])) {
         $dotpos = stripos($about_img, '.') + 1;
         $ext = substr($about_img, $dotpos);
         $rand = rand(100000, 1000000);
-        $img_folder = '../assets/images/' . $about_img;
+        $img_folder = '../uploaded_img/' . $about_img;
 
 
         if (file_exists($img_folder)) {
             $newImg = $rand . '.' . $ext;
-            move_uploaded_file($about_img_tmp_name, "../assets/images/" . $newImg);
+            move_uploaded_file($about_img_tmp_name, "../uploaded_img/" . $newImg);
 
             mysqli_query($conn, "UPDATE about SET about_title = '$about_title', about_desc = '$about_desc', experience = '$experience', about_image = '$newImg' WHERE id = 1");
         } else {
@@ -298,16 +298,20 @@ if (isset($_POST['about_title'])) {
         } else {
             $sql_img = mysqli_fetch_assoc(mysqli_query($conn, "SELECT about_image FROM about WHERE id = 1"))['about_image'];
 
-            if (unlink("../assets/images/" . $sql_img)) {
+            if (unlink("../uploaded_img/" . $sql_img)) {
+                aboutImg();
+                echo "About content updated successfully";
+            } else {
                 aboutImg();
                 echo "About content updated successfully";
             }
         }
     } else {
         $query = mysqli_query($conn, "UPDATE about SET about_title = '$about_title', about_desc = '$about_desc', experience = '$experience' WHERE id = 1");
-    }
-    if ($query) {
-        echo "About content updated successfully";
+
+        if ($query) {
+            echo "About content updated successfully";
+        }
     }
 }
 
@@ -535,3 +539,26 @@ if (isset($_POST['update_experience'])) {
 }
 
 // Achievements content end
+
+
+
+
+// Portfolio section starts
+
+// Update Portfolio Content
+if (isset($_POST['update_portfolio_content'])) {
+
+    $portfolio_title = $_POST['portfolio_title'];
+    $portfolio_desc = $_POST['portfolio_desc'];
+
+    $query = mysqli_query($conn, "UPDATE `portfolio_section` SET portfolio_title = '$portfolio_title', portfolio_desc = '$portfolio_desc' WHERE port_sec_id = 1 ");
+
+    if ($query) {
+        echo 'Portfolio content updated successfully';
+    } else {
+        echo 'Portfolio content not updated';
+    }
+}
+
+
+// Portfolio section starts

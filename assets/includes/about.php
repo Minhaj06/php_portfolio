@@ -3,7 +3,7 @@
     <div class="container">
         <div class="inner_skill row">
             <div class="skill_image pe-xxl-5 col-md-6 mb-5 mb-md-0">
-                <img src="assets/images/<?= $select['about_image'] ?>" alt="skill_img" />
+                <img src="uploaded_img/<?= $select['about_image'] ?>" alt="skill_img" />
                 <div class="experience_highlight">
                     <div class="experience_content">
                         <div class="text-center">

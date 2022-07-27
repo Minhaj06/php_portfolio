@@ -19,6 +19,11 @@ padding: 0;
 margin: 0;
 }
 
+ul,
+ol,
+li {
+padding: 0;
+}
 
 /* ::selection {
 color: var(--text-color);
@@ -106,6 +111,11 @@ color: var(--primary-color);
 background: var(--sidebar-color);
 }*/
 
+.card {
+background-color: var(--sidebar-color);
+border: none;
+}
+
 .card-header {
 background: var(--primary-color);
 color: #b4b4b4;
@@ -114,6 +124,7 @@ color: #b4b4b4;
 body.dark .card-header {
 background: var(--text-color);
 color: var(--body-color);
+border: 1px solid rgba(0,0,0,.125);
 }
 
 .heading {
@@ -197,10 +208,6 @@ color: var(--text-color);
 
 .breadcrumb-active {
 opacity: 70%;
-}
-
-.card {
-background-color: var(--sidebar-color);
 }
 
 .modal-content {

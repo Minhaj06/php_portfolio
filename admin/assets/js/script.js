@@ -1297,6 +1297,51 @@ $(document).on("click", "#update_experience", function(e) {
         }
     });
 });
-
-
 // Achievements Section Ends Here
+
+
+
+// Portfolio Section Starts Here
+
+// Update portfolio content
+$("#update_portfolio_content_btn").click(function(e) {
+    e.preventDefault();
+
+    let portfolio_title = $("#portfolio_title").val();
+    let portfolio_desc = $("#portfolio_desc").val();
+
+    if (
+        portfolio_title === "" ||
+        portfolio_desc === ""
+    ) {
+
+        $("#alertBox").modal("show");
+        $(".alertMessage").html("Oops! Fill up all the fields...");
+
+    } else {
+
+        $.ajax({
+            type: "POST",
+            url: "code.php",
+            data: {
+                update_portfolio_content: 1,
+                portfolio_title: portfolio_title,
+                portfolio_desc: portfolio_desc
+            },
+            success: function(response) {
+                // hide modal
+                $("#edit_portfolio_content_modal").modal("toggle");
+
+                // Refresh Service Content
+                $("#portfolio_content").load(location.href + " #portfolio_content>*", "");
+
+                // Messsage Show
+                showMessage();
+                $(".message_show .ation_message").html(response);
+            }
+        });
+    }
+});
+
+
+// Portfolio Section Starts Here

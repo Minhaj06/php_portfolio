@@ -9,13 +9,10 @@
     </nav>
 
 
-
     <?php
     $query = mysqli_query($conn, "SELECT * FROM `service_section` LIMIT 1 ");
     $result = mysqli_fetch_assoc($query);
     ?>
-
-
 
 
     <!-- About Card Starts Here -->
@@ -211,7 +208,7 @@ include_once "../admin/assets/includes/confirmBox.php";
 ?>
 <!-- Delete Modal Starts Here -->
 
-<!-- Update Sevice Content Modal Starts -->
+<!-- Update Service Content Modal Starts -->
 <div class="modal fade text-capitalize" id="edit_service_content_modal" data-bs-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -246,4 +243,4 @@ include_once "../admin/assets/includes/confirmBox.php";
         </div>
     </div>
 </div>
-<!-- Update Sevice Content Modal Starts -->
+<!-- Update Service Content Modal Starts -->

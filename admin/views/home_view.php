@@ -26,7 +26,7 @@
                 <div class="col-lg-4 col-xl-3 mb-5 mb-lg-0">
                     <div style="border: 4px solid var(--primary-color);" class="home_img p-4 rounded-3 d-inline-block">
                         <img style="border: 4px solid var(--primary-color);" class="home_img rounded-circle"
-                            src="../assets/images/<?= $result['image'] ?>" width="200" height="200" alt="home_img">
+                            src="../uploaded_img/<?= $result['image'] ?>" width="200" height="200" alt="home_img">
                     </div>
                 </div>
                 <div class="col-lg-8 col-xl-9">

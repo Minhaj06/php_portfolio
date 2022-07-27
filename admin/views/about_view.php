@@ -27,7 +27,7 @@
                 ?>
 
                 <div class="about_img col-md-5 mb-4 mb-md-0">
-                    <img src="../assets/images/<?= $result['about_image'] ?>" width="100%" height="100%" alt="">
+                    <img src="../uploaded_img/<?= $result['about_image'] ?>" width="100%" height="100%" alt="">
                 </div>
                 <div class="col-md-7 p-4 skill_area">
                     <h3 class="h1"> <?= $result['about_title'] ?> </h3>
