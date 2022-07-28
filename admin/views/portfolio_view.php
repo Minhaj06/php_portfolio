@@ -40,6 +40,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
 
         <div class="card2 col-lg-6">

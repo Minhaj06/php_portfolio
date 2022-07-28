@@ -48,28 +48,69 @@ nav_link.forEach((element) => {
 
 // sidebar dropdown menu
 
-let dropdown1 = document.querySelector(".dropdown1");
-let dropdown2 = document.querySelector(".dropdown2");
-let sub_menu1 = document.querySelector(".sub_menu1");
-let sub_menu2 = document.querySelector(".sub_menu2");
-let drop_icon1 = document.querySelector(".drop_icon1");
-let drop_icon2 = document.querySelector(".drop_icon2");
+// let dropdown1 = document.querySelector(".dropdown1");
+// let dropdown2 = document.querySelector(".dropdown2");
+// let sub_menu1 = document.querySelector(".sub_menu1");
+// let sub_menu2 = document.querySelector(".sub_menu2");
+// let drop_icon1 = document.querySelector(".drop_icon1");
+// let drop_icon2 = document.querySelector(".drop_icon2");
 
-dropdown1.addEventListener("click", () => {
-    sub_menu1.classList.toggle("sub_menu_show");
-    drop_icon1.classList.toggle("rotate");
+// dropdown1.addEventListener("click", () => {
+//     sub_menu1.classList.toggle("sub_menu_show");
+//     drop_icon1.classList.toggle("rotate");
 
-    sub_menu2.classList.remove("sub_menu_show");
-    drop_icon2.classList.remove("rotate");
+//     sub_menu2.classList.remove("sub_menu_show");
+//     drop_icon2.classList.remove("rotate");
+// });
+
+// dropdown2.addEventListener("click", () => {
+//     sub_menu2.classList.toggle("sub_menu_show");
+//     drop_icon2.classList.toggle("rotate");
+
+//     sub_menu1.classList.remove("sub_menu_show");
+//     drop_icon1.classList.remove("rotate");
+// });
+
+$(".dropdown1").click(function(e) {
+    e.preventDefault();
+    $(".sub_menu1").toggleClass("sub_menu_show");
+    $(".drop_icon1").toggleClass("rotate");
+
+    $(".sub_menu2").removeClass("sub_menu_show");
+    $(".drop_icon2").removeClass("rotate");
+
+    $(".sub_menu3").removeClass("sub_menu_show");
+    $(".drop_icon3").removeClass("rotate");
 });
 
-dropdown2.addEventListener("click", () => {
-    sub_menu2.classList.toggle("sub_menu_show");
-    drop_icon2.classList.toggle("rotate");
+$(".dropdown2").click(function(e) {
+    e.preventDefault();
+    $(".sub_menu2").toggleClass("sub_menu_show");
+    $(".drop_icon2").toggleClass("rotate");
 
-    sub_menu1.classList.remove("sub_menu_show");
-    drop_icon1.classList.remove("rotate");
+    $(".sub_menu1").removeClass("sub_menu_show");
+    $(".drop_icon1").removeClass("rotate");
+
+    $(".sub_menu3").removeClass("sub_menu_show");
+    $(".drop_icon3").removeClass("rotate");
 });
+
+$(".dropdown3").click(function(e) {
+    e.preventDefault();
+    $(".sub_menu3").toggleClass("sub_menu_show");
+    $(".drop_icon3").toggleClass("rotate");
+
+
+    $(".sub_menu1").removeClass("sub_menu_show");
+    $(".drop_icon1").removeClass("rotate");
+
+    $(".sub_menu2").removeClass("sub_menu_show");
+    $(".drop_icon2").removeClass("rotate");
+});
+
+
+
+
 
 // #########################################################################
 

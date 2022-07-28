@@ -41,6 +41,7 @@
                         <span class="text nav_text">Registerd users</span>
                     </a>
                 </li>
+
                 <li class="nav_link dropdown1">
                     <a href="#">
                         <i class="fa-solid fa-newspaper icon"></i>
@@ -54,13 +55,28 @@
                         <li><a href="">mange category</a></li>
                     </ul>
                 </li>
+
                 <li class="nav_link dropdown2">
                     <a href="#">
-                        <i class="fa-solid fa-gear icon"></i>
-                        <span class="text nav_text">section control</span>
+                        <i class="fa-solid fa-newspaper icon"></i>
+                        <span class="text nav_text">Manage Q&A</span>
                         <i class='fa-solid fa-chevron-down toggle_icon drop_icon2'></i>
                     </a>
                     <ul class="sub_menu sub_menu2">
+                        <li><a href="">Hi</a></li>
+                        <li><a href="">manage posts</a></li>
+                        <li><a href="">add category</a></li>
+                        <li><a href="">mange category</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav_link dropdown3">
+                    <a href="#">
+                        <i class="fa-solid fa-gear icon"></i>
+                        <span class="text nav_text">section control</span>
+                        <i class='fa-solid fa-chevron-down toggle_icon drop_icon3'></i>
+                    </a>
+                    <ul class="sub_menu sub_menu3">
                         <li><a href="home_update.php">Home</a></li>
                         <li><a href="about_update.php">About</a></li>
                         <li><a href="services_update.php">Services</a></li>
@@ -70,6 +86,7 @@
                         <li><a href="hire_me_update.php">hire me</a></li>
                     </ul>
                 </li>
+
                 <li class="nav_link">
                     <a href="#">
                         <i class="fa-solid fa-shapes icon"></i>

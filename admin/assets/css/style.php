@@ -500,7 +500,7 @@ background: var(--primary-color-light);
 }
 
 .sub_menu_show {
-display: block !important;
+display: block;
 }
 
 .rotate {
