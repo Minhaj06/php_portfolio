@@ -568,6 +568,11 @@ margin: 1rem;
 cursor: pointer;
 }
 
+.port_menu ul li:hover .p_cat {
+color: var(--orange);
+border-bottom: 3px solid var(--orange);
+}
+
 .bottom_space {
 margin-bottom: 4rem !important;
 }
@@ -964,16 +969,51 @@ left: auto;
 }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 991px) {
 .content {
 max-width: 100%;
 }
 .skills button {
 margin-bottom: 1rem;
 }
+
+/* Portfolio menu */
+.port_menu {
+position: relative;
 }
 
-@media (max-width: 768px) {
+.p_cats {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+background: var(--black);
+padding-bottom: 1rem;
+clip-path: polygon(100% 0, 100% 5rem, 0 5rem, 0 0);
+z-index: 1;
+transition: .3s;
+}
+.show_p_cats {
+clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);
+}
+.bottom_space {
+margin-bottom: 1rem !important;
+}
+.port_menu_icon {
+position: absolute;
+top: .5rem;
+right: 1rem;
+font-size: 2.3rem;
+cursor: pointer;
+z-index: 2;
+}
+.port_items {
+margin-top: 10rem;
+}
+
+}
+
+@media (max-width: 767px) {
 .hero_content h1 {
 font-size: 8vw;
 }

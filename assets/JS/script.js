@@ -54,12 +54,28 @@ p_cat.forEach((port_menu) => {
     });
 });
 
+// show hide portfolio menu
+let portMenuBtn = document.querySelector(".port_menu_icon");
+let portMenu = document.querySelector(".p_cats");
+
+portMenuBtn.addEventListener("click", () => {
+    portMenu.classList.toggle("show_p_cats");
+});
+
+
+// Filter Portfolio Items By Category
+// let portfolio_category = document.querySelector("port_single");
+
 p_cats.addEventListener("click", (event) => {
     console.log(event.target);
+
     if (event.target.classList.contains("p_cat")) {
         const filterValue = event.target.getAttribute("data-filter");
+
         p_single.forEach((category) => {
-            if (category.classList.contains(filterValue) || filterValue === "all") {
+            let port_cat = category.getAttribute("portfolio_category");
+
+            if (port_cat == filterValue || filterValue === "all") {
                 category.classList.remove("hide");
                 category.classList.add("display");
             } else {
@@ -67,6 +83,7 @@ p_cats.addEventListener("click", (event) => {
                 category.classList.add("hide");
             }
         });
+
     }
 });
 

@@ -560,5 +560,57 @@ if (isset($_POST['update_portfolio_content'])) {
     }
 }
 
+// Add Portfolio Category
+// check category exist or not for add category
+if (isset($_POST['checkPortCat'])) {
+
+    $port_cat_name = $_POST['port_cat_name'];
+
+    $check_portfolio_query = mysqli_query($conn, "SELECT port_cat_name FROM `portfolio_category` WHERE port_cat_name='$port_cat_name'");
+
+    echo mysqli_num_rows($check_portfolio_query);
+}
+
+if (isset($_POST['addPortfolioCategory'])) {
+    $port_cat_name = $_POST['port_cat_name'];
+    $port_cat_status = $_POST['port_cat_status'];
+
+    $query = mysqli_query($conn, "INSERT INTO `portfolio_category` (port_cat_name, port_cat_status) VALUES ('$port_cat_name', '$port_cat_status') ");
+
+    if ($query) {
+        echo "Category added successfully";
+    } else {
+        echo "Something went wrong!";
+    }
+}
+
+// check category exist or not for update category
+if (isset($_POST['checkEditPortCat'])) {
+
+    $port_cat_name = $_POST['port_cat_name'];
+
+    $check_portfolio_query = mysqli_query($conn, "SELECT port_cat_name FROM `portfolio_category` WHERE port_cat_name = '$port_cat_name'");
+
+    echo mysqli_num_rows($check_portfolio_query);
+}
+
+// Update portfolio category
+if (isset($_POST['update_portfolio_category'])) {
+
+    $port_cat_id = $_POST['port_cat_id'];
+    $port_cat_name = $_POST['port_cat_name'];
+    $port_cat_status = $_POST['port_cat_status'];
+
+    $query = mysqli_query(
+        $conn,
+        "UPDATE `portfolio_category` SET port_cat_name = '$port_cat_name', port_cat_status = '$port_cat_status' WHERE port_cat_id = '$port_cat_id' "
+    );
+
+    if ($query) {
+        echo 'Category updated successfully';
+    } else {
+        echo 'Category not updated!';
+    }
+}
 
 // Portfolio section starts

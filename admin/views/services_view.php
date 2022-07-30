@@ -132,7 +132,7 @@
                 <div class="form-group mb-3">
                     <label for="add_service_name">Service Name</label>
                     <span class="add_service_error ms-3">
-                        <span class="text-danger"></span>
+
                     </span>
                     <input type="text" class="form-control fs-4" id="add_service_name" name="add_service_name"
                         placeholder="HTML5">
@@ -140,7 +140,7 @@
                 <div class="form-group mb-3">
                     <label for="add_service_icon">Service Icon</label>
                     <span class="add_service_icon_error ms-3">
-                        <span class="text-danger"></span>
+
                     </span>
                     <input type="text" class="form-control fs-4" id="add_service_icon" name="add_service_icon"
                         placeholder='<i class="fa-brands fa-html5"></i>'>
@@ -172,7 +172,7 @@
                 <div class="form-group mb-3">
                     <label for="edit_service_name">Service Name</label>
                     <span class="edit_service_error ms-3">
-                        <span class="text-danger"></span>
+
                     </span>
                     <input type="text" class="form-control fs-4" id="edit_service_name" name="edit_service_name"
                         placeholder="HTML5">
@@ -180,7 +180,7 @@
                 <div class="form-group mb-3">
                     <label for="edit_service_icon">Service Icon</label>
                     <span class="edit_service_icon_error ms-3">
-                        <span class="text-danger"></span>
+
                     </span>
                     <input type="text" class="form-control fs-4 text-lowercase" id="edit_service_icon"
                         name="edit_service_icon" placeholder='<i class="fa-brands fa-html5"></i>'>

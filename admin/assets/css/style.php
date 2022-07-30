@@ -165,7 +165,13 @@ height: 5rem;
 border-radius: 0.3rem;
 }
 
+.dataTables_length {
+float: left;
+}
 
+.dataTables_filter {
+float: right;
+}
 /* customized scrollbar */
 
 ::-webkit-scrollbar {

@@ -1,4 +1,4 @@
-#usersDataTable_length {
+/* #usersDataTable_length {
     float: left;
     margin-bottom: 1rem;
 }
@@ -15,6 +15,27 @@ div#usersDataTable_info {
 }
 
 div#usersDataTable_paginate {
+    float: right;
+    margin-bottom: 1rem;
+} */
+
+.dataTables_length {
+    float: left;
+    margin-bottom: 1rem;
+}
+
+.dataTables_filter {
+    float: right;
+    margin-bottom: 1rem;
+}
+
+.dataTables_info {
+    float: left;
+    margin-bottom: 1rem;
+    padding-top: 0.25rem;
+}
+
+.dataTables_paginate {
     float: right;
     margin-bottom: 1rem;
 }

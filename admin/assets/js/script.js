@@ -72,7 +72,6 @@ nav_link.forEach((element) => {
 // });
 
 $(".dropdown1").click(function(e) {
-    e.preventDefault();
     $(".sub_menu1").toggleClass("sub_menu_show");
     $(".drop_icon1").toggleClass("rotate");
 
@@ -84,7 +83,6 @@ $(".dropdown1").click(function(e) {
 });
 
 $(".dropdown2").click(function(e) {
-    e.preventDefault();
     $(".sub_menu2").toggleClass("sub_menu_show");
     $(".drop_icon2").toggleClass("rotate");
 
@@ -96,7 +94,6 @@ $(".dropdown2").click(function(e) {
 });
 
 $(".dropdown3").click(function(e) {
-    e.preventDefault();
     $(".sub_menu3").toggleClass("sub_menu_show");
     $(".drop_icon3").toggleClass("rotate");
 
@@ -107,9 +104,6 @@ $(".dropdown3").click(function(e) {
     $(".sub_menu2").removeClass("sub_menu_show");
     $(".drop_icon2").removeClass("rotate");
 });
-
-
-
 
 
 // #########################################################################
@@ -134,6 +128,12 @@ function modalDismiss() {
             location.reload();
         })
     })
+}
+
+// Empty alert
+function emptyAlert() {
+    $("#alertBox").modal("show");
+    $(".alertMessage").html("Oops! Fill up all the fields...");
 }
 
 // $(document).ready(function() {
@@ -208,16 +208,15 @@ $(document).on("submit", "#add_user_form", function(e) {
     let image = $("#add_image").get(0).files.length === 0;
 
     if (
-        fname === "" ||
-        lname === "" ||
-        username === "" ||
-        email === "" ||
-        contact_no === "" ||
-        password === "" ||
+        fname == "" ||
+        lname == "" ||
+        username == "" ||
+        email == "" ||
+        contact_no == "" ||
+        password == "" ||
         image
     ) {
-        $("#alertBox").modal("show");
-        $(".alertMessage").html("Oops! Fill up all the fields...");
+        emptyAlert();
     } else {
         let pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
 
@@ -395,14 +394,14 @@ $(document).on("click", "span[data-role=edit]", function() {
 
         let role_as = $("#role_select").find(":selected").val();
 
-        // Cheking fields empty or not
+        // Checking fields empty or not
         if (
-            id === "" ||
-            fname === "" ||
-            lname === "" ||
-            username === "" ||
-            email === "" ||
-            contact_no === ""
+            id == "" ||
+            fname == "" ||
+            lname == "" ||
+            username == "" ||
+            email == "" ||
+            contact_no == ""
         ) {
             $("#alertBox").modal("show");
             $(".alertMessage").html("Oops! Fill up all the fields...");
@@ -581,10 +580,10 @@ $(".edit_home_btn").click(function(e) {
         let home_occu = $("#home_occu").val();
         let home_desc = $("#home_desc").val();
         if (
-            home_fname === "" ||
-            home_lname === "" ||
-            home_occu === "" ||
-            home_desc === ""
+            home_fname == "" ||
+            home_lname == "" ||
+            home_occu == "" ||
+            home_desc == ""
         ) {
 
             $("#alertBox").modal("show");
@@ -644,8 +643,8 @@ $(".edit_about_btn").click(function(e) {
         let about_desc = $("#about_desc").val();
         let experience = $("#experience").find(":selected").val();
         if (
-            about_title === "" ||
-            about_desc === ""
+            about_title == "" ||
+            about_desc == ""
         ) {
 
             $("#alertBox").modal("show");
@@ -699,8 +698,7 @@ $("#add_skill_btn").click(function(e) {
 
 
     if (skillName == "" || skillPercentage == "") {
-        $("#alertBox").modal("show");
-        $(".alertMessage").html("Oops! Fill up all the fields...");
+        emptyAlert();
     } else {
         let add_skill_form = document.getElementById("add_skill_form");
 
@@ -763,13 +761,13 @@ $(document).on("click", ".edit_skill_btn", function(e) {
 
     let progress_color4 = $("#edit_progress_color4").val().toLowerCase();
 
-    if (progress_color1 === skill_color) {
+    if (progress_color1 == skill_color) {
         $("#edit_progress_color1").prop("checked", true);
-    } else if (progress_color2 === skill_color) {
+    } else if (progress_color2 == skill_color) {
         $("#edit_progress_color2").prop("checked", true);
-    } else if (progress_color3 === skill_color) {
+    } else if (progress_color3 == skill_color) {
         $("#edit_progress_color3").prop("checked", true);
-    } else if (progress_color4 === skill_color) {
+    } else if (progress_color4 == skill_color) {
         $("#edit_progress_color4").prop("checked", true);
     }
 
@@ -859,13 +857,10 @@ $("#update_service_content_btn").click(function(e) {
     let service_desc = $("#service_desc").val();
 
     if (
-        service_title === "" ||
-        service_desc === ""
+        service_title == "" ||
+        service_desc == ""
     ) {
-
-        $("#alertBox").modal("show");
-        $(".alertMessage").html("Oops! Fill up all the fields...");
-
+        emptyAlert();
     } else {
 
         $.ajax({
@@ -958,8 +953,8 @@ $("#add_service").click(function(e) {
         let service_icon = $("#add_service_icon").val();
 
         if (
-            service_name === "" ||
-            service_icon === ""
+            service_name == "" ||
+            service_icon == ""
         ) {
 
             $("#alertBox").modal("show");
@@ -1038,7 +1033,7 @@ $(document).on("click", "#edit_service_btn", function(e) {
                     );
                     $("#update_service_btn").attr("disabled", true);
                     $("#edit_service_icon").attr("disabled", true);
-                } else if (service_name === "") {
+                } else if (service_name == "") {
                     $(".edit_service_error").html(
                         "<span class='text-danger'>Couldn't be empty</span>"
                     );
@@ -1070,7 +1065,7 @@ $(document).on("click", "#edit_service_btn", function(e) {
             );
             $("#update_service_btn").attr("disabled", true);
             $("#edit_service_name").attr("disabled", true);
-        } else if (service_icon === "") {
+        } else if (service_icon == "") {
             $(".edit_service_error").html(
                 "<span class='text-danger'>Couldn't be empty</span>"
             );
@@ -1352,13 +1347,10 @@ $("#update_portfolio_content_btn").click(function(e) {
     let portfolio_desc = $("#portfolio_desc").val();
 
     if (
-        portfolio_title === "" ||
-        portfolio_desc === ""
+        portfolio_title == "" ||
+        portfolio_desc == ""
     ) {
-
-        $("#alertBox").modal("show");
-        $(".alertMessage").html("Oops! Fill up all the fields...");
-
+        emptyAlert();
     } else {
 
         $.ajax({
@@ -1374,7 +1366,74 @@ $("#update_portfolio_content_btn").click(function(e) {
                 $("#edit_portfolio_content_modal").modal("toggle");
 
                 // Refresh Service Content
-                $("#portfolio_content").load(location.href + " #portfolio_content>*", "");
+                $("#portfolio_category").load(location.href + " #portfolio_category>*", "");
+
+                // Messsage Show
+                showMessage();
+                $(".message_show .ation_message").html(response);
+            }
+        });
+    }
+});
+
+// Add Portfolio Category
+// check portfolio category exists or not
+$("#port_cat_name").keyup(function(e) {
+
+    let port_cat_name = $("#port_cat_name").val();
+
+    $.ajax({
+        type: "POST",
+        url: "code.php",
+        data: {
+            checkPortCat: 1,
+            port_cat_name: port_cat_name,
+        },
+        success: function(data) {
+            if (data != "0") {
+                $(".add_cat_error").html(
+                    "<span class='text-danger'>Username already taken!</span>"
+                );
+                $("#add_portfolio_category_btn").attr("disabled", true);
+            } else {
+                $(".add_cat_error").html(
+                    "<span class='text-success'>It's available</span>"
+                );
+                $("#add_portfolio_category_btn").attr("disabled", false);
+            }
+        },
+    });
+});
+
+
+// Add Portfolio Category
+$("#add_portfolio_category_btn").click(function(e) {
+    e.preventDefault();
+
+    let port_cat_name = $("#port_cat_name").val();
+    let port_cat_status = $("#port_cat_status").is(":checked") == true ? '1' : '0';
+
+    if (port_cat_name == "") {
+        emptyAlert();
+    } else {
+
+        $.ajax({
+            type: "POST",
+            url: "code.php",
+            data: {
+                addPortfolioCategory: 1,
+                port_cat_name: port_cat_name,
+                port_cat_status: port_cat_status
+            },
+            success: function(response) {
+                // hide modal
+                $("#add_portfolio_cotegory_modal").modal("toggle");
+
+                // refresh modal
+                $("#add_portfolio_cotegory_modal").load(location.href + " #add_portfolio_cotegory_modal>*", "");
+
+                // Refresh Portfolio Content
+                $("#portfolio_category").load(location.href + " #portfolio_category>*", "");
 
                 // Messsage Show
                 showMessage();
@@ -1385,4 +1444,158 @@ $("#update_portfolio_content_btn").click(function(e) {
 });
 
 
-// Portfolio Section Starts Here
+
+
+
+
+$(document).on("click", "#edit_port_cat_btn", function(e) {
+    e.preventDefault();
+
+    modalDismiss();
+
+    let port_cat_id = $(this).data("id");
+    let td_port_cat_name = $.trim($("#" + port_cat_id)
+        .children("td[data-target=port_cat_name]")
+        .text());
+    let port_cat_status = $.trim($("#" + port_cat_id).children("td[data-target=port_cat_status]").text());
+
+    // Show data in modal input
+    $("#edit_port_cat_name").val(td_port_cat_name);
+
+    if (port_cat_status == "Visible") {
+        $("#edit_port_cat_status").attr("checked", true);
+    } else {
+        $("#edit_port_cat_status").attr("checked", false);
+    }
+
+    // Check service icon valid or not for edit Portfolio category
+    $("#edit_port_cat_name").keyup(function(e) {
+
+        let port_cat_name = $("#edit_port_cat_name").val();
+
+        $.ajax({
+            type: "POST",
+            url: "code.php",
+            data: {
+                checkEditPortCat: 1,
+                port_cat_name: port_cat_name
+            },
+            success: function(data) {
+                if ((data != "0") && ((port_cat_name.toLowerCase()) != (td_port_cat_name.toLowerCase()))) {
+                    $(".edit_cat_error").html(
+                        "<span class='text-danger'>Username already taken!</span>"
+                    );
+                    $("#update_portfolio_category_btn").attr("disabled", true);
+                } else if (port_cat_name == "") {
+                    $(".edit_cat_error").html(
+                        "<span class='text-danger'>Couldn't be empty</span>"
+                    );
+                    $("#update_portfolio_category_btn").attr("disabled", true);
+                } else {
+                    $(".edit_cat_error").html(
+                        "<span class='text-success'>It's available</span>"
+                    );
+                    $("#update_portfolio_category_btn").attr("disabled", false);
+                }
+            },
+        });
+    });
+
+
+    $("#update_portfolio_category_btn").click(function(e) {
+        e.preventDefault();
+
+        let port_cat_name = $("#edit_port_cat_name").val();
+        let port_cat_status = $("#edit_port_cat_status").is(":checked") == true ? '1' : '0';
+
+        $.ajax({
+            type: "POST",
+            url: "code.php",
+            data: {
+                update_portfolio_category: 1,
+                port_cat_id: port_cat_id,
+                port_cat_name: port_cat_name,
+                port_cat_status: port_cat_status,
+            },
+            success: function(response) {
+                // hide modal
+                $("#edit_portfolio_cotegory_modal").modal("toggle");
+
+
+                // Refresh Portfolio Content
+                $("#portfolio_category").load(location.href + " #portfolio_category>*", "");
+
+                // Messsage Show
+                showMessage();
+                $(".message_show .ation_message").html(response);
+            }
+        });
+    });
+
+
+
+
+
+
+});
+
+// Portfolio Section Ends Here
+
+
+// Check service icon valid or not for edit service
+// $("#edit_service_icon").keyup(function(e) {
+
+//     let service_icon = $("#edit_service_icon").val();
+
+//     let condition1 = service_icon.includes('<i class="');
+//     let condition2 = service_icon.includes('"></i>');
+
+//     if (!(condition1 && condition2)) {
+//         $(".edit_service_icon_error").html(
+//             "<span class='text-danger'>Not valid fontawesome icon</span>"
+//         );
+//         $("#update_service_btn").attr("disabled", true);
+//         $("#edit_service_name").attr("disabled", true);
+//     } else if (service_icon == "") {
+//         $(".edit_service_error").html(
+//             "<span class='text-danger'>Couldn't be empty</span>"
+//         );
+//         $("#update_service_btn").attr("disabled", true);
+//         $("#edit_service_name").attr("disabled", true);
+//     } else {
+//         $(".edit_service_icon_error").html(
+//             "<span class='text-success'>Valid icon</span>"
+//         );
+//         $("#update_service_btn").attr("disabled", false);
+//         $("#edit_service_name").attr("disabled", false);
+//     }
+// });
+
+
+// $("#update_service_btn").click(function(e) {
+//     e.preventDefault();
+//     let service_name = $("#edit_service_name").val();
+//     let service_icon = $("#edit_service_icon").val();
+
+//     $.ajax({
+//         type: "POST",
+//         url: "code.php",
+//         data: {
+//             update_service: 1,
+//             service_id: service_id,
+//             service_name: service_name,
+//             service_icon: service_icon
+//         },
+//         success: function(response) {
+//             // hide modal
+//             $("#edit_service_modal").modal("toggle");
+
+//             // Refresh Skill Content
+//             $("#service_items").load(location.href + " #service_items>*", "");
+
+//             // Messsage Show
+//             showMessage();
+//             $(".message_show .ation_message").html(response);
+//         }
+//     });
+// });
