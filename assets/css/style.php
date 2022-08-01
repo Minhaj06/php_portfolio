@@ -593,6 +593,7 @@ border-bottom: 3px solid var(--orange);
 .port_single>div {
 position: relative;
 overflow: hidden;
+height: 100%;
 }
 
 .port_single>div img {

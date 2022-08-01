@@ -36,12 +36,32 @@
             </div>
         </div>
 
-        <div class="port_items row g-5 justify-content-center align-items-center">
+        <div class="port_items row g-5 justify-content-center">
 
 
             <div class="col-xl-4 col-md-6 port_single" portfolio_category="web design">
                 <div>
                     <a href="#"><img src="uploaded_img/port_item_1.png" alt="portfolio_image" /></a>
+                    <div class="overlay_bg">
+                        <div class="overlay_content">
+                            <h3>Web Design</h3>
+                            <h4>HTML, CSS, jQuery</h4>
+                            <p class="para">
+                                Lorem ipsum dolor sit amet,Stet clita kasd lorem ipsum dolor sit amet. sed diam
+                                eirmod tempor dolore.
+                            </p>
+                            <a href="https://minhaj06.github.io/systematic/" target="_blank">
+                                <button class="button">Live preview</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-4 col-md-6 port_single" portfolio_category="PHP">
+                <div>
+                    <a href="#"><img src="uploaded_img/avatar.jpg" alt="portfolio_image" /></a>
                     <div class="overlay_bg">
                         <div class="overlay_content">
                             <h3>Web Design</h3>
