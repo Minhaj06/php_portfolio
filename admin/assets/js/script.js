@@ -113,13 +113,15 @@ $(document).ready(function() {
     $("#usersDataTable").DataTable();
 });
 
+
 // alert message function
-function showMessage() {
+function showMessage(message) {
     document.querySelector(".message_show").classList.remove("d-none");
+    document.querySelector(".btn-close").addEventListener("click", function() {
+        document.querySelector(".message_show").classList.add("d-none");
+    })
 }
-document.querySelector(".btn-close").addEventListener("click", function() {
-    document.querySelector(".message_show").classList.add("d-none");
-})
+
 
 // Reload location On dismiss modal
 function modalDismiss() {
@@ -1365,7 +1367,7 @@ $("#update_portfolio_content_btn").click(function(e) {
                 // hide modal
                 $("#edit_portfolio_content_modal").modal("toggle");
 
-                // Refresh Service Content
+                // Refresh Portfolio Content
                 $("#portfolio_category").load(location.href + " #portfolio_category>*", "");
 
                 // Messsage Show
@@ -1375,6 +1377,7 @@ $("#update_portfolio_content_btn").click(function(e) {
         });
     }
 });
+
 
 // Add Portfolio Category
 // check portfolio category exists or not
@@ -1444,10 +1447,7 @@ $("#add_portfolio_category_btn").click(function(e) {
 });
 
 
-
-
-
-
+// Update Portfolio Category
 $(document).on("click", "#edit_port_cat_btn", function(e) {
     e.preventDefault();
 
@@ -1468,7 +1468,7 @@ $(document).on("click", "#edit_port_cat_btn", function(e) {
         $("#edit_port_cat_status").attr("checked", false);
     }
 
-    // Check service icon valid or not for edit Portfolio category
+    // Check portfolio name exist or not for edit Portfolio category
     $("#edit_port_cat_name").keyup(function(e) {
 
         let port_cat_name = $("#edit_port_cat_name").val();
@@ -1529,6 +1529,39 @@ $(document).on("click", "#edit_port_cat_btn", function(e) {
                 showMessage();
                 $(".message_show .ation_message").html(response);
             }
+        });
+    });
+});
+
+
+// Delete Portfolio Category
+$(document).on("click", "#delete_port_cat_btn", function(e) {
+    e.preventDefault();
+
+    $("#confirmBox").modal("show");
+    let delete_port_cat_id = $(this).data("id");
+    modalDismiss();
+
+    $("#confirm_ok").click(function() {
+        $.ajax({
+            url: "code.php",
+            type: "POST",
+            data: {
+                delete_port_cat: 1,
+                delete_port_cat_id: delete_port_cat_id,
+            },
+            success: function(response) {
+
+                // hide confirm box
+                $("#confirmBox").modal("toggle");
+
+                // Refresh Portfolio Content
+                $("#portfolio_category").load(location.href + " #portfolio_category>*", "");
+
+                // Messsage Show
+                showMessage();
+                $(".message_show .ation_message").html(response);
+            },
         });
     });
 });

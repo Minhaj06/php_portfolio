@@ -16,16 +16,16 @@
 
 
     <!-- Portfolio Card Starts Here -->
-    <div class="row g-4">
+    <!-- <div class="col row g-4">
         <style>
         .message_show {
             margin-bottom: 0 !important;
         }
-        </style>
-        <?php include("../admin/assets/includes/message.php"); ?>
-        <div class="card-left col-lg-6">
-
-            <div class="card mb-4">
+        </style> -->
+    <?php include("../admin/assets/includes/message.php"); ?>
+    <div class="card-left row g-4 mb-4">
+        <div class="col-xl-6">
+            <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h2 class="mb-0">Portfolio Content</h2>
 
@@ -39,7 +39,9 @@
                     <p class="mt-2"><?= $result['portfolio_desc'] ?></p>
                 </div>
             </div>
+        </div>
 
+        <div class="col-xl-6">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h2 class="mb-0">Portfolio Category</h2>
@@ -121,60 +123,78 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="card-right col-lg-6">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h2 class="mb-0">Portfolio Items</h2>
+    <div class="card-right">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0">Portfolio Items</h2>
 
-                    <span id="add_service" role="button" data-bs-target="#add_service_modal" data-bs-toggle="modal">
-                        <i class="fa-solid fa-plus"></i>
-                        Add Service
-                    </span>
-                </div>
+                <span id="add_service" role="button" data-bs-target="#add_service_modal" data-bs-toggle="modal">
+                    <i class="fa-solid fa-plus"></i>
+                    Add Portfolio
+                </span>
+            </div>
 
-                <div class="card-body" id="service_items">
-                    <table id="usersDataTable" class="table display table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>Service Icon</th>
-                                <th>Service Name</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr id="">
-                                <td data-target="service_icon" class="align-middle">
+            <div class="card-body" id="service_items">
+                <table id="usersDataTable" class="table display table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>#ID</th>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Technology</th>
+                            <th>URL</th>
+                            <th>Category</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="">
+                            <td data-target="portfolio_id" class="align-middle">
 
-                                </td>
+                            </td>
 
-                                <td data-target="service_name" class="align-middle">
+                            <td data-target="portfolio_name" class="align-middle">
 
-                                </td>
+                            </td>
 
-                                <td class="align-middle">
-                                    <span data-id="" class="fs-4 text-capitalize" id="edit_portfolio_btn" role="button"
-                                        data-bs-target="#edit_portfolio_modal" data-bs-toggle="modal">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </span>
+                            <td data-target="portfolio_image" class="align-middle">
 
-                                    <span data-id="" class="fs-4 text-capitalize ms-4" id="delete_portfolio_btn"
-                                        role="button">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </span>
-                                </td>
-                            </tr>
+                            </td>
 
+                            <td data-target="portfolio_technology" class="align-middle">
 
+                            </td>
 
+                            <td data-target="portfolio_url" class="align-middle">
 
-                        </tbody>
-                    </table>
+                            </td>
 
-                </div>
+                            <td data-target="portfolio_category" class="align-middle">
+
+                            </td>
+
+                            <td class="align-middle">
+                                <span data-id="" class="fs-4 text-capitalize" id="edit_portfolio_btn" role="button"
+                                    data-bs-target="#edit_portfolio_modal" data-bs-toggle="modal">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </span>
+
+                                <span data-id="" class="fs-4 text-capitalize ms-4" id="delete_portfolio_btn"
+                                    role="button">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>
+    <!-- </div> -->
     <!-- Portfolio Card Ends Here -->
 </div>
 
@@ -286,3 +306,13 @@
     </div>
 </div>
 <!-- Edit Portfolio Category Modal Ends -->
+
+
+<!-- Delete Confirm Modal Modal Starts Here -->
+<?php
+$confirm_title = "Delete Portfolio Category";
+$confirm_text = "Do you want to delete this Category?";
+
+include_once "../admin/assets/includes/confirmBox.php";
+?>
+<!-- Delete Confirm Modal Ends Here -->

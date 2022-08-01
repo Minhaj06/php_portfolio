@@ -613,4 +613,20 @@ if (isset($_POST['update_portfolio_category'])) {
     }
 }
 
+
+// Delete portfolio category
+if (isset($_POST['delete_port_cat'])) {
+    $delete_port_cat_id = $_POST['delete_port_cat_id'];
+
+    $query = mysqli_query(
+        $conn,
+        "DELETE FROM `portfolio_category` WHERE port_cat_id = '$delete_port_cat_id' "
+    );
+
+    if ($query) {
+        echo "Category deleted succfully";
+    } else {
+        echo "Category not deleted!";
+    }
+}
 // Portfolio section starts
