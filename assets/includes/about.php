@@ -2,7 +2,7 @@
 <section id="skill_area">
     <div class="container">
         <div class="inner_skill row">
-            <div class="skill_image pe-xxl-5 col-md-6 mb-5 mb-md-0">
+            <div class="skill_image pe-xxl-5 col-lg-6 mb-5 mb-lg-0">
                 <img src="uploaded_img/<?= $select['about_image'] ?>" alt="skill_img" />
                 <div class="experience_highlight">
                     <div class="experience_content">
@@ -14,7 +14,7 @@
                     </div>
                 </div>
             </div>
-            <div class="skills ps-xxl-5 col-md-6 mt-5 mt-md-0 pt-5 pt-md-0">
+            <div class="skills ps-xxl-5 col-lg-6 mt-5 mt-lg-0 pt-5 pt-lg-0">
                 <h3><?= $select['about_title'] ?></h3>
                 <p><?= $select['about_desc'] ?></p>
                 <ul class="skill_progress">

@@ -25,32 +25,33 @@
                 <?php }
                 } ?>
 
-
-
-                <!-- <li><span class="p_cat" data-filter="html">HTML</span></li>
-                <li><span class="p_cat" data-filter="ui">UI/UX</span></li>
-                <li><span class="p_cat" data-filter="design">Web Design</span></li> -->
             </ul>
             <div class="port_menu_icon d-lg-none">
                 <i class="fa-solid fa-bars-staggered"></i>
             </div>
         </div>
 
-        <div class="port_items row g-5 justify-content-center">
+        <div class="port_items row g-4 g-lg-5 justify-content-center">
 
+            <?php
+            $portfolio_query = mysqli_query($conn, "SELECT * FROM `portfolio_items` LIMIT 6 ");
 
-            <div class="col-xl-4 col-md-6 port_single" portfolio_category="web design">
+            if (mysqli_num_rows($portfolio_query) > 0) {
+                while ($portfolio_result = mysqli_fetch_array($portfolio_query)) {
+            ?>
+
+            <div class="col-xl-4 col-md-6 port_single"
+                portfolio_category="<?= $portfolio_result['portfolio_category'] ?>">
                 <div>
-                    <a href="#"><img src="uploaded_img/port_item_1.png" alt="portfolio_image" /></a>
+                    <a href="<?= $portfolio_result['portfolio_url'] ?>">
+                        <img src="uploaded_img/<?= $portfolio_result['portfolio_image'] ?>">
+                    </a>
                     <div class="overlay_bg">
                         <div class="overlay_content">
-                            <h3>Web Design</h3>
-                            <h4>HTML, CSS, jQuery</h4>
-                            <p class="para">
-                                Lorem ipsum dolor sit amet,Stet clita kasd lorem ipsum dolor sit amet. sed diam
-                                eirmod tempor dolore.
-                            </p>
-                            <a href="https://minhaj06.github.io/systematic/" target="_blank">
+                            <h3><?= $portfolio_result['portfolio_name'] ?></h3>
+                            <h4><?= $portfolio_result['portfolio_technology'] ?></h4>
+                            <p class="para"><?= $portfolio_result['portfolio_description'] ?></p>
+                            <a href="<?= $portfolio_result['portfolio_url'] ?>" target="_blank">
                                 <button class="button">Live preview</button>
                             </a>
                         </div>
@@ -58,25 +59,8 @@
                 </div>
             </div>
 
-
-            <div class="col-xl-4 col-md-6 port_single" portfolio_category="PHP">
-                <div>
-                    <a href="#"><img src="uploaded_img/avatar.jpg" alt="portfolio_image" /></a>
-                    <div class="overlay_bg">
-                        <div class="overlay_content">
-                            <h3>Web Design</h3>
-                            <h4>HTML, CSS, jQuery</h4>
-                            <p class="para">
-                                Lorem ipsum dolor sit amet,Stet clita kasd lorem ipsum dolor sit amet. sed diam
-                                eirmod tempor dolore.
-                            </p>
-                            <a href="https://minhaj06.github.io/systematic/" target="_blank">
-                                <button class="button">Live preview</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php }
+            } ?>
 
         </div>
         <div class="text-center mt-5 pt-5">

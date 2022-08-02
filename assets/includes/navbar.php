@@ -32,9 +32,15 @@
                                 <?= $_SESSION['auth_user']['username']; ?><i class="fa-solid fa-chevron-down ps-3"></i>
                             </a>
                             <ul class="dropdown_menu flex-column">
-                                <li><a class="dropdown_item" href="user_profile.php">my profile</a></li>
-                                <li><a class="dropdown_item" href="admin/index.php">dashboard</a></li>
-                                <li><a class="dropdown_item" href="logout.php">logout</a></li>
+                                <li>
+                                    <a class="dropdown_item" href="user_profile.php">my profile</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown_item" href="admin/index.php" target="_blank">dashboard</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown_item" href="logout.php">logout</a>
+                                </li>
                             </ul>
                         </li>
                         <?php } elseif (isset($_SESSION['auth_user'])) { ?>
@@ -43,8 +49,12 @@
                                 <?= $_SESSION['auth_user']['username']; ?><i class="fa-solid fa-chevron-down ps-3"></i>
                             </a>
                             <ul class="dropdown_menu flex-column">
-                                <li><a class="dropdown_item" href="user_profile.php">my profile</a></li>
-                                <li><a class="dropdown_item" href="logout.php">logout</a></li>
+                                <li>
+                                    <a class="dropdown_item" href="user_profile.php">my profile</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown_item" href="logout.php">logout</a>
+                                </li>
                             </ul>
                         </li>
                         <?php } else { ?>

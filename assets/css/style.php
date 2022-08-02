@@ -13,6 +13,7 @@ ul {
 box-sizing: border-box;
 padding: 0;
 margin: 0;
+transition: all 0.2s linear;
 }
 
 ul,
@@ -296,6 +297,7 @@ position: relative;
 
 .skill_image img {
 width: 100%;
+min-height: 45rem;
 height: 100%;
 border-radius: .5rem;
 }
@@ -575,6 +577,7 @@ border-bottom: 3px solid var(--orange);
 
 .bottom_space {
 margin-bottom: 4rem !important;
+transition: 0s;
 }
 
 .port_menu .p_cats .p_cat {
@@ -598,6 +601,8 @@ height: 100%;
 
 .port_single>div img {
 width: 100%;
+min-height: 40rem;
+max-height: 45rem;
 height: 100%;
 border-radius: 5px;
 }
@@ -605,6 +610,7 @@ border-radius: 5px;
 .overlay_bg {
 position: absolute;
 background: var(--orange);
+background-image: linear-gradient(45deg, #1bdd82, transparent);
 height: 100%;
 width: 100%;
 opacity: 85%;
@@ -1027,7 +1033,7 @@ margin-left: 2rem !important;
 }
 }
 
-@media (max-width: 520px) {
+/*@media (max-width: 520px) {
 #skill_area {
 padding-bottom: 0;
 }
@@ -1056,7 +1062,43 @@ max-height: 6rem;
 .main_menu {
 top: 5.5rem;
 }
+}*/
+@media (max-width: 420px) {
+html {
+font-size: 55%;
 }
 
+.btn {
+min-width: 18rem;
+}
+.logo img {
+max-height: 6rem;
+}
+.main_menu {
+top: 5.5rem;
+}
+}
+
+@media (max-width: 375px) {
+html {
+font-size: 48%;
+}
+#skill_area {
+padding-bottom: 0;
+}
+.experience_highlight {
+position:relative;
+display: flex;
+width: 100%;
+}
+.skill_image img {
+height: auto;
+}
+}
+@media (max-width: 300px) {
+html {
+font-size: 45%;
+}
+}
 
 /* media queries ends here */

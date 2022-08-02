@@ -130,66 +130,73 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h2 class="mb-0">Portfolio Items</h2>
 
-                <span id="add_service" role="button" data-bs-target="#add_service_modal" data-bs-toggle="modal">
+                <span id="add_service" role="button" data-bs-target="#add_portfolio_modal" data-bs-toggle="modal">
                     <i class="fa-solid fa-plus"></i>
                     Add Portfolio
                 </span>
             </div>
 
             <div class="card-body" id="service_items">
-                <table id="usersDataTable" class="table display table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>#ID</th>
-                            <th>Name</th>
-                            <th>Image</th>
-                            <th>Technology</th>
-                            <th>URL</th>
-                            <th>Category</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr id="">
-                            <td data-target="portfolio_id" class="align-middle">
+                <div class="table-responsive">
+                    <table id="usersDataTable" class="table display table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#ID</th>
+                                <th>Name</th>
+                                <th>Image</th>
+                                <th>Technology</th>
+                                <th>Description</th>
+                                <th>URL</th>
+                                <th>Category</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="">
+                                <td data-target="portfolio_id" class="align-middle">
 
-                            </td>
+                                </td>
 
-                            <td data-target="portfolio_name" class="align-middle">
+                                <td data-target="portfolio_name" class="align-middle">
 
-                            </td>
+                                </td>
 
-                            <td data-target="portfolio_image" class="align-middle">
+                                <td data-target="portfolio_image" class="align-middle">
 
-                            </td>
+                                </td>
 
-                            <td data-target="portfolio_technology" class="align-middle">
+                                <td data-target="portfolio_technology" class="align-middle">
 
-                            </td>
+                                </td>
 
-                            <td data-target="portfolio_url" class="align-middle">
+                                <td data-target="portfolio_description" class="align-middle">
 
-                            </td>
+                                </td>
 
-                            <td data-target="portfolio_category" class="align-middle">
+                                <td data-target="portfolio_url" class="align-middle">
 
-                            </td>
+                                </td>
 
-                            <td class="align-middle">
-                                <span data-id="" class="fs-4 text-capitalize" id="edit_portfolio_btn" role="button"
-                                    data-bs-target="#edit_portfolio_modal" data-bs-toggle="modal">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </span>
+                                <td data-target="portfolio_category" class="align-middle">
 
-                                <span data-id="" class="fs-4 text-capitalize ms-4" id="delete_portfolio_btn"
-                                    role="button">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </span>
-                            </td>
-                        </tr>
+                                </td>
 
-                    </tbody>
-                </table>
+                                <td class="align-middle">
+                                    <span data-id="" class="fs-4 text-capitalize" id="edit_portfolio_btn" role="button"
+                                        data-bs-target="#edit_portfolio_modal" data-bs-toggle="modal">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </span>
+
+                                    <span data-id="" class="fs-4 text-capitalize ms-4" id="delete_portfolio_btn"
+                                        role="button">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
         </div>
@@ -306,6 +313,111 @@
     </div>
 </div>
 <!-- Edit Portfolio Category Modal Ends -->
+
+
+<!-- Add Portfolio Modal Starts -->
+<div class="modal fade text-capitalize" id="add_portfolio_modal" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add Portfolio</h2>
+                <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
+            </div>
+
+            <form action="" id="add_portfolio_form" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row g-4">
+
+                        <div class="form-group col-lg-6">
+                            <label for="port_name" class="label-control">Portfolio Name</label>
+                            <input class="form-control fs-4" type="text" id="port_name" name="port_name"
+                                placeholder="Type portfolio name">
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="port_technology" class="label-control">Portfolio Technology</label>
+                            <input class="form-control fs-4" type="text" id="port_technology" name="port_technology"
+                                placeholder="What technology have you used?">
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="port_url" class="label-control">Portfolio URL</label>
+                            <input class="form-control fs-4" type="text" id="port_url" name="port_url"
+                                placeholder="https://minhajkobir.com">
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="port_image" class="label-control">Portfolio Image</label>
+                            <input class="form-control fs-4" type="file" id="port_image" name="port_image"
+                                placeholder="Type portfolio URL">
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label for="port_cat">Portfolio Category</label>
+                            <select class="form-select fs-4" name="port_category" id="port_cat">
+
+                                <option value="">--Select Category--</option>
+
+                                <?php
+                                $category_query = mysqli_query($conn, "SELECT port_cat_name FROM `portfolio_category` WHERE port_cat_status ='1' ");
+
+                                if (mysqli_num_rows($category_query) > 0) {
+                                    while ($category_result = mysqli_fetch_array($category_query)) {
+                                ?>
+                                <option value="<?= $category_result['port_cat_name'] ?>">
+                                    <?= $category_result['port_cat_name'] ?></option>
+
+                                <?php }
+                                } ?>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label for="port_description" class="label-control">Portfolio Description (Max Length:
+                                120)</label>
+                            <textarea class="form-control fs-4" placeholder="Portfolio description goes here"
+                                id="port_description" name="port_description" style="height: 130px"
+                                maxlength="120"></textarea>
+                        </div>
+
+                        <input type="hidden" name="add_portfolio">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id="add_portfolio_btn" class="btn btn-secondary fs-4">Add
+                        Portfolio</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Add Portfolio Modal Ends -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- Delete Confirm Modal Modal Starts Here -->

@@ -629,4 +629,36 @@ if (isset($_POST['delete_port_cat'])) {
         echo "Category not deleted!";
     }
 }
+
+
+// Add Portfolio
+if (isset($_POST['add_portfolio'])) {
+    $portfolio_name = $_POST['port_name'];
+    $portfolio_technology = $_POST['port_technology'];
+    $portfolio_description = $_POST['port_description'];
+    $portfolio_url = $_POST['port_url'];
+    $portfolio_category = $_POST['port_category'] == "" ? "Uncategorized" : $_POST['port_category'];
+
+
+    $portfolio_image = $_FILES['port_image']['name'];
+    $port_image_tmp_name = $_FILES['port_image']['tmp_name'];
+    $dotpos = stripos($portfolio_image, '.') + 1;
+    $ext = substr($portfolio_image, $dotpos);
+    $rand = rand(100000, 1000000);
+    $rename_port_image = $rand . '.' . $ext;
+    $img_folder = '../uploaded_img/' . $rename_port_image;
+
+    $query = mysqli_query($conn, "INSERT INTO `portfolio_items`(`portfolio_name`, `portfolio_technology`, `portfolio_description`, `portfolio_url`, `portfolio_image`, `portfolio_category`) VALUES ('$portfolio_name','$portfolio_technology','$portfolio_description','$portfolio_url','$rename_port_image','$portfolio_category')");
+
+    if ($query) {
+        move_uploaded_file($port_image_tmp_name, $img_folder);
+
+        echo "Portfolio added successfully";
+    } else {
+        echo "Something went wrong!";
+    }
+}
+
+
+
 // Portfolio section starts
