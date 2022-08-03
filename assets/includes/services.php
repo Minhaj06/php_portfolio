@@ -38,14 +38,13 @@
             ?>
         </div>
         <div class="text-center mt-5 pt-5">
-            <a href="services.php" data-bs-target="#view_all_services" data-bs-toggle="modal"><button
-                    class="button">view all</button></a>
+            <button class="button" data-bs-target="#view_all_services" data-bs-toggle="modal">view all</button>
         </div>
     </div>
 </section>
 <!-- services section ends here -->
 
-<!-- Show All Skills Modal Starts -->
+<!-- Show All Services Modal Starts -->
 <div class="modal fade text-capitalize " id="view_all_services" data-bs-backdrop="static">
     <div class="modal-dialog modal-xl modal-fullscreen-lg-down">
         <div class="modal-content">
@@ -100,4 +99,4 @@
         </div>
     </div>
 </div>
-<!-- Show All Skills Modal Ends -->
+<!-- Show All Services Modal Ends -->

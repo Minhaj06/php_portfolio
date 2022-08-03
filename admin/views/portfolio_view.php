@@ -136,14 +136,14 @@
                 </span>
             </div>
 
-            <div class="card-body" id="service_items">
+            <div class="card-body" id="portfolio_items">
                 <div class="table-responsive">
                     <table id="usersDataTable" class="table display table-striped table-hover">
                         <thead>
                             <tr>
                                 <th>#ID</th>
-                                <th>Name</th>
                                 <th>Image</th>
+                                <th>Name</th>
                                 <th>Technology</th>
                                 <th>Description</th>
                                 <th>URL</th>
@@ -152,47 +152,71 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr id="">
-                                <td data-target="portfolio_id" class="align-middle">
 
+                            <?php
+                            $portfolio_query = mysqli_query($conn, "SELECT * FROM `portfolio_items`");
+
+                            if (mysqli_num_rows($portfolio_query) > 0) {
+                                while ($portfolio_result = mysqli_fetch_array($portfolio_query)) {
+                            ?>
+
+                            <tr id="<?= $portfolio_result['port_item_id'] ?>">
+                                <td class="h1 align-middle" data-target="portfolio_id">
+                                    #<?= $portfolio_result['port_item_id'] ?>
                                 </td>
 
-                                <td data-target="portfolio_name" class="align-middle">
-
+                                <td data-target="portfolio_image">
+                                    <a href="<?= $portfolio_result['portfolio_url'] ?>" target="_blank">
+                                        <img src="../uploaded_img/<?= $portfolio_result['portfolio_image'] ?>"
+                                            alt="Portfolio_image"
+                                            style="width: 8rem; height: 10rem; background: var(--primary-color-light); padding: .5rem; border: 1px solid;">
+                                    </a>
                                 </td>
 
-                                <td data-target="portfolio_image" class="align-middle">
-
+                                <td data-target="portfolio_name">
+                                    <?= $portfolio_result['portfolio_name'] ?>
                                 </td>
 
-                                <td data-target="portfolio_technology" class="align-middle">
-
+                                <td data-target="portfolio_technology">
+                                    <?= $portfolio_result['portfolio_technology'] ?>
                                 </td>
 
-                                <td data-target="portfolio_description" class="align-middle">
-
+                                <td data-target="portfolio_description">
+                                    <?= $portfolio_result['portfolio_description'] ?>
                                 </td>
 
-                                <td data-target="portfolio_url" class="align-middle">
-
+                                <td data-target="portfolio_url">
+                                    <?= $portfolio_result['portfolio_url'] ?>
                                 </td>
 
-                                <td data-target="portfolio_category" class="align-middle">
-
+                                <td data-target="portfolio_category">
+                                    <?= $portfolio_result['portfolio_category'] ?>
                                 </td>
 
-                                <td class="align-middle">
-                                    <span data-id="" class="fs-4 text-capitalize" id="edit_portfolio_btn" role="button"
+                                <td>
+                                    <span data-id="<?= $portfolio_result['port_item_id'] ?>"
+                                        class="fs-4 text-capitalize" id="edit_portfolio_btn" role="button"
                                         data-bs-target="#edit_portfolio_modal" data-bs-toggle="modal">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </span>
 
-                                    <span data-id="" class="fs-4 text-capitalize ms-4" id="delete_portfolio_btn"
-                                        role="button">
+                                    <span data-id="<?= $portfolio_result['port_item_id'] ?>"
+                                        class="fs-4 text-capitalize ms-4" id="delete_portfolio_btn" role="button">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </span>
                                 </td>
                             </tr>
+
+                            <?php
+                                }
+                            } else {
+                                ?>
+
+                            <tr>
+                                <td class="text-center py-5 fs-1" colspan="8">No portfolio founded!</td>
+                            </tr>
+
+                            <?php } ?>
 
                         </tbody>
                     </table>

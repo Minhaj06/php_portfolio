@@ -519,21 +519,12 @@ right: 1rem;
 
 .achive_item>div {
 background: var(--dark-gray);
-
-
-
-
 background-image: repeating-linear-gradient(0deg, var(--gray), var(--gray) 13px, transparent 13px, transparent 23px,
 var(--gray)
 23px), repeating-linear-gradient(90deg, var(--gray), var(--gray) 13px, transparent 13px, transparent 23px, var(--gray)
 23px),
 repeating-linear-gradient(180deg, var(--gray), var(--gray) 13px, transparent 13px, transparent 23px, var(--gray) 23px),
 repeating-linear-gradient(270deg, var(--gray), var(--gray) 13px, transparent 13px, transparent 23px, var(--gray) 23px);
-
-
-
-
-
 background-size: 1px 100%, 100% 1px, 1px 100% , 100% 1px;
 background-position: 0 0, 0 0, 100% 0, 0 100%;
 background-repeat: no-repeat;
@@ -610,7 +601,6 @@ border-radius: 5px;
 .overlay_bg {
 position: absolute;
 background: var(--orange);
-background-image: linear-gradient(45deg, #1bdd82, transparent);
 height: 100%;
 width: 100%;
 opacity: 85%;
@@ -641,7 +631,7 @@ font-size: 2.2rem;
 
 .overlay_content h4 {
 font-size: 15px;
-margin: 1.5rem 0 5rem 0;
+margin: 1.5rem 0 2.5rem 0;
 }
 
 .overlay_content .button {

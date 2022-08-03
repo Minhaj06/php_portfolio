@@ -648,11 +648,15 @@ if (isset($_POST['add_portfolio'])) {
     $rename_port_image = $rand . '.' . $ext;
     $img_folder = '../uploaded_img/' . $rename_port_image;
 
-    $query = mysqli_query($conn, "INSERT INTO `portfolio_items`(`portfolio_name`, `portfolio_technology`, `portfolio_description`, `portfolio_url`, `portfolio_image`, `portfolio_category`) VALUES ('$portfolio_name','$portfolio_technology','$portfolio_description','$portfolio_url','$rename_port_image','$portfolio_category')");
+    // $query = mysqli_query($conn, "INSERT INTO `portfolio_items`(`portfolio_name`, `portfolio_technology`, `portfolio_description`, `portfolio_url`, `portfolio_image`, `portfolio_category`) VALUES ('$portfolio_name','$portfolio_technology','$portfolio_description','$portfolio_url','$rename_port_image','$portfolio_category')");
 
-    if ($query) {
+    $sql = "INSERT INTO `portfolio_items`(`portfolio_name`, `portfolio_technology`, `portfolio_description`, `portfolio_url`, `portfolio_image`, `portfolio_category`) VALUES ('$portfolio_name','$portfolio_technology','$portfolio_description','$portfolio_url','$rename_port_image','$portfolio_category');";
+
+    $sql .= "UPDATE `portfolio_category` SET no_of_port = no_of_port + 1 WHERE port_cat_name = '$portfolio_category'";
+
+    if (mysqli_multi_query($conn, $sql)) {
+
         move_uploaded_file($port_image_tmp_name, $img_folder);
-
         echo "Portfolio added successfully";
     } else {
         echo "Something went wrong!";

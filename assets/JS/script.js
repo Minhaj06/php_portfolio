@@ -13,7 +13,7 @@ btn.addEventListener("click", () => {
 const menu_link = document.querySelectorAll(".menu_link");
 
 menu_link.forEach((element) => {
-    element.addEventListener("click", function() {
+    element.addEventListener("click", function () {
         menu_link.forEach((link) => link.classList.remove("active"));
 
         this.classList.add("active");
@@ -39,7 +39,7 @@ const p_cat = document.querySelectorAll(".p_cat");
 const p_single = document.querySelectorAll(".port_items div");
 
 p_cat_li.forEach((port_menu_li) => {
-    port_menu_li.addEventListener("click", function() {
+    port_menu_li.addEventListener("click", function () {
         p_cat_li.forEach((mb) => mb.classList.remove("bottom_space"));
 
         this.classList.add("bottom_space");
@@ -47,7 +47,7 @@ p_cat_li.forEach((port_menu_li) => {
 });
 
 p_cat.forEach((port_menu) => {
-    port_menu.addEventListener("click", function() {
+    port_menu.addEventListener("click", function () {
         p_cat.forEach((active) => active.classList.remove("active"));
 
         this.classList.add("active");
@@ -62,10 +62,15 @@ portMenuBtn.addEventListener("click", () => {
     portMenu.classList.toggle("show_p_cats");
 });
 
+let modalPortMenuBtn = document.querySelector("#modal-body .port_menu_icon");
+let modalPortMenu = document.querySelector("#modal-body .p_cats");
+modalPortMenuBtn.addEventListener("click", () => {
+    modalPortMenu.classList.toggle("show_p_cats");
+});
+
 
 // Filter Portfolio Items By Category
 // let portfolio_category = document.querySelector("port_single");
-
 p_cats.addEventListener("click", (event) => {
     console.log(event.target);
 
@@ -87,10 +92,33 @@ p_cats.addEventListener("click", (event) => {
     }
 });
 
+let modal_p_cats = document.querySelector("#modal-body .p_cats")
+modal_p_cats.addEventListener("click", (event) => {
+    console.log(event.target);
+
+    if (event.target.classList.contains("p_cat")) {
+        const filterValue = event.target.getAttribute("data-filter");
+
+        p_single.forEach((category) => {
+            let port_cat = category.getAttribute("portfolio_category");
+
+            if (port_cat == filterValue || filterValue === "all") {
+                category.classList.remove("hide");
+                category.classList.add("display");
+            } else {
+                category.classList.remove("display");
+                category.classList.add("hide");
+            }
+        });
+
+    }
+});
+
+
 // Achivements counter
 
 window.addEventListener("load", () => {
-    setTimeout(function() {
+    setTimeout(function () {
         let counters = document.querySelectorAll(".counter");
         let time = 300;
 
