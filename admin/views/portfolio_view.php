@@ -160,7 +160,7 @@
                                 while ($portfolio_result = mysqli_fetch_array($portfolio_query)) {
                             ?>
 
-                            <tr id="<?= $portfolio_result['port_item_id'] ?>">
+                            <tr class="<?= $portfolio_result['port_item_id'] ?>">
                                 <td class="h1 align-middle" data-target="portfolio_id">
                                     #<?= $portfolio_result['port_item_id'] ?>
                                 </td>
@@ -186,7 +186,8 @@
                                 </td>
 
                                 <td data-target="portfolio_url">
-                                    <?= $portfolio_result['portfolio_url'] ?>
+                                    <a href="<?= $portfolio_result['portfolio_url'] ?>"
+                                        target="_blank"><?= $portfolio_result['portfolio_url'] ?></a>
                                 </td>
 
                                 <td data-target="portfolio_category">
@@ -372,13 +373,14 @@
 
                         <div class="form-group col-lg-6">
                             <label for="port_image" class="label-control">Portfolio Image</label>
-                            <input class="form-control fs-4" type="file" id="port_image" name="port_image"
-                                placeholder="Type portfolio URL">
+                            <input class="form-control fs-4" type="file"
+                                accept="image/jpg, image/png, image/jpeg, image/gif, image/jfif" id="port_image"
+                                name="port_image" placeholder="Type portfolio URL">
                         </div>
 
                         <div class="form-group col-12">
                             <label for="port_cat">Portfolio Category</label>
-                            <select class="form-select fs-4" name="port_category" id="port_cat">
+                            <select class="form-select fs-4" name="port_category" id="port_category">
 
                                 <option value="">--Select Category--</option>
 
@@ -419,6 +421,94 @@
     </div>
 </div>
 <!-- Add Portfolio Modal Ends -->
+
+
+
+
+
+
+<!-- Edit Portfolio Modal Starts -->
+<div class="modal fade text-capitalize" id="edit_portfolio_modal" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Portfolio</h2>
+                <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
+            </div>
+
+            <form action="" id="edit_portfolio_form" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row g-4">
+
+                        <div class="form-group col-lg-6">
+                            <label for="edit_port_name" class="label-control">Portfolio Name</label>
+                            <input class="form-control fs-4" type="text" id="edit_port_name" name="edit_port_name"
+                                placeholder="Type portfolio name">
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="edit_port_technology" class="label-control">Portfolio Technology</label>
+                            <input class="form-control fs-4" type="text" id="edit_port_technology"
+                                name="edit_port_technology" placeholder="What technology have you used?">
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="edit_port_url" class="label-control">Portfolio URL</label>
+                            <input class="form-control fs-4" type="text" id="edit_port_url" name="edit_port_url"
+                                placeholder="https://minhajkobir.com">
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="edit_port_image" class="label-control">Portfolio Image</label>
+                            <input class="form-control fs-4" type="file"
+                                accept="image/jpg, image/png, image/jpeg, image/gif, image/jfif" id="edit_port_image"
+                                name="edit_port_image">
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label for="edit_port_category">Portfolio Category</label>
+                            <select class="form-select fs-4" name="edit_port_category" id="edit_port_category">
+
+                                <option value="">Uncategorized</option>
+
+                                <?php
+                                $category_query = mysqli_query($conn, "SELECT port_cat_name FROM `portfolio_category` WHERE port_cat_status ='1' ");
+
+                                if (mysqli_num_rows($category_query) > 0) {
+                                    while ($category_result = mysqli_fetch_array($category_query)) {
+                                ?>
+                                <option value="<?= $category_result['port_cat_name'] ?>">
+                                    <?= $category_result['port_cat_name'] ?></option>
+
+                                <?php }
+                                } ?>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label for="edit_port_description" class="label-control">Portfolio Description (Max Length:
+                                120)</label>
+                            <textarea class="form-control fs-4" placeholder="Portfolio description goes here"
+                                id="edit_port_description" name="edit_port_description" style="height: 130px"
+                                maxlength="120"></textarea>
+                        </div>
+
+                        <input type="hidden" value="" name="edit_port_id" id="edit_port_id">
+                        <input type="hidden" name="update_portfolio">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id="update_portfolio_btn" class="btn btn-secondary fs-4">Add
+                        Portfolio</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Edit Portfolio Modal Ends -->
 
 
 

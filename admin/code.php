@@ -639,7 +639,6 @@ if (isset($_POST['add_portfolio'])) {
     $portfolio_url = $_POST['port_url'];
     $portfolio_category = $_POST['port_category'] == "" ? "Uncategorized" : $_POST['port_category'];
 
-
     $portfolio_image = $_FILES['port_image']['name'];
     $port_image_tmp_name = $_FILES['port_image']['tmp_name'];
     $dotpos = stripos($portfolio_image, '.') + 1;
@@ -648,7 +647,6 @@ if (isset($_POST['add_portfolio'])) {
     $rename_port_image = $rand . '.' . $ext;
     $img_folder = '../uploaded_img/' . $rename_port_image;
 
-    // $query = mysqli_query($conn, "INSERT INTO `portfolio_items`(`portfolio_name`, `portfolio_technology`, `portfolio_description`, `portfolio_url`, `portfolio_image`, `portfolio_category`) VALUES ('$portfolio_name','$portfolio_technology','$portfolio_description','$portfolio_url','$rename_port_image','$portfolio_category')");
 
     $sql = "INSERT INTO `portfolio_items`(`portfolio_name`, `portfolio_technology`, `portfolio_description`, `portfolio_url`, `portfolio_image`, `portfolio_category`) VALUES ('$portfolio_name','$portfolio_technology','$portfolio_description','$portfolio_url','$rename_port_image','$portfolio_category');";
 
@@ -660,6 +658,124 @@ if (isset($_POST['add_portfolio'])) {
         echo "Portfolio added successfully";
     } else {
         echo "Something went wrong!";
+    }
+}
+
+
+// Update Portfolio
+if (isset($_POST['update_portfolio'])) {
+
+    $edit_port_id = $_POST['edit_port_id'];
+
+    $portfolio_name = $_POST['edit_port_name'];
+    $portfolio_technology = $_POST['edit_port_technology'];
+    $portfolio_description = $_POST['edit_port_description'];
+    $portfolio_url = $_POST['edit_port_url'];
+    $portfolio_category = $_POST['edit_port_category'] == "" ? "Uncategorized" : $_POST['edit_port_category'];
+
+    $portfolio_image = $_FILES['edit_port_image']['name'];
+
+    if (empty($portfolio_name) || empty($portfolio_technology) || empty($portfolio_description) || empty($portfolio_url)) {
+        echo "Input could not be empty!!";
+    } else {
+
+        $port_cat_query = mysqli_query($conn, "SELECT portfolio_category FROM `portfolio_items` WHERE port_item_id = '$edit_port_id' ");
+
+        $prev_category = mysqli_fetch_assoc($port_cat_query)['portfolio_category'];
+
+        if (empty($portfolio_image)) {
+
+            if (($portfolio_category !== $prev_category) && ($portfolio_category == "Uncategorized")) {
+
+                $query = mysqli_query($conn, "UPDATE `portfolio_items` SET `portfolio_name`='$portfolio_name',`portfolio_technology`='$portfolio_technology',`portfolio_description`='$portfolio_description',`portfolio_url`='$portfolio_url',`portfolio_category`='$portfolio_category' WHERE port_item_id='$edit_port_id' ");
+
+                if ($query) {
+                    $query_sql = "UPDATE `portfolio_category` SET no_of_port = no_of_port - 1 WHERE port_cat_name = '$prev_category';";
+
+                    if (mysqli_query($conn, $query_sql)) {
+                        echo 'Portfolio Update Successfully';
+                    }
+                }
+            } elseif ($portfolio_category !== $prev_category) {
+
+                $query = mysqli_query($conn, "UPDATE `portfolio_items` SET `portfolio_name`='$portfolio_name',`portfolio_technology`='$portfolio_technology',`portfolio_description`='$portfolio_description',`portfolio_url`='$portfolio_url',`portfolio_category`='$portfolio_category' WHERE port_item_id='$edit_port_id' ");
+
+                if ($query) {
+                    $query_sql = "UPDATE `portfolio_category` SET no_of_port = no_of_port - 1 WHERE port_cat_name = '$prev_category';";
+                    $query_sql .= "UPDATE `portfolio_category` SET no_of_port = no_of_port + 1 WHERE port_cat_name = '$portfolio_category'";
+
+                    if (mysqli_multi_query($conn, $query_sql)) {
+                        echo 'Portfolio Update Successfully';
+                    }
+                }
+            } else {
+
+                $query = mysqli_query($conn, "UPDATE `portfolio_items` SET `portfolio_name`='$portfolio_name',`portfolio_technology`='$portfolio_technology',`portfolio_description`='$portfolio_description',`portfolio_url`='$portfolio_url' WHERE port_item_id='$edit_port_id' ");
+
+                if ($query) {
+                    echo "Porfolio Updated Successfully";
+                }
+            }
+        } else {
+
+            $port_image_tmp_name = $_FILES['edit_port_image']['tmp_name'];
+            $dotpos = stripos($portfolio_image, '.') + 1;
+            $ext = substr($portfolio_image, $dotpos);
+            $rand = rand(100000, 1000000);
+            $rename_port_image = $rand . '.' . $ext;
+            $img_folder = '../uploaded_img/' . $rename_port_image;
+
+
+            $image_query = mysqli_query($conn, "SELECT portfolio_image FROM `portfolio_items` WHERE port_item_id = '$edit_port_id' ");
+            $old_image_name = mysqli_fetch_assoc($image_query)['portfolio_image'];
+            $old_img_folder = '../uploaded_img/' . $old_image_name;
+
+            function updatePortfolioImg()
+            {
+
+                global $old_img_folder, $port_image_tmp_name, $img_folder;
+
+                if (file_exists($old_img_folder)) {
+                    unlink($old_img_folder);
+
+                    move_uploaded_file($port_image_tmp_name, $img_folder);
+                    echo "Porfolio Updated Successfully With Image";
+                } else {
+
+                    move_uploaded_file($port_image_tmp_name, $img_folder);
+                    echo "Porfolio Updated Successfully With Image";
+                }
+            }
+
+            if (($portfolio_category !== $prev_category) && ($portfolio_category == "Uncategorized")) {
+
+
+                $query = mysqli_query($conn, "UPDATE `portfolio_items` SET `portfolio_name`='$portfolio_name',`portfolio_technology`='$portfolio_technology',`portfolio_description`='$portfolio_description',`portfolio_url`='$portfolio_url',`portfolio_image`='$rename_port_image',`portfolio_category`='$portfolio_category' WHERE port_item_id='$edit_port_id' ");
+
+                if ($query) {
+                    $query_sql = "UPDATE `portfolio_category` SET no_of_port = no_of_port - 1 WHERE port_cat_name = '$prev_category';";
+                    mysqli_multi_query($conn, $query_sql);
+                    updatePortfolioImg();
+                }
+            } elseif ($portfolio_category !== $prev_category) {
+
+                $query = mysqli_query($conn, "UPDATE `portfolio_items` SET `portfolio_name`='$portfolio_name',`portfolio_technology`='$portfolio_technology',`portfolio_description`='$portfolio_description',`portfolio_url`='$portfolio_url',`portfolio_image`='$rename_port_image',`portfolio_category`='$portfolio_category' WHERE port_item_id='$edit_port_id' ");
+
+                if ($query) {
+                    $query_sql = "UPDATE `portfolio_category` SET no_of_port = no_of_port - 1 WHERE port_cat_name = '$prev_category';";
+                    $query_sql .= "UPDATE `portfolio_category` SET no_of_port = no_of_port + 1 WHERE port_cat_name = '$portfolio_category'";
+                    mysqli_multi_query($conn, $query_sql);
+                    updatePortfolioImg();
+                }
+            } else {
+
+                $query = mysqli_query($conn, "UPDATE `portfolio_items` SET `portfolio_name`='$portfolio_name',`portfolio_technology`='$portfolio_technology',`portfolio_description`='$portfolio_description',`portfolio_url`='$portfolio_url',`portfolio_image`='$rename_port_image' WHERE port_item_id='$edit_port_id' ");
+
+                if ($query) {
+                    updatePortfolioImg();
+                }
+            }
+        }
     }
 }
 

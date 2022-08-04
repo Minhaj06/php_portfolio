@@ -631,8 +631,6 @@ $(".edit_home_btn").click(function(e) {
 
 
 // Update About Section Starts Here
-
-
 $(".edit_about_btn").click(function(e) {
     e.preventDefault();
 
@@ -1594,9 +1592,6 @@ $(document).on("submit", "#add_portfolio_form", function(e) {
             data: new FormData(this),
             processData: false,
             contentType: false,
-            beforeSend: function() {
-                console.log("Wait..Data is loading...");
-            },
             success: function(response) {
                 // hide modal
                 $("#add_portfolio_modal").modal("toggle");
@@ -1613,14 +1608,90 @@ $(document).on("submit", "#add_portfolio_form", function(e) {
                 $("#portfolio_items").load(location.href + " #portfolio_items>*", "");
 
             },
-            error: function(request, error) {
-                console.log(arguments);
-                console.log("Error: " + error);
-            },
         });
     }
-
-
 });
+
+
+
+
+// Edit Portfolio
+$(document).on("click", "#edit_portfolio_btn", function(e) {
+    e.preventDefault();
+
+    let portfolio_id = $(this).data("id");
+    modalDismiss();
+
+    // Storing data from td
+    let portfolio_name = $.trim($("." + portfolio_id).children("td[data-target=portfolio_name]").text());
+    let portfolio_technology = $.trim($("." + portfolio_id).children("td[data-target=portfolio_technology]").text());
+    let portfolio_description = $.trim($("." + portfolio_id).children("td[data-target=portfolio_description]").text());
+    let portfolio_url = $.trim($("." + portfolio_id).children("td[data-target=portfolio_url]").text());
+    let portfolio_category = $.trim($("." + portfolio_id).children("td[data-target=portfolio_category]").text());
+
+    // Showing data in input field
+    $("#edit_port_id").val(portfolio_id);
+
+    $("#edit_port_name").val(portfolio_name);
+    $("#edit_port_technology").val(portfolio_technology);
+    $("#edit_port_description").val(portfolio_description);
+    $("#edit_port_url").val(portfolio_url);
+
+    // Select option by category
+    let port_cat_option = document.querySelectorAll("#edit_port_category option");
+    port_cat_option.forEach((options) => {
+        let port_option = options.value
+
+        if (port_option == portfolio_category) {
+            options.setAttribute("selected", true);
+        }
+    });
+
+
+    $(document).on("submit", "#edit_portfolio_form", function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: "code.php",
+            type: "POST",
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // hide modal
+                $("#edit_portfolio_modal").modal("toggle");
+
+                // Messsage Show
+                showMessage();
+                $(".message_show .ation_message").html(response);
+
+                // Refresh Form
+                $("#edit_portfolio_form")[0].reset();
+
+                // Refresh Table
+                $("#portfolio_category").load(location.href + " #portfolio_category>*", "");
+                $("#portfolio_items").load(location.href + " #portfolio_items>*", "");
+
+            },
+        });
+
+        // let portfolio_name = $("#edit_port_name").val();
+        // let portfolio_technology = $("#edit_port_technology").val();
+        // let portfolio_description = $("#edit_port_description").val();
+        // let portfolio_url = $("#edit_port_url").val();
+
+        // if (portfolio_name == "" || portfolio_technology == "" || portfolio_description == "" || portfolio_url == "") {
+        //     emptyAlert();
+        // } else {
+
+        // }
+    });
+});
+
+
+
+
+
+
 
 // Portfolio Section Ends Here
