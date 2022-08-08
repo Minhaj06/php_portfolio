@@ -34,7 +34,7 @@
         <div class="port_items row g-5 g-sm-4 g-lg-5 g-xxl-4 justify-content-center">
 
             <?php
-            $portfolio_query = mysqli_query($conn, "SELECT * FROM `portfolio_items` LIMIT 8 ");
+            $portfolio_query = mysqli_query($conn, "SELECT * FROM `portfolio_items` ORDER BY port_item_id DESC LIMIT 8 ");
 
             if (mysqli_num_rows($portfolio_query) > 0) {
                 while ($portfolio_result = mysqli_fetch_array($portfolio_query)) {
@@ -116,7 +116,7 @@
                     <div class="port_items row g-5 g-sm-4 justify-content-center">
 
                         <?php
-                        $portfolio_query = mysqli_query($conn, "SELECT * FROM `portfolio_items`");
+                        $portfolio_query = mysqli_query($conn, "SELECT * FROM `portfolio_items` ORDER BY port_item_id DESC");
 
                         if (mysqli_num_rows($portfolio_query) > 0) {
                             while ($portfolio_result = mysqli_fetch_array($portfolio_query)) {

@@ -1264,10 +1264,14 @@ right: 1rem;
 }
 
 @media (max-width: 991px) {
-.grid_container {
+/*.grid_container {
 grid-template-areas: "Counter Counter Counter Counter Counter Counter" "Write_new Write_new Write_new Write_new
 Write_new Write_new" "Shares Shares Shares Comments Comments Comments" "Used Used Used Used Used Used" "TopArt TopArt
 TopArt TopArt TopArt TopArt" "RecentArt RecentArt RecentArt RecentArt RecentArt RecentArt";
+}*/
+.grid_container {
+grid-template-columns: 1fr;
+grid-template-areas: "Counter" "Write_new" "Shares" "Comments" "Used" "TopArt" "RecentArt";
 }
 }
 
@@ -1286,10 +1290,6 @@ height: calc(100% - 11rem);
 .mainTop {
 top: 11.5rem;
 }
-.grid_container {
-grid-template-columns: 1fr;
-grid-template-areas: "Counter" "Write_new" "Shares" "Comments" "Used" "TopArt" "RecentArt";
-}
 }
 
 @media (max-width: 400px) {
@@ -1298,6 +1298,10 @@ font-size: 50%;
 }
 .sidebar.close {
 left: -300px;
+}
+.main {
+left: 0;
+width: 100%;
 }
 .sidebar.close~.main {
 left: 0;
@@ -1314,6 +1318,7 @@ font-size: 2.5rem;
 left: 0;
 width: 100%;
 }
+
 .sidebar.close~.main #footer {
 left: 0;
 width: 100%;

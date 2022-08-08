@@ -112,8 +112,8 @@ username='$username', email='$email', contact_no='$contact_no', image='$rename_i
 
         $rename_image = $username . ".jpg";
 
-        $from = ".../uploaded_img/" . $data['username'] . ".jpg";
-        $to = ".../uploaded_img/" . $username . ".jpg";
+        $from = "../uploaded_img/" . $data['username'] . ".jpg";
+        $to = "../uploaded_img/" . $username . ".jpg";
         rename($from, $to);
 
         echo "User updated successfully";
@@ -618,10 +618,7 @@ if (isset($_POST['update_portfolio_category'])) {
 if (isset($_POST['delete_port_cat'])) {
     $delete_port_cat_id = $_POST['delete_port_cat_id'];
 
-    $query = mysqli_query(
-        $conn,
-        "DELETE FROM `portfolio_category` WHERE port_cat_id = '$delete_port_cat_id' "
-    );
+    $query = mysqli_query($conn, "DELETE FROM `portfolio_category` WHERE port_cat_id = '$delete_port_cat_id' ");
 
     if ($query) {
         echo "Category deleted succfully";
@@ -690,7 +687,7 @@ if (isset($_POST['update_portfolio'])) {
                 $query = mysqli_query($conn, "UPDATE `portfolio_items` SET `portfolio_name`='$portfolio_name',`portfolio_technology`='$portfolio_technology',`portfolio_description`='$portfolio_description',`portfolio_url`='$portfolio_url',`portfolio_category`='$portfolio_category' WHERE port_item_id='$edit_port_id' ");
 
                 if ($query) {
-                    $query_sql = "UPDATE `portfolio_category` SET no_of_port = no_of_port - 1 WHERE port_cat_name = '$prev_category';";
+                    $query_sql = "UPDATE `portfolio_category` SET no_of_port = no_of_port - 1 WHERE port_cat_name = '$prev_category'";
 
                     if (mysqli_query($conn, $query_sql)) {
                         echo 'Portfolio Update Successfully';
@@ -753,8 +750,8 @@ if (isset($_POST['update_portfolio'])) {
                 $query = mysqli_query($conn, "UPDATE `portfolio_items` SET `portfolio_name`='$portfolio_name',`portfolio_technology`='$portfolio_technology',`portfolio_description`='$portfolio_description',`portfolio_url`='$portfolio_url',`portfolio_image`='$rename_port_image',`portfolio_category`='$portfolio_category' WHERE port_item_id='$edit_port_id' ");
 
                 if ($query) {
-                    $query_sql = "UPDATE `portfolio_category` SET no_of_port = no_of_port - 1 WHERE port_cat_name = '$prev_category';";
-                    mysqli_multi_query($conn, $query_sql);
+                    $query_sql = "UPDATE `portfolio_category` SET no_of_port = no_of_port - 1 WHERE port_cat_name = '$prev_category'";
+                    mysqli_query($conn, $query_sql);
                     updatePortfolioImg();
                 }
             } elseif ($portfolio_category !== $prev_category) {
@@ -780,5 +777,19 @@ if (isset($_POST['update_portfolio'])) {
 }
 
 
+// Delete Portfolio
+if (isset($_POST['delete_portfolio'])) {
+    $portfolio_id = $_POST['portfolio_id'];
+    $portfolio_category = $_POST['portfolio_category'];
+
+    $query = "DELETE FROM `portfolio_items` WHERE port_item_id = '$portfolio_id';";
+    $query .= "UPDATE `portfolio_category` SET no_of_port = no_of_port - 1 WHERE port_cat_name = '$portfolio_category'";
+
+    if (mysqli_multi_query($conn, $query)) {
+        echo "Portfolio deleted successfully";
+    } else {
+        echo "Portfolio not deleted!!";
+    }
+}
 
 // Portfolio section starts

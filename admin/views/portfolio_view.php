@@ -138,10 +138,10 @@
 
             <div class="card-body" id="portfolio_items">
                 <div class="table-responsive">
-                    <table id="usersDataTable" class="table display table-striped table-hover">
+                    <table id="usersDataTable" class="table display table-striped table-hover"
+                        style="min-width: 1270px;">
                         <thead>
                             <tr>
-                                <th>#ID</th>
                                 <th>Image</th>
                                 <th>Name</th>
                                 <th>Technology</th>
@@ -161,13 +161,10 @@
                             ?>
 
                             <tr class="<?= $portfolio_result['port_item_id'] ?>">
-                                <td class="h1 align-middle" data-target="portfolio_id">
-                                    #<?= $portfolio_result['port_item_id'] ?>
-                                </td>
-
-                                <td data-target="portfolio_image">
+                                <td>
                                     <a href="<?= $portfolio_result['portfolio_url'] ?>" target="_blank">
-                                        <img src="../uploaded_img/<?= $portfolio_result['portfolio_image'] ?>"
+                                        <img id="<?= $portfolio_result['port_item_id'] ?>view_image"
+                                            src="../uploaded_img/<?= $portfolio_result['portfolio_image'] ?>"
                                             alt="Portfolio_image"
                                             style="width: 8rem; height: 10rem; background: var(--primary-color-light); padding: .5rem; border: 1px solid;">
                                     </a>
@@ -185,6 +182,12 @@
                                     <?= $portfolio_result['portfolio_description'] ?>
                                 </td>
 
+                                <style>
+                                a:hover {
+                                    color: var(--primary-color)
+                                }
+                                </style>
+
                                 <td data-target="portfolio_url">
                                     <a href="<?= $portfolio_result['portfolio_url'] ?>"
                                         target="_blank"><?= $portfolio_result['portfolio_url'] ?></a>
@@ -194,15 +197,22 @@
                                     <?= $portfolio_result['portfolio_category'] ?>
                                 </td>
 
-                                <td>
+                                <td style="min-width: 10rem;">
                                     <span data-id="<?= $portfolio_result['port_item_id'] ?>"
-                                        class="fs-4 text-capitalize" id="edit_portfolio_btn" role="button"
-                                        data-bs-target="#edit_portfolio_modal" data-bs-toggle="modal">
+                                        class="fs-4 text-capitalize text-success" id="view_portfolio_btn" role="button"
+                                        data-bs-target="#view_portfolio_modal" data-bs-toggle="modal">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </span>
+
+                                    <span data-id="<?= $portfolio_result['port_item_id'] ?>"
+                                        class="fs-4 text-capitalize text-info ms-4" id="edit_portfolio_btn"
+                                        role="button" data-bs-target="#edit_portfolio_modal" data-bs-toggle="modal">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </span>
 
                                     <span data-id="<?= $portfolio_result['port_item_id'] ?>"
-                                        class="fs-4 text-capitalize ms-4" id="delete_portfolio_btn" role="button">
+                                        class="fs-4 text-capitalize text-danger ms-4" id="delete_portfolio_btn"
+                                        role="button">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </span>
                                 </td>
@@ -423,8 +433,61 @@
 <!-- Add Portfolio Modal Ends -->
 
 
+<!-- View Portfolio Modal Starts -->
+<div class="modal fade" id="view_portfolio_modal" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">View Portfolio</h2>
+                <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
+            </div>
+            <div class="modal-body" style="max-height: 60rem;">
 
+                <div style="border-bottom: 1px solid var(--primary-color);" class="home_img text-center pb-3 mb-4">
 
+                    <a href="" id="view_port_img_modal_url" target="_blank">
+                        <img id="view_port_img_modal"
+                            style="max-height: 45rem; border: 2px solid; border-radius: .5rem;" width="100%"
+                            class="home_modal_img p-2" src="" alt="Portfolio Image">
+                    </a>
+
+                </div>
+
+                <table class="table table-striped table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <th class="align-middle">Portfolio Name</th>
+                            <td class="align-middle" id="view_port_name"></td>
+                        </tr>
+                        <tr>
+                            <th class="align-middle">Using Technology</th>
+                            <td class="align-middle" id="view_port_technology"></td>
+                        </tr>
+                        <tr>
+                            <th class="align-middle">Description</th>
+                            <td class="align-middle" id="view_port_description"></td>
+                        </tr>
+                        <tr>
+                            <th class="align-middle">Portfolio URL</th>
+                            <td class="align-middle" id="view_port_url">
+                                <a href="" target="_blank"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="align-middle">Portfolio Category</th>
+                            <td class="align-middle" id="view_port_category"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- View Portfolio Modal Starts -->
 
 
 <!-- Edit Portfolio Modal Starts -->
@@ -511,33 +574,10 @@
 <!-- Edit Portfolio Modal Ends -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- Delete Confirm Modal Modal Starts Here -->
 <?php
-$confirm_title = "Delete Portfolio Category";
-$confirm_text = "Do you want to delete this Category?";
+$confirm_title = "Delete Alert";
+$confirm_text = "Do you want to delete this?";
 
 include_once "../admin/assets/includes/confirmBox.php";
 ?>
