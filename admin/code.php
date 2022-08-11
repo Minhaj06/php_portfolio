@@ -785,11 +785,129 @@ if (isset($_POST['delete_portfolio'])) {
     $query = "DELETE FROM `portfolio_items` WHERE port_item_id = '$portfolio_id';";
     $query .= "UPDATE `portfolio_category` SET no_of_port = no_of_port - 1 WHERE port_cat_name = '$portfolio_category'";
 
+    $prev_image = mysqli_fetch_assoc(mysqli_query($conn, "SELECT portfolio_image FROM `portfolio_items` WHERE port_item_id = '$portfolio_id'"))['portfolio_image'];
+
+
     if (mysqli_multi_query($conn, $query)) {
+
+        unlink('../uploaded_img/' . $prev_image);
         echo "Portfolio deleted successfully";
     } else {
         echo "Portfolio not deleted!!";
     }
 }
 
-// Portfolio section starts
+// Portfolio section Ends
+
+
+// Testimonial section starts
+// Update Portfolio Content
+if (isset($_POST['update_testimonial_content'])) {
+
+    $testimonial_title = $_POST['testimonial_title'];
+    $testimonial_desc = $_POST['testimonial_desc'];
+
+    $query = mysqli_query($conn, "UPDATE `testimonial_section` SET testimonial_title = '$testimonial_title', testimonial_desc = '$testimonial_desc' WHERE test_sec_id = 1 ");
+
+    if ($query) {
+        echo 'Testimonial content updated successfully';
+    } else {
+        echo 'Testimonial content not updated!!';
+    }
+}
+
+
+// Add Testimonial
+if (isset($_POST['add_testimonial'])) {
+    $test_reviewer_name = $_POST['test_reviewer_name'];
+    $test_reviewer_title = $_POST['test_reviewer_title'];
+    $test_reviewer_comment = $_POST['test_reviewer_comment'];
+    $test_reviewer_comment = str_replace("'", "\'", $test_reviewer_comment);
+
+    $test_reviewer_image = $_FILES['test_reviewer_image']['name'];
+    $test_reviewer_image_tmp_name = $_FILES['test_reviewer_image']['tmp_name'];
+    $dotpos = stripos($test_reviewer_image, '.') + 1;
+    $ext = substr($test_reviewer_image, $dotpos);
+    $rand = rand(100000, 1000000);
+    $rename_test_reviewer_image = $rand . '.' . $ext;
+    $img_folder = '../uploaded_img/' . $rename_test_reviewer_image;
+
+
+    $query = mysqli_query($conn, "INSERT INTO `testimonial_items` (`test_reviewer_name`, `test_reviewer_title`, `test_reviewer_image`, `test_reviewer_comment`) VALUES ('$test_reviewer_name', '$test_reviewer_title', '$rename_test_reviewer_image', '$test_reviewer_comment')");
+
+    if ($query) {
+
+        move_uploaded_file($test_reviewer_image_tmp_name, $img_folder);
+        echo "Testimonial added successfully";
+    } else {
+        echo "Something went wrong!";
+    }
+}
+
+
+// Update Testimonial
+if (isset($_POST['edit_testimonial_id'])) {
+    $testimonial_id = $_POST['edit_testimonial_id'];
+    $test_reviewer_name = $_POST['edit_test_reviewer_name'];
+    $test_reviewer_title = $_POST['edit_test_reviewer_title'];
+    $test_reviewer_comment = $_POST['edit_test_reviewer_comment'];
+    $test_reviewer_comment = str_replace("'", "\'", $test_reviewer_comment);
+    $test_reviewer_image = $_FILES['edit_test_reviewer_image']['name'];
+
+
+    if (empty($test_reviewer_image)) {
+
+        $query = mysqli_query($conn, "UPDATE `testimonial_items` SET `test_reviewer_name` = '$test_reviewer_name', `test_reviewer_title` = '$test_reviewer_title', `test_reviewer_comment` = '$test_reviewer_comment' WHERE test_item_id = '$testimonial_id' ");
+
+        if ($query) {
+            echo "Testimonial updated successfully";
+        } else {
+            echo "Something went wrong!";
+        }
+    } else {
+
+        $prev_image = mysqli_fetch_assoc(mysqli_query($conn, "SELECT test_reviewer_image FROM `testimonial_items` WHERE test_item_id = '$testimonial_id'"))['test_reviewer_image'];
+
+        $test_reviewer_image_tmp_name = $_FILES['edit_test_reviewer_image']['tmp_name'];
+        $dotpos = stripos($test_reviewer_image, '.') + 1;
+        $ext = substr($test_reviewer_image, $dotpos);
+        $rand = rand(
+            100000,
+            1000000
+        );
+        $rename_test_reviewer_image = $rand . '.' . $ext;
+        $img_folder = '../uploaded_img/' . $rename_test_reviewer_image;
+
+        $query = mysqli_query($conn, "UPDATE `testimonial_items` SET `test_reviewer_name` = '$test_reviewer_name', `test_reviewer_title` = '$test_reviewer_title', `test_reviewer_image` = '$rename_test_reviewer_image', `test_reviewer_comment` = '$test_reviewer_comment' WHERE test_item_id = '$testimonial_id' ");
+
+        if ($query) {
+
+            unlink('../uploaded_img/' . $prev_image);
+            move_uploaded_file($test_reviewer_image_tmp_name, $img_folder);
+            echo "Testimonial updated successfully";
+        } else {
+            echo "Something went wrong!";
+        }
+    }
+}
+
+
+// Delete Testimonial
+if (isset($_POST['delete_testiomonial'])) {
+    $testimonial_id = $_POST['testimonial_id'];
+
+    $query = "DELETE FROM `testimonial_items` WHERE test_item_id = '$testimonial_id';";
+
+    $prev_image = mysqli_fetch_assoc(mysqli_query($conn, "SELECT test_reviewer_image FROM `testimonial_items` WHERE test_item_id = '$testimonial_id'"))['test_reviewer_image'];
+
+
+    if (mysqli_multi_query($conn, $query)) {
+
+        unlink('../uploaded_img/' . $prev_image);
+        echo "Testimonial deleted successfully";
+    } else {
+        echo "Testimonial not deleted!!";
+    }
+}
+
+// Testimonial section ends

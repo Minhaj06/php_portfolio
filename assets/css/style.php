@@ -692,7 +692,6 @@ padding: 15rem 3rem 2rem 3rem;
 .slider_desc h3 {
 font-size: 2.5rem;
 color: var(--orange);
-cursor: pointer;
 }
 
 .slider_desc h4 {

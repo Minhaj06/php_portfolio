@@ -13,7 +13,7 @@ btn.addEventListener("click", () => {
 const menu_link = document.querySelectorAll(".menu_link");
 
 menu_link.forEach((element) => {
-    element.addEventListener("click", function () {
+    element.addEventListener("click", function() {
         menu_link.forEach((link) => link.classList.remove("active"));
 
         this.classList.add("active");
@@ -39,7 +39,7 @@ const p_cat = document.querySelectorAll(".p_cat");
 const p_single = document.querySelectorAll(".port_items div");
 
 p_cat_li.forEach((port_menu_li) => {
-    port_menu_li.addEventListener("click", function () {
+    port_menu_li.addEventListener("click", function() {
         p_cat_li.forEach((mb) => mb.classList.remove("bottom_space"));
 
         this.classList.add("bottom_space");
@@ -47,7 +47,7 @@ p_cat_li.forEach((port_menu_li) => {
 });
 
 p_cat.forEach((port_menu) => {
-    port_menu.addEventListener("click", function () {
+    port_menu.addEventListener("click", function() {
         p_cat.forEach((active) => active.classList.remove("active"));
 
         this.classList.add("active");
@@ -118,7 +118,7 @@ modal_p_cats.addEventListener("click", (event) => {
 // Achivements counter
 
 window.addEventListener("load", () => {
-    setTimeout(function () {
+    setTimeout(function() {
         let counters = document.querySelectorAll(".counter");
         let time = 300;
 
@@ -145,7 +145,7 @@ var swiper = new Swiper(".testimonial_slider", {
     loop: true,
     spaceBetween: 20,
     autoplay: {
-        delay: 7500,
+        delay: 4000,
         disableOnInteraction: false,
     },
     centeredSlides: true,

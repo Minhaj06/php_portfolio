@@ -20,8 +20,8 @@
                     <div class="testimonial_single swiper-slide h-auto">
                         <div class="inner-card h-100">
                             <div class="slider_img">
-                                <a href=""><img src="uploaded_img/<?= $test_item_result['test_reviewer_image'] ?>"
-                                        alt="testimonial_img" /></a>
+                                <img src="uploaded_img/<?= $test_item_result['test_reviewer_image'] ?>"
+                                    alt="testimonial_img" />
                             </div>
                             <div class="slider_desc">
                                 <h3><?= $test_item_result['test_reviewer_name'] ?></h3>
