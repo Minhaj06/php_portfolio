@@ -911,3 +911,49 @@ if (isset($_POST['delete_testiomonial'])) {
 }
 
 // Testimonial section ends
+
+
+// Hire Me Section Starts Here
+if (isset($_POST['update_hire_me'])) {
+    $hire_title = str_replace("'", "\'", $_POST['hire_title']);
+    $hire_text = str_replace("'", "\'", $_POST['hire_text']);
+    $hire_bg = $_FILES['hire_bg']['name'];
+
+    if (empty($hire_bg)) {
+        // $query = mysqli_query($conn, "UPDATE `hire` SET `hire_title` = '$hire_title', `hire_text` = '$hire_text' WHERE hire_sec_id = 1");
+
+        $query = mysqli_query($conn, "UPDATE `hire` SET `hire_title` = '$hire_title', `hire_text` = '$hire_text' WHERE hire_sec_id = 1");
+
+        if ($query) {
+
+            echo "Hire me updated successfully";
+        } else {
+            echo "Hire me not updated!!";
+        }
+    } else {
+
+        $hire_bg_tmp_name = $_FILES['hire_bg']['tmp_name'];
+        $dotpos = stripos($hire_bg, '.') + 1;
+        $ext = substr($hire_bg, $dotpos);
+        $rand = rand(100000, 1000000);
+        $rename_hire_bg = $rand . '.' . $ext;
+        $img_folder = '../uploaded_img/' . $rename_hire_bg;
+
+        $prev_hire_bg = mysqli_fetch_assoc(mysqli_query($conn, "SELECT hire_bg FROM `hire` WHERE hire_sec_id = 1"))['hire_bg'];
+
+        $query = mysqli_query($conn, "UPDATE `hire` SET `hire_title` = '$hire_title', `hire_text` = '$hire_text', `hire_bg` = '$rename_hire_bg'  WHERE hire_sec_id = 1");
+
+        if ($query) {
+
+            if (file_exists("../uploaded_img/" . $prev_hire_bg)) {
+                unlink("../uploaded_img/" . $prev_hire_bg);
+            }
+            move_uploaded_file($hire_bg_tmp_name, $img_folder);
+
+            echo "Hire me updated successfully";
+        } else {
+            echo "Hire me not updated!";
+        }
+    }
+}
+// Hire Me Section Ends Here

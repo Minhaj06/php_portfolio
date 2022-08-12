@@ -706,8 +706,13 @@ margin-bottom: 4rem;
 
 /* hire me are starts here */
 
+<?php
+$hire_query = mysqli_query($conn, "SELECT hire_bg FROM hire");
+$hire_result = mysqli_fetch_assoc($hire_query);
+?>
+
 .hire_me_content {
-background-image: url(../images/hire_bg.png);
+background-image: url(../../uploaded_img/<?= $hire_result['hire_bg'] ?>);
 background-position: center;
 background-size: cover;
 background-repeat: no-repeat;

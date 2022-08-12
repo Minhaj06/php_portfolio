@@ -13,6 +13,8 @@
     $result = mysqli_fetch_assoc($query);
 
     ?>
+
+    <!-- Home Card Starts Here -->
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h2 class="mb-0">Home Content</h2>
@@ -48,9 +50,8 @@
             </div>
         </div>
     </div>
+    <!-- Home Card Ends Here -->
 </div>
-
-
 
 
 <!--Update Modal Starts -->

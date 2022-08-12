@@ -1934,5 +1934,42 @@ $(document).on("click", "#delete_testiomonial_btn", function(e) {
     });
 });
 
-
 // Testimonials Section Ends Here
+
+
+// Hire Me Section Starts Here
+$(document).on("submit", "#update_hire_me_form", function(e) {
+    e.preventDefault();
+
+    let hire_title = $("#hire_title").val();
+    let hire_text = $("#hire_text").val();
+
+    if (hire_title == "" || hire_text == "") {
+        emptyAlert();
+    } else {
+
+        $.ajax({
+            url: "code.php",
+            type: "POST",
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // hide modal
+                $("#edit_hire_me_modal").modal("toggle");
+
+                // Messsage Show
+                showMessage();
+                $(".message_show .ation_message").html(response);
+
+                // Refresh Table
+                $("#hire_me_content").load(location.href + " #hire_me_content>*", "");
+
+                // Refresh Modal
+                $("#edit_hire_me_modal").load(location.href + " #edit_hire_me_modal>*", "");
+            },
+        });
+    }
+
+});
+// Hire Me Section Ends Here
