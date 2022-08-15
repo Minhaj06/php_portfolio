@@ -4,6 +4,7 @@ header("Content-type: text/css; charset: UTF-8");
 include '../../admin/config/dbConnect.php';
 
 ?>
+
 /* common css starts here */
 
 *,
@@ -21,6 +22,7 @@ ol,
 li {
 padding: 0;
 margin: 0;
+list-style: none;
 }
 
 html {
@@ -41,7 +43,13 @@ font-family: "Poppins", sans-serif;
 color: var(--white);
 font-size: 1.6rem;
 }
-
+a {
+color: var(--white);
+text-decoration: none;
+}
+a:hover {
+color: var(--orange);
+}
 #preloader {
 position: fixed;
 top: 0;
@@ -764,11 +772,13 @@ background: var(--black);
 
 .blog_item {
 background: var(--dark-gray);
-cursor: pointer;
+overflow: hidden
 }
-
+.blog_item .blog_img {
+overflow: hidden;
+}
 .blog_item:hover img {
-filter: grayscale(100%);
+transform: scale(1.1) rotate(2deg);
 }
 
 .blog_item img {
@@ -777,20 +787,27 @@ height: 23rem;
 }
 
 .blog_content {
-padding: 0 3rem 4rem 3rem;
+padding: 2rem 3rem 3rem 3rem;
+}
+
+.blog_content .para {
+font-size: 1.4rem;
+font-weight: 300;
+margin: 1rem 0;
+line-height: 1;
 }
 
 .blog_content h3 {
-font-size: 2.2rem;
+font-size: 1.6rem;
 font-weight: 300;
-margin-bottom: 3rem;
+margin-bottom: 1rem;
 }
 
 .blog_content a {
 display: flex;
 align-items: center;
 text-decoration: none;
-font-size: 1.6rem;
+font-size: 1.5rem;
 font-weight: 300;
 color: var(--white);
 text-transform: capitalize;
@@ -805,6 +822,37 @@ font-size: 2rem;
 margin-left: 1rem;
 }
 
+.nav-tabs {
+border-color: var(--orange);
+}
+
+.recent_post_comment li button {
+color: var(--white);
+}
+
+
+.recent_post_comment li:hover button {
+color: var(--white);
+}
+
+.recent_post_comment li button.active {
+color: var(--white) !important;
+background: var(--orange) !important;
+border-color: var(--orange) !important;
+}
+
+.search_btn {
+background: var(--orange);
+color: var(--white);
+}
+
+.search_btn:hover {
+color: var(--white);
+}
+
+.categories ul li {
+line-height: 2;
+}
 
 /* blog section ends here */
 

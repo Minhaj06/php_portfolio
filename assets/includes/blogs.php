@@ -9,31 +9,46 @@
             </p>
         </div>
         <div class="blogs row g-5 mt-5">
+
             <div class="col-xl-4 col-md-6">
                 <div class="blog_item">
-                    <img src="assets/images/blog_1.png" alt="blog_img" />
+                    <div class="blog_img">
+                        <a href="#">
+                            <img src="img/robot.jpg" alt="blog_img" />
+                        </a>
+                    </div>
                     <div class="blog_content">
-                        <p class="para">26th October,2019</p>
+                        <p class="para">26th August, 2022</p>
                         <h3>I Used The Web For A Day On A 50 MB Budget</h3>
                         <a href="#">learn more<i class="fa-solid fa-arrow-right-long"></i></a>
                     </div>
                 </div>
             </div>
+
             <div class="col-xl-4 col-md-6">
                 <div class="blog_item">
-                    <img src="assets/images/blog_2.png" alt="blog_img" />
+                    <div class="blog_img">
+                        <a href="#">
+                            <img src="img/robot.jpg" alt="blog_img" />
+                        </a>
+                    </div>
                     <div class="blog_content">
-                        <p class="para">26th October,2019</p>
+                        <p class="para">26th August, 2022</p>
                         <h3>I Used The Web For A Day On A 50 MB Budget</h3>
                         <a href="#">learn more<i class="fa-solid fa-arrow-right-long"></i></a>
                     </div>
                 </div>
             </div>
+
             <div class="col-xl-4 col-md-6">
                 <div class="blog_item">
-                    <img src="assets/images/blog_1.png" alt="blog_img" />
+                    <div class="blog_img">
+                        <a href="#">
+                            <img src="img/robot.jpg" alt="blog_img" />
+                        </a>
+                    </div>
                     <div class="blog_content">
-                        <p class="para">26th October,2019</p>
+                        <p class="para">26th August, 2022</p>
                         <h3>I Used The Web For A Day On A 50 MB Budget</h3>
                         <a href="#">learn more<i class="fa-solid fa-arrow-right-long"></i></a>
                     </div>
