@@ -30,9 +30,9 @@ font-size: 62.5%;
 }
 
 :root {
---white: #fff;
+--white: #cccccc;
 --black: #000;
---orange: #ff4900;
+--orange: #cc3a00;
 --dark-gray: #111111;
 --gray: #707070;
 }
@@ -159,6 +159,19 @@ text-transform: lowercase;
 .modal-content {
 background-color: var(--black);
 border: solid var(--gray);
+}
+
+.widget_title {
+color: var(--orange);
+background: var(--dark-gray);
+padding: .5rem 1rem;
+text-transform: capitalize;
+font-weight: 500;
+margin-bottom: 1rem;
+}
+
+.form-control {
+background-color: var(--white);
 }
 
 /* common css ends here */
@@ -852,6 +865,21 @@ color: var(--white);
 
 .categories ul li {
 line-height: 2;
+border-bottom: 1px solid var(--dark-gray);
+}
+
+.categories ul li:hover {
+border-bottom: 1px solid var(--gray);
+}
+
+.categories ul li a {
+display: block;
+}
+
+
+
+.recent_post_img img:hover {
+transform: scale(1.1) rotate(1deg);
 }
 
 /* blog section ends here */

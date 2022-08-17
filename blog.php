@@ -137,8 +137,8 @@
         <div class="inner_blog container m-auto">
 
             <div class="row g-5">
-                <main class="col-lg-8">
-                    <div class="row g-0">
+                <main class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="row g-0 mb-5">
                         <div class="blog_item">
 
                             <div style="--swiper-navigation-color: var(--orange); --swiper-pagination-color: var(-orange)"
@@ -211,7 +211,7 @@
 
                     </div>
 
-                    <div class="row g-5 mt-1">
+                    <div class="row g-4">
                         <div class="col-md-6">
                             <div class="blog_item">
                                 <div class="blog_img">
@@ -274,75 +274,18 @@
 
                     </div>
                 </main>
+
+
+                <!-- Right aside section Starts here -->
                 <aside class="col-lg-4">
 
-                    <!-- Search bar -->
-                    <h1 class="mb-3" style="color: var(--orange)">Search Here</h1>
-                    <div class="input-group mb-5 pb-4">
-                        <input type="search" class="form-control rounded fs-3 px-3" placeholder="Search blog"
-                            aria-label="Search" />
-                        <button type="button" class="btn fs-3 search_btn">Search</button>
-                    </div>
-
-                    <!-- Recent post and comment tab -->
-                    <div class="recent_post_comment mb-5">
-                        <ul class="nav nav-tabs mb-3">
-                            <li class="nav-item active"><button class="nav-link active" data-bs-toggle="tab"
-                                    data-bs-target="#recent_post">Home</button>
-                            </li>
-                            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab"
-                                    data-bs-target="#recent_comment">Menu 1</button>
-                            </li>
-                        </ul>
-
-
-                        <div class="tab-content">
-                            <div id="recent_post" class="tab-pane active">
-                                <h3>HOME</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                            <div id="recent_comment" class="tab-pane fade">
-                                <h3>Menu 1</h3>
-                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                    ea commodo consequat.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="categories mb-5">
-                        <h1 style="color: var(--orange)">Categories</h1>
-                        <ul>
-                            <li><a href="#">PHP</a></li>
-                            <li><a href="#">JavaScript</a></li>
-                            <li><a href="#">Bootstrap5</a></li>
-                            <li><a href="#">CSS</a></li>
-                            <li><a href="#">JQuery</a></li>
-                            <li><a href="#">Ajax</a></li>
-                        </ul>
-                    </div>
-
-
-
-                    <!-- Facebook Page Plugin -->
-                    <div id="fb-root"></div>
-                    <script async defer crossorigin="anonymous"
-                        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0&appId=750629119040166&autoLogAppEvents=1"
-                        nonce="e26vHkB4"></script>
-
-                    <div class="facebook_page mb-5" id="">
-                        <h1 class="mb-3" style="color: var(--orange)">Our Facebook Page</h1>
-                        <div class="fb-page" data-href="https://www.facebook.com/mindthegraph/"
-                            data-tabs="timeline, events" data-width="500" data-height="" data-small-header="false"
-                            data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false">
-                            <blockquote cite="https://www.facebook.com/mindthegraph/" class="fb-xfbml-parse-ignore"><a
-                                    href="https://www.facebook.com/mindthegraph/">Mind the Graph</a></blockquote>
-                        </div>
-                    </div>
-
-
+                    <?php include_once("assets/includes/blog_aside.php") ?>
 
                 </aside>
+                <!-- Right aside section ends here -->
+
+
+
             </div>
 
 

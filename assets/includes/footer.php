@@ -1,7 +1,7 @@
 <!-- footer starts here -->
 <footer id="footer">
     <div class="footer container">
-        <div class="row g-5 mt-5">
+        <div class="row g-5">
             <div class="footer_item col-xl-5 col-lg-6">
                 <h2 class="heading">contact us</h2>
                 <p class="para">
@@ -74,7 +74,7 @@
                         <textarea id="" cols="30" rows="5" placeholder="Message"></textarea>
                     </div>
                     <div>
-                        <button class="btn" type="submit">Submit</button>
+                        <button class="button" type="submit">Submit</button>
                     </div>
                 </form>
             </div>
