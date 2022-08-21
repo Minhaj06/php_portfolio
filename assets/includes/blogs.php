@@ -2,11 +2,8 @@
 <section id="blogs">
     <div class="inner_blog container vertical_path">
         <div class="content">
-            <h2 class="heading">latest blog</h2>
-            <p class="para">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem totam rem aperiam, eaque ipsa quae ab
-                illo inventore veritatis et is the quasi architecto beatae vitae dicta sunt explicabo.
-            </p>
+            <h2 class="heading"><?= $select['blog_title'] ?></h2>
+            <p class="para"><?= $select['blog_desc'] ?></p>
         </div>
         <div class="blogs row g-5 mt-5">
 

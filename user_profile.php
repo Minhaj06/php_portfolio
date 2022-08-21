@@ -1,5 +1,4 @@
 <?php
-session_start();
 include 'admin/config/dbConnect.php';
 if (!isset($_SESSION['auth'])) {
     $_SESSION['message'] = "Login to view profile!";

@@ -1407,7 +1407,7 @@ $("#port_cat_name").keyup(function(e) {
 });
 
 
-// Add Portfolio Category
+// Insert Portfolio Category
 $("#add_portfolio_category_btn").click(function(e) {
     e.preventDefault();
 
@@ -1973,3 +1973,276 @@ $(document).on("submit", "#update_hire_me_form", function(e) {
 
 });
 // Hire Me Section Ends Here
+
+
+
+// Blog Section Starts Here
+// Update blog content
+$("#update_blog_content_btn").click(function(e) {
+    e.preventDefault();
+
+    let blog_title = $("#blog_title").val();
+    let blog_desc = $("#blog_desc").val();
+
+    if (
+        blog_title == "" ||
+        blog_desc == ""
+    ) {
+        emptyAlert();
+    } else {
+
+        $.ajax({
+            type: "POST",
+            url: "code.php",
+            data: {
+                update_blog_content: 1,
+                blog_title: blog_title,
+                blog_desc: blog_desc
+            },
+            success: function(response) {
+                // hide modal
+                $("#edit_blog_content_modal").modal("toggle");
+
+                // Refresh blog Content
+                $("#blog_content").load(location.href + " #blog_content>*", "");
+
+                // Messsage Show
+                showMessage();
+                $(".message_show .ation_message").html(response);
+            }
+        });
+    }
+});
+
+
+
+// Add Blog Category
+$(document).on("click", "#add_blog_category", function(e) {
+    // check blog category exists or not
+    $("#blog_cat_name").keyup(function(e) {
+
+        let blog_cat_name = $("#blog_cat_name").val();
+
+        $.ajax({
+            type: "POST",
+            url: "code.php",
+            data: {
+                checkBlogCat: 1,
+                blog_cat_name: blog_cat_name,
+            },
+            success: function(data) {
+                if (data != "0") {
+                    $(".add_cat_error").html(
+                        "<span class='text-danger'>Category already taken!</span>"
+                    );
+                    $("#add_blog_category_btn").attr("disabled", true);
+                } else {
+                    $(".add_cat_error").html(
+                        "<span class='text-success'>It's available</span>"
+                    );
+                    $("#add_blog_category_btn").attr("disabled", false);
+                }
+            },
+        });
+    });
+
+
+    // check blog slug exists or not
+    $("#blog_cat_slug").keyup(function(e) {
+
+        let blog_cat_slug = $("#blog_cat_slug").val();
+
+        $.ajax({
+            type: "POST",
+            url: "code.php",
+            data: {
+                checkBlogCatSlug: 1,
+                blog_cat_slug: blog_cat_slug,
+            },
+            success: function(data) {
+                if (data != "0") {
+                    $(".add_cat_slug_error").html(
+                        "<span class='text-danger'>Slug already taken!</span>"
+                    );
+                    $("#add_blog_category_btn").attr("disabled", true);
+                } else {
+                    $(".add_cat_slug_error").html(
+                        "<span class='text-success'>It's available</span>"
+                    );
+                    $("#add_blog_category_btn").attr("disabled", false);
+                }
+            },
+        });
+    });
+
+
+    // Insert Blog Category
+    $(document).on("click", "#add_blog_category_btn", function(e) {
+
+        e.preventDefault();
+
+        let blog_cat_name = $("#blog_cat_name").val();
+        let blog_cat_slug = $("#blog_cat_slug").val();
+        let blog_cat_description = $("#blog_cat_description").val();
+        let blog_cat_meta_title = $("#blog_cat_meta_title").val();
+        let blog_cat_meta_description = $("#blog_cat_meta_description").val();
+        let blog_cat_meta_keywords = $("#blog_cat_meta_keywords").val();
+        let blog_cat_status = $("#blog_cat_status").is(":checked") == true ? '1' : '0';
+
+        if (blog_cat_name == "" || blog_cat_slug == "" || blog_cat_description == "" || blog_cat_meta_title == "" || blog_cat_meta_description == "" || blog_cat_meta_keywords == "") {
+            emptyAlert();
+        } else {
+
+            $.ajax({
+                type: "POST",
+                url: "code.php",
+                data: {
+                    addblogCategory: 1,
+                    blog_cat_name: blog_cat_name,
+                    blog_cat_slug: blog_cat_slug,
+                    blog_cat_description: blog_cat_description,
+                    blog_cat_meta_title: blog_cat_meta_title,
+                    blog_cat_meta_description: blog_cat_meta_description,
+                    blog_cat_meta_keywords: blog_cat_meta_keywords,
+                    blog_cat_status: blog_cat_status
+                },
+                success: function(response) {
+                    // hide modal
+                    $("#add_blog_cotegory_modal").modal("toggle");
+
+                    // refresh modal
+                    $("#add_blog_cotegory_modal").load(location.href + " #add_blog_cotegory_modal>*", "");
+
+                    // Refresh Blog Content
+                    $("#blog_category").load(location.href + " #blog_category>*", "");
+
+                    // Messsage Show
+                    showMessage();
+                    $(".message_show .ation_message").html(response);
+                }
+            });
+        }
+    });
+});
+
+
+
+// Update Blog Category
+$(document).on("click", "#edit_blog_cat_btn", function(e) {
+    e.preventDefault();
+
+    modalDismiss();
+
+    let blog_cat_id = $(this).data("id");
+
+    $.ajax({
+        type: "POST",
+        url: "code.php",
+        data: {
+            getBlogCatData: 1,
+            blog_cat_id: blog_cat_id,
+        },
+        success: function(response) {
+            let blog_cat_data = JSON.parse(response);
+
+            console.log(blog_cat_data[0])
+        }
+    });
+
+    // let td_blog_cat_name = $.trim($("#" + blog_cat_id).children("td[data-target=category_name]").text());
+    // let td_blog_cat_slug = $.trim($("#" + blog_cat_id).children("td[data-target=category_slug]").text());
+    // let td_blog_cat_description = $.trim($("#" + blog_cat_id).children("td[data-target=category_description]").text());
+    // let td_blog_cat_meta_title = $.trim($("#" + blog_cat_id).children("td[data-target=category_meta_title]").text());
+    // let td_blog_cat_meta_description = $.trim($("#" + blog_cat_id).children("td[data-target=category_meta_description]").text());
+    // let td_blog_cat_meta_keywords = $.trim($("#" + blog_cat_id).children("td[data-target=category_meta_meta_keywords]").text());
+    // let blog_cat_status = $.trim($("#" + blog_cat_id).children("td[data-target=category_status]").text());
+
+    // console.log(blog_cat_id)
+    // console.log(td_blog_cat_name)
+    // console.log(td_blog_cat_slug)
+    // console.log(td_blog_cat_description)
+    // console.log(td_blog_cat_meta_title)
+    // console.log(td_blog_cat_meta_description)
+    // console.log(td_blog_cat_meta_keywords)
+    // console.log(blog_cat_status)
+
+    // // Show data in modal input
+    // $("#edit_port_cat_name").val(td_port_cat_name);
+
+    // if (port_cat_status == "Visible") {
+    //     $("#edit_port_cat_status").attr("checked", true);
+    // } else {
+    //     $("#edit_port_cat_status").attr("checked", false);
+    // }
+
+    // // Check portfolio name exist or not for edit Portfolio category
+    // $("#edit_port_cat_name").keyup(function(e) {
+
+    //     let port_cat_name = $("#edit_port_cat_name").val();
+
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "code.php",
+    //         data: {
+    //             checkEditPortCat: 1,
+    //             port_cat_name: port_cat_name
+    //         },
+    //         success: function(data) {
+    //             if ((data != "0") && ((port_cat_name.toLowerCase()) != (td_port_cat_name.toLowerCase()))) {
+    //                 $(".edit_cat_error").html(
+    //                     "<span class='text-danger'>Username already taken!</span>"
+    //                 );
+    //                 $("#update_portfolio_category_btn").attr("disabled", true);
+    //             } else if (port_cat_name == "") {
+    //                 $(".edit_cat_error").html(
+    //                     "<span class='text-danger'>Couldn't be empty</span>"
+    //                 );
+    //                 $("#update_portfolio_category_btn").attr("disabled", true);
+    //             } else {
+    //                 $(".edit_cat_error").html(
+    //                     "<span class='text-success'>It's available</span>"
+    //                 );
+    //                 $("#update_portfolio_category_btn").attr("disabled", false);
+    //             }
+    //         },
+    //     });
+    // });
+
+
+    // $("#update_portfolio_category_btn").click(function(e) {
+    //     e.preventDefault();
+
+    //     let port_cat_name = $("#edit_port_cat_name").val();
+    //     let port_cat_status = $("#edit_port_cat_status").is(":checked") == true ? '1' : '0';
+
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "code.php",
+    //         data: {
+    //             update_portfolio_category: 1,
+    //             port_cat_id: port_cat_id,
+    //             port_cat_name: port_cat_name,
+    //             port_cat_status: port_cat_status,
+    //         },
+    //         success: function(response) {
+    //             // hide modal
+    //             $("#edit_portfolio_cotegory_modal").modal("toggle");
+
+
+    //             // Refresh Portfolio Content
+    //             $("#portfolio_category").load(location.href + " #portfolio_category>*", "");
+
+    //             // Messsage Show
+    //             showMessage();
+    //             $(".message_show .ation_message").html(response);
+    //         }
+    //     });
+    // });
+});
+
+
+
+
+
+
+// Blog Section Ends Here

@@ -1,5 +1,5 @@
 <!-- Search bar -->
-<h1 class="widget_title">Search Here</h1>
+<h2 class="widget_title">Search Here</h2>
 <div class="input-group mb-5 pb-4">
     <input type="search" class="form-control rounded fs-3 px-3" placeholder="Search blog" aria-label="Search" />
     <button type="button" class="btn fs-3 search_btn">Search</button>
@@ -177,14 +177,13 @@
 
 <!-- Categories -->
 <div class="categories mb-5">
-    <h1 class="widget_title">Categories</h1>
+    <h2 class="widget_title">Categories</h2>
     <ul>
-        <li><a href="#">PHP</a></li>
-        <li><a href="#">JavaScript</a></li>
-        <li><a href="#">Bootstrap5</a></li>
-        <li><a href="#">CSS</a></li>
-        <li><a href="#">JQuery</a></li>
-        <li><a href="#">Ajax</a></li>
+        <li><a href="#" class="d-flex justify-content-between"><span>CSS3</span> <span>(06)</span></a></li>
+        <li><a href="#" class="d-flex justify-content-between"><span>Bootstrap 5</span> <span>(06)</span></a></li>
+        <li><a href="#" class="d-flex justify-content-between"><span>JavaScript</span> <span>(06)</span></a></li>
+        <li><a href="#" class="d-flex justify-content-between"><span>JQuery</span> <span>(06)</span></a></li>
+        <li><a href="#" class="d-flex justify-content-between"><span>PHP</span> <span>(06)</span></a></li>
     </ul>
 </div>
 
@@ -196,7 +195,7 @@
     nonce="e26vHkB4"></script>
 
 <div style="overflow-x: auto;" class="facebook_page mb-5" id="">
-    <h1 class="widget_title">Our Facebook Page</h1>
+    <h2 class="widget_title">Our Facebook Page</h2>
     <div style="min-width: 400px;" class="fb-page" data-href="https://www.facebook.com/mindthegraph/"
         data-tabs="timeline, events" data-width="500" data-height="" data-small-header="false"
         data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false">

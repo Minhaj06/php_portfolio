@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once 'config/dbConnect.php';
 
 if (isset($_SESSION['auth'])) {
@@ -61,6 +60,9 @@ if (!isset($_SESSION['auth'])) {
             } elseif ($view == "portfolio_update") {
 
                 include_once("views/portfolio_view.php");
+            } elseif ($view == "blog_update") {
+
+                include_once("views/blog_view.php");
             } elseif ($view == "testimonials_update") {
 
                 include_once("views/testimonials_view.php");

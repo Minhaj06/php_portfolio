@@ -1,130 +1,136 @@
 <div class="container pt-4">
-    <h1 class="text-capitalize mb-3">Update Portfolio</h1>
+    <h1 class="text-capitalize mb-3">Update Blog</h1>
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item breadcrumb-active"><a href="index.php">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="portfolio_update.php">Portfolio</a></li>
+            <li class="breadcrumb-item"><a href="blog_update.php">Blog</a></li>
         </ol>
     </nav>
 
 
     <?php
-    $query = mysqli_query($conn, "SELECT * FROM `portfolio_section` LIMIT 1 ");
+    $query = mysqli_query($conn, "SELECT * FROM `blog_section` LIMIT 1 ");
     $result = mysqli_fetch_assoc($query);
     ?>
 
 
-    <!-- Portfolio Card Starts Here -->
-    <!-- <div class="col row g-4">
-        <style>
-        .message_show {
-            margin-bottom: 0 !important;
-        }
-        </style> -->
     <?php include("../admin/assets/includes/message.php"); ?>
-    <div class="card-left row g-4 mb-4">
-        <div class="col-xl-6">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h2 class="mb-0">Portfolio Content</h2>
 
-                    <span class="" role="button" data-bs-toggle="modal" data-bs-target="#edit_portfolio_content_modal">
-                        <i class="fa-solid fa-pen-to-square"></i> Edit Content
-                    </span>
-                </div>
+    <!-- Blog section content card starts here -->
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">Blog Content</h2>
 
-                <div class="card-body" id="portfolio_content">
-                    <h2 class="heading m-0"><?= $result['portfolio_title'] ?></h2>
-                    <p class="mt-2"><?= $result['portfolio_desc'] ?></p>
-                </div>
-            </div>
+            <span class="" role="button" data-bs-toggle="modal" data-bs-target="#edit_blog_content_modal">
+                <i class="fa-solid fa-pen-to-square"></i> Edit Content
+            </span>
         </div>
 
-        <div class="col-xl-6">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h2 class="mb-0">Portfolio Category</h2>
-
-                    <span id="add_service" role="button" data-bs-target="#add_portfolio_cotegory_modal"
-                        data-bs-toggle="modal">
-                        <i class="fa-solid fa-plus"></i>
-                        Add Category
-                    </span>
-                </div>
-
-                <div class="card-body" id="portfolio_category">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover display" style="min-width: 50rem;">
-                            <thead>
-                                <tr>
-                                    <th>Category Name</th>
-                                    <th>Status</th>
-                                    <th>No. Of Posts</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <?php
-                                $category_query = mysqli_query($conn, "SELECT * FROM `portfolio_category`");
-
-                                if (mysqli_num_rows($category_query) > 0) {
-                                    while ($category_result = mysqli_fetch_array($category_query)) {
-                                ?>
-
-                                <tr id="<?= $category_result['port_cat_id'] ?>">
-                                    <td data-target="port_cat_name" class="align-middle">
-                                        <?= $category_result['port_cat_name'] ?></td>
-
-                                    <td data-target="port_cat_status" class="align-middle">
-                                        <?php
-                                                if ($category_result['port_cat_status'] == 1) {
-                                                    echo "Visible";
-                                                } else {
-                                                    echo "Hidden";
-                                                }
-                                                ?>
-                                    </td>
-
-                                    <td data-target="" class="align-middle">
-                                        <?= $category_result['no_of_port'] ?>
-                                    </td>
-
-                                    <td class="align-middle">
-                                        <span data-id="<?= $category_result['port_cat_id'] ?>"
-                                            class="fs-4 text-capitalize" id="edit_port_cat_btn" role="button"
-                                            data-bs-target="#edit_portfolio_cotegory_modal" data-bs-toggle="modal">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </span>
-
-                                        <span data-id="<?= $category_result['port_cat_id'] ?>"
-                                            class="fs-4 text-capitalize ms-4" id="delete_port_cat_btn" role="button">
-                                            <i class="fa-solid fa-trash-can"></i>
-                                        </span>
-                                    </td>
-                                </tr>
-
-                                <?php
-                                    }
-                                } else {
-                                    ?>
-
-                                <tr>
-                                    <td colspan="4">No category founded!</td>
-                                </tr>
-
-                                <?php } ?>
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
+        <div class="card-body" id="blog_content">
+            <h2 class="heading m-0"><?= $result['blog_title'] ?></h2>
+            <p class="mt-2"><?= $result['blog_desc'] ?></p>
         </div>
     </div>
+    <!-- Blog section content card ends here -->
 
+
+    <!-- Blog categories card starts here -->
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">Blog Category</h2>
+
+            <span id="add_blog_category" role="button" data-bs-target="#add_blog_cotegory_modal" data-bs-toggle="modal">
+                <i class="fa-solid fa-plus"></i>
+                Add Category
+            </span>
+        </div>
+
+        <div class="card-body" id="blog_category">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover display" style="min-width: 100rem;">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Slug(URL)</th>
+                            <th>Meta Title</th>
+                            <th>Meta Keywords</th>
+                            <th>No. Of Posts</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <?php
+                        $category_query = mysqli_query($conn, "SELECT * FROM `blog_categories`");
+
+                        if (mysqli_num_rows($category_query) > 0) {
+                            while ($category_result = mysqli_fetch_array($category_query)) {
+                        ?>
+
+                        <tr id="cat<?= $category_result['id'] ?>">
+                            <td data-target="category_name" class="align-middle">
+                                <?= $category_result['name'] ?></td>
+
+                            <td data-target="category_slug" class="align-middle">
+                                <?= $category_result['slug'] ?></td>
+
+                            <td data-target="category_meta_title" class="align-middle">
+                                <?= $category_result['meta_title'] ?></td>
+
+                            <td data-target="category_meta_keywords" class="align-middle">
+                                <?= $category_result['meta_keywords'] ?></td>
+
+                            <td data-target="" class="align-middle">
+                                <?= $category_result['no_of_post'] ?>
+                            </td>
+
+                            <td data-target="category_status" class="align-middle">
+                                <?php
+                                        if ($category_result['status'] == 1) {
+                                            echo "Visible";
+                                        } else {
+                                            echo "Hidden";
+                                        }
+                                        ?>
+                            </td>
+
+                            <td class="align-middle">
+                                <span data-id="<?= $category_result['id'] ?>" class="fs-4 text-capitalize"
+                                    id="edit_blog_cat_btn" role="button" data-bs-target="#edit_blog_cotegory_modal"
+                                    data-bs-toggle="modal">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </span>
+
+                                <span data-id="<?= $category_result['id'] ?>" class="fs-4 text-capitalize ms-4"
+                                    id="delete_blog_cat_btn" role="button">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </span>
+                            </td>
+                        </tr>
+
+                        <?php
+                            }
+                        } else {
+                            ?>
+
+                        <tr>
+                            <td colspan="4">No category founded!</td>
+                        </tr>
+
+                        <?php } ?>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!-- Blog categories card ends here -->
+
+
+    <!-- Blog posts card starts here -->
     <div class="card-right">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
@@ -236,53 +242,55 @@
             </div>
         </div>
     </div>
-    <!-- </div> -->
-    <!-- Portfolio Card Ends Here -->
+    <!-- Blog posts card ends here -->
+
+    <!-- Blog Card Ends Here -->
 </div>
 
 
 
-<!-- Update Portfolio Content Modal Starts -->
-<div class="modal fade text-capitalize" id="edit_portfolio_content_modal" data-bs-backdrop="static">
-    <div class="modal-dialog">
+<!-- Update Blog Content Modal Starts -->
+<div class="modal fade text-capitalize" id="edit_blog_content_modal" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Edit Portfolio Content</h2>
+                <h2 class="modal-title">Edit Blog Content</h2>
                 <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body">
                 <form action="">
                     <div class="row g-4">
                         <div class="form-group">
-                            <label for="portfolio_title" class="label-control">Title</label>
+                            <label for="blog_title" class="label-control">Title</label>
                             <div class="input_icon d-flex align-items-center">
                                 <i class="fa-solid fa-heading fs-3 px-4"></i>
-                                <input class="form-control fs-4 border-0 input" type="text" id="portfolio_title"
-                                    name="portfolio_title" value="<?= $result['portfolio_title'] ?>">
+                                <input class="form-control fs-4 border-0 input" type="text" id="blog_title"
+                                    name="blog_title" value="<?= $result['blog_title'] ?>"
+                                    placeholder="Type blog section title">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <textarea class="form-control fs-4" placeholder="Service description goes here"
-                                id="portfolio_desc" name="portfolio_desc" style="height: 130px"
-                                maxlength="190"><?= $result['portfolio_desc'] ?></textarea>
+                            <textarea class="form-control fs-4" placeholder="Blog section description goes here"
+                                id="blog_desc" name="blog_desc" style="height: 130px"
+                                maxlength="190"><?= $result['blog_desc'] ?></textarea>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>
-                <button type="submit" id="update_portfolio_content_btn" class="btn btn-secondary fs-4">Update</button>
+                <button type="submit" id="update_blog_content_btn" class="btn btn-secondary fs-4">Update</button>
             </div>
         </div>
     </div>
 </div>
-<!-- Update Portfolio Content Modal Ends -->
+<!-- Update Blog Content Modal Ends -->
 
 
-<!-- Add Portfolio Category Modal Starts -->
-<div class="modal fade text-capitalize" id="add_portfolio_cotegory_modal" data-bs-backdrop="static">
-    <div class="modal-dialog">
+<!-- Add Blog Category Modal Starts -->
+<div class="modal fade text-capitalize" id="add_blog_cotegory_modal" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">Add Category</h2>
@@ -290,64 +298,137 @@
             </div>
             <div class="modal-body">
 
-                <div class="form-group mb-4">
-                    <label for="port_cat_name" class="label-control">Category name</label>
-                    <span class="add_cat_error ms-3"></span>
-                    <input class="form-control fs-4" type="text" id="port_cat_name" name="port_cat_name"
-                        placeholder="Type category name">
-                </div>
+                <div class="row g-4">
 
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="port_cat_status"
-                        name="port_cat_status">
-                    <label class="form-check-label" for="port_cat_status">Status</label>
-                </div>
+                    <div class="form-group col-lg-6">
+                        <label for="blog_cat_name" class="label-control">Category name</label>
+                        <span class="add_cat_error ms-3"></span>
+                        <input class="form-control fs-4" type="text" id="blog_cat_name" name="blog_cat_name"
+                            placeholder="Type category name">
+                    </div>
 
+                    <div class="form-group col-lg-6">
+                        <label for="blog_cat_slug" class="label-control">Slug(URL)</label>
+                        <span class="add_cat_slug_error ms-3"></span>
+                        <input class="form-control fs-4" type="text" id="blog_cat_slug" name="blog_cat_slug"
+                            placeholder="Type category slug">
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label for="blog_cat_description" class="label-control">description</label>
+                        <textarea class="form-control fs-4" placeholder="Blog category description goes here"
+                            id="blog_cat_description" name="blog_cat_description" rows="4" maxlength="190"></textarea>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label for="blog_cat_meta_title" class="label-control">Meta Title</label>
+                        <input class="form-control fs-4" type="text" id="blog_cat_meta_title" name="blog_cat_meta_title"
+                            placeholder="Type category meta title">
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label for="blog_cat_meta_description" class="label-control">meta description</label>
+                        <textarea class="form-control fs-4" placeholder="Category meta description goes here"
+                            id="blog_cat_meta_description" name="blog_cat_meta_description" rows="4"
+                            maxlength="190"></textarea>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label for="blog_cat_meta_keywords" class="label-control">meta keywords</label>
+                        <textarea class="form-control fs-4" placeholder="Category meta keywords goes here"
+                            id="blog_cat_meta_keywords" name="blog_cat_meta_keywords" rows="4"
+                            maxlength="190"></textarea>
+                    </div>
+
+                    <div class="form-group col-lg-12">
+                        <input class="form-check-input" type="checkbox" value="" id="blog_cat_status"
+                            name="blog_cat_status">
+                        <label class="form-check-label" for="blog_cat_status">Status</label>
+                    </div>
+
+                </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>
-                <button type="submit" id="add_portfolio_category_btn" class="btn btn-secondary fs-4">Add
+                <button type="submit" id="add_blog_category_btn" class="btn btn-secondary fs-4">Add
                     Category</button>
             </div>
         </div>
     </div>
 </div>
-<!-- Add Portfolio Category Modal Ends -->
+<!-- Add Blog Category Modal Ends -->
 
 
-<!-- Edit Portfolio Category Modal Starts -->
-<div class="modal fade text-capitalize" id="edit_portfolio_cotegory_modal" data-bs-backdrop="static">
-    <div class="modal-dialog">
+<!-- Edit Blog Category Modal Starts -->
+<div class="modal fade text-capitalize" id="edit_blog_cotegory_modal" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Update Category</h2>
+                <h2 class="modal-title">Edit Category</h2>
                 <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body">
 
-                <div class="form-group mb-4">
-                    <label for="edit_port_cat_name" class="label-control">Category name</label>
-                    <span class="edit_cat_error ms-3"></span>
-                    <input class="form-control fs-4" type="text" id="edit_port_cat_name" name="edit_port_cat_name"
-                        placeholder="Type category name">
-                </div>
+                <div class="row g-4">
 
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="edit_port_cat_status"
-                        name="edit_port_cat_status">
-                    <label class="form-check-label" for="edit_port_cat_status">Status</label>
-                </div>
+                    <div class="form-group col-lg-6">
+                        <label for="edit_blog_cat_name" class="label-control">Category name</label>
+                        <span class="add_cat_error ms-3"></span>
+                        <input class="form-control fs-4" type="text" id="edit_blog_cat_name" name="edit_blog_cat_name"
+                            placeholder="Type category name">
+                    </div>
 
+                    <div class="form-group col-lg-6">
+                        <label for="edit_blog_cat_slug" class="label-control">Slug(URL)</label>
+                        <span class="add_cat_slug_error ms-3"></span>
+                        <input class="form-control fs-4" type="text" id="edit_blog_cat_slug" name="edit_blog_cat_slug"
+                            placeholder="Type category slug">
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label for="edit_blog_cat_description" class="label-control">description</label>
+                        <textarea class="form-control fs-4" placeholder="Blog category description goes here"
+                            id="edit_blog_cat_description" name="edit_blog_cat_description" rows="4"
+                            maxlength="190"></textarea>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label for="edit_blog_cat_meta_title" class="label-control">Meta Title</label>
+                        <input class="form-control fs-4" type="text" id="edit_blog_cat_meta_title"
+                            name="edit_blog_cat_meta_title" placeholder="Type category meta title">
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label for="edit_blog_cat_meta_description" class="label-control">meta description</label>
+                        <textarea class="form-control fs-4" placeholder="Category meta description goes here"
+                            id="edit_blog_cat_meta_description" name="edit_blog_cat_meta_description" rows="4"
+                            maxlength="190"></textarea>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label for="edit_blog_cat_meta_keywords" class="label-control">meta keywords</label>
+                        <textarea class="form-control fs-4" placeholder="Category meta keywords goes here"
+                            id="edit_blog_cat_meta_keywords" name="edit_blog_cat_meta_keywords" rows="4"
+                            maxlength="190"></textarea>
+                    </div>
+
+                    <div class="form-group col-lg-12">
+                        <input class="form-check-input" type="checkbox" value="" id="edit_blog_cat_status"
+                            name="edit_blog_cat_status">
+                        <label class="form-check-label" for="edit_blog_cat_status">Status</label>
+                    </div>
+
+                </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>
-                <button type="submit" id="update_portfolio_category_btn" class="btn btn-secondary fs-4">Update
+                <button id="update_blog_category_btn" class="btn btn-secondary fs-4">Update
                     Category</button>
             </div>
         </div>
     </div>
 </div>
-<!-- Edit Portfolio Category Modal Ends -->
+<!-- Edit Blog Category Modal Ends -->
 
 
 <!-- Add Portfolio Modal Starts -->
@@ -553,7 +634,7 @@
                             <label for="edit_port_description" class="label-control">Portfolio Description (Max Length:
                                 120)</label>
                             <textarea class="form-control fs-4" placeholder="Portfolio description goes here"
-                                id="edit_port_description" name="edit_port_description" rows="4"
+                                id="edit_port_description" name="edit_port_description" style="height: 130px"
                                 maxlength="120"></textarea>
                         </div>
 

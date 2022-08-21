@@ -260,6 +260,11 @@ margin-left: 1rem;
 border-radius: 0.5rem;
 }
 
+.continue_reading_btn:hover {
+background: var(--orange);
+color: var(--black);
+}
+
 
 /* header css ends Here */
 
@@ -749,7 +754,7 @@ opacity: 75%;
 }
 
 .inner_hire {
-padding: 15rem 0;
+padding: 10rem 0;
 display: flex;
 align-items: center;
 justify-content: space-around;
@@ -841,6 +846,10 @@ border-color: var(--orange);
 
 .recent_post_comment li button {
 color: var(--white);
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+border-color: var(--orange);
 }
 
 

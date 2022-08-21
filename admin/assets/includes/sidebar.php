@@ -84,6 +84,7 @@
                         <li><a href="portfolio_update.php">Portfolio</a></li>
                         <li><a href="testimonials_update.php">Testimonials</a></li>
                         <li><a href="hire_me_update.php">hire me</a></li>
+                        <li><a href="blog_update.php">Blog</a></li>
                     </ul>
                 </li>
 

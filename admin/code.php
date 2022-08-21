@@ -1,6 +1,4 @@
 <?php
-// header("Location: index.php");
-session_start();
 include_once 'config/dbConnect.php';
 
 // error_reporting(0);
@@ -801,7 +799,7 @@ if (isset($_POST['delete_portfolio'])) {
 
 
 // Testimonial section starts
-// Update Portfolio Content
+// Update Testimonial Content
 if (isset($_POST['update_testimonial_content'])) {
 
     $testimonial_title = $_POST['testimonial_title'];
@@ -957,3 +955,83 @@ if (isset($_POST['update_hire_me'])) {
     }
 }
 // Hire Me Section Ends Here
+
+
+
+// Blog Section Starts Here
+
+// Update Blog Content
+if (isset($_POST['update_blog_content'])) {
+
+    $blog_title = mysqli_real_escape_string($conn, $_POST['blog_title']);
+    $blog_desc = mysqli_real_escape_string($conn, $_POST['blog_desc']);
+
+
+    $query = mysqli_query($conn, "UPDATE `blog_section` SET blog_title = '$blog_title', blog_desc = '$blog_desc' WHERE blog_sec_id = 1 ");
+
+    if ($query) {
+        echo 'Blog content updated successfully';
+    } else {
+        echo '<span class="text-danger">Blog content not updated!</span>';
+    }
+}
+
+
+// Add Blog Category
+// check category exist or not for add category
+if (isset($_POST['checkBlogCat'])) {
+
+    $blog_cat_name = mysqli_real_escape_string($conn, $_POST['blog_cat_name']);
+
+    $check_blog_cat_query = mysqli_query($conn, "SELECT `name` FROM `blog_categories` WHERE name = '$blog_cat_name'");
+
+    echo mysqli_num_rows($check_blog_cat_query);
+}
+
+// check slug exist or not for add category
+if (isset($_POST['checkBlogCatSlug'])) {
+
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['blog_cat_slug']);
+    $blog_cat_slug = preg_replace('/-+/', '-', $string);
+
+    $check_blog_cat_slug_query = mysqli_query($conn, "SELECT `slug` FROM `blog_categories` WHERE slug = '$blog_cat_slug'");
+
+    echo mysqli_num_rows($check_blog_cat_slug_query);
+}
+
+// Insert Blog Category
+if (isset($_POST['addblogCategory'])) {
+    $name = mysqli_real_escape_string($conn, $_POST['blog_cat_name']);
+
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['blog_cat_slug']);
+    $slug = preg_replace('/-+/', '-', $string);
+
+    $description = mysqli_real_escape_string($conn, $_POST['blog_cat_description']);
+    $meta_title = mysqli_real_escape_string($conn, $_POST['blog_cat_meta_title']);
+    $meta_description = mysqli_real_escape_string($conn, $_POST['blog_cat_meta_description']);
+    $meta_keywords = mysqli_real_escape_string($conn, $_POST['blog_cat_meta_keywords']);
+    $status = $_POST['blog_cat_status'];
+
+    $query = mysqli_query($conn, "INSERT INTO `blog_categories` (name, slug, description, meta_title, meta_description, meta_keywords, status) VALUES ('$name', '$slug', '$description', '$meta_title', '$meta_description', '$meta_keywords', '$status') ");
+
+    if ($query) {
+        echo "Category added successfully";
+    } else {
+        echo '<span class="text-danger">Something went wrong!</span>';
+    }
+}
+
+
+// Update Blog Category
+if (isset($_POST['getBlogCatData'])) {
+    $id = $_POST['blog_cat_id'];
+
+    $query = mysqli_query($conn, "SELECT * FROM `blog_categories` WHERE id = '$id'");
+
+    $result = mysqli_fetch_assoc($query);
+    $blog_cat_data = json_encode($result);
+}
+
+
+
+// Blog Section Ends Here

@@ -6,23 +6,32 @@
                     <a href="index.php"><img src="assets/images/logo.png" alt="" /></a>
                 </div>
                 <div class="main_menu">
+
+                    <?php
+                    if (isset($home_index) && $home_index == "index.php") {
+                        $index = "";
+                    } else {
+                        $index = "index.php";
+                    }
+                    ?>
+
                     <ul>
                         <li>
-                            <a class="menu_link active" href="index.php">home</a>
+                            <a class="menu_link active" href="<?= $index ?>#home">home</a>
                         </li>
                         <li>
-                            <a class="menu_link" href="index.php#skill_area">about me</a>
+                            <a class="menu_link" href="<?= $index ?>#skill_area">about me</a>
                         </li>
                         <li>
-                            <a class="menu_link" href="index.php#services">services</a>
+                            <a class="menu_link" href="<?= $index ?>#services">services</a>
                         </li>
                         <li>
-                            <a class="menu_link" href="index.php#portfolio">portfolio</a>
+                            <a class="menu_link" href="<?= $index ?>#portfolio">portfolio</a>
                         </li>
                         <li>
-                            <a class="menu_link" href="index.php#testimonials">testimonials</a>
+                            <a class="menu_link" href="<?= $index ?>#testimonials">testimonials</a>
                         </li>
-                        <li><a class="menu_link" href="index.php#blogs">blogs</a></li>
+                        <li><a class="menu_link" href="<?= $index ?>#blogs">blogs</a></li>
                         <li>
                             <a class="menu_link" href="#footer">contact us</a>
                         </li>
