@@ -217,13 +217,13 @@ opacity: 70%;
 }
 
 .modal-content {
+overflow-y: auto;
 background: var(--sidebar-color);
 border: solid;
 }
 
 .modal-body {
-max-height: 50rem;
-overflow-y: auto;
+max-height: 55rem;
 }
 
 #view_all_skills .modal-content {
@@ -317,7 +317,14 @@ background: #FFBF0D;
 background: #FFBF0D;
 }
 
+#usersDataTable_filter input {
+margin-left: 0.5rem;
+}
 
+.note-frame {
+color: #212529;
+background: #FFFFFF;
+}
 /* common css ends here */
 
 
@@ -421,11 +428,11 @@ margin-top: 1rem;
 position: relative;
 }
 
-.sidebar.close {
+.sidebar.hide {
 width: 8rem;
 }
 
-.sidebar.close .admin_desc {
+.sidebar.hide .admin_desc {
 overflow: hidden;
 }
 
@@ -433,7 +440,7 @@ overflow: hidden;
 height: 9rem;
 }
 
-.sidebar.close .image img {
+.sidebar.hide .image img {
 width: 6rem;
 height: 5rem;
 }
@@ -607,12 +614,12 @@ font-weight: 500;
 transition: var(--tran-03);
 }
 
-.sidebar.close .text {
+.sidebar.hide .text {
 /* opacity: 0; */
 display: none;
 }
 
-.sidebar.close .toggle_icon {
+.sidebar.hide .toggle_icon {
 /* opacity: 0; */
 display: none;
 }
@@ -711,7 +718,7 @@ color: var(--text-color);
 transition: var(--tran-03);
 }
 
-.sidebar.close~.main {
+.sidebar.hide~.main {
 left: 8rem;
 width: calc(100% - 8rem);
 }
@@ -1226,7 +1233,7 @@ body.dark #footer {
 background: var(--body-color);
 }
 
-.sidebar.close~.main #footer {
+.sidebar.hide~.main #footer {
 left: 8rem;
 width: calc(100% - 8rem);
 }
@@ -1263,7 +1270,7 @@ right: 1rem;
 }
 }
 
-@media (max-width: 991px) {
+@media (max-width: 991.98px) {
 /*.grid_container {
 grid-template-areas: "Counter Counter Counter Counter Counter Counter" "Write_new Write_new Write_new Write_new
 Write_new Write_new" "Shares Shares Shares Comments Comments Comments" "Used Used Used Used Used Used" "TopArt TopArt
@@ -1296,18 +1303,18 @@ top: 11.5rem;
 html {
 font-size: 50%;
 }
-.sidebar.close {
+.sidebar.hide {
 left: -300px;
 }
 .main {
 left: 0;
 width: 100%;
 }
-.sidebar.close~.main {
+.sidebar.hide~.main {
 left: 0;
 width: 100%;
 }
-.sidebar.close .img_text .image img {
+.sidebar.hide .img_text .image img {
 display: none;
 transition: var(--tran-03);
 }
@@ -1319,7 +1326,7 @@ left: 0;
 width: 100%;
 }
 
-.sidebar.close~.main #footer {
+.sidebar.hide~.main #footer {
 left: 0;
 width: 100%;
 }

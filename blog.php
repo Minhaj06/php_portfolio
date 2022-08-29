@@ -1,3 +1,7 @@
+<?php
+include 'admin/config/dbConnect.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,7 +99,7 @@
 
     .swiper-slide .slider_blog_content {
         position: absolute;
-        background: #111111a1;
+        background: #000000bd;
         bottom: 0;
         left: 0;
         width: 100%;
@@ -123,6 +127,16 @@
         height: 10rem;
         cursor: pointer;
     }
+
+    @media (max-width: 767.98px) {
+        .mySwiper2 {
+            height: 100%;
+        }
+
+        .mySwiper {
+            height: 0;
+        }
+    }
     </style>
 
 </head>
@@ -138,7 +152,7 @@
 
             <div class="row g-5">
                 <main class="col-lg-7 col-xl-8 mb-5 mb-lg-0">
-                    <div class="row g-0 mb-5">
+                    <div class="row g-0 mb-5 pb-4">
                         <div class="blog_item">
 
                             <div style="--swiper-navigation-color: var(--orange); --swiper-pagination-color: var(-orange)"
@@ -146,41 +160,63 @@
                                 <div class="swiper-wrapper">
 
 
+
+                                    <?php
+                                    $slide_post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `created_at` FROM `blog_posts` WHERE status = '1' AND category = 'programming' ORDER BY id DESC LIMIT 2");
+
+                                    if (mysqli_num_rows($slide_post_query) > 0) {
+                                        while ($slide_post_result = mysqli_fetch_array($slide_post_query)) {
+                                    ?>
+
                                     <div class="swiper-slide slide_item">
-                                        <img src="img/robot.jpg" alt="blog_img" />
+                                        <a href="post.php?slug=<?= $slide_post_result['slug'] ?>" class="w-100">
+                                            <img src="uploaded_img/<?= $slide_post_result['image'] ?>" alt="blog_img" />
+                                        </a>
                                         <div class="slider_blog_content">
-                                            <p>26th August, 2022</p>
-                                            <h3>I Used The Web For A Day On A 50 MB Budget</h3>
-                                            <a href="#">learn more<i class="fa-solid fa-arrow-right-long"></i></a>
+                                            <p>
+                                                <?php
+                                                        $timestamp =  $slide_post_result['created_at'];
+                                                        $date = date("M d, Y", strtotime($timestamp));
+                                                        echo $date;
+                                                        ?>
+                                            </p>
+                                            <h3><?= $slide_post_result['title'] ?></h3>
+                                            <a href="post.php?slug=<?= $slide_post_result['slug'] ?>">learn more<i
+                                                    class="fa-solid fa-arrow-right-long"></i></a>
                                         </div>
                                     </div>
 
+                                    <?php }
+                                    } ?>
+
+                                    <?php
+                                    $slide_post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `created_at` FROM `blog_posts` WHERE status = '1' AND category = 'tech news' ORDER BY id DESC LIMIT 2");
+
+                                    if (mysqli_num_rows($slide_post_query) > 0) {
+                                        while ($slide_post_result = mysqli_fetch_array($slide_post_query)) {
+                                    ?>
+
                                     <div class="swiper-slide slide_item">
-                                        <img src="img/robot.jpg" alt="blog_img" />
+                                        <a href="post.php?slug=<?= $slide_post_result['slug'] ?>" class="w-100">
+                                            <img src="uploaded_img/<?= $slide_post_result['image'] ?>" alt="blog_img" />
+                                        </a>
                                         <div class="slider_blog_content">
-                                            <p>26th August, 2022</p>
-                                            <h3>I Used The Web For A Day On A 50 MB Budget</h3>
-                                            <a href="#">learn more<i class="fa-solid fa-arrow-right-long"></i></a>
+                                            <p>
+                                                <?php
+                                                        $timestamp =  $slide_post_result['created_at'];
+                                                        $date = date("M d, Y", strtotime($timestamp));
+                                                        echo $date;
+                                                        ?>
+                                            </p>
+                                            <h3><?= $slide_post_result['title'] ?></h3>
+                                            <a href="post.php?slug=<?= $slide_post_result['slug'] ?>">learn more<i
+                                                    class="fa-solid fa-arrow-right-long"></i></a>
                                         </div>
                                     </div>
 
-                                    <div class="swiper-slide slide_item">
-                                        <img src="img/robot.jpg" alt="blog_img" />
-                                        <div class="slider_blog_content">
-                                            <p>26th August, 2022</p>
-                                            <h3>I Used The Web For A Day On A 50 MB Budget</h3>
-                                            <a href="#">learn more<i class="fa-solid fa-arrow-right-long"></i></a>
-                                        </div>
-                                    </div>
+                                    <?php }
+                                    } ?>
 
-                                    <div class="swiper-slide slide_item">
-                                        <img src="img/robot.jpg" alt="blog_img" />
-                                        <div class="slider_blog_content">
-                                            <p>26th August, 2022</p>
-                                            <h3>I Used The Web For A Day On A 50 MB Budget</h3>
-                                            <a href="#">learn more<i class="fa-solid fa-arrow-right-long"></i></a>
-                                        </div>
-                                    </div>
 
                                 </div>
                                 <div>
@@ -188,21 +224,40 @@
                                     <div class="swiper-button-prev"></div>
                                 </div>
                             </div>
-                            <div thumbsSlider="" class="swiper mySwiper">
+                            <div thumbsSlider="" class="swiper mySwiper d-none d-md-block">
                                 <div class="swiper-wrapper swiper_pagi_img">
 
+                                    <?php
+                                    $slide_post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `created_at` FROM `blog_posts` WHERE status = '1' AND category = 'programming' ORDER BY id DESC LIMIT 2");
+
+                                    // $slide_post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `created_at` FROM `blog_posts` WHERE status = '1' ORDER BY id DESC LIMIT 4");
+
+                                    if (mysqli_num_rows($slide_post_query) > 0) {
+                                        while ($slide_post_result = mysqli_fetch_array($slide_post_query)) {
+                                    ?>
+
                                     <div class="swiper-slide">
-                                        <img src="img/robot.jpg" />
+                                        <img src="uploaded_img/<?= $slide_post_result['image'] ?>" />
                                     </div>
+
+                                    <?php }
+                                    } ?>
+
+                                    <?php
+                                    $slide_post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `created_at` FROM `blog_posts` WHERE status = '1' AND category = 'tech news' ORDER BY id DESC LIMIT 2");
+
+                                    // $slide_post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `created_at` FROM `blog_posts` WHERE status = '1' ORDER BY id DESC LIMIT 4");
+
+                                    if (mysqli_num_rows($slide_post_query) > 0) {
+                                        while ($slide_post_result = mysqli_fetch_array($slide_post_query)) {
+                                    ?>
+
                                     <div class="swiper-slide">
-                                        <img src="img/robot.jpg" />
+                                        <img src="uploaded_img/<?= $slide_post_result['image'] ?>" />
                                     </div>
-                                    <div class="swiper-slide">
-                                        <img src="img/robot.jpg" />
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="img/robot.jpg" />
-                                    </div>
+
+                                    <?php }
+                                    } ?>
 
                                 </div>
                             </div>
@@ -210,6 +265,10 @@
                         </div>
 
                     </div>
+
+
+                    <h2 style="border-left: 6px solid var(--gray); border-bottom: 1px solid var(--gray)"
+                        class="widget_title text-uppercase mb-4 fs-2">Latest news are on top all times</h2>
 
                     <div class="row g-4">
                         <div class="col-md-6">
@@ -300,21 +359,28 @@
 
     <!-- Initialize Swiper -->
     <script>
-    var swiper = new Swiper(".mySwiper", {
-        spaceBetween: 10,
-        slidesPerView: 4,
-        freeMode: true,
-        watchSlidesProgress: true,
-    });
-    var swiper2 = new Swiper(".mySwiper2", {
-        spaceBetween: 10,
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-        thumbs: {
-            swiper: swiper,
-        },
+    window.addEventListener("load", () => {
+        var swiper = new Swiper(".mySwiper", {
+            spaceBetween: 10,
+            slidesPerView: 4,
+            freeMode: true,
+            watchSlidesProgress: true,
+        });
+        var swiper2 = new Swiper(".mySwiper2", {
+            loop: true,
+            spaceBetween: 10,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            thumbs: {
+                swiper: swiper,
+            },
+        });
     });
     </script>
 </body>

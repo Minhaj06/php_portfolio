@@ -5,3 +5,32 @@
     </div>
 </footer>
 <!-- footer ends here -->
+
+</main>
+<!-- main content ends here -->
+
+
+<!-- JQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<!-- Summernote JS - CDN Link -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script>
+$(document).ready(function() {
+    $("#add_post_description").summernote({
+        placeholder: 'Post description goes here',
+        height: 300
+    });
+    $("#edit_post_description").summernote({
+        placeholder: 'Post description goes here',
+        height: 300
+    });
+    $('.dropdown-toggle').dropdown();
+});
+</script>
+<!-- //Summernote JS - CDN Link -->
+
+</body>
+
+</html>

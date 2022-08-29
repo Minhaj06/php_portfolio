@@ -1,5 +1,5 @@
 <!-- sidebar starts here -->
-<div class="sidebar close">
+<div class="sidebar hide">
     <div class="img_text position-relative d-flex align-items-start">
         <span class="image d-flex align-items-center me-3">
             <img src="assets/images/admin.png" alt="admin_img" />

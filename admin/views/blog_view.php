@@ -134,90 +134,96 @@
     <div class="card-right">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h2 class="mb-0">Portfolio Items</h2>
+                <h2 class="mb-0">Blog Posts</h2>
 
-                <span id="add_service" role="button" data-bs-target="#add_portfolio_modal" data-bs-toggle="modal">
+                <span id="add_blog_post" role="button" data-bs-target="#add_blog_post_modal" data-bs-toggle="modal">
                     <i class="fa-solid fa-plus"></i>
-                    Add Portfolio
+                    Add Post
                 </span>
             </div>
 
-            <div class="card-body" id="portfolio_items">
+            <div class="card-body" id="blog_posts">
                 <div class="table-responsive">
                     <table id="usersDataTable" class="table display table-striped table-hover"
-                        style="min-width: 1270px;">
+                        style="min-width: 950px;">
                         <thead>
                             <tr>
                                 <th>Image</th>
-                                <th>Name</th>
-                                <th>Technology</th>
-                                <th>Description</th>
-                                <th>URL</th>
-                                <th>Category</th>
-                                <th>Actions</th>
+                                <th>Title</th>
+                                <th>status</th>
+                                <th>category</th>
+                                <th>views</th>
+                                <th>created on</th>
+                                <th>actions</th>
                             </tr>
                         </thead>
+
+                        <style>
+                        td a {
+                            text-decoration: none;
+                        }
+
+                        td a:hover {
+                            color: var(--text-color)
+                        }
+                        </style>
+
                         <tbody>
-
                             <?php
-                            $portfolio_query = mysqli_query($conn, "SELECT * FROM `portfolio_items`");
+                            $blog_post_query = mysqli_query($conn, "SELECT * FROM `blog_posts`");
 
-                            if (mysqli_num_rows($portfolio_query) > 0) {
-                                while ($portfolio_result = mysqli_fetch_array($portfolio_query)) {
+                            if (mysqli_num_rows($blog_post_query) > 0) {
+                                while ($blog_post_result = mysqli_fetch_array($blog_post_query)) {
                             ?>
 
-                            <tr class="<?= $portfolio_result['port_item_id'] ?>">
-                                <td>
-                                    <a href="<?= $portfolio_result['portfolio_url'] ?>" target="_blank">
-                                        <img id="<?= $portfolio_result['port_item_id'] ?>view_image"
-                                            src="../uploaded_img/<?= $portfolio_result['portfolio_image'] ?>"
+                            <tr class="blog<?= $blog_post_result['id'] ?>">
+                                <td class="align-middle">
+                                    <a href="../post.php?<?= $blog_post_result['slug'] ?>" target="_blank">
+                                        <img src="../uploaded_img/<?= $blog_post_result['image'] ?>"
                                             alt="Portfolio_image"
-                                            style="width: 8rem; height: 10rem; background: var(--primary-color-light); padding: .5rem; border: 1px solid;">
+                                            style="width: 12rem; height: 9rem; background: var(--primary-color-light); padding: .5rem; border: 1px solid;">
                                     </a>
                                 </td>
 
-                                <td data-target="portfolio_name">
-                                    <?= $portfolio_result['portfolio_name'] ?>
+                                <td class="align-middle"><?= $blog_post_result['title'] ?></td>
+
+                                <td class="align-middle">
+                                    <?php
+                                            if ($blog_post_result['status'] == '1') {
+                                                echo "Publushed";
+                                            } else {
+                                                echo "Unpublished";
+                                            }
+                                            ?>
                                 </td>
 
-                                <td data-target="portfolio_technology">
-                                    <?= $portfolio_result['portfolio_technology'] ?>
+                                <td class="align-middle"><?= $blog_post_result['category'] ?></td>
+
+                                <td class="align-middle"><?= $blog_post_result['views'] ?></td>
+
+                                <td class="align-middle" style="min-width: 13rem;">
+                                    <?php
+                                            $timestamp =  $blog_post_result['created_at'];
+                                            $date = date("M d, Y", strtotime($timestamp));
+                                            echo $date;
+                                            ?>
                                 </td>
 
-                                <td data-target="portfolio_description">
-                                    <?= $portfolio_result['portfolio_description'] ?>
-                                </td>
-
-                                <style>
-                                a:hover {
-                                    color: var(--primary-color)
-                                }
-                                </style>
-
-                                <td data-target="portfolio_url">
-                                    <a href="<?= $portfolio_result['portfolio_url'] ?>"
-                                        target="_blank"><?= $portfolio_result['portfolio_url'] ?></a>
-                                </td>
-
-                                <td data-target="portfolio_category">
-                                    <?= $portfolio_result['portfolio_category'] ?>
-                                </td>
-
-                                <td style="min-width: 10rem;">
-                                    <span data-id="<?= $portfolio_result['port_item_id'] ?>"
-                                        class="fs-4 text-capitalize text-success" id="view_portfolio_btn" role="button"
-                                        data-bs-target="#view_portfolio_modal" data-bs-toggle="modal">
+                                <td class="align-middle" style="min-width: 10rem;">
+                                    <span data-id="<?= $blog_post_result['id'] ?>"
+                                        class="fs-4 text-capitalize text-success" id="view_blog_post_btn" role="button"
+                                        data-bs-target="#view_blog_post_modal" data-bs-toggle="modal">
                                         <i class="fa-solid fa-eye"></i>
                                     </span>
 
-                                    <span data-id="<?= $portfolio_result['port_item_id'] ?>"
-                                        class="fs-4 text-capitalize text-info ms-4" id="edit_portfolio_btn"
-                                        role="button" data-bs-target="#edit_portfolio_modal" data-bs-toggle="modal">
+                                    <span data-id="<?= $blog_post_result['id'] ?>"
+                                        class="fs-4 text-capitalize text-info ms-4" id="edit_blog_post_btn"
+                                        role="button" data-bs-target="#edit_blog_post_modal" data-bs-toggle="modal">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </span>
 
-                                    <span data-id="<?= $portfolio_result['port_item_id'] ?>"
-                                        class="fs-4 text-capitalize text-danger ms-4" id="delete_portfolio_btn"
+                                    <span data-id="<?= $blog_post_result['id'] ?>"
+                                        class="fs-4 text-capitalize text-danger ms-4" id="delete_blog_post_btn"
                                         role="button">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </span>
@@ -373,14 +379,14 @@
 
                     <div class="form-group col-lg-6">
                         <label for="edit_blog_cat_name" class="label-control">Category name</label>
-                        <span class="add_cat_error ms-3"></span>
+                        <span class="edit_cat_error ms-3"></span>
                         <input class="form-control fs-4" type="text" id="edit_blog_cat_name" name="edit_blog_cat_name"
                             placeholder="Type category name">
                     </div>
 
                     <div class="form-group col-lg-6">
                         <label for="edit_blog_cat_slug" class="label-control">Slug(URL)</label>
-                        <span class="add_cat_slug_error ms-3"></span>
+                        <span class="edit_cat_slug_error ms-3"></span>
                         <input class="form-control fs-4" type="text" id="edit_blog_cat_slug" name="edit_blog_cat_slug"
                             placeholder="Type category slug">
                     </div>
@@ -431,58 +437,78 @@
 <!-- Edit Blog Category Modal Ends -->
 
 
-<!-- Add Portfolio Modal Starts -->
-<div class="modal fade text-capitalize" id="add_portfolio_modal" data-bs-backdrop="static">
-    <div class="modal-dialog modal-lg">
+<!-- Add Blog Post Modal Starts -->
+<div class="modal fade" id="add_blog_post_modal" data-bs-backdrop="static">
+    <div class="modal-dialog modal-fullscreen-xl-down modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Add Portfolio</h2>
+                <h2 class="modal-title">Add Post</h2>
                 <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
             </div>
 
-            <form action="" id="add_portfolio_form" enctype="multipart/form-data">
-                <div class="modal-body">
+            <form action="" id="add_blog_post_form" enctype="multipart/form-data">
+                <div style="max-height: fit-content;" class="modal-body pb-5">
                     <div class="row g-4">
 
                         <div class="form-group col-lg-6">
-                            <label for="port_name" class="label-control">Portfolio Name</label>
-                            <input class="form-control fs-4" type="text" id="port_name" name="port_name"
-                                placeholder="Type portfolio name">
+                            <label for="add_post_title" class="label-control">Title</label>
+                            <input class="form-control fs-4" type="text" id="add_post_title" required
+                                name="add_post_title" placeholder="Enter post title">
                         </div>
 
                         <div class="form-group col-lg-6">
-                            <label for="port_technology" class="label-control">Portfolio Technology</label>
-                            <input class="form-control fs-4" type="text" id="port_technology" name="port_technology"
-                                placeholder="What technology have you used?">
-                        </div>
-
-                        <div class="form-group col-lg-6">
-                            <label for="port_url" class="label-control">Portfolio URL</label>
-                            <input class="form-control fs-4" type="text" id="port_url" name="port_url"
-                                placeholder="https://minhajkobir.com">
-                        </div>
-
-                        <div class="form-group col-lg-6">
-                            <label for="port_image" class="label-control">Portfolio Image</label>
-                            <input class="form-control fs-4" type="file"
-                                accept="image/jpg, image/png, image/jpeg, image/gif, image/jfif" id="port_image"
-                                name="port_image" placeholder="Type portfolio URL">
+                            <label for="add_post_slug" class="label-control">Slug (URL)</label>
+                            <span class="add_post_slug_error ms-3"></span>
+                            <input class="form-control fs-4" type="text" id="add_post_slug" required
+                                name="add_post_slug" placeholder="Enter slug (URL)">
                         </div>
 
                         <div class="form-group col-12">
-                            <label for="port_cat">Portfolio Category</label>
-                            <select class="form-select fs-4" name="port_category" id="port_category">
+                            <label for="add_post_description" class="label-control">Description</label>
+                            <textarea class="form-control fs-4" placeholder="Post description goes here"
+                                id="add_post_description" required name="add_post_description" rows="6"></textarea>
+                        </div>
 
-                                <option value="">--Select Category--</option>
+                        <div class="form-group col-12">
+                            <label for="add_post_meta_title" class="label-control">Meta Title</label>
+                            <input class="form-control fs-4" type="text" id="add_post_meta_title" required
+                                name="add_post_meta_title" placeholder="Type meta title">
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="add_post_meta_keywords" class="label-control">Meta Keywords</label>
+                            <textarea class="form-control fs-4" placeholder="Type meta keywords"
+                                id="add_post_meta_keywords" required name="add_post_meta_keywords" rows="4"></textarea>
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="add_post_meta_description" class="label-control">Meta Description</label>
+                            <textarea class="form-control fs-4" placeholder="Meta description goes here"
+                                id="add_post_meta_description" required name="add_post_meta_description"
+                                rows="4"></textarea>
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="add_post_image" class="label-control">Post Image</label>
+                            <input class="form-control fs-4" type="file"
+                                accept="image/jpg, image/png, image/jpeg, image/gif, image/jfif" id="add_post_image"
+                                required name="add_post_image" placeholder="Type portfolio URL">
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="add_post_category">Portfolio Category</label>
+                            <select class="form-select fs-4" name="add_post_category" id="add_post_category">
+
+                                <option value="">-- Select Category --</option>
 
                                 <?php
-                                $category_query = mysqli_query($conn, "SELECT port_cat_name FROM `portfolio_category` WHERE port_cat_status ='1' ");
+                                $category_query = mysqli_query($conn, "SELECT name FROM `blog_categories` WHERE status ='1' ");
 
                                 if (mysqli_num_rows($category_query) > 0) {
                                     while ($category_result = mysqli_fetch_array($category_query)) {
                                 ?>
-                                <option value="<?= $category_result['port_cat_name'] ?>">
-                                    <?= $category_result['port_cat_name'] ?></option>
+                                <option value="<?= $category_result['name'] ?>">
+                                    <?= $category_result['name'] ?></option>
 
                                 <?php }
                                 } ?>
@@ -490,73 +516,84 @@
                             </select>
                         </div>
 
-                        <div class="form-group col-12">
-                            <label for="port_description" class="label-control">Portfolio Description (Max Length:
-                                120)</label>
-                            <textarea class="form-control fs-4" placeholder="Portfolio description goes here"
-                                id="port_description" name="port_description" style="height: 130px"
-                                maxlength="120"></textarea>
+                        <div class="form-group col-lg-12">
+                            <input class="form-check-input" type="checkbox" value="" id="add_post_status"
+                                name="add_post_status">
+                            <label class="form-check-label" for="add_post_status">Status</label>
                         </div>
 
-                        <input type="hidden" name="add_portfolio">
+                        <input type="hidden" required name="add_blog_post">
 
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" id="add_portfolio_btn" class="btn btn-secondary fs-4">Add
-                        Portfolio</button>
+                    <button type="submit" id="add_blog_post_btn" class="btn btn-secondary fs-4">Add
+                        Post</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<!-- Add Portfolio Modal Ends -->
+<!-- Add Blog Post Modal Ends -->
 
 
-<!-- View Portfolio Modal Starts -->
-<div class="modal fade" id="view_portfolio_modal" data-bs-backdrop="static">
-    <div class="modal-dialog">
+<!-- View Blog Post Modal Starts -->
+<div class="modal fade" id="view_blog_post_modal" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">View Portfolio</h2>
                 <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
             </div>
-            <div class="modal-body" style="max-height: 60rem;">
+            <div class="modal-body">
 
                 <div style="border-bottom: 1px solid var(--primary-color);" class="home_img text-center pb-3 mb-4">
 
-                    <a href="" id="view_port_img_modal_url" target="_blank">
-                        <img id="view_port_img_modal"
-                            style="max-height: 45rem; border: 2px solid; border-radius: .5rem;" width="100%"
-                            class="home_modal_img p-2" src="" alt="Portfolio Image">
+                    <a href="" id="" target="_blank">
+                        <img id="view_post_image" style="height: 40rem; border: 2px solid; border-radius: .5rem;"
+                            width="100%" class="home_modal_img p-2" src="" alt="Portfolio Image">
                     </a>
 
                 </div>
 
-                <table class="table table-striped table-bordered table-hover">
+                <table class="table table-striped table-bordered">
                     <tbody>
                         <tr>
-                            <th class="align-middle">Portfolio Name</th>
-                            <td class="align-middle" id="view_port_name"></td>
+                            <th class="align-middle">Title</th>
+                            <td class="align-middle" id="view_post_title"></td>
                         </tr>
                         <tr>
-                            <th class="align-middle">Using Technology</th>
-                            <td class="align-middle" id="view_port_technology"></td>
-                        </tr>
-                        <tr>
-                            <th class="align-middle">Description</th>
-                            <td class="align-middle" id="view_port_description"></td>
-                        </tr>
-                        <tr>
-                            <th class="align-middle">Portfolio URL</th>
-                            <td class="align-middle" id="view_port_url">
-                                <a href="" target="_blank"></a>
-                            </td>
+                            <th class="align-middle">Slug (URL)</th>
+                            <td class="align-middle" id="view_post_slug"></td>
                         </tr>
                         <tr>
                             <th class="align-middle">Portfolio Category</th>
-                            <td class="align-middle" id="view_port_category"></td>
+                            <td class="align-middle" id="view_post_category"></td>
+                        </tr>
+                        <tr>
+                            <th class="align-middle">Status</th>
+                            <td class="align-middle" id="view_post_status"></td>
+                        </tr>
+                        <tr>
+                            <th class="align-middle">Created On</th>
+                            <td class="align-middle" id="view_post_created_at"></td>
+                        </tr>
+                        <tr>
+                            <th class="align-middle">Meta Title</th>
+                            <td class="align-middle" id="view_post_meta_title"></td>
+                        </tr>
+                        <tr>
+                            <th class="align-middle">Meta Keywords</th>
+                            <td class="align-middle" id="view_post_meta_keywords"></td>
+                        </tr>
+                        <tr>
+                            <th class="align-middle">Meta Description</th>
+                            <td class="align-middle" id="view_post_meta_description"></td>
+                        </tr>
+                        <tr>
+                            <th class="align-middle">Post Description</th>
+                            <td class="align-middle" id="view_post_description"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -568,61 +605,82 @@
         </div>
     </div>
 </div>
-<!-- View Portfolio Modal Starts -->
+<!-- View Blog Post Modal Starts -->
 
 
-<!-- Edit Portfolio Modal Starts -->
-<div class="modal fade text-capitalize" id="edit_portfolio_modal" data-bs-backdrop="static">
-    <div class="modal-dialog modal-lg">
+<!-- Edit Blog Post Modal Starts -->
+<div class="modal fade" id="edit_blog_post_modal" data-bs-backdrop="static">
+    <div class="modal-dialog modal-fullscreen-xl-down modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Edit Portfolio</h2>
+                <h2 class="modal-title">Add Post</h2>
                 <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
             </div>
 
-            <form action="" id="edit_portfolio_form" enctype="multipart/form-data">
-                <div class="modal-body">
+            <form action="" id="edit_blog_post_form" enctype="multipart/form-data">
+                <div style="max-height: fit-content;" class="modal-body pb-5">
                     <div class="row g-4">
 
                         <div class="form-group col-lg-6">
-                            <label for="edit_port_name" class="label-control">Portfolio Name</label>
-                            <input class="form-control fs-4" type="text" id="edit_port_name" name="edit_port_name"
-                                placeholder="Type portfolio name">
+                            <label for="edit_post_title" class="label-control">Title</label>
+                            <input class="form-control fs-4" type="text" id="edit_post_title" required
+                                name="edit_post_title" placeholder="Enter post title">
                         </div>
 
                         <div class="form-group col-lg-6">
-                            <label for="edit_port_technology" class="label-control">Portfolio Technology</label>
-                            <input class="form-control fs-4" type="text" id="edit_port_technology"
-                                name="edit_port_technology" placeholder="What technology have you used?">
-                        </div>
-
-                        <div class="form-group col-lg-6">
-                            <label for="edit_port_url" class="label-control">Portfolio URL</label>
-                            <input class="form-control fs-4" type="text" id="edit_port_url" name="edit_port_url"
-                                placeholder="https://minhajkobir.com">
-                        </div>
-
-                        <div class="form-group col-lg-6">
-                            <label for="edit_port_image" class="label-control">Portfolio Image</label>
-                            <input class="form-control fs-4" type="file"
-                                accept="image/jpg, image/png, image/jpeg, image/gif, image/jfif" id="edit_port_image"
-                                name="edit_port_image">
+                            <label for="edit_post_slug" class="label-control">Slug (URL)</label>
+                            <span class="edit_post_slug_error ms-3"></span>
+                            <input class="form-control fs-4" type="text" id="edit_post_slug" required
+                                name="edit_post_slug" placeholder="Enter slug (URL)">
                         </div>
 
                         <div class="form-group col-12">
-                            <label for="edit_port_category">Portfolio Category</label>
-                            <select class="form-select fs-4" name="edit_port_category" id="edit_port_category">
+                            <label for="edit_post_description" class="label-control">Description</label>
+                            <textarea class="form-control fs-4" placeholder="Post description goes here"
+                                id="edit_post_description" required name="edit_post_description" rows="6"></textarea>
+                        </div>
 
-                                <option value="">Uncategorized</option>
+                        <div class="form-group col-12">
+                            <label for="edit_post_meta_title" class="label-control">Meta Title</label>
+                            <input class="form-control fs-4" type="text" id="edit_post_meta_title" required
+                                name="edit_post_meta_title" placeholder="Type meta title">
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="edit_post_meta_keywords" class="label-control">Meta Keywords</label>
+                            <textarea class="form-control fs-4" placeholder="Type meta keywords"
+                                id="edit_post_meta_keywords" required name="edit_post_meta_keywords"
+                                rows="4"></textarea>
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="edit_post_meta_description" class="label-control">Meta Description</label>
+                            <textarea class="form-control fs-4" placeholder="Meta description goes here"
+                                id="edit_post_meta_description" required name="edit_post_meta_description"
+                                rows="4"></textarea>
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="edit_post_image" class="label-control">Post Image</label>
+                            <input class="form-control fs-4" type="file"
+                                accept="image/jpg, image/png, image/jpeg, image/gif, image/jfif" id="edit_post_image"
+                                name="edit_post_image" placeholder="Type portfolio URL">
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="edit_post_category">Portfolio Category</label>
+                            <select class="form-select fs-4" name="edit_post_category" id="edit_post_category">
+
+                                <option value="uncategorized">Uncategorized</option>
 
                                 <?php
-                                $category_query = mysqli_query($conn, "SELECT port_cat_name FROM `portfolio_category` WHERE port_cat_status ='1' ");
+                                $category_query = mysqli_query($conn, "SELECT name FROM `blog_categories` WHERE status ='1' ");
 
                                 if (mysqli_num_rows($category_query) > 0) {
                                     while ($category_result = mysqli_fetch_array($category_query)) {
                                 ?>
-                                <option value="<?= $category_result['port_cat_name'] ?>">
-                                    <?= $category_result['port_cat_name'] ?></option>
+                                <option value="<?= $category_result['name'] ?>">
+                                    <?= $category_result['name'] ?></option>
 
                                 <?php }
                                 } ?>
@@ -630,29 +688,26 @@
                             </select>
                         </div>
 
-                        <div class="form-group col-12">
-                            <label for="edit_port_description" class="label-control">Portfolio Description (Max Length:
-                                120)</label>
-                            <textarea class="form-control fs-4" placeholder="Portfolio description goes here"
-                                id="edit_port_description" name="edit_port_description" style="height: 130px"
-                                maxlength="120"></textarea>
+                        <div class="form-group col-lg-12">
+                            <input class="form-check-input" type="checkbox" value="" id="edit_post_status"
+                                name="edit_post_status">
+                            <label class="form-check-label" for="edit_post_status">Status</label>
                         </div>
 
-                        <input type="hidden" value="" name="edit_port_id" id="edit_port_id">
-                        <input type="hidden" name="update_portfolio">
+                        <input type="hidden" required id="update_blog_post_id" name="update_blog_post_id">
 
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" id="update_portfolio_btn" class="btn btn-secondary fs-4">Add
-                        Portfolio</button>
+                    <button type="submit" id="update_post_btn" class="btn btn-secondary fs-4">Update
+                        Post</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<!-- Edit Portfolio Modal Ends -->
+<!-- Edit Blog Post Modal Ends -->
 
 
 <!-- Delete Confirm Modal Modal Starts Here -->

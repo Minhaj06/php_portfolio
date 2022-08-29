@@ -21,16 +21,16 @@
 
     <!-- DataTables CSS Library -->
     <link rel="stylesheet" href="assets/css/dataTables.custom.min.css">
+
+    <!-- Summernote CSS - CDN Link -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <!-- //Summernote CSS - CDN Link -->
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.php" />
 
 
     <!-- ############### Scripts ############## -->
-    <!-- JQuery -->
-    <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-
     <!-- Bootstrap Bundle with Popper -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
@@ -39,9 +39,10 @@
     <!-- DataTables JQuery Libaray -->
     <script type="text/javascript" defer src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
-
     <!-- Custom JS -->
     <script type="text/javascript" defer src="assets/js/script.js"></script>
 
     <title><?= $title ?></title>
 </head>
+
+<body>

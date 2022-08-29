@@ -25,16 +25,16 @@
 
             <div class="recent_post d-flex mb-4">
                 <div class="recent_post_img me-3">
-                    <a href="#">
+                    <a href="post.php">
                         <img width="100" height="80" src="img/robot.jpg" alt="post image">
                     </a>
                 </div>
                 <div class="recent_post_content">
-                    <a href="#">
+                    <a href="post.php">
                         <p class="recent_post_title fs-4">I Used The Web For A Day On A 50 MB Budget
                         </p>
                     </a>
-                    <a href="#">
+                    <a href="post.php">
                         <p class="recent_post_date fs-5">26th August, 2022</p>
                     </a>
                 </div>
@@ -42,16 +42,16 @@
 
             <div class="recent_post d-flex mb-4">
                 <div class="recent_post_img me-3">
-                    <a href="#">
+                    <a href="post.php">
                         <img width="100" height="80" src="img/robot.jpg" alt="post image">
                     </a>
                 </div>
                 <div class="recent_post_content">
-                    <a href="#">
+                    <a href="post.php">
                         <p class="recent_post_title fs-4">I Used The Web For A Day On A 50 MB Budget
                         </p>
                     </a>
-                    <a href="#">
+                    <a href="post.php">
                         <p class="recent_post_date fs-5">26th August, 2022</p>
                     </a>
                 </div>
@@ -59,16 +59,16 @@
 
             <div class="recent_post d-flex mb-4">
                 <div class="recent_post_img me-3">
-                    <a href="#">
+                    <a href="post.php">
                         <img width="100" height="80" src="img/robot.jpg" alt="post image">
                     </a>
                 </div>
                 <div class="recent_post_content">
-                    <a href="#">
+                    <a href="post.php">
                         <p class="recent_post_title fs-4">I Used The Web For A Day On A 50 MB Budget
                         </p>
                     </a>
-                    <a href="#">
+                    <a href="post.php">
                         <p class="recent_post_date fs-5">26th August, 2022</p>
                     </a>
                 </div>
@@ -76,16 +76,16 @@
 
             <div class="recent_post d-flex mb-4">
                 <div class="recent_post_img me-3">
-                    <a href="#">
+                    <a href="post.php">
                         <img width="100" height="80" src="img/robot.jpg" alt="post image">
                     </a>
                 </div>
                 <div class="recent_post_content">
-                    <a href="#">
+                    <a href="post.php">
                         <p class="recent_post_title fs-4">I Used The Web For A Day On A 50 MB Budget
                         </p>
                     </a>
-                    <a href="#">
+                    <a href="post.php">
                         <p class="recent_post_date fs-5">26th August, 2022</p>
                     </a>
                 </div>
@@ -179,11 +179,13 @@
 <div class="categories mb-5">
     <h2 class="widget_title">Categories</h2>
     <ul>
-        <li><a href="#" class="d-flex justify-content-between"><span>CSS3</span> <span>(06)</span></a></li>
-        <li><a href="#" class="d-flex justify-content-between"><span>Bootstrap 5</span> <span>(06)</span></a></li>
-        <li><a href="#" class="d-flex justify-content-between"><span>JavaScript</span> <span>(06)</span></a></li>
-        <li><a href="#" class="d-flex justify-content-between"><span>JQuery</span> <span>(06)</span></a></li>
-        <li><a href="#" class="d-flex justify-content-between"><span>PHP</span> <span>(06)</span></a></li>
+        <li><a href="category.php" class="d-flex justify-content-between"><span>CSS3</span> <span>(06)</span></a></li>
+        <li><a href="category.php" class="d-flex justify-content-between"><span>Bootstrap 5</span> <span>(06)</span></a>
+        </li>
+        <li><a href="category.php" class="d-flex justify-content-between"><span>JavaScript</span> <span>(06)</span></a>
+        </li>
+        <li><a href="category.php" class="d-flex justify-content-between"><span>JQuery</span> <span>(06)</span></a></li>
+        <li><a href="category.php" class="d-flex justify-content-between"><span>PHP</span> <span>(06)</span></a></li>
     </ul>
 </div>
 

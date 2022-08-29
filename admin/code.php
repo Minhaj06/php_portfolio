@@ -1004,7 +1004,7 @@ if (isset($_POST['addblogCategory'])) {
     $name = mysqli_real_escape_string($conn, $_POST['blog_cat_name']);
 
     $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['blog_cat_slug']);
-    $slug = preg_replace('/-+/', '-', $string);
+    $slug = strtolower(preg_replace('/-+/', '-', $string));
 
     $description = mysqli_real_escape_string($conn, $_POST['blog_cat_description']);
     $meta_title = mysqli_real_escape_string($conn, $_POST['blog_cat_meta_title']);
@@ -1023,15 +1023,320 @@ if (isset($_POST['addblogCategory'])) {
 
 
 // Update Blog Category
+// get data from db and show in input
 if (isset($_POST['getBlogCatData'])) {
     $id = $_POST['blog_cat_id'];
-
     $query = mysqli_query($conn, "SELECT * FROM `blog_categories` WHERE id = '$id'");
+    $result = json_encode(mysqli_fetch_assoc($query));
 
-    $result = mysqli_fetch_assoc($query);
-    $blog_cat_data = json_encode($result);
+    echo $result;
+}
+
+// check category exist or not for update category
+if (isset($_POST['checkEditBlogCat'])) {
+
+    $edit_blog_cat_name = mysqli_real_escape_string($conn, $_POST['edit_blog_cat_name']);
+
+    $check_blog_cat_query = mysqli_query($conn, "SELECT `name` FROM `blog_categories` WHERE name = '$edit_blog_cat_name'");
+
+    echo mysqli_num_rows($check_blog_cat_query);
+}
+
+// check slug exist or not for update category
+if (isset($_POST['checkEditBlogCatSlug'])) {
+
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['edit_blog_cat_slug']);
+    $edit_blog_cat_slug = preg_replace('/-+/', '-', $string);
+
+    $check_blog_cat_slug_query = mysqli_query($conn, "SELECT `slug` FROM `blog_categories` WHERE slug = '$edit_blog_cat_slug'");
+
+    echo mysqli_num_rows($check_blog_cat_slug_query);
+}
+
+// update
+if (isset($_POST['updateBlogCategory'])) {
+    $id = mysqli_real_escape_string($conn, $_POST['edit_blog_cat_id']);
+    $name = mysqli_real_escape_string($conn, $_POST['edit_blog_cat_name']);
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['edit_blog_cat_slug']);
+    $slug = strtolower(preg_replace('/-+/', '-', $string));
+    $description = mysqli_real_escape_string($conn, $_POST['edit_blog_cat_description']);
+    $meta_title = mysqli_real_escape_string($conn, $_POST['edit_blog_cat_meta_title']);
+    $meta_description = mysqli_real_escape_string($conn, $_POST['edit_blog_cat_meta_description']);
+    $meta_keywords = mysqli_real_escape_string($conn, $_POST['edit_blog_cat_meta_keywords']);
+    $status = $_POST['edit_blog_cat_status'];
+
+    $query = mysqli_query($conn, "UPDATE `blog_categories` SET name = '$name', slug = '$slug', description = '$description', meta_title = '$meta_title', meta_description = '$meta_description', meta_keywords = '$meta_keywords', status = '$status' WHERE id = '$id' ");
+
+    if ($query) {
+        echo "Category updated successfully";
+    } else {
+        echo '<span class="text-danger">Something went wrong!!</span>';
+    }
 }
 
 
+// Delete blog category
+if (isset($_POST['delete_blog_cat'])) {
+    $delete_blog_cat_id = $_POST['delete_blog_cat_id'];
 
+    $query = mysqli_query($conn, "DELETE FROM `blog_categories` WHERE id = '$delete_blog_cat_id' ");
+
+    if ($query) {
+        echo "Category deleted succfully";
+    } else {
+        echo '<span class="text-danger">Category not deleted!</span>';
+    }
+}
+
+
+// Add Blog Post
+// check slug exist or not for add post
+if (isset($_POST['checkAddBlogPostSlug'])) {
+
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['add_blog_post_slug']);
+    $blog_post_slug = preg_replace('/-+/', '-', $string);
+
+    $check_blog_post_slug_query = mysqli_query($conn, "SELECT `slug` FROM `blog_posts` WHERE slug = '$blog_post_slug'");
+
+    echo mysqli_num_rows($check_blog_post_slug_query);
+}
+
+// Insert Post Data
+if (isset($_POST['add_blog_post'])) {
+    $post_title = mysqli_real_escape_string($conn, $_POST['add_post_title']);
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['add_post_slug']);
+    $post_slug = strtolower(preg_replace('/-+/', '-', $string));
+    $post_description = mysqli_real_escape_string($conn, $_POST['add_post_description']);
+    $post_meta_title = mysqli_real_escape_string($conn, $_POST['add_post_meta_title']);
+    $post_meta_keywords = mysqli_real_escape_string($conn, $_POST['add_post_meta_keywords']);
+    $post_meta_description = mysqli_real_escape_string($conn, $_POST['add_post_meta_description']);
+
+    $post_category = $_POST['add_post_category'] == "" ? "uncategorized" : $_POST['add_post_category'];
+
+    if (isset($_POST['add_post_status'])) {
+        $post_status = '1';
+    } else {
+        $post_status = '0';
+    }
+
+    $post_image = $_FILES['add_post_image']['name'];
+    $post_image_tmp_name = $_FILES['add_post_image']['tmp_name'];
+    $dotpos = stripos($post_image, '.') + 1;
+    $ext = substr($post_image, $dotpos);
+    $rand = rand(100000, 1000000);
+    $rename_post_image = $rand . '.' . $ext;
+    $img_folder = '../uploaded_img/' . $rename_post_image;
+
+
+    $sql = "INSERT INTO `blog_posts`(`title`, `slug`, `description`, `image`, `meta_title`, `meta_description`, `meta_keywords`, `status`, `category`) VALUES ('$post_title','$post_slug','$post_description', '$rename_post_image','$post_meta_title','$post_meta_description','$post_meta_keywords', '$post_status', '$post_category');";
+
+    $sql .= "UPDATE `blog_categories` SET no_of_post = no_of_post + 1 WHERE name = '$post_category'";
+
+    if (mysqli_multi_query($conn, $sql)) {
+
+        move_uploaded_file($post_image_tmp_name, $img_folder);
+        echo "Post added successfully";
+    } else {
+        echo '<span class="text-danger">Something went wrong!</span>';
+    }
+}
+
+
+// get data from db
+function getPostData($id)
+{
+    global $conn;
+
+    $query = mysqli_query($conn, "SELECT * FROM `blog_posts` WHERE id = '$id'");
+    $result = json_encode(mysqli_fetch_assoc($query));
+
+    echo $result;
+}
+
+// View Post in Modal
+if (isset($_POST['getBlogPostView'])) {
+    $id = $_POST['blog_post_id'];
+
+    getPostData($id);
+}
+
+// Show Data in Modal input
+if (isset($_POST['getBlogPostData'])) {
+    $id = $_POST['edit_blog_post_id'];
+
+    getPostData($id);
+}
+
+
+// Update Blog Post
+// Check Slug for update data
+if (isset($_POST['checkEditBlogPostSlug'])) {
+
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['edit_blog_post_slug']);
+    $blog_post_slug = preg_replace('/-+/', '-', $string);
+
+    $check_blog_post_slug_query = mysqli_query($conn, "SELECT `slug` FROM `blog_posts` WHERE slug = '$blog_post_slug'");
+
+    echo mysqli_num_rows($check_blog_post_slug_query);
+}
+
+// update
+if (isset($_POST['update_blog_post_id'])) {
+    $post_id = $_POST['update_blog_post_id'];
+    $post_title = mysqli_real_escape_string($conn, $_POST['edit_post_title']);
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['edit_post_slug']);
+    $post_slug = strtolower(preg_replace('/-+/', '-', $string));
+    $post_description = mysqli_real_escape_string($conn, $_POST['edit_post_description']);
+    $post_meta_title = mysqli_real_escape_string($conn, $_POST['edit_post_meta_title']);
+    $post_meta_keywords = mysqli_real_escape_string($conn, $_POST['edit_post_meta_keywords']);
+    $post_meta_description = mysqli_real_escape_string($conn, $_POST['edit_post_meta_description']);
+
+    $post_category = $_POST['edit_post_category'];
+
+    if (isset($_POST['edit_post_status'])) {
+        $post_status = '1';
+    } else {
+        $post_status = '0';
+    }
+
+    $post_image = $_FILES['edit_post_image']['name'];
+
+    $prev_category = mysqli_fetch_assoc(mysqli_query($conn, "SELECT category FROM `blog_posts` WHERE id = '$post_id' "))['category'];
+
+
+    // $sql = "UPDATE `blog_posts` SET `title`='$post_title',`slug`='$post_slug',`description`='$post_description',`image`='$rename_port_image',`meta_title`='$post_meta_title',`meta_description`='$post_meta_description',`meta_keywords`='$post_meta_keywords',`status`='$post_status,`category`='$post_category WHERE `id` = '$post_id' ";
+
+    // $sql .= "UPDATE `blog_categories` SET no_of_post = no_of_post + 1 WHERE category = '$post_category'";
+
+
+
+    if (empty($post_image)) {
+
+        // $query = mysqli_query($conn, "UPDATE `blog_posts` SET `title`='$post_title',`slug`='$post_slug',`description`='$post_description',`meta_title`='$post_meta_title',`meta_description`='$post_meta_description',`meta_keywords`='$post_meta_keywords',`status`='$post_status',`category`='$post_category' WHERE `id` = '$post_id' ");
+
+        $query = mysqli_query($conn, "UPDATE `blog_posts` SET `title`='$post_title',`slug`='$post_slug',`description`='$post_description',`meta_title`='$post_meta_title',`meta_description`='$post_meta_description',`meta_keywords`='$post_meta_keywords',`status`='$post_status',`category`='$post_category' WHERE `id` = '$post_id' ");
+
+        if (($post_category !== $prev_category) && ($post_category == "uncategorized")) {
+
+            if ($query) {
+                $query_no_of = mysqli_query($conn, "UPDATE `blog_categories` SET no_of_post = no_of_post - 1 WHERE name = '$prev_category'");
+
+                if ($query_no_of) {
+                    echo 'Post Updated Successfully';
+                }
+            }
+        } elseif (($post_category !== $prev_category) && ($prev_category == "uncategorized")) {
+
+            if ($query) {
+                $query_no_of = mysqli_query($conn, "UPDATE `blog_categories` SET no_of_post = no_of_post + 1 WHERE name = '$post_category'");
+
+                if ($query_no_of) {
+                    echo 'Post Updated Successfully';
+                }
+            }
+        } elseif ($post_category !== $prev_category) {
+            if ($query) {
+                $query_sql = "UPDATE `blog_categories` SET no_of_post = no_of_post - 1 WHERE name = '$prev_category';";
+                $query_sql .= "UPDATE `blog_categories` SET no_of_post = no_of_post + 1 WHERE name = '$post_category'";
+
+                if (mysqli_multi_query($conn, $query_sql)) {
+                    echo 'Post Updated Successfully';
+                }
+            }
+        } else {
+
+            if ($query) {
+                echo "Post Updated Successfully";
+            }
+        }
+    } else {
+
+        $post_image_tmp_name = $_FILES['edit_post_image']['tmp_name'];
+        $dotpos = stripos($post_image, '.') + 1;
+        $ext = substr($post_image, $dotpos);
+        $rand = rand(100000, 1000000);
+        $rename_post_image = $rand . '.' . $ext;
+        $img_folder = '../uploaded_img/' . $rename_post_image;
+
+
+        $image_query = mysqli_query($conn, "SELECT image FROM `blog_posts` WHERE id = '$post_id' ");
+        $old_image_name = mysqli_fetch_assoc($image_query)['image'];
+        $old_img_folder = '../uploaded_img/' . $old_image_name;
+
+        function updatePostImg()
+        {
+
+            global $old_img_folder, $post_image_tmp_name, $img_folder;
+
+            if (file_exists($old_img_folder)) {
+                unlink($old_img_folder);
+
+                move_uploaded_file($post_image_tmp_name, $img_folder);
+                echo "Post Updated Successfully";
+            } else {
+
+                move_uploaded_file($post_image_tmp_name, $img_folder);
+                echo "Post Updated Successfully";
+            }
+        }
+
+        $query = mysqli_query($conn, "UPDATE `blog_posts` SET `title`='$post_title',`slug`='$post_slug',`description`='$post_description',`image`='$rename_post_image',`meta_title`='$post_meta_title',`meta_description`='$post_meta_description',`meta_keywords`='$post_meta_keywords',`status`='$post_status',`category`='$post_category' WHERE `id` = '$post_id' ");
+
+        if (($post_category !== $prev_category) && ($post_category == "uncategorized")) {
+
+            if ($query) {
+                $query_no_of = mysqli_query($conn, "UPDATE `blog_categories` SET no_of_post = no_of_post - 1 WHERE name = '$prev_category'");
+
+                if ($query_no_of) {
+                    updatePostImg();
+                }
+            }
+        } elseif (($post_category !== $prev_category) && ($prev_category == "uncategorized")) {
+
+            if ($query) {
+                $query_no_of = mysqli_query($conn, "UPDATE `blog_categories` SET no_of_post = no_of_post + 1 WHERE name = '$post_category'");
+
+                if ($query_no_of) {
+                    updatePostImg();
+                }
+            }
+        } elseif ($post_category !== $prev_category) {
+
+            if ($query) {
+                $query_sql = "UPDATE `blog_categories` SET no_of_post = no_of_post - 1 WHERE name = '$prev_category';";
+                $query_sql .= "UPDATE `blog_categories` SET no_of_post = no_of_post + 1 WHERE name = '$post_category'";
+
+                if (mysqli_multi_query($conn, $query_sql)) {
+                    updatePostImg();
+                }
+            }
+        } else {
+
+            if ($query) {
+                updatePostImg();
+            }
+        }
+    }
+
+
+
+
+
+    // $prev_category = mysqli_query($conn, "SELECT category FROM `blog_posts`");
+
+    // // $sql = "INSERT INTO `blog_posts`(`title`, `slug`, `description`, `image`, `meta_title`, `meta_description`, `meta_keywords`, `status`, `category`) VALUES ('$post_title','$post_slug','$post_description', '$rename_post_image','$post_meta_title','$post_meta_description','$post_meta_keywords', '$post_status', '$post_category');";
+
+    // $sql = "UPDATE `blog_posts` SET `title`='$post_title',`slug`='$post_slug',`description`='$post_description',`image`='$rename_port_image',`meta_title`='$post_meta_title',`meta_description`='$post_meta_description',`meta_keywords`='$post_meta_keywords',`status`='$post_status,`category`='$post_category WHERE `id` = '$post_id' ";
+
+    // $sql .= "UPDATE `blog_categories` SET no_of_post = no_of_post + 1 WHERE name = '$post_category'";
+
+    // if (mysqli_multi_query($conn, $sql)) {
+
+    //     move_uploaded_file($post_image_tmp_name, $img_folder);
+    //     echo "Post added successfully";
+    // } else {
+    //     echo '<span class="text-danger">Something went wrong!</span>';
+    // }
+
+}
 // Blog Section Ends Here

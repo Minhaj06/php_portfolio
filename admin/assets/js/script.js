@@ -9,14 +9,14 @@ const body = document.querySelector("body"),
     modeText = document.querySelector(".mode_text");
 
 toggle.addEventListener("click", () => {
-    sidebar.classList.toggle("close");
+    sidebar.classList.toggle("hide");
     sidebar.classList.toggle("sideTop");
     topNavRight.classList.toggle("show_right_nav");
     main.classList.toggle("mainTop");
 });
 
 searchBtn.addEventListener("click", () => {
-    sidebar.classList.remove("close");
+    sidebar.classList.remove("hide");
 });
 
 let getMode = localStorage.getItem("mode");
@@ -39,7 +39,7 @@ modeSwitch.addEventListener("click", () => {
 const nav_link = document.querySelectorAll(".nav_link a");
 
 nav_link.forEach((element) => {
-    element.addEventListener("click", function() {
+    element.addEventListener("click", function () {
         nav_link.forEach((link) => link.classList.remove("active"));
 
         this.classList.add("active");
@@ -71,7 +71,7 @@ nav_link.forEach((element) => {
 //     drop_icon1.classList.remove("rotate");
 // });
 
-$(".dropdown1").click(function(e) {
+$(".dropdown1").click(function (e) {
     $(".sub_menu1").toggleClass("sub_menu_show");
     $(".drop_icon1").toggleClass("rotate");
 
@@ -82,7 +82,7 @@ $(".dropdown1").click(function(e) {
     $(".drop_icon3").removeClass("rotate");
 });
 
-$(".dropdown2").click(function(e) {
+$(".dropdown2").click(function (e) {
     $(".sub_menu2").toggleClass("sub_menu_show");
     $(".drop_icon2").toggleClass("rotate");
 
@@ -93,7 +93,7 @@ $(".dropdown2").click(function(e) {
     $(".drop_icon3").removeClass("rotate");
 });
 
-$(".dropdown3").click(function(e) {
+$(".dropdown3").click(function (e) {
     $(".sub_menu3").toggleClass("sub_menu_show");
     $(".drop_icon3").toggleClass("rotate");
 
@@ -109,7 +109,7 @@ $(".dropdown3").click(function(e) {
 // #########################################################################
 
 // Data table ready function
-$(document).ready(function() {
+$(document).ready(function () {
     $("#usersDataTable").DataTable();
 });
 
@@ -117,7 +117,7 @@ $(document).ready(function() {
 // alert message function
 function showMessage(message) {
     document.querySelector(".message_show").classList.remove("d-none");
-    document.querySelector(".btn-close").addEventListener("click", function() {
+    document.querySelector(".btn-close").addEventListener("click", function () {
         document.querySelector(".message_show").classList.add("d-none");
     })
 }
@@ -126,7 +126,7 @@ function showMessage(message) {
 // Reload location On dismiss modal
 function modalDismiss() {
     document.querySelectorAll('[data-bs-dismiss="modal"]').forEach(item => {
-        item.addEventListener("click", function() {
+        item.addEventListener("click", function () {
             location.reload();
         })
     })
@@ -140,7 +140,7 @@ function emptyAlert() {
 
 // $(document).ready(function() {
 // check username exists or not
-$("#add_username").keyup(function(e) {
+$("#add_username").keyup(function (e) {
     let username = $("#add_username").val();
 
     $.ajax({
@@ -151,7 +151,7 @@ $("#add_username").keyup(function(e) {
             username: username,
         },
 
-        success: function(data) {
+        success: function (data) {
             if (data != "0") {
                 $(".add_username_error").html(
                     "<span class='text-danger'>Username already taken!</span>"
@@ -170,7 +170,7 @@ $("#add_username").keyup(function(e) {
 });
 
 // check email exists or not
-$("#add_email").keyup(function(e) {
+$("#add_email").keyup(function (e) {
     let email = $("#add_email").val();
 
     $.ajax({
@@ -181,7 +181,7 @@ $("#add_email").keyup(function(e) {
             email: email,
         },
 
-        success: function(data) {
+        success: function (data) {
             if (data != "0") {
                 $(".add_email_error").html(
                     "<span class='text-danger'>Email already taken!</span>"
@@ -198,7 +198,7 @@ $("#add_email").keyup(function(e) {
 });
 // });
 
-$(document).on("submit", "#add_user_form", function(e) {
+$(document).on("submit", "#add_user_form", function (e) {
     e.preventDefault();
 
     let fname = $("#add_fname").val();
@@ -230,10 +230,10 @@ $(document).on("submit", "#add_user_form", function(e) {
                 data: new FormData(this),
                 processData: false,
                 contentType: false,
-                beforeSend: function() {
+                beforeSend: function () {
                     // console.log("Wait..Data is loading...");
                 },
-                success: function(response) {
+                success: function (response) {
                     // reset form
                     $("#add_user_form")[0].reset();
 
@@ -250,7 +250,7 @@ $(document).on("submit", "#add_user_form", function(e) {
 
 
                 },
-                error: function(request, error) {
+                error: function (request, error) {
                     console.log(arguments);
                     console.log("Error: " + error);
                 },
@@ -265,7 +265,7 @@ $(document).on("submit", "#add_user_form", function(e) {
 
 // Update User Data
 // $(document).ready(function() {
-$(document).on("click", "span[data-role=edit]", function() {
+$(document).on("click", "span[data-role=edit]", function () {
 
     let id = $(this).data("id");
     modalDismiss();
@@ -319,7 +319,7 @@ $(document).on("click", "span[data-role=edit]", function() {
     }
 
     // username live checking exist or not
-    $("#username").keyup(function(e) {
+    $("#username").keyup(function (e) {
         let id = $("#user_id").val();
         let td_username = $("#" + id)
             .children("td[data-target=username]")
@@ -334,7 +334,7 @@ $(document).on("click", "span[data-role=edit]", function() {
                 check_id: id,
             },
 
-            success: function(data) {
+            success: function (data) {
                 if ((data != "0") && ((username.toLowerCase()) != (td_username.toLowerCase()))) {
                     $(".username_error").html(
                         "<span class='text-danger'>Username already taken!</span>"
@@ -353,7 +353,7 @@ $(document).on("click", "span[data-role=edit]", function() {
     });
 
     // email live checking exist or not
-    $("#email").keyup(function(e) {
+    $("#email").keyup(function (e) {
         let id = $("#user_id").val();
         let td_email = $("#" + id)
             .children("td[data-target=email]")
@@ -367,7 +367,7 @@ $(document).on("click", "span[data-role=edit]", function() {
                 email: email,
                 check_id: id,
             },
-            success: function(data) {
+            success: function (data) {
                 if (data != "0" && email != td_email) {
                     $(".email_error").html(
                         "<span class='text-danger'>Email already taken!</span>"
@@ -383,7 +383,7 @@ $(document).on("click", "span[data-role=edit]", function() {
         });
     });
 
-    $("#update_user").click(function(e) {
+    $("#update_user").click(function (e) {
         e.preventDefault();
 
         // Get data from input fields and update
@@ -423,7 +423,7 @@ $(document).on("click", "span[data-role=edit]", function() {
                         id: id,
                         role_as: role_as,
                     },
-                    success: function(response) {
+                    success: function (response) {
                         $("#" + id)
                             .children("td[data-target=fname]")
                             .text(fname);
@@ -476,7 +476,7 @@ $(document).on("click", "span[data-role=edit]", function() {
 // });
 
 // view data in modal
-$(document).on("click", "span[data-role=view]", function() {
+$(document).on("click", "span[data-role=view]", function () {
     let id = $(this).data("id");
 
     let username = $("#" + id)
@@ -488,38 +488,38 @@ $(document).on("click", "span[data-role=view]", function() {
 
     $("#view_fname").text(
         $("#" + id)
-        .children("td[data-target=fname]")
-        .text()
+            .children("td[data-target=fname]")
+            .text()
     );
     $("#view_lname").text(
         $("#" + id)
-        .children("td[data-target=lname]")
-        .text()
+            .children("td[data-target=lname]")
+            .text()
     );
     $("#view_username").text(
         $("#" + id)
-        .children("td[data-target=username]")
-        .text()
+            .children("td[data-target=username]")
+            .text()
     );
     $("#view_email").text(
         $("#" + id)
-        .children("td[data-target=email]")
-        .text()
+            .children("td[data-target=email]")
+            .text()
     );
     $("#view_contact").text(
         $("#" + id)
-        .children("td[data-target=contact_no]")
-        .text()
+            .children("td[data-target=contact_no]")
+            .text()
     );
     $("#view_role").text(
         $("#" + id)
-        .children("td[data-target=role_as]")
-        .text()
+            .children("td[data-target=role_as]")
+            .text()
     );
 });
 
 // Delete user code starts here
-$(document).on("click", "span[data-role=delete]", function() {
+$(document).on("click", "span[data-role=delete]", function () {
 
     $("#confirmBox").modal("show");
     let id = $(this).data("id");
@@ -532,12 +532,12 @@ $(document).on("click", "span[data-role=delete]", function() {
     let role = $.trim($("#" + id).children("td[data-target=role_as]").text());
 
 
-    $("#confirm_ok").click(function() {
+    $("#confirm_ok").click(function () {
         $.ajax({
             url: "code.php",
             type: "POST",
             data: { delete_id: id },
-            success: function(response) {
+            success: function (response) {
 
                 // Hide Row
                 $("#" + id).hide();
@@ -558,7 +558,7 @@ $(document).on("click", "span[data-role=delete]", function() {
 
 
 // Update Home Section Starts Here
-$(".edit_home_btn").click(function(e) {
+$(".edit_home_btn").click(function (e) {
     e.preventDefault();
     let home_fname = $.trim($(".home_fname").text());
     let home_lname = $.trim($(".home_lname").text());
@@ -574,7 +574,7 @@ $(".edit_home_btn").click(function(e) {
     $(".home_modal_img").attr("src", home_img);
 
 
-    $("#update_home_btn").click(function(e) {
+    $("#update_home_btn").click(function (e) {
         e.preventDefault();
 
         let home_fname = $("#home_fname").val();
@@ -602,10 +602,10 @@ $(".edit_home_btn").click(function(e) {
                 data: new FormData(home_form),
                 processData: false,
                 contentType: false,
-                beforeSend: function() {
+                beforeSend: function () {
                     // console.log("Wait..Data is loading...");
                 },
-                success: function(response) {
+                success: function (response) {
                     // hide modal
                     $("#edit_home_modal").modal("toggle");
 
@@ -619,7 +619,7 @@ $(".edit_home_btn").click(function(e) {
                     showMessage();
                     $(".message_show .ation_message").html(response);
                 },
-                error: function(request, error) {
+                error: function (request, error) {
                     console.log(arguments);
                     console.log("Error: " + error);
                 },
@@ -631,12 +631,12 @@ $(".edit_home_btn").click(function(e) {
 
 
 // Update About Section Starts Here
-$(".edit_about_btn").click(function(e) {
+$(".edit_about_btn").click(function (e) {
     e.preventDefault();
 
     $(".about_modal_img").attr("src", $(".about_img img").attr("src"));
 
-    $("#update_about_btn").click(function(e) {
+    $("#update_about_btn").click(function (e) {
         e.preventDefault();
 
         let about_title = $("#about_title").val();
@@ -660,10 +660,10 @@ $(".edit_about_btn").click(function(e) {
                 data: new FormData(about_form),
                 processData: false,
                 contentType: false,
-                beforeSend: function() {
+                beforeSend: function () {
                     console.log("Wait..Data is loading...");
                 },
-                success: function(response) {
+                success: function (response) {
                     // hide modal
                     $("#edit_about_modal").modal("toggle");
 
@@ -678,7 +678,7 @@ $(".edit_about_btn").click(function(e) {
                     showMessage();
                     $(".message_show .ation_message").html(response);
                 },
-                error: function(request, error) {
+                error: function (request, error) {
                     console.log(arguments);
                     console.log("Error: " + error);
                 },
@@ -690,7 +690,7 @@ $(".edit_about_btn").click(function(e) {
 
 
 // Add Skill
-$("#add_skill_btn").click(function(e) {
+$("#add_skill_btn").click(function (e) {
     e.preventDefault();
     let skillName = $("#add_skill_name").val();
     let skillPercentage = $("#add_skill_percentage").val();
@@ -711,10 +711,10 @@ $("#add_skill_btn").click(function(e) {
                 skillPercentage: skillPercentage,
                 skillProgessColor: skillProgessColor
             },
-            beforeSend: function() {
+            beforeSend: function () {
                 console.log("Wait..Data is loading...");
             },
-            success: function(response) {
+            success: function (response) {
                 // hide modal
                 $("#add_skill_modal").modal("toggle");
 
@@ -736,7 +736,7 @@ $("#add_skill_btn").click(function(e) {
 
 
 // Edit Skill
-$(document).on("click", ".edit_skill_btn", function(e) {
+$(document).on("click", ".edit_skill_btn", function (e) {
     e.preventDefault();
 
     let skill_id = $(this).data("id");
@@ -773,7 +773,7 @@ $(document).on("click", ".edit_skill_btn", function(e) {
 
 
 
-    $("#update_skill_btn").click(function(e) {
+    $("#update_skill_btn").click(function (e) {
         e.preventDefault();
 
         // Get data from input fields
@@ -791,7 +791,7 @@ $(document).on("click", ".edit_skill_btn", function(e) {
                 skill_percentage: skill_percentage,
                 skill_color: skill_color
             },
-            success: function(response) {
+            success: function (response) {
                 // hide modal
                 $("#edit_skill_modal").modal("toggle");
 
@@ -811,13 +811,13 @@ $(document).on("click", ".edit_skill_btn", function(e) {
 
 
 // Delete Skill
-$(document).on("click", ".delete_skill_btn", function(e) {
+$(document).on("click", ".delete_skill_btn", function (e) {
 
     $("#confirmBox").modal("show");
     let skill_id = $(this).data("id");
     modalDismiss();
 
-    $("#confirm_ok").click(function() {
+    $("#confirm_ok").click(function () {
         $.ajax({
             url: "code.php",
             type: "POST",
@@ -825,7 +825,7 @@ $(document).on("click", ".delete_skill_btn", function(e) {
                 delete_skill: 1,
                 skill_id: skill_id
             },
-            success: function(response) {
+            success: function (response) {
 
                 // hide modal
                 $("#confirmBox").modal("toggle");
@@ -850,7 +850,7 @@ $(document).on("click", ".delete_skill_btn", function(e) {
 // Service Section Starts Here
 
 // Update service content
-$("#update_service_content_btn").click(function(e) {
+$("#update_service_content_btn").click(function (e) {
     e.preventDefault();
 
     let service_title = $("#service_title").val();
@@ -871,7 +871,7 @@ $("#update_service_content_btn").click(function(e) {
                 service_title: service_title,
                 service_desc: service_desc
             },
-            success: function(response) {
+            success: function (response) {
                 // hide modal
                 $("#edit_service_content_modal").modal("toggle");
 
@@ -889,13 +889,13 @@ $("#update_service_content_btn").click(function(e) {
 
 
 // Add Service Starts Here
-$("#add_service").click(function(e) {
+$("#add_service").click(function (e) {
     e.preventDefault();
 
     $("#code").text('<i class="fa-brands fa-html5"></i>');
 
     // Check service already exists or not for add service
-    $("#add_service_name").keyup(function(e) {
+    $("#add_service_name").keyup(function (e) {
         let service_name = $("#add_service_name").val();
 
         $.ajax({
@@ -906,7 +906,7 @@ $("#add_service").click(function(e) {
                 add_service_name: service_name,
             },
 
-            success: function(response) {
+            success: function (response) {
                 if (response != "0") {
                     $(".add_service_error").html(
                         "<span class='text-danger'>Service name already taken!</span>"
@@ -925,7 +925,7 @@ $("#add_service").click(function(e) {
 
 
     // Check service icon valid or not for add service
-    $("#add_service_icon").keyup(function(e) {
+    $("#add_service_icon").keyup(function (e) {
 
         let service_icon = $("#add_service_icon").val();
 
@@ -946,7 +946,7 @@ $("#add_service").click(function(e) {
     });
 
 
-    $("#add_service_btn").click(function(e) {
+    $("#add_service_btn").click(function (e) {
         e.preventDefault();
 
         let service_name = $("#add_service_name").val();
@@ -969,7 +969,7 @@ $("#add_service").click(function(e) {
                     service_name: service_name,
                     service_icon: service_icon
                 },
-                success: function(response) {
+                success: function (response) {
                     // hide modal
                     $("#add_service_modal").modal("toggle");
 
@@ -994,7 +994,7 @@ $("#add_service").click(function(e) {
 
 // Edit service start here
 // $("#edit_service_btn").click(function(e) {
-$(document).on("click", "#edit_service_btn", function(e) {
+$(document).on("click", "#edit_service_btn", function (e) {
     e.preventDefault();
 
     let service_id = $(this).data("id");
@@ -1014,7 +1014,7 @@ $(document).on("click", "#edit_service_btn", function(e) {
     let service_icon = $("#edit_service_icon").val();
 
     // Check service already exists or not for edit service
-    $("#edit_service_name").keyup(function(e) {
+    $("#edit_service_name").keyup(function (e) {
 
         let service_name = $("#edit_service_name").val();
 
@@ -1026,7 +1026,7 @@ $(document).on("click", "#edit_service_btn", function(e) {
                 edit_service_name: service_name,
             },
 
-            success: function(response) {
+            success: function (response) {
                 if ((response != "0") && ((service_name.toLowerCase()) != (td_service_name.toLowerCase()))) {
                     $(".edit_service_error").html(
                         "<span class='text-danger'>Service name already taken!</span>"
@@ -1052,7 +1052,7 @@ $(document).on("click", "#edit_service_btn", function(e) {
     });
 
     // Check service icon valid or not for edit service
-    $("#edit_service_icon").keyup(function(e) {
+    $("#edit_service_icon").keyup(function (e) {
 
         let service_icon = $("#edit_service_icon").val();
 
@@ -1081,7 +1081,7 @@ $(document).on("click", "#edit_service_btn", function(e) {
     });
 
 
-    $("#update_service_btn").click(function(e) {
+    $("#update_service_btn").click(function (e) {
         e.preventDefault();
         let service_name = $("#edit_service_name").val();
         let service_icon = $("#edit_service_icon").val();
@@ -1095,7 +1095,7 @@ $(document).on("click", "#edit_service_btn", function(e) {
                 service_name: service_name,
                 service_icon: service_icon
             },
-            success: function(response) {
+            success: function (response) {
                 // hide modal
                 $("#edit_service_modal").modal("toggle");
 
@@ -1115,14 +1115,14 @@ $(document).on("click", "#edit_service_btn", function(e) {
 
 
 // Delete service starts here
-$(document).on("click", "#delete_service_btn", function(e) {
+$(document).on("click", "#delete_service_btn", function (e) {
     e.preventDefault();
 
     $("#confirmBox").modal("show");
     let service_delete_id = $(this).data("id");
     modalDismiss();
 
-    $("#confirm_ok").click(function() {
+    $("#confirm_ok").click(function () {
         $.ajax({
             url: "code.php",
             type: "POST",
@@ -1130,7 +1130,7 @@ $(document).on("click", "#delete_service_btn", function(e) {
                 delete_service: 1,
                 service_delete_id: service_delete_id,
             },
-            success: function(response) {
+            success: function (response) {
 
                 // hide modal
                 $("#confirmBox").modal("toggle");
@@ -1154,7 +1154,7 @@ $(document).on("click", "#delete_service_btn", function(e) {
 // Achivements counter
 
 function animCounter() {
-    setTimeout(function() {
+    setTimeout(function () {
         let counters = document.querySelectorAll(".counter");
         let time = 300;
 
@@ -1180,7 +1180,7 @@ animCounter();
 
 
 // Update all achievements
-$(document).on("click", "#update_achivements", function(e) {
+$(document).on("click", "#update_achivements", function (e) {
     e.preventDefault();
 
     let clients_all = $("#clients").val();
@@ -1198,7 +1198,7 @@ $(document).on("click", "#update_achivements", function(e) {
             awards_all: awards_all,
             experience_all: experience_all,
         },
-        success: function(response) {
+        success: function (response) {
             // hide modal
             $("#edit_all_achive_modal").modal("toggle");
 
@@ -1216,7 +1216,7 @@ $(document).on("click", "#update_achivements", function(e) {
 
 
 // Update total clients
-$(document).on("click", "#update_clients", function(e) {
+$(document).on("click", "#update_clients", function (e) {
     e.preventDefault();
 
     let clients_total = $("#clients_total").val();
@@ -1228,7 +1228,7 @@ $(document).on("click", "#update_clients", function(e) {
             update_clients: 1,
             clients_total: clients_total,
         },
-        success: function(response) {
+        success: function (response) {
             // hide modal
             $("#edit_total_clients_modal").modal("toggle");
 
@@ -1246,7 +1246,7 @@ $(document).on("click", "#update_clients", function(e) {
 
 
 // Update total projects
-$(document).on("click", "#update_projects", function(e) {
+$(document).on("click", "#update_projects", function (e) {
     e.preventDefault();
 
     let projects_total = $("#projects_total").val();
@@ -1258,7 +1258,7 @@ $(document).on("click", "#update_projects", function(e) {
             update_projects: 1,
             projects_total: projects_total,
         },
-        success: function(response) {
+        success: function (response) {
             // hide modal
             $("#edit_total_projects_modal").modal("toggle");
 
@@ -1276,7 +1276,7 @@ $(document).on("click", "#update_projects", function(e) {
 
 
 // Update total awards
-$(document).on("click", "#update_awards", function(e) {
+$(document).on("click", "#update_awards", function (e) {
     e.preventDefault();
 
     let awards_total = $("#awards_total").val();
@@ -1288,7 +1288,7 @@ $(document).on("click", "#update_awards", function(e) {
             update_awards: 1,
             awards_total: awards_total,
         },
-        success: function(response) {
+        success: function (response) {
             // hide modal
             $("#edit_total_awards_modal").modal("toggle");
 
@@ -1306,7 +1306,7 @@ $(document).on("click", "#update_awards", function(e) {
 
 
 // Update experience
-$(document).on("click", "#update_experience", function(e) {
+$(document).on("click", "#update_experience", function (e) {
     e.preventDefault();
 
     let experience_total = $("#experience_total").val();
@@ -1318,7 +1318,7 @@ $(document).on("click", "#update_experience", function(e) {
             update_experience: 1,
             experience_total: experience_total,
         },
-        success: function(response) {
+        success: function (response) {
             // hide modal
             $("#edit_experience_modal").modal("toggle");
 
@@ -1340,7 +1340,7 @@ $(document).on("click", "#update_experience", function(e) {
 // Portfolio Section Starts Here
 
 // Update portfolio content
-$("#update_portfolio_content_btn").click(function(e) {
+$("#update_portfolio_content_btn").click(function (e) {
     e.preventDefault();
 
     let portfolio_title = $("#portfolio_title").val();
@@ -1361,7 +1361,7 @@ $("#update_portfolio_content_btn").click(function(e) {
                 portfolio_title: portfolio_title,
                 portfolio_desc: portfolio_desc
             },
-            success: function(response) {
+            success: function (response) {
                 // hide modal
                 $("#edit_portfolio_content_modal").modal("toggle");
 
@@ -1379,7 +1379,7 @@ $("#update_portfolio_content_btn").click(function(e) {
 
 // Add Portfolio Category
 // check portfolio category exists or not
-$("#port_cat_name").keyup(function(e) {
+$("#port_cat_name").keyup(function (e) {
 
     let port_cat_name = $("#port_cat_name").val();
 
@@ -1390,7 +1390,7 @@ $("#port_cat_name").keyup(function(e) {
             checkPortCat: 1,
             port_cat_name: port_cat_name,
         },
-        success: function(data) {
+        success: function (data) {
             if (data != "0") {
                 $(".add_cat_error").html(
                     "<span class='text-danger'>Username already taken!</span>"
@@ -1408,7 +1408,7 @@ $("#port_cat_name").keyup(function(e) {
 
 
 // Insert Portfolio Category
-$("#add_portfolio_category_btn").click(function(e) {
+$("#add_portfolio_category_btn").click(function (e) {
     e.preventDefault();
 
     let port_cat_name = $("#port_cat_name").val();
@@ -1426,7 +1426,7 @@ $("#add_portfolio_category_btn").click(function(e) {
                 port_cat_name: port_cat_name,
                 port_cat_status: port_cat_status
             },
-            success: function(response) {
+            success: function (response) {
                 // hide modal
                 $("#add_portfolio_cotegory_modal").modal("toggle");
 
@@ -1446,7 +1446,7 @@ $("#add_portfolio_category_btn").click(function(e) {
 
 
 // Update Portfolio Category
-$(document).on("click", "#edit_port_cat_btn", function(e) {
+$(document).on("click", "#edit_port_cat_btn", function (e) {
     e.preventDefault();
 
     modalDismiss();
@@ -1467,7 +1467,7 @@ $(document).on("click", "#edit_port_cat_btn", function(e) {
     }
 
     // Check portfolio name exist or not for edit Portfolio category
-    $("#edit_port_cat_name").keyup(function(e) {
+    $("#edit_port_cat_name").keyup(function (e) {
 
         let port_cat_name = $("#edit_port_cat_name").val();
 
@@ -1478,7 +1478,7 @@ $(document).on("click", "#edit_port_cat_btn", function(e) {
                 checkEditPortCat: 1,
                 port_cat_name: port_cat_name
             },
-            success: function(data) {
+            success: function (data) {
                 if ((data != "0") && ((port_cat_name.toLowerCase()) != (td_port_cat_name.toLowerCase()))) {
                     $(".edit_cat_error").html(
                         "<span class='text-danger'>Username already taken!</span>"
@@ -1500,7 +1500,7 @@ $(document).on("click", "#edit_port_cat_btn", function(e) {
     });
 
 
-    $("#update_portfolio_category_btn").click(function(e) {
+    $("#update_portfolio_category_btn").click(function (e) {
         e.preventDefault();
 
         let port_cat_name = $("#edit_port_cat_name").val();
@@ -1515,7 +1515,7 @@ $(document).on("click", "#edit_port_cat_btn", function(e) {
                 port_cat_name: port_cat_name,
                 port_cat_status: port_cat_status,
             },
-            success: function(response) {
+            success: function (response) {
                 // hide modal
                 $("#edit_portfolio_cotegory_modal").modal("toggle");
 
@@ -1533,14 +1533,14 @@ $(document).on("click", "#edit_port_cat_btn", function(e) {
 
 
 // Delete Portfolio Category
-$(document).on("click", "#delete_port_cat_btn", function(e) {
+$(document).on("click", "#delete_port_cat_btn", function (e) {
     e.preventDefault();
 
     $("#confirmBox").modal("show");
     let delete_port_cat_id = $(this).data("id");
     modalDismiss();
 
-    $("#confirm_ok").click(function() {
+    $("#confirm_ok").click(function () {
         $.ajax({
             url: "code.php",
             type: "POST",
@@ -1548,7 +1548,7 @@ $(document).on("click", "#delete_port_cat_btn", function(e) {
                 delete_port_cat: 1,
                 delete_port_cat_id: delete_port_cat_id,
             },
-            success: function(response) {
+            success: function (response) {
 
                 // hide confirm box
                 $("#confirmBox").modal("toggle");
@@ -1566,7 +1566,7 @@ $(document).on("click", "#delete_port_cat_btn", function(e) {
 
 
 // Add Porfolio
-$(document).on("submit", "#add_portfolio_form", function(e) {
+$(document).on("submit", "#add_portfolio_form", function (e) {
     e.preventDefault();
 
     let port_name = $("#port_name").val();
@@ -1592,7 +1592,7 @@ $(document).on("submit", "#add_portfolio_form", function(e) {
             data: new FormData(this),
             processData: false,
             contentType: false,
-            success: function(response) {
+            success: function (response) {
                 // hide modal
                 $("#add_portfolio_modal").modal("toggle");
 
@@ -1614,7 +1614,7 @@ $(document).on("submit", "#add_portfolio_form", function(e) {
 
 
 // View Portfolio
-$(document).on("click", "#view_portfolio_btn", function() {
+$(document).on("click", "#view_portfolio_btn", function () {
 
     let portfolio_id = $(this).data("id");
     let portfolio_image = $("#" + portfolio_id + "view_image").attr("src");
@@ -1639,7 +1639,7 @@ $(document).on("click", "#view_portfolio_btn", function() {
 });
 
 // Edit Portfolio
-$(document).on("click", "#edit_portfolio_btn", function(e) {
+$(document).on("click", "#edit_portfolio_btn", function (e) {
     e.preventDefault();
 
     let portfolio_id = $(this).data("id");
@@ -1671,7 +1671,7 @@ $(document).on("click", "#edit_portfolio_btn", function(e) {
     });
 
 
-    $(document).on("submit", "#edit_portfolio_form", function(e) {
+    $(document).on("submit", "#edit_portfolio_form", function (e) {
         e.preventDefault();
 
         $.ajax({
@@ -1680,7 +1680,7 @@ $(document).on("click", "#edit_portfolio_btn", function(e) {
             data: new FormData(this),
             processData: false,
             contentType: false,
-            success: function(response) {
+            success: function (response) {
                 // hide modal
                 $("#edit_portfolio_modal").modal("toggle");
 
@@ -1703,7 +1703,7 @@ $(document).on("click", "#edit_portfolio_btn", function(e) {
 
 
 // Delete Portfolio
-$(document).on("click", "#delete_portfolio_btn", function(e) {
+$(document).on("click", "#delete_portfolio_btn", function (e) {
     e.preventDefault();
 
     $("#confirmBox").modal("show");
@@ -1712,7 +1712,7 @@ $(document).on("click", "#delete_portfolio_btn", function(e) {
 
     let portfolio_category = $.trim($("." + portfolio_id).children("td[data-target=portfolio_category]").text());
 
-    $("#confirm_ok").click(function() {
+    $("#confirm_ok").click(function () {
         $.ajax({
             url: "code.php",
             type: "POST",
@@ -1721,7 +1721,7 @@ $(document).on("click", "#delete_portfolio_btn", function(e) {
                 portfolio_id: portfolio_id,
                 portfolio_category: portfolio_category,
             },
-            success: function(response) {
+            success: function (response) {
 
                 // hide confirm box
                 $("#confirmBox").modal("toggle");
@@ -1746,7 +1746,7 @@ $(document).on("click", "#delete_portfolio_btn", function(e) {
 
 // Testimonials Section Starts Here
 // Update Testimonial content
-$("#update_testimonial_content_btn").click(function(e) {
+$("#update_testimonial_content_btn").click(function (e) {
     e.preventDefault();
 
     let testimonial_title = $("#testimonial_title").val();
@@ -1767,7 +1767,7 @@ $("#update_testimonial_content_btn").click(function(e) {
                 testimonial_title: testimonial_title,
                 testimonial_desc: testimonial_desc
             },
-            success: function(response) {
+            success: function (response) {
                 // hide modal
                 $("#edit_testimonial_content_modal").modal("toggle");
 
@@ -1784,7 +1784,7 @@ $("#update_testimonial_content_btn").click(function(e) {
 
 
 // Add Testimonial
-$(document).on("submit", "#add_testimonial_form", function(e) {
+$(document).on("submit", "#add_testimonial_form", function (e) {
     e.preventDefault();
 
     let test_reviewer_name = $("#test_reviewer_name").val();
@@ -1807,7 +1807,7 @@ $(document).on("submit", "#add_testimonial_form", function(e) {
             data: new FormData(this),
             processData: false,
             contentType: false,
-            success: function(response) {
+            success: function (response) {
                 // hide modal
                 $("#add_testimonial_modal").modal("toggle");
 
@@ -1827,7 +1827,7 @@ $(document).on("submit", "#add_testimonial_form", function(e) {
 
 
 // View Testimonial
-$(document).on("click", "#view_testiomonial_btn", function() {
+$(document).on("click", "#view_testiomonial_btn", function () {
 
     let testimonial_id = $(this).data("id");
     let testimonial_image = $("#" + testimonial_id + "test_reviewer_image").attr("src");
@@ -1846,7 +1846,7 @@ $(document).on("click", "#view_testiomonial_btn", function() {
 
 
 // Edit Testimonial
-$(document).on("click", "#edit_testimonial_btn", function(e) {
+$(document).on("click", "#edit_testimonial_btn", function (e) {
     e.preventDefault();
 
     let testimonial_id = $(this).data("id");
@@ -1870,7 +1870,7 @@ $(document).on("click", "#edit_testimonial_btn", function(e) {
     $("#edit_test_reviewer_comment").val(testimonial_comment);
 
 
-    $(document).on("submit", "#edit_testimonial_form", function(e) {
+    $(document).on("submit", "#edit_testimonial_form", function (e) {
         e.preventDefault();
 
         if (testimonial_name == "" || testimonial_title == "" || testimonial_comment == "") {
@@ -1883,7 +1883,7 @@ $(document).on("click", "#edit_testimonial_btn", function(e) {
                 data: new FormData(this),
                 processData: false,
                 contentType: false,
-                success: function(response) {
+                success: function (response) {
                     // hide modal
                     $("#edit_testimonial_modal").modal("toggle");
 
@@ -1904,14 +1904,14 @@ $(document).on("click", "#edit_testimonial_btn", function(e) {
 
 
 // Delete Testimonial
-$(document).on("click", "#delete_testiomonial_btn", function(e) {
+$(document).on("click", "#delete_testiomonial_btn", function (e) {
     e.preventDefault();
 
     let testimonial_id = $(this).data("id");
     $("#confirmBox").modal("show");
     modalDismiss();
 
-    $("#confirm_ok").click(function() {
+    $("#confirm_ok").click(function () {
         $.ajax({
             url: "code.php",
             type: "POST",
@@ -1919,7 +1919,7 @@ $(document).on("click", "#delete_testiomonial_btn", function(e) {
                 delete_testiomonial: 1,
                 testimonial_id: testimonial_id
             },
-            success: function(response) {
+            success: function (response) {
                 // hide confirm box
                 $("#confirmBox").modal("toggle");
 
@@ -1938,7 +1938,7 @@ $(document).on("click", "#delete_testiomonial_btn", function(e) {
 
 
 // Hire Me Section Starts Here
-$(document).on("submit", "#update_hire_me_form", function(e) {
+$(document).on("submit", "#update_hire_me_form", function (e) {
     e.preventDefault();
 
     let hire_title = $("#hire_title").val();
@@ -1954,7 +1954,7 @@ $(document).on("submit", "#update_hire_me_form", function(e) {
             data: new FormData(this),
             processData: false,
             contentType: false,
-            success: function(response) {
+            success: function (response) {
                 // hide modal
                 $("#edit_hire_me_modal").modal("toggle");
 
@@ -1978,7 +1978,7 @@ $(document).on("submit", "#update_hire_me_form", function(e) {
 
 // Blog Section Starts Here
 // Update blog content
-$("#update_blog_content_btn").click(function(e) {
+$("#update_blog_content_btn").click(function (e) {
     e.preventDefault();
 
     let blog_title = $("#blog_title").val();
@@ -1999,7 +1999,7 @@ $("#update_blog_content_btn").click(function(e) {
                 blog_title: blog_title,
                 blog_desc: blog_desc
             },
-            success: function(response) {
+            success: function (response) {
                 // hide modal
                 $("#edit_blog_content_modal").modal("toggle");
 
@@ -2017,9 +2017,9 @@ $("#update_blog_content_btn").click(function(e) {
 
 
 // Add Blog Category
-$(document).on("click", "#add_blog_category", function(e) {
+$(document).on("click", "#add_blog_category", function (e) {
     // check blog category exists or not
-    $("#blog_cat_name").keyup(function(e) {
+    $("#blog_cat_name").keyup(function (e) {
 
         let blog_cat_name = $("#blog_cat_name").val();
 
@@ -2030,17 +2030,17 @@ $(document).on("click", "#add_blog_category", function(e) {
                 checkBlogCat: 1,
                 blog_cat_name: blog_cat_name,
             },
-            success: function(data) {
+            success: function (data) {
                 if (data != "0") {
                     $(".add_cat_error").html(
                         "<span class='text-danger'>Category already taken!</span>"
                     );
-                    $("#add_blog_category_btn").attr("disabled", true);
+                    $("#add_blog_post_btn").attr("disabled", true);
                 } else {
                     $(".add_cat_error").html(
                         "<span class='text-success'>It's available</span>"
                     );
-                    $("#add_blog_category_btn").attr("disabled", false);
+                    $("#add_blog_post_btn").attr("disabled", false);
                 }
             },
         });
@@ -2048,7 +2048,7 @@ $(document).on("click", "#add_blog_category", function(e) {
 
 
     // check blog slug exists or not
-    $("#blog_cat_slug").keyup(function(e) {
+    $("#blog_cat_slug").keyup(function (e) {
 
         let blog_cat_slug = $("#blog_cat_slug").val();
 
@@ -2059,7 +2059,7 @@ $(document).on("click", "#add_blog_category", function(e) {
                 checkBlogCatSlug: 1,
                 blog_cat_slug: blog_cat_slug,
             },
-            success: function(data) {
+            success: function (data) {
                 if (data != "0") {
                     $(".add_cat_slug_error").html(
                         "<span class='text-danger'>Slug already taken!</span>"
@@ -2077,8 +2077,7 @@ $(document).on("click", "#add_blog_category", function(e) {
 
 
     // Insert Blog Category
-    $(document).on("click", "#add_blog_category_btn", function(e) {
-
+    $("#add_blog_category_btn").click(function (e) {
         e.preventDefault();
 
         let blog_cat_name = $("#blog_cat_name").val();
@@ -2106,7 +2105,7 @@ $(document).on("click", "#add_blog_category", function(e) {
                     blog_cat_meta_keywords: blog_cat_meta_keywords,
                     blog_cat_status: blog_cat_status
                 },
-                success: function(response) {
+                success: function (response) {
                     // hide modal
                     $("#add_blog_cotegory_modal").modal("toggle");
 
@@ -2128,7 +2127,7 @@ $(document).on("click", "#add_blog_category", function(e) {
 
 
 // Update Blog Category
-$(document).on("click", "#edit_blog_cat_btn", function(e) {
+$(document).on("click", "#edit_blog_cat_btn", function (e) {
     e.preventDefault();
 
     modalDismiss();
@@ -2138,109 +2137,395 @@ $(document).on("click", "#edit_blog_cat_btn", function(e) {
     $.ajax({
         type: "POST",
         url: "code.php",
+        dataType: "json",
         data: {
             getBlogCatData: 1,
             blog_cat_id: blog_cat_id,
         },
-        success: function(response) {
-            let blog_cat_data = JSON.parse(response);
+        success: function (category) {
 
-            console.log(blog_cat_data[0])
+            $("#edit_blog_cat_name").val(category.name);
+            $("#edit_blog_cat_slug").val(category.slug);
+            $("#edit_blog_cat_description").val(category.description);
+            $("#edit_blog_cat_meta_title").val(category.meta_title);
+            $("#edit_blog_cat_meta_description").val(category.meta_description);
+            $("#edit_blog_cat_meta_keywords").val(category.meta_keywords);
+
+            category.status == 1 ? $("#edit_blog_cat_status").prop("checked", true) : $("#edit_blog_cat_status").prop("checked", false);
+
+            // Check blog category name exist or not
+            $("#edit_blog_cat_name").keyup(function (e) {
+
+                let edit_blog_cat_name = $.trim($("#edit_blog_cat_name").val());
+
+                $.ajax({
+                    type: "POST",
+                    url: "code.php",
+                    data: {
+                        checkEditBlogCat: 1,
+                        edit_blog_cat_name: edit_blog_cat_name,
+                    },
+                    success: function (data) {
+                        if ((data != "0") && (edit_blog_cat_name.toLowerCase() != category.name.toLowerCase())) {
+                            $(".edit_cat_error").html(
+                                "<span class='text-danger'>Category already taken!</span>"
+                            );
+                            $("#edit_blog_cat_slug").attr("disabled", true);
+                            $("#update_blog_category_btn").attr("disabled", true);
+                        } else {
+                            $(".edit_cat_error").html(
+                                "<span class='text-success'>It's available</span>"
+                            );
+                            $("#edit_blog_cat_slug").attr("disabled", false);
+                            $("#update_blog_category_btn").attr("disabled", false);
+                        }
+                    },
+                });
+            });
+
+            // Check blog category slug exist or not
+            $("#edit_blog_cat_slug").keyup(function (e) {
+
+                let edit_blog_cat_slug = $.trim($("#edit_blog_cat_slug").val());
+
+                $.ajax({
+                    type: "POST",
+                    url: "code.php",
+                    data: {
+                        checkEditBlogCatSlug: 1,
+                        edit_blog_cat_slug: edit_blog_cat_slug,
+                    },
+                    success: function (data) {
+                        let slug = edit_blog_cat_slug.replace(/[^A-Za-z0-9\-]+/g, '-');
+
+                        if ((data != "0") && (slug.toLowerCase() != category.slug.toLowerCase())) {
+                            $(".edit_cat_slug_error").html(
+                                "<span class='text-danger'>Slug already taken!</span>"
+                            );
+                            $("#edit_blog_cat_name").attr("disabled", true);
+                            $("#update_blog_category_btn").attr("disabled", true);
+                        } else {
+                            $(".edit_cat_slug_error").html(
+                                "<span class='text-success'>It's available</span>"
+                            );
+                            $("#edit_blog_cat_name").attr("disabled", false);
+                            $("#update_blog_category_btn").attr("disabled", false);
+                        }
+                    },
+                });
+            });
         }
     });
 
-    // let td_blog_cat_name = $.trim($("#" + blog_cat_id).children("td[data-target=category_name]").text());
-    // let td_blog_cat_slug = $.trim($("#" + blog_cat_id).children("td[data-target=category_slug]").text());
-    // let td_blog_cat_description = $.trim($("#" + blog_cat_id).children("td[data-target=category_description]").text());
-    // let td_blog_cat_meta_title = $.trim($("#" + blog_cat_id).children("td[data-target=category_meta_title]").text());
-    // let td_blog_cat_meta_description = $.trim($("#" + blog_cat_id).children("td[data-target=category_meta_description]").text());
-    // let td_blog_cat_meta_keywords = $.trim($("#" + blog_cat_id).children("td[data-target=category_meta_meta_keywords]").text());
-    // let blog_cat_status = $.trim($("#" + blog_cat_id).children("td[data-target=category_status]").text());
+    // update category
+    $("#update_blog_category_btn").click(function (e) {
+        e.preventDefault();
 
-    // console.log(blog_cat_id)
-    // console.log(td_blog_cat_name)
-    // console.log(td_blog_cat_slug)
-    // console.log(td_blog_cat_description)
-    // console.log(td_blog_cat_meta_title)
-    // console.log(td_blog_cat_meta_description)
-    // console.log(td_blog_cat_meta_keywords)
-    // console.log(blog_cat_status)
+        let name = $("#edit_blog_cat_name").val();
+        let slug = $("#edit_blog_cat_slug").val();
+        let description = $("#edit_blog_cat_description").val();
+        let meta_title = $("#edit_blog_cat_meta_title").val();
+        let meta_description = $("#edit_blog_cat_meta_description").val();
+        let meta_keywords = $("#edit_blog_cat_meta_keywords").val();
+        let status = $("#edit_blog_cat_status").is(":checked") == true ? '1' : '0';
 
-    // // Show data in modal input
-    // $("#edit_port_cat_name").val(td_port_cat_name);
+        if (name == "" || slug == "" || description == "" || meta_title == "" || meta_description == "" || meta_keywords == "") {
+            emptyAlert();
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "code.php",
+                data: {
+                    updateBlogCategory: 1,
+                    edit_blog_cat_id: blog_cat_id,
+                    edit_blog_cat_name: name,
+                    edit_blog_cat_slug: slug,
+                    edit_blog_cat_description: description,
+                    edit_blog_cat_meta_title: meta_title,
+                    edit_blog_cat_meta_description: meta_description,
+                    edit_blog_cat_meta_keywords: meta_keywords,
+                    edit_blog_cat_status: status
+                },
+                success: function (response) {
 
-    // if (port_cat_status == "Visible") {
-    //     $("#edit_port_cat_status").attr("checked", true);
-    // } else {
-    //     $("#edit_port_cat_status").attr("checked", false);
-    // }
+                    // hide modal
+                    $("#edit_blog_cotegory_modal").modal("toggle");
 
-    // // Check portfolio name exist or not for edit Portfolio category
-    // $("#edit_port_cat_name").keyup(function(e) {
+                    // Refresh Blog Content
+                    $("#blog_category").load(location.href + " #blog_category>*", "");
 
-    //     let port_cat_name = $("#edit_port_cat_name").val();
-
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "code.php",
-    //         data: {
-    //             checkEditPortCat: 1,
-    //             port_cat_name: port_cat_name
-    //         },
-    //         success: function(data) {
-    //             if ((data != "0") && ((port_cat_name.toLowerCase()) != (td_port_cat_name.toLowerCase()))) {
-    //                 $(".edit_cat_error").html(
-    //                     "<span class='text-danger'>Username already taken!</span>"
-    //                 );
-    //                 $("#update_portfolio_category_btn").attr("disabled", true);
-    //             } else if (port_cat_name == "") {
-    //                 $(".edit_cat_error").html(
-    //                     "<span class='text-danger'>Couldn't be empty</span>"
-    //                 );
-    //                 $("#update_portfolio_category_btn").attr("disabled", true);
-    //             } else {
-    //                 $(".edit_cat_error").html(
-    //                     "<span class='text-success'>It's available</span>"
-    //                 );
-    //                 $("#update_portfolio_category_btn").attr("disabled", false);
-    //             }
-    //         },
-    //     });
-    // });
-
-
-    // $("#update_portfolio_category_btn").click(function(e) {
-    //     e.preventDefault();
-
-    //     let port_cat_name = $("#edit_port_cat_name").val();
-    //     let port_cat_status = $("#edit_port_cat_status").is(":checked") == true ? '1' : '0';
-
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "code.php",
-    //         data: {
-    //             update_portfolio_category: 1,
-    //             port_cat_id: port_cat_id,
-    //             port_cat_name: port_cat_name,
-    //             port_cat_status: port_cat_status,
-    //         },
-    //         success: function(response) {
-    //             // hide modal
-    //             $("#edit_portfolio_cotegory_modal").modal("toggle");
-
-
-    //             // Refresh Portfolio Content
-    //             $("#portfolio_category").load(location.href + " #portfolio_category>*", "");
-
-    //             // Messsage Show
-    //             showMessage();
-    //             $(".message_show .ation_message").html(response);
-    //         }
-    //     });
-    // });
+                    // Messsage Show
+                    showMessage();
+                    $(".message_show .ation_message").html(response);
+                }
+            });
+        }
+        blog_cat_id = "";
+    });
 });
 
 
+// Delete Blog Category
+$(document).on("click", "#delete_blog_cat_btn", function (e) {
+    e.preventDefault();
+
+    $("#confirmBox").modal("show");
+    let delete_blog_cat_id = $(this).data("id");
+    modalDismiss();
+
+    $("#confirm_ok").click(function () {
+        $.ajax({
+            url: "code.php",
+            type: "POST",
+            data: {
+                delete_blog_cat: 1,
+                delete_blog_cat_id: delete_blog_cat_id,
+            },
+            success: function (response) {
+
+                // hide confirm box
+                $("#confirmBox").modal("toggle");
+
+                // Refresh Portfolio Content
+                $("#blog_category").load(location.href + " #blog_category>*", "");
+
+                // Messsage Show
+                showMessage();
+                $(".message_show .ation_message").html(response);
+            },
+        });
+    });
+});
+
+
+// Add Blog Post
+$(document).on("click", "#add_blog_post", function (e) {
+    e.preventDefault();
+
+    // check post slug exists or not
+    $("#add_post_slug").keyup(function (e) {
+
+        let slug = $("#add_post_slug").val();
+        let add_blog_post_slug = slug.replace(/[^A-Za-z0-9\-]+/g, '-');
+
+        $.ajax({
+            type: "POST",
+            url: "code.php",
+            data: {
+                checkAddBlogPostSlug: 1,
+                add_blog_post_slug: add_blog_post_slug,
+            },
+            success: function (data) {
+                if (data != "0") {
+                    $(".add_post_slug_error").html(
+                        "<span class='text-danger'>Slug already taken!!</span>"
+                    );
+                    $("#add_blog_post_btn").attr("disabled", true);
+                } else {
+                    $(".add_post_slug_error").html(
+                        "<span class='text-success'>It's available</span>"
+                    );
+                    $("#add_blog_post_btn").attr("disabled", false);
+                }
+            },
+        });
+    });
+
+    $(document).on("submit", "#add_blog_post_form", function (e) {
+        e.preventDefault();
+
+        let post_title = $("#add_post_title").val();
+        let post_slug = $("#add_post_slug").val();
+        let post_description = $("#add_post_description").val();
+        let post_meta_title = $("#add_post_meta_title").val();
+        let post_meta_keywords = $("#add_post_meta_keywords").val();
+        let post_meta_description = $("#add_post_meta_description").val();
+
+        let post_image = $("#add_post_image").get(0).files.length === 0;
+
+        if (post_title == "" || post_slug == "" || post_description == "" || post_meta_title == "" || post_meta_keywords == "" || post_meta_description == "" || post_image) {
+            emptyAlert();
+        } else {
+            $.ajax({
+                url: "code.php",
+                type: "POST",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    // hide modal
+                    $("#add_blog_post_modal").modal("toggle");
+
+                    // Messsage Show
+                    showMessage();
+                    $(".message_show .ation_message").html(response);
+
+                    // Refresh Form
+                    $("#add_blog_post_form")[0].reset();
+                    $('#add_post_description').summernote('reset');
+
+                    // Refresh Table
+                    $("#blog_category").load(location.href + " #blog_category>*", "");
+                    $("#blog_posts").load(location.href + " #blog_posts>*", "");
+
+                },
+            });
+        }
+    });
+});
+
+// View Blog Post 
+$(document).on("click", "#view_blog_post_btn", function (e) {
+    e.preventDefault();
+
+    let blog_post_id = $(this).data("id");
+
+    $.ajax({
+        type: "POST",
+        url: "code.php",
+        dataType: "json",
+        data: {
+            getBlogPostView: 1,
+            blog_post_id: blog_post_id,
+        },
+        success: function (data) {
+
+            $("#view_post_image").attr("src", "../uploaded_img/" + data.image);
+
+            $("#view_post_title").html(data.title);
+            $("#view_post_slug").html(data.slug);
+            $("#view_post_category").html(data.category);
+
+            if (data.status == "1") {
+                $("#view_post_status").html("Published");
+            } else {
+                $("#view_post_status").html("Unpublished");
+            }
+
+            $("#view_post_created_at").html(data.created_at);
+            $("#view_post_meta_title").html(data.meta_title);
+            $("#view_post_meta_keywords").html(data.meta_keywords);
+            $("#view_post_meta_description").html(data.meta_description);
+            $("#view_post_description").html(data.description);
+        }
+    });
+});
+
+
+
+// Update Blog Post
+$(document).on("click", "#edit_blog_post_btn", function (e) {
+    e.preventDefault();
+
+    modalDismiss();
+
+    let edit_blog_post_id = $(this).data("id");
+
+    $.ajax({
+        type: "POST",
+        url: "code.php",
+        dataType: "json",
+        data: {
+            getBlogPostData: 1,
+            edit_blog_post_id: edit_blog_post_id,
+        },
+        success: function (data) {
+
+            $("#update_blog_post_id").val(data.id);
+            $("#edit_post_title").val(data.title);
+            $("#edit_post_slug").val(data.slug);
+            $("#edit_post_description").summernote("code", data.description);
+            $("#edit_post_meta_title").val(data.meta_title);
+            $("#edit_post_meta_description").val(data.meta_description);
+            $("#edit_post_meta_keywords").val(data.meta_keywords);
+
+            // Select option by category
+            let options = document.querySelectorAll("#edit_post_category option");
+            options.forEach((element) => {
+                let option = element.value
+
+                if (option == $("#edit_post_category").val(data.category)) {
+                    element.setAttribute("selected", true);
+                }
+            });
+
+            data.status == 1 ? $("#edit_post_status").prop("checked", true) : $("#edit_post_status").prop("checked", false);
+
+            // Check blog category slug exist or not
+            $("#edit_post_slug").keyup(function (e) {
+
+                let edit_blog_post_slug = $.trim($("#edit_post_slug").val());
+
+                $.ajax({
+                    type: "POST",
+                    url: "code.php",
+                    data: {
+                        checkEditBlogPostSlug: 1,
+                        edit_blog_post_slug: edit_blog_post_slug,
+                    },
+                    success: function (response) {
+                        let slug = edit_blog_post_slug.replace(/[^A-Za-z0-9\-]+/g, '-');
+
+                        if ((response != "0") && (slug.toLowerCase() != data.slug.toLowerCase())) {
+                            $(".edit_post_slug_error").html(
+                                "<span class='text-danger'>Slug already taken!</span>"
+                            );
+
+                            $("#update_post_btn").attr("disabled", true);
+                        } else {
+                            $(".edit_post_slug_error").html(
+                                "<span class='text-success'>It's available</span>"
+                            );
+
+                            $("#update_post_btn").attr("disabled", false);
+                        }
+                    },
+                });
+            });
+        }
+    });
+
+    // update post
+    $(document).on("submit", "#edit_blog_post_form", function (e) {
+        e.preventDefault();
+
+        let post_title = $("#edit_post_title").val();
+        let post_slug = $("#edit_post_slug").val();
+        let post_description = $("#edit_post_description").val();
+        let post_meta_title = $("#edit_post_meta_title").val();
+        let post_meta_keywords = $("#edit_post_meta_keywords").val();
+        let post_meta_description = $("#edit_post_meta_description").val();
+
+        if (post_title == "" || post_slug == "" || post_description == "" || post_meta_title == "" || post_meta_keywords == "" || post_meta_description == "") {
+            emptyAlert();
+        } else {
+            $.ajax({
+                url: "code.php",
+                type: "POST",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    // hide modal
+                    $("#edit_blog_post_modal").modal("toggle");
+
+                    // Messsage Show
+                    showMessage();
+                    $(".message_show .ation_message").html(response);
+
+                    // Refresh Form
+                    $("#edit_blog_post_form")[0].reset();
+
+                    // Refresh Table
+                    $("#blog_category").load(location.href + " #blog_category>*", "");
+                    $("#blog_posts").load(location.href + " #blog_posts>*", "");
+
+                },
+            });
+        }
+    });
+    edit_blog_post_id = "";
+});
 
 
 

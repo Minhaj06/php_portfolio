@@ -7,50 +7,43 @@
         </div>
         <div class="blogs row g-5 mt-5">
 
-            <div class="col-xl-4 col-md-6">
-                <div class="blog_item">
-                    <div class="blog_img">
-                        <a href="#">
-                            <img src="img/robot.jpg" alt="blog_img" />
-                        </a>
-                    </div>
-                    <div class="blog_content">
-                        <p class="para">26th August, 2022</p>
-                        <h3>I Used The Web For A Day On A 50 MB Budget</h3>
-                        <a href="#">learn more<i class="fa-solid fa-arrow-right-long"></i></a>
-                    </div>
-                </div>
-            </div>
+
+            <?php
+            $blog_post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `created_at` FROM `blog_posts` WHERE status = '1' ORDER BY id DESC LIMIT 6");
+
+            if (mysqli_num_rows($blog_post_query) > 0) {
+                while ($blog_post_result = mysqli_fetch_array($blog_post_query)) {
+            ?>
 
             <div class="col-xl-4 col-md-6">
                 <div class="blog_item">
                     <div class="blog_img">
-                        <a href="#">
-                            <img src="img/robot.jpg" alt="blog_img" />
+                        <a href="post.php?slug=<?= $blog_post_result['slug'] ?>">
+                            <img src="uploaded_img/<?= $blog_post_result['image'] ?>" alt="blog_img" />
                         </a>
                     </div>
                     <div class="blog_content">
-                        <p class="para">26th August, 2022</p>
-                        <h3>I Used The Web For A Day On A 50 MB Budget</h3>
-                        <a href="#">learn more<i class="fa-solid fa-arrow-right-long"></i></a>
+                        <p class="para">
+                            <?php
+                                    $timestamp =  $blog_post_result['created_at'];
+                                    $date = date("M d, Y", strtotime($timestamp));
+                                    echo $date;
+                                    ?>
+                        </p>
+
+                        <h3><?= $blog_post_result['title'] ?></h3>
+
+                        <a href="post.php?slug=<?= $blog_post_result['slug'] ?>">learn more<i
+                                class="fa-solid fa-arrow-right-long"></i></a>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xl-4 col-md-6">
-                <div class="blog_item">
-                    <div class="blog_img">
-                        <a href="#">
-                            <img src="img/robot.jpg" alt="blog_img" />
-                        </a>
-                    </div>
-                    <div class="blog_content">
-                        <p class="para">26th August, 2022</p>
-                        <h3>I Used The Web For A Day On A 50 MB Budget</h3>
-                        <a href="#">learn more<i class="fa-solid fa-arrow-right-long"></i></a>
-                    </div>
-                </div>
-            </div>
+            <?php }
+            } ?>
+
+
+
         </div>
         <div class="text-center mt-5 pt-5">
             <a href="blog.php"><button class="button">view all</button></a>
