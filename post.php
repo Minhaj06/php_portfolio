@@ -1,9 +1,37 @@
+<?php
+include 'admin/config/dbConnect.php';
+
+$slug = $_GET['slug'];
+$single_post_query = mysqli_query($conn, "SELECT * FROM `blog_posts` WHERE slug = '$slug' ");
+$single_post_result = mysqli_fetch_assoc($single_post_query);
+
+$category = $single_post_result["category"];
+if (strtolower($category) != 'uncategorized') {
+    $category_slug = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `slug` FROM `blog_categories` WHERE name = '$category' "))['slug'];
+} else {
+    $category_slug = "";
+}
+
+if ($category_slug == "") {
+    $category_slug = "javascript: void(0)";
+} else {
+    $category_slug = "category.php?slug=" . $category_slug;
+}
+
+function postDate($timestamp)
+{
+    $date = date("M d, Y", strtotime($timestamp));
+    echo $date;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <?php include_once("assets/includes/meta_links_scripts.php"); ?>
-    <title>Coder || Blogs</title>
+    <title><?= $single_post_result['title'] ?></title>
 </head>
 
 <body>
@@ -20,37 +48,31 @@
 
                     <!-- Singel post view -->
                     <div class="single_post_view">
-                        <img style="max-height: 50rem;" src="img/robot.jpg" width="100%" alt="post image">
+                        <!-- post details -->
+                        <div class="post_details">
+                            <img style="max-height: 50rem;" src="uploaded_img/<?= $single_post_result['image'] ?>"
+                                width="100%" alt="post image">
 
-                        <h2 style="font-weight: 300;" class="post_title my-4">I Used The Web For A Day On A
-                            50 MB
-                            Budget
-                        </h2>
+                            <h2 style="font-weight: 300;" class="post_title my-4"><?= $single_post_result['title'] ?>
+                            </h2>
 
-                        <a href="#">
-                            <h4 style="background: var(--orange); color: var(--black)"
-                                class="post_category d-inline-block p-3 fs-3 rounded mb-3">
-                                International
-                            </h4>
-                        </a>
+                            <a href="<?= $category_slug ?>">
+                                <h4 style="background: var(--orange); color: var(--black)"
+                                    class="post_category d-inline-block p-3 fs-3 rounded mb-3 text-capitalize">
+                                    <?= $single_post_result['category'] ?></h4>
+                            </a>
 
-                        <p style="font-weight: 300" class="fs-4 mb-4">
-                            <span class="post_date me-3"><i class="fa-solid fa-calendar-days"></i> 26th August,
-                                2022</span>
+                            <p style="font-weight: 300" class="fs-4 mb-4">
+                                <span class="post_date me-3"><i class="fa-solid fa-calendar-days"></i>
+                                    <?php
+                                    postDate($single_post_result['created_at']);
+                                    ?>
+                                </span>
 
-                            <a href="#respond"><i class="fa-solid fa-comment"></i> Leave A Comment</a>
-                        </p>
+                                <a href="#respond"><i class="fa-solid fa-comment"></i> Leave A Comment</a>
+                            </p>
 
-                        <div class="post_description mb-5 pb-4">
-                            অজিদের কোচ গ্রাহাম আর্নল্ডের ভরসার প্রতিদানও দিয়েছেন ৩৩ বছর বয়সী পেনাল্টি বিশেষজ্ঞ গোলরক্ষক
-                            অ্যান্ড্রু রেডমাইন। টানা তিন পেনাল্টি ঠেকিয়ে দেয়ার রেকর্ড আছে তার ঝুলিতে।
-
-                            পেরুর বিপক্ষে প্লে অফে জিতে বিশ্বকাপে জায়গা করে নিয়েছে অস্ট্রেলিয়া। শেষ মুহূর্তে বদলি
-                            গোলকিপার হিসেবে মাঠে নেমে অজিদের জয়ের নায়ক অ্যান্ড্রু রেডমাইন।
-
-                            নির্ধারিত ৯০ মিনিট ও অতিরিক্ত ৩০ মিনিট পর্যন্ত গোল শূন্য থাকায় ম্যাচ গড়ায় টাইব্রেকারে।
-                            ম্যাচের তিন মিনিট বাকি থাকতে মাঠে নামেন রেডমাইন। শ্বাসরুদ্ধকর টাইব্রেকারে ৫-৪ গোলে জয় পেয়ে
-                            টানা পঞ্চম বারের মত বিশ্বকাপে জায়গা করে নেয় অস্ট্রেলিয়া।
+                            <div class="post_description mb-5 pb-4"><?= $single_post_result['description'] ?></div>
                         </div>
 
                         <!-- Post Share Options -->
@@ -103,37 +125,38 @@
 
                         <!-- Related Posts -->
                         <h1 class="widget_title">related posts</h1>
+
                         <div class="row g-4">
-                            <div class="col-md-6">
-                                <div class="blog_item">
-                                    <div class="blog_img">
-                                        <a href="#">
-                                            <img src="img/robot.jpg" alt="blog_img" />
-                                        </a>
-                                    </div>
-                                    <div class="blog_content">
-                                        <p class="para">26th August, 2022</p>
-                                        <h3>I Used The Web For A Day On A 50 MB Budget</h3>
-                                        <a href="#">learn more<i class="fa-solid fa-arrow-right-long"></i></a>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php
+                            $related_post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `created_at` FROM `blog_posts` WHERE status = '1' AND `category` = '$category' AND `slug` != '$slug' ORDER BY id DESC");
+
+                            if (mysqli_num_rows($related_post_query) > 0) {
+                                while ($related_post_result = mysqli_fetch_array($related_post_query)) {
+                            ?>
 
                             <div class="col-md-6">
                                 <div class="blog_item">
                                     <div class="blog_img">
-                                        <a href="#">
-                                            <img src="img/robot.jpg" alt="blog_img" />
+                                        <a href="post.php?slug=<?= $related_post_result['slug'] ?>">
+                                            <img src="uploaded_img/<?= $related_post_result['image'] ?>"
+                                                alt="blog_img" />
                                         </a>
                                     </div>
                                     <div class="blog_content">
-                                        <p class="para">26th August, 2022</p>
-                                        <h3>I Used The Web For A Day On A 50 MB Budget</h3>
-                                        <a href="#">learn more<i class="fa-solid fa-arrow-right-long"></i></a>
+                                        <p class="para"><?php postDate($related_post_result['created_at']) ?></p>
+                                        <h3><?= $related_post_result['title'] ?></h3>
+                                        <a href="post.php?slug=<?= $related_post_result['slug'] ?>">learn more<i
+                                                class="fa-solid fa-arrow-right-long"></i></a>
                                     </div>
                                 </div>
                             </div>
 
+                            <?php }
+                            } else { ?>
+
+                            <h1 class="text-center" style="color: var(--gray)">Oops! Related Posts Not Found!</h1>
+
+                            <?php } ?>
                         </div>
 
                     </div>

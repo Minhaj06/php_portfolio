@@ -1,9 +1,16 @@
+<?php
+$conn = mysqli_connect("localhost", "root", "", "coder");
+?>
+
 <!-- Search bar -->
 <h2 class="widget_title">Search Here</h2>
-<div class="input-group mb-5 pb-4">
-    <input type="search" class="form-control rounded fs-3 px-3" placeholder="Search blog" aria-label="Search" />
-    <button type="button" class="btn fs-3 search_btn">Search</button>
-</div>
+<form action="search.php" method="GET">
+    <div class="input-group mb-5 pb-4">
+        <input type="search" name="search" class="form-control rounded fs-3 px-3" placeholder="Search blog"
+            aria-label="Search" />
+        <input type="submit" name="search_btn" value="Search" class="btn fs-3 search_btn" />
+    </div>
+</form>
 
 
 <!-- Recent post and comment tab -->
@@ -19,94 +26,35 @@
 
 
     <div class="tab-content">
-
         <!-- recent posts -->
         <div id="recent_post" class="tab-pane active">
 
+            <?php
+            $recent_post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `created_at` FROM `blog_posts` WHERE status = '1' ORDER BY id DESC LIMIT 5");
+
+            if (mysqli_num_rows($recent_post_query) > 0) {
+                while ($recent_post_result = mysqli_fetch_array($recent_post_query)) {
+            ?>
+
             <div class="recent_post d-flex mb-4">
-                <div class="recent_post_img me-3">
-                    <a href="post.php">
-                        <img width="100" height="80" src="img/robot.jpg" alt="post image">
+                <div class="recent_post_img me-3 overflow-hidden">
+                    <a href="post.php?slug=<?= $recent_post_result['slug'] ?>">
+                        <img width="100" height="70" src="uploaded_img/<?= $recent_post_result['image'] ?>"
+                            alt="post image">
                     </a>
                 </div>
                 <div class="recent_post_content">
-                    <a href="post.php">
-                        <p class="recent_post_title fs-4">I Used The Web For A Day On A 50 MB Budget
-                        </p>
+                    <a href="post.php?slug=<?= $recent_post_result['slug'] ?>">
+                        <p class="recent_post_title fs-4"><?= $recent_post_result['title'] ?></p>
                     </a>
-                    <a href="post.php">
-                        <p class="recent_post_date fs-5">26th August, 2022</p>
-                    </a>
+                    <p class="recent_post_date fs-5">26th August, 2022</p>
                 </div>
             </div>
 
-            <div class="recent_post d-flex mb-4">
-                <div class="recent_post_img me-3">
-                    <a href="post.php">
-                        <img width="100" height="80" src="img/robot.jpg" alt="post image">
-                    </a>
-                </div>
-                <div class="recent_post_content">
-                    <a href="post.php">
-                        <p class="recent_post_title fs-4">I Used The Web For A Day On A 50 MB Budget
-                        </p>
-                    </a>
-                    <a href="post.php">
-                        <p class="recent_post_date fs-5">26th August, 2022</p>
-                    </a>
-                </div>
-            </div>
-
-            <div class="recent_post d-flex mb-4">
-                <div class="recent_post_img me-3">
-                    <a href="post.php">
-                        <img width="100" height="80" src="img/robot.jpg" alt="post image">
-                    </a>
-                </div>
-                <div class="recent_post_content">
-                    <a href="post.php">
-                        <p class="recent_post_title fs-4">I Used The Web For A Day On A 50 MB Budget
-                        </p>
-                    </a>
-                    <a href="post.php">
-                        <p class="recent_post_date fs-5">26th August, 2022</p>
-                    </a>
-                </div>
-            </div>
-
-            <div class="recent_post d-flex mb-4">
-                <div class="recent_post_img me-3">
-                    <a href="post.php">
-                        <img width="100" height="80" src="img/robot.jpg" alt="post image">
-                    </a>
-                </div>
-                <div class="recent_post_content">
-                    <a href="post.php">
-                        <p class="recent_post_title fs-4">I Used The Web For A Day On A 50 MB Budget
-                        </p>
-                    </a>
-                    <a href="post.php">
-                        <p class="recent_post_date fs-5">26th August, 2022</p>
-                    </a>
-                </div>
-            </div>
-
-            <div class="recent_post d-flex mb-4">
-                <div class="recent_post_img me-3">
-                    <a href="#">
-                        <img width="100" height="80" src="img/robot.jpg" alt="post image">
-                    </a>
-                </div>
-                <div class="recent_post_content">
-                    <a href="#">
-                        <p class="recent_post_title fs-4">I Used The Web For A Day On A 50 MB Budget
-                        </p>
-                    </a>
-                    <a href="#">
-                        <p class="recent_post_date fs-5">26th August, 2022</p>
-                    </a>
-                </div>
-            </div>
+            <?php
+                }
+            }
+            ?>
 
         </div>
 
@@ -115,7 +63,7 @@
 
             <div class="recent_comment d-flex mb-4">
                 <div class="recent_comment_img me-3">
-                    <img width="100" height="80" src="img/robot.jpg" alt="post image">
+                    <img width="100" height="70" src="img/robot.jpg" alt="post image">
                 </div>
                 <div class="recent_comment_content">
                     <p class="recent_commenter_username fs-5">
@@ -134,7 +82,7 @@
 
             <div class="recent_comment d-flex mb-4">
                 <div class="recent_comment_img me-3">
-                    <img width="100" height="80" src="img/robot.jpg" alt="post image">
+                    <img width="100" height="70" src="img/robot.jpg" alt="post image">
                 </div>
                 <div class="recent_comment_content">
                     <p class="recent_commenter_username fs-5">
@@ -153,7 +101,7 @@
 
             <div class="recent_comment d-flex mb-4">
                 <div class="recent_comment_img me-3">
-                    <img width="100" height="80" src="img/robot.jpg" alt="post image">
+                    <img width="100" height="70" src="img/robot.jpg" alt="post image">
                 </div>
                 <div class="recent_comment_content">
                     <p class="recent_commenter_username fs-5">
@@ -178,14 +126,37 @@
 <!-- Categories -->
 <div class="categories mb-5">
     <h2 class="widget_title">Categories</h2>
-    <ul>
-        <li><a href="category.php" class="d-flex justify-content-between"><span>CSS3</span> <span>(06)</span></a></li>
-        <li><a href="category.php" class="d-flex justify-content-between"><span>Bootstrap 5</span> <span>(06)</span></a>
+    <ul class="text-capitalize">
+
+        <?php
+        if (isset($_GET['slug'])) {
+            $cat_slug = $_GET['slug'];
+        } else {
+            $cat_slug = "";
+        }
+
+        $category_query = mysqli_query($conn, "SELECT `name`, `slug`, `no_of_post` FROM `blog_categories` WHERE status = '1' ORDER BY id DESC");
+
+        if (mysqli_num_rows($category_query) > 0) {
+            while ($category_result = mysqli_fetch_array($category_query)) {
+
+                if ($cat_slug == $category_result['slug']) {
+                    $active = "active";
+                } else {
+                    $active = "";
+                }
+        ?>
+
+        <li class="<?= $active ?>">
+            <a href="category.php?slug=<?= $category_result['slug'] ?>" class="d-flex justify-content-between">
+                <span><?= $category_result['name'] ?></span>
+                <span><?= $category_result['no_of_post'] ?></span>
+            </a>
         </li>
-        <li><a href="category.php" class="d-flex justify-content-between"><span>JavaScript</span> <span>(06)</span></a>
-        </li>
-        <li><a href="category.php" class="d-flex justify-content-between"><span>JQuery</span> <span>(06)</span></a></li>
-        <li><a href="category.php" class="d-flex justify-content-between"><span>PHP</span> <span>(06)</span></a></li>
+
+        <?php }
+        } ?>
+
     </ul>
 </div>
 

@@ -168,10 +168,52 @@ padding: .5rem 1rem;
 text-transform: capitalize;
 font-weight: 500;
 margin-bottom: 1rem;
+border-left: 6px solid var(--gray);
+border-bottom: 1px solid var(--gray);
 }
 
 .form-control {
 background-color: var(--white);
+}
+
+.myPagination {
+color: var(--orange);
+display: flex;
+justify-content: center;
+padding: 0.5rem 2rem;
+border-radius: 3rem;
+}
+
+.myPagination li {
+display: inline-block;
+margin: 0 .7rem;
+}
+.myPagination li a {
+font-size: 1.8rem;
+color: var(--orange);
+border: 1px solid var(--orange);
+border-radius: 50%;
+width: 4.5rem;
+height: 4.5rem;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.myPagination li a:hover {
+color: var(--white);
+background: var(--orange);
+}
+.myPagination li a.active {
+color: var(--white);
+background: var(--orange);
+}
+
+.myPagination li a.page_prev,.myPagination li a.page_next {
+width: auto;
+padding: 0 2rem;
+border-radius: 3rem;
+gap: 0.5rem;
 }
 
 /* common css ends here */
@@ -235,33 +277,42 @@ display: block;
 font-size: 1.8rem;
 text-decoration: none;
 color: var(--white);
-font-weight: 300;
+font-weight: 400;
 padding: 6rem 1rem .5rem 1rem;
 text-transform: capitalize;
 }
 
 .main_menu ul li a:hover {
 background: var(--orange);
+color: var(--black);
 }
 
 .main_menu ul li a.active {
 background: var(--orange);
+color: var(--black);
 }
 
 .link_active {
 background: var(--orange);
 }
 
-.hire_btn {
+.main_menu ul li a.hire_btn {
 background: var(--orange);
+border: 2px solid var(--orange);
+color: var(--black);
 padding: 1rem 2rem !important;
 margin-top: 3.8rem;
 margin-left: 1rem;
 border-radius: 0.5rem;
 }
 
+.main_menu ul li a.hire_btn:hover {
+background: transparent;
+color: var(--white);
+}
+
 .continue_reading_btn:hover {
-background: var(--orange);
+background: var(--gray);
 color: var(--black);
 }
 
@@ -879,6 +930,14 @@ border-bottom: 1px solid var(--dark-gray);
 
 .categories ul li:hover {
 border-bottom: 1px solid var(--gray);
+}
+
+.categories ul li.active {
+border-bottom: 1px solid var(--gray);
+}
+
+.categories ul li.active a {
+color: var(--orange);
 }
 
 .categories ul li a {

@@ -1,9 +1,14 @@
+<?php
+include 'admin/config/dbConnect.php';
+$search = $_GET['search'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <?php include_once("assets/includes/meta_links_scripts.php"); ?>
-    <title>Coder || Blogs</title>
+    <title>search results for <?= $search ?></title>
 </head>
 
 <body>
@@ -17,35 +22,53 @@
 
             <div class="row g-5">
                 <main class="col-lg-7 col-xl-8 mb-5 mb-lg-0">
-                    <h1 class="widget_title mb-5">search results for: Tech News</h1>
+                    <h2 class="widget_title mb-5">search results for: <?= $search ?></h2>
+
+                    <?php
+                    $search_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `description`, `created_at` FROM `blog_posts` WHERE `title` LIKE '%$search%' OR `description` LIKE '%$search%' ");
+
+                    if (mysqli_num_rows($search_query) > 0) {
+                        while ($search_result = mysqli_fetch_array($search_query)) {
+                    ?>
 
                     <div class="search_post mb-5 pb-4">
-                        <a href="#">
-                            <img style="max-height: 50rem;" src="img/robot.jpg" width="100%" alt="post image">
+                        <a href="post.php?slug=<?= $search_result['slug'] ?>">
+                            <img style="max-height: 50rem;" src="uploaded_img/<?= $search_result['image'] ?>"
+                                width="100%" alt="post image">
                         </a>
-                        <a href="#">
-                            <h2 style="font-weight: 300;" class="post_title my-4">I Used The Web For A Day On A
-                                50 MB
-                                Budget
-                            </h2>
+                        <a href="post.php?slug=<?= $search_result['slug'] ?>">
+                            <h2 style="font-weight: 300;" class="post_title my-4"><?= $search_result['title'] ?></h2>
                         </a>
 
                         <p style="font-weight: 300" class="fs-4 mb-4">
-                            <span class="post_date me-3"><i class="fa-solid fa-calendar-days"></i> 26th August,
-                                2022</span>
-
-                            <a href="#respond"><i class="fa-solid fa-comment"></i> Leave A Comment</a>
+                            <span class="post_date me-3"><i class="fa-solid fa-calendar-days"></i>
+                                <?php
+                                        $date = date("M d, Y", strtotime($search_result['created_at']));
+                                        echo $date;
+                                        ?>
+                            </span>
                         </p>
 
-                        <div class="post_description mb-5 pb-4">
-                            অজিদের কোচ গ্রাহাম আর্নল্ডের ভরসার প্রতিদানও দিয়েছেন ৩৩ বছর বয়সী পেনাল্টি বিশেষজ্ঞ গোলরক্ষক
-                            অ্যান্ড্রু রেডমাইন। টানা তিন পেনাল্টি ঠেকিয়ে দেয়ার রেকর্ড আছে তার ঝুলিতে।
+                        <div class="post_description mb-4">
+                            <?php
+                                    $string = $search_result['description'];
+                                    if (strlen($string) > 500) {
 
-                            পেরুর বিপক্ষে প্লে অফে জিতে বিশ্বকাপে জায়গা করে নিয়েছে অস্ট্রেলিয়া। শেষ মুহূর্তে বদলি
-                            গোলকিপার হিসেবে মাঠে নেমে অজিদের জয়ের নায়ক অ্যান্ড্রু রেডমাইন। [...]
+                                        $stringCut = substr($string, 0, 500);
+                                        $endPoint = strrpos($stringCut, ' ');
+
+                                        $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                        $string .= ' <a href="post.php?slug=' . $search_result['slug'] . '">[...]</a>';
+
+                                        echo $string;
+                                    } else {
+                                        echo $string;
+                                    }
+                                    ?>
                         </div>
 
-                        <a href="#" class="d-inline-block fs-2 widget_title rounded px-5 py-3 continue_reading_btn">
+                        <a href="post.php?slug=<?= $search_result['slug'] ?>"
+                            class="d-inline-block fs-2 widget_title rounded px-4 py-2 continue_reading_btn">
                             <span><i class="fa-solid fa-circle-arrow-right"></i></span>
                             Continue Reading
                         </a>
@@ -54,42 +77,12 @@
 
                     </div>
 
-                    <div class="category_wise_post mb-5 pb-4">
-                        <a href="#">
-                            <img style="max-height: 50rem;" src="img/robot.jpg" width="100%" alt="post image">
-                        </a>
-                        <a href="#">
-                            <h2 style="font-weight: 300;" class="post_title my-4">I Used The Web For A Day On A
-                                50 MB
-                                Budget
-                            </h2>
-                        </a>
+                    <?php }
+                    } else { ?>
 
-                        <p style="font-weight: 300" class="fs-4 mb-4">
-                            <span class="post_date me-3"><i class="fa-solid fa-calendar-days"></i> 26th August,
-                                2022</span>
+                    <h1 class="text-center" style="color: var(--gray)">Oops! Posts Not Found!</h1>
 
-                            <a href="#respond"><i class="fa-solid fa-comment"></i> Leave A Comment</a>
-                        </p>
-
-                        <div class="post_description mb-5 pb-4">
-                            অজিদের কোচ গ্রাহাম আর্নল্ডের ভরসার প্রতিদানও দিয়েছেন ৩৩ বছর বয়সী পেনাল্টি বিশেষজ্ঞ গোলরক্ষক
-                            অ্যান্ড্রু রেডমাইন। টানা তিন পেনাল্টি ঠেকিয়ে দেয়ার রেকর্ড আছে তার ঝুলিতে।
-
-                            পেরুর বিপক্ষে প্লে অফে জিতে বিশ্বকাপে জায়গা করে নিয়েছে অস্ট্রেলিয়া। শেষ মুহূর্তে বদলি
-                            গোলকিপার হিসেবে মাঠে নেমে অজিদের জয়ের নায়ক অ্যান্ড্রু রেডমাইন। [...]
-                        </div>
-
-                        <a href="#" class="d-inline-block fs-2 widget_title rounded px-5 py-3 continue_reading_btn">
-                            <span><i class="fa-solid fa-circle-arrow-right"></i></span>
-                            Continue Reading
-                        </a>
-
-                        <hr>
-
-                    </div>
-
-
+                    <?php } ?>
 
                 </main>
 

@@ -16,6 +16,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
 
+<!-- Code Highlight CSS CDN -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+
 <!-- Custom CSS Link -->
 <link rel="stylesheet" type="text/css" href="assets/css/style.php" />
 
@@ -32,5 +35,10 @@
 <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
+<!-- Code Highlight JS CDN -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+<script>
+hljs.highlightAll();
+</script>
 <!-- Custom JavaScript -->
 <script defer src="assets/JS/script.js"></script>

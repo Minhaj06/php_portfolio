@@ -266,27 +266,26 @@ include 'admin/config/dbConnect.php';
                     <h2 style="border-left: 6px solid var(--gray); border-bottom: 1px solid var(--gray)"
                         class="widget_title text-uppercase mb-4 fs-2">Latest news are on top all times</h2>
 
-                    <div class="row g-5 g-md-4 g-xl-5">
+                    <div class="row g-5 g-md-4 g-xl-5 mb-5">
 
                         <?php
-                        $total_records = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM `blog_posts` WHERE status = '1'"));
-
-                        $limit = 3;
-                        $total_pages = ceil($total_records / $limit);
 
                         if (isset($_GET['page'])) {
                             $page_no = $_GET['page'];
-                            $prev_page = $page_no - 1;
-                            $next_page = $page_no + 1;
-                            $offset = ($page_no - 1) * $limit;
                         } else {
-                            $page_no = 0;
-                            $offset = 0;
-                            $prev_page = 0;
-                            $next_page = 2;
+                            $page_no = 1;
                         }
 
-                        $post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `created_at` FROM `blog_posts` WHERE status = '1' ORDER BY id DESC LIMIT $limit OFFSET $offset");
+                        $limit = 2;
+                        $offset = ($page_no - 1) * $limit;
+
+                        $total_records = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM `blog_posts` WHERE status = '1'"));
+                        $total_pages = ceil($total_records / $limit);
+
+
+
+
+                        $post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `created_at` FROM `blog_posts` WHERE status = '1' ORDER BY id DESC LIMIT 3");
 
                         if (mysqli_num_rows($post_query) > 0) {
                             while ($post_result = mysqli_fetch_array($post_query)) {
@@ -318,70 +317,57 @@ include 'admin/config/dbConnect.php';
                         } ?>
 
 
-
                     </div>
 
-                    <?php
 
-                    if ($total_records > $limit) {
 
-                        echo '<ul class="myPagination mt-5">';
+                    <!-- Pagination Starts Here -->
+                    <nav aria-label="blog_posts" class="pt-4">
+                        <ul class="pagination justify-content-center pagination-lg">
+                            <?php
+                            $pagination = mysqli_query($conn, "SELECT * FROM `blog_posts` WHERE status = '1'");
 
-                        if ($prev_page > 0) {
-                            echo '<li><a class="page_prev" href="blog.php?page=' . $prev_page . '"><i class="fa-solid fa-angles-left"></i> Prev</a></li>';
-                        }
+                            if (mysqli_num_rows($pagination) > 0) {
 
-                        if ($total_pages > 4) {
-                            if ($page_no > 3 && $page_no < $total_pages - 3) {
-                                echo '<li><a class="" href="blog.php?page=1">1</a></li>';
-                                echo '<li><b>...</b></li>';
-                                for ($i = $page_no - 1; $i <= $page_no + 1; $i++) {
-                                    if ($i == $page_no) {
-                                        echo '<li><a class="active" href="javascript: void(0)">' . $i . '</a></li>';
-                                    } else {
-                                        echo '<li><a class="" href="blog.php?page=' . $i . '">' . $i . '</a></li>';
-                                    }
-                                }
-                                echo '<li><b>...</b></li>';
-                                echo '<li><a class="" href="blog.php?page=' . $total_pages . '">' . $total_pages . '</a></li>';
-                            } elseif ($page_no <= 3) {
-                                for ($i = 1; $i <= 4; $i++) {
-                                    if ($i == $page_no) {
-                                        echo '<li><a class="active" href="javascript: void(0)">' . $i . '</a></li>';
-                                    } else {
-                                        echo '<li><a class="" href="blog.php?page=' . $i . '">' . $i . '</a></li>';
-                                    }
-                                }
-                                echo '<li><b>...</b></li>';
-                                echo '<li><a class="" href="blog.php?page=' . $total_pages . '">' . $total_pages . '</a></li>';
-                            } else {
-                                echo '<li><a class="" href="blog.php?page=1">1</a></li>';
-                                echo '<li><b>...</b></li>';
-                                for ($i = $total_pages - 3; $i <= $total_pages; $i++) {
-                                    if ($i == $page_no) {
-                                        echo '<li><a class="active" href="javascript: void(0)">' . $i . '</a></li>';
-                                    } else {
-                                        echo '<li><a class="" href="blog.php?page=' . $i . '">' . $i . '</a></li>';
-                                    }
+                                $total_records = mysqli_num_rows($pagination);
+                                $limit = 2;
+                                $total_pages = ceil($total_records / $limit);
+
+                                for ($i = 1; $i <= $total_pages; $i++) {
+                                    echo '<li class="page-item"><a class="page-link fs-3" href="blog.php?page=' . $i . '">' . $i . '</a></li>';
                                 }
                             }
-                        } else {
-                            for ($i = 1; $i <= $total_pages; $i++) {
-                                if ($i == $page_no) {
-                                    echo '<li><a class="active" href="javascript: void(0)">' . $i . '</a></li>';
-                                } else {
-                                    echo '<li><a class="" href="blog.php?page=' . $i . '">' . $i . '</a></li>';
-                                }
-                            }
-                        }
 
-                        if ($next_page - 1 < $total_pages) {
-                            echo '<li><a class="page_next" href="blog.php?page=' . $next_page . '">Next <i class="fa-solid fa-angles-right"></i></a></li>';
-                        }
 
-                        echo '</ul>';
-                    }
-                    ?>
+                            ?>
+                        </ul>
+                    </nav>
+
+
+
+                    <!-- <li class="page-item disabled">
+                        <a class="page-link fs-3" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+
+                    <li class="page-item"><a class="page-link fs-3" href="#">1</a></li>
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link fs-3" href="#">2</a>
+                    </li>
+                    <li class="page-item"><a class="page-link fs-3" href="#">3</a></li>
+
+                    <li class="page-item">
+                        <a class="page-link fs-3" href="#">Next</a>
+                    </li> -->
+
+
+                    <!-- Pagination Starts Here -->
+
+
+
+
+
+
+
 
 
                 </main>
