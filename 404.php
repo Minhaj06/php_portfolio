@@ -16,7 +16,7 @@
                     <span><i class="fa-solid fa-house-chimney"></i></span>
                     Back Home
                 </a>
-                <a href="blog.php" class="btn btn-success rounded-pill px-5 py-3 bg-transparent text-success fs-3">
+                <a href="blogs.php" class="btn btn-success rounded-pill px-5 py-3 bg-transparent text-success fs-3">
                     <span><i class="fa-solid fa-newspaper"></i></span>
                     Read Blog
                 </a>

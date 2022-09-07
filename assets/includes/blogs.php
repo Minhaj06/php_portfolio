@@ -46,7 +46,7 @@
 
         </div>
         <div class="text-center mt-5 pt-5">
-            <a href="blog.php"><button class="button">view all</button></a>
+            <a href="blogs.php"><button class="button">view all</button></a>
         </div>
     </div>
 </section>

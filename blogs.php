@@ -271,7 +271,7 @@ include 'admin/config/dbConnect.php';
                         <?php
                         $total_records = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM `blog_posts` WHERE status = '1'"));
 
-                        $limit = 3;
+                        $limit = 6;
                         $total_pages = ceil($total_records / $limit);
 
                         if (isset($_GET['page'])) {

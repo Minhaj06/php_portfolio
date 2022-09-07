@@ -29,7 +29,8 @@
                             <a class="menu_link" href="<?= $index ?>#portfolio">portfolio</a>
                         </li>
                         <li>
-                            <a class="menu_link" href="<?= $index ?>#testimonials">testimonials</a>
+                            <a class="menu_link" href="<?= $index ?>#projects">projects</a>
+                        </li>
                         </li>
                         <li><a class="menu_link" href="<?= $index ?>#blogs">blogs</a></li>
                         <li>
@@ -37,7 +38,7 @@
                         </li>
                         <?php if (isset($_SESSION['auth_user']) && $_SESSION['auth_role'] == 1) { ?>
                         <li class="dropdown">
-                            <a class="menu_link" href="#">
+                            <a class="menu_link" href="javascript: void(0)">
                                 <?= $_SESSION['auth_user']['username']; ?><i class="fa-solid fa-chevron-down ps-3"></i>
                             </a>
                             <ul class="dropdown_menu flex-column">

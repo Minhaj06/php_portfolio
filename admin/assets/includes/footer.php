@@ -16,6 +16,7 @@
 
 <!-- Summernote JS - CDN Link -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script type="text/javascript" src="assets/js/summernote-buitify.js"></script>
 <script>
 $(document).ready(function() {
     $("#add_post_description").summernote({

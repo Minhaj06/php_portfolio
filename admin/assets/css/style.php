@@ -760,7 +760,7 @@ grid-template-areas:
 "Shares Shares Used Used Used Used"
 "TopArt TopArt TopArt TopArt Comments Comments"
 "RecentArt RecentArt RecentArt RecentArt RecentArt RecentArt";
-grid-gap: 1rem;
+grid-gap: 1.5rem;
 }
 
 .grid_container>div {

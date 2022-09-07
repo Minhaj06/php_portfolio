@@ -16,12 +16,11 @@ $select = mysqli_fetch_assoc($query);
     <title>Coder || Advanced Thinking</title>
 </head>
 
-<body>
+<body class="line-numbers">
 
     <?php
-
-    include_once("assets/includes/preloader.php");
     $home_index = "index.php";
+    include_once("assets/includes/preloader.php");
     include_once("assets/includes/navbar.php");
     include_once("assets/includes/home.php");
     include_once("assets/includes/about.php");
@@ -33,7 +32,6 @@ $select = mysqli_fetch_assoc($query);
     include_once("assets/includes/hire_me.php");
     include_once("assets/includes/blogs.php");
     include_once("assets/includes/footer.php")
-
     ?>
 
 </body>

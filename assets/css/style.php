@@ -216,6 +216,15 @@ border-radius: 3rem;
 gap: 0.5rem;
 }
 
+pre {
+font-size: 1.8rem;
+line-height: 2.3rem;
+background: var(--dark-gray);
+color: #a7c3ff;
+padding: 0.5rem;
+border-radius: 0.5rem;
+}
+
 /* common css ends here */
 
 
@@ -856,7 +865,7 @@ height: 23rem;
 }
 
 .blog_content {
-padding: 2rem 3rem 3rem 3rem;
+padding: 2rem 2rem 3rem 2rem;
 }
 
 .blog_content .para {
