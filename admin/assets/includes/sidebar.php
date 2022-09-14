@@ -82,6 +82,7 @@
                         <li><a href="services_update.php">Services</a></li>
                         <li><a href="achievements_update.php">Achievements</a></li>
                         <li><a href="portfolio_update.php">Portfolio</a></li>
+                        <li><a href="project_update.php">Project</a></li>
                         <li><a href="testimonials_update.php">Testimonials</a></li>
                         <li><a href="hire_me_update.php">hire me</a></li>
                         <li><a href="blog_update.php">Blog</a></li>

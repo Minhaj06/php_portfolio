@@ -12,7 +12,8 @@ if (!$conn) {
     die();
 }
 
-function base_url($base_url)
+function base_url($url)
 {
-    echo $base_url;
+    echo "http://localhost/coder/" . $url;
+    // echo "https://minhajkobir.com/" . $url;
 }

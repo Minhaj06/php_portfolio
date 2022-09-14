@@ -1,9 +1,9 @@
 <!-- blogs section starts here -->
-<section id="blogs">
+<section id="projects">
     <div class="inner_blog container vertical_path">
         <div class="content">
-            <h2 class="heading"><?= $select['blog_title'] ?></h2>
-            <p class="para"><?= $select['blog_desc'] ?></p>
+            <h2 class="heading"><?= $select['project_title'] ?></h2>
+            <p class="para"><?= $select['project_desc'] ?></p>
         </div>
 
         <div class="blogs row g-5 mt-5">
@@ -43,8 +43,9 @@
         </div>
 
         <div class="text-center mt-5 pt-5">
-            <a href="<?php base_url("blogs.php") ?>"><button class="button">view all</button></a>
+            <a href="<?php base_url("projects/index.php") ?>"><button class="button">view all</button></a>
         </div>
+
     </div>
 </section>
 <!-- blogs section ends here -->

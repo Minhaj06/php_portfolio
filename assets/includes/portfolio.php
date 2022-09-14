@@ -44,7 +44,7 @@
                 portfolio_category="<?= $portfolio_result['portfolio_category'] ?>">
                 <div>
                     <a href="<?= $portfolio_result['portfolio_url'] ?>">
-                        <img src="uploaded_img/<?= $portfolio_result['portfolio_image'] ?>">
+                        <img src="<?php base_url("uploaded_img/" . $portfolio_result['portfolio_image']) ?>">
                     </a>
                     <div class="overlay_bg">
                         <div class="overlay_content">
@@ -126,7 +126,8 @@
                             portfolio_category="<?= $portfolio_result['portfolio_category'] ?>">
                             <div>
                                 <a href="<?= $portfolio_result['portfolio_url'] ?>">
-                                    <img src="uploaded_img/<?= $portfolio_result['portfolio_image'] ?>">
+                                    <img
+                                        src="<?php base_url("uploaded_img/" . $portfolio_result['portfolio_image']) ?>">
                                 </a>
                                 <div class="overlay_bg">
                                     <div class="overlay_content">

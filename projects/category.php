@@ -1,9 +1,9 @@
 <?php
-include 'admin/config/dbConnect.php';
+include '../admin/config/dbConnect.php';
 
 if (isset($_GET['slug'])) {
     $slug = $_GET['slug'];
-    $category_query = mysqli_query($conn, "SELECT * FROM `blog_categories` WHERE slug = '$slug' ");
+    $category_query = mysqli_query($conn, "SELECT * FROM `project_categories` WHERE slug = '$slug' ");
 
     $count_post = mysqli_num_rows($category_query);
 
@@ -33,13 +33,13 @@ function postDate($timestamp)
 <html lang="en">
 
 <head>
-    <?php include_once("assets/includes/meta_links_scripts.php"); ?>
-    <title><?= $title ?> || Coder</title>
+    <?php include_once("../assets/includes/meta_links_scripts.php"); ?>
+    <title> <?= $title ?> || Coder</title>
 </head>
 
 <body>
-    <?php include_once("assets/includes/preloader.php") ?>
-    <?php include_once("assets/includes/navbar.php") ?>
+    <?php include_once("../assets/includes/preloader.php") ?>
+    <?php include_once("../assets/includes/navbar.php") ?>
 
     <!-- blog section starts here -->
     <section class="all" id="blogs" style="margin-top: 12rem;">
@@ -54,7 +54,7 @@ function postDate($timestamp)
                     <h2 class="widget_title mb-5">category: <?= $category ?></h2>
 
                     <?php
-                        $cat_wise_post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `description`, `created_at` FROM `blog_posts` WHERE `category` ='$category'");
+                        $cat_wise_post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `description`, `created_at` FROM `project_posts` WHERE `category` ='$category'");
 
                         if (mysqli_num_rows($cat_wise_post_query) > 0) {
                             while ($cat_wise_post_result = mysqli_fetch_array($cat_wise_post_query)) {
@@ -106,21 +106,22 @@ function postDate($timestamp)
                         } ?>
 
                     <?php } else {
-                        include "assets/includes/post_not_found.php";
+                        include "inc/post_not_found.php";
                     } ?>
+
 
                 </main>
 
 
                 <!-- Right aside section Starts here -->
                 <aside class="col-lg-5 col-xl-4">
-                    <?php include_once("assets/includes/blog_aside.php") ?>
+                    <?php include_once("inc/project_aside.php") ?>
                 </aside>
                 <!-- Right aside section ends here -->
             </div>
         </div>
     </section>
-    <?php include_once("assets/includes/footer.php") ?>
+    <?php include_once("../assets/includes/footer.php") ?>
 </body>
 
 </html>

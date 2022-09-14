@@ -255,7 +255,8 @@ if (isset($_POST['change_pass'])) {
                             <form action="<?php htmlentities($_SERVER['PHP_SELF']); ?>" method="POST"
                                 enctype="multipart/form-data">
                                 <div class="text-center mb-3">
-                                    <img class="profile_pic" src="<?= 'uploaded_img/' . $fetch_data['image'] ?>"
+                                    <img class="profile_pic"
+                                        src="<?php base_url("uploaded_img/" . $fetch_data['image']) ?>"
                                         alt="profile_pic">
                                     <!-- <img class="profile_pic" src="<?= $image_path ?>" alt="profile_pic"> -->
                                     <h3><?= $fetch_data['username'] ?></h3>
@@ -349,7 +350,8 @@ if (isset($_POST['change_pass'])) {
                             <form action="<?php htmlentities($_SERVER['PHP_SELF']); ?>" method="POST"
                                 enctype="multipart/form-data">
                                 <div class="text-center mb-3">
-                                    <img class="profile_pic" src="<?= $image_path ?>" alt="profile_pic">
+                                    <img class="profile_pic" src="<?php base_url("" . $image_path) ?>"
+                                        alt="profile_pic">
                                     <h3><?= $fetch_data['username'] ?></h3>
                                     <h4><?= $fetch_data['email'] ?></h4>
                                 </div>
@@ -421,7 +423,8 @@ if (isset($_POST['change_pass'])) {
                                         <div class="overflow-hidden text-center">
 
 
-                                            <img class="profile_pic" src="<?= $image_path ?>" alt="profile_pic">
+                                            <img class="profile_pic" src="<?php base_url("" . $image_path) ?>"
+                                                alt="profile_pic">
                                             <h3><?= $_SESSION['auth_user']['username'] ?></h3>
                                             <h4><?= $_SESSION['auth_user']['email'] ?></h4>
                                             <a class="btn btn-primary w-100 mt-4 text-capitalize fs-4"
@@ -482,7 +485,7 @@ if (isset($_POST['change_pass'])) {
                         <div class="card my-5 rounded-3">
                             <div class="card-body p-5 fs-4 overflow-hidden text-center">
 
-                                <img class="profile_pic" src="<?= $image_path ?>" alt="profile_pic'">
+                                <img class="profile_pic" src="<?php base_url("" . $image_path) ?>" alt="profile_pic'">
                                 <h3><?= $fetch_data['username'] ?></h3>
                                 <h4><?= $fetch_data['email']; ?></h4>
                                 <a class="btn btn-primary w-100 mt-4 text-capitalize fs-3"
@@ -498,7 +501,8 @@ if (isset($_POST['change_pass'])) {
                                             details</a>
                                     </div>
                                     <div class="col-6">
-                                        <a class="option_btn btn w-100 text-capitalize fs-3" href="blog.php">read
+                                        <a class="option_btn btn w-100 text-capitalize fs-3"
+                                            href="<?php base_url("blogs.php") ?>">read
                                             blogs</a>
                                     </div>
                                 </div>

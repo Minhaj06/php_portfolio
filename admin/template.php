@@ -58,6 +58,9 @@ include_once("assets/includes/alertBox.php");
         } elseif ($view == "portfolio_update") {
 
             include_once("views/portfolio_view.php");
+        } elseif ($view == "project_update") {
+
+            include_once("views/project_view.php");
         } elseif ($view == "blog_update") {
 
             include_once("views/blog_view.php");

@@ -798,6 +798,220 @@ if (isset($_POST['delete_portfolio'])) {
 // Portfolio section Ends
 
 
+
+// Project Section Starts Here
+
+// Update Project Content
+if (isset($_POST['update_project_content'])) {
+
+    $project_title = mysqli_real_escape_string($conn, $_POST['project_title']);
+    $project_desc = mysqli_real_escape_string($conn, $_POST['project_desc']);
+
+
+    $query = mysqli_query($conn, "UPDATE `project_section` SET project_title = '$project_title', project_desc = '$project_desc' WHERE project_sec_id = 1 ");
+
+    if ($query) {
+        echo 'Project content updated successfully';
+    } else {
+        echo '<span class="text-danger">Project content not updated!</span>';
+    }
+}
+
+
+// Add Project Category
+// check category exist or not for add category
+if (isset($_POST['checkProjectCat'])) {
+
+    $project_cat_name = mysqli_real_escape_string($conn, $_POST['project_cat_name']);
+
+    $check_project_cat_query = mysqli_query($conn, "SELECT `name` FROM `project_categories` WHERE name = '$project_cat_name'");
+
+    echo mysqli_num_rows($check_project_cat_query);
+}
+
+// check slug exist or not for add category
+if (isset($_POST['checkProjectCatSlug'])) {
+
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['project_cat_slug']);
+    $project_cat_slug = preg_replace('/-+/', '-', $string);
+
+    $check_project_cat_slug_query = mysqli_query($conn, "SELECT `slug` FROM `project_categories` WHERE slug = '$project_cat_slug'");
+
+    echo mysqli_num_rows($check_project_cat_slug_query);
+}
+
+// Insert Project Category
+if (isset($_POST['addProjectCategory'])) {
+    $name = mysqli_real_escape_string($conn, $_POST['project_cat_name']);
+
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['project_cat_slug']);
+    $slug = strtolower(preg_replace('/-+/', '-', $string));
+
+    $description = mysqli_real_escape_string($conn, $_POST['project_cat_description']);
+    $meta_title = mysqli_real_escape_string($conn, $_POST['project_cat_meta_title']);
+    $meta_description = mysqli_real_escape_string($conn, $_POST['project_cat_meta_description']);
+    $meta_keywords = mysqli_real_escape_string($conn, $_POST['project_cat_meta_keywords']);
+    $status = $_POST['project_cat_status'];
+
+    $query = mysqli_query($conn, "INSERT INTO `project_categories` (name, slug, description, meta_title, meta_description, meta_keywords, status) VALUES ('$name', '$slug', '$description', '$meta_title', '$meta_description', '$meta_keywords', '$status') ");
+
+    if ($query) {
+        echo "Category added successfully";
+    } else {
+        echo '<span class="text-danger">Something went wrong!</span>';
+    }
+}
+
+
+// Update Project Category
+// get data from db and show in input
+if (isset($_POST['getProjectCatData'])) {
+    $id = $_POST['project_cat_id'];
+    $query = mysqli_query($conn, "SELECT * FROM `project_categories` WHERE id = '$id'");
+    $result = json_encode(mysqli_fetch_assoc($query));
+
+    echo $result;
+}
+
+// check category exist or not for update category
+if (isset($_POST['checkEditProjectCat'])) {
+
+    $edit_project_cat_name = mysqli_real_escape_string($conn, $_POST['edit_project_cat_name']);
+
+    $check_project_cat_query = mysqli_query($conn, "SELECT `name` FROM `project_categories` WHERE name = '$edit_project_cat_name'");
+
+    echo mysqli_num_rows($check_project_cat_query);
+}
+
+// check slug exist or not for update category
+if (isset($_POST['checkEditProjectCatSlug'])) {
+
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['edit_project_cat_slug']);
+    $edit_project_cat_slug = preg_replace('/-+/', '-', $string);
+
+    $check_project_cat_slug_query = mysqli_query($conn, "SELECT `slug` FROM `project_categories` WHERE slug = '$edit_project_cat_slug'");
+
+    echo mysqli_num_rows($check_project_cat_slug_query);
+}
+
+// update category
+if (isset($_POST['updateProjectCategory'])) {
+    $id = mysqli_real_escape_string($conn, $_POST['edit_project_cat_id']);
+    $name = mysqli_real_escape_string($conn, $_POST['edit_project_cat_name']);
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['edit_project_cat_slug']);
+    $slug = strtolower(preg_replace('/-+/', '-', $string));
+    $description = mysqli_real_escape_string($conn, $_POST['edit_project_cat_description']);
+    $meta_title = mysqli_real_escape_string($conn, $_POST['edit_project_cat_meta_title']);
+    $meta_description = mysqli_real_escape_string($conn, $_POST['edit_project_cat_meta_description']);
+    $meta_keywords = mysqli_real_escape_string($conn, $_POST['edit_project_cat_meta_keywords']);
+    $status = $_POST['edit_project_cat_status'];
+
+    $query = mysqli_query($conn, "UPDATE `project_categories` SET name = '$name', slug = '$slug', description = '$description', meta_title = '$meta_title', meta_description = '$meta_description', meta_keywords = '$meta_keywords', status = '$status' WHERE id = '$id' ");
+
+    if ($query) {
+        echo "Category updated successfully";
+    } else {
+        echo '<span class="text-danger">Something went wrong!!</span>';
+    }
+}
+
+
+// Delete project category
+if (isset($_POST['delete_project_cat'])) {
+    $delete_project_cat_id = $_POST['delete_project_cat_id'];
+
+    $query = mysqli_query($conn, "DELETE FROM `project_categories` WHERE id = '$delete_project_cat_id' ");
+
+    if ($query) {
+        echo "Category deleted succfully";
+    } else {
+        echo '<span class="text-danger">Category not deleted!</span>';
+    }
+}
+
+
+// Add Project Post
+// check slug exist or not for add post
+if (isset($_POST['checkAddProjectPostSlug'])) {
+
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['add_project_post_slug']);
+    $project_post_slug = preg_replace('/-+/', '-', $string);
+
+    $check_project_post_slug_query = mysqli_query($conn, "SELECT `slug` FROM `project_posts` WHERE slug = '$project_post_slug'");
+
+    echo mysqli_num_rows($check_project_post_slug_query);
+}
+
+// Insert Post Data
+if (isset($_POST['add_project_post'])) {
+    $post_title = mysqli_real_escape_string($conn, $_POST['add_post_title']);
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['add_post_slug']);
+    $post_slug = strtolower(preg_replace('/-+/', '-', $string));
+    $post_description = mysqli_real_escape_string($conn, $_POST['add_post_description']);
+    $post_meta_title = mysqli_real_escape_string($conn, $_POST['add_post_meta_title']);
+    $post_meta_keywords = mysqli_real_escape_string($conn, $_POST['add_post_meta_keywords']);
+    $post_meta_description = mysqli_real_escape_string($conn, $_POST['add_post_meta_description']);
+
+    $post_category = $_POST['add_post_category'] == "" ? "uncategorized" : $_POST['add_post_category'];
+
+    if (isset($_POST['add_post_status'])) {
+        $post_status = '1';
+    } else {
+        $post_status = '0';
+    }
+
+    $post_image = $_FILES['add_post_image']['name'];
+    $post_image_tmp_name = $_FILES['add_post_image']['tmp_name'];
+    $dotpos = stripos($post_image, '.') + 1;
+    $ext = substr($post_image, $dotpos);
+    $rand = rand(100000, 1000000);
+    $rename_post_image = $rand . '.' . $ext;
+    $img_folder = '../uploaded_img/' . $rename_post_image;
+
+
+    // Optional Data
+    $post_html_code = htmlentities($_POST['add_post_html_code'], ENT_QUOTES);
+    $post_css_code = htmlentities($_POST['add_post_css_code'], ENT_QUOTES);
+    $post_js_code = htmlentities($_POST['add_post_js_code'], ENT_QUOTES);
+    $post_php_code = htmlentities($_POST['add_post_php_code'], ENT_QUOTES);
+
+    // Optional File
+
+
+    $post_code_file = $_FILES['add_post_code_files']['name'];
+    $post_code_file_tmp_name = $_FILES['add_post_code_files']['tmp_name'];
+    $rand = rand(100000, 1000000);
+    $rename_post_code_file = $rand . $post_code_file;
+    $code_file_folder = '../assets/files/' . $rename_post_code_file;
+
+    if (empty($post_code_file)) {
+        $rename_post_code_file = "";
+    }
+
+
+
+
+
+    // $sql = "INSERT INTO `project_posts`(`title`, `slug`, `description`, `image`, `meta_title`, `meta_description`, `meta_keywords`, `status`, `category`) VALUES ('$post_title','$post_slug','$post_description', '$rename_post_image','$post_meta_title','$post_meta_description','$post_meta_keywords', '$post_status', '$post_category');";
+
+    $sql = "INSERT INTO `project_posts`(`title`, `slug`, `description`, `html_code`, `css_code`, `js_code`, `php_code`, `code_file`, `image`, `meta_title`, `meta_description`, `meta_keywords`, `status`, `category`) VALUES ('$post_title','$post_slug','$post_description', '$post_html_code', '$post_css_code', '$post_js_code', '$post_php_code', '$rename_post_code_file' , '$rename_post_image','$post_meta_title','$post_meta_description','$post_meta_keywords', '$post_status', '$post_category');";
+
+    $sql .= "UPDATE `project_categories` SET no_of_post = no_of_post + 1 WHERE name = '$post_category'";
+
+    if (mysqli_multi_query($conn, $sql)) {
+
+        move_uploaded_file($post_image_tmp_name, $img_folder); // move image
+        move_uploaded_file($post_code_file_tmp_name, $code_file_folder); // move file
+        echo "Post added successfully";
+    } else {
+        echo '<span class="text-danger">Something went wrong!</span>';
+    }
+}
+
+// Project Section Ends Here
+
+
+
 // Testimonial section starts
 // Update Testimonial Content
 if (isset($_POST['update_testimonial_content'])) {

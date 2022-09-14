@@ -3,7 +3,7 @@
     <div class="container">
         <div class="inner_skill row">
             <div class="skill_image pe-xxl-5 col-lg-6 mb-5 mb-lg-0">
-                <img src="uploaded_img/<?= $select['about_image'] ?>" alt="skill_img" />
+                <img src="<?php base_url("uploaded_img/" . $select['about_image']) ?>" alt="skill_img" />
                 <div class="experience_highlight">
                     <div class="experience_content">
                         <div class="text-center">
@@ -34,11 +34,11 @@
 
                 </ul>
 
-                <a href="#" data-bs-toggle="modal" data-bs-target="#view_all_skills">
+                <a href="<?php base_url("") ?>" data-bs-toggle="modal" data-bs-target="#view_all_skills">
                     <button class="button me-4 mt-xl-5">View All</button>
                 </a>
 
-                <a href="#">
+                <a href="<?php base_url("") ?>">
                     <button class="button mt-xl-5">Aboute Me</button>
                 </a>
             </div>

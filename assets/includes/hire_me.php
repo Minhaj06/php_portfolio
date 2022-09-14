@@ -6,7 +6,7 @@
             <div class="hire_content">
                 <h3><?= $select['hire_title'] ?></h3>
                 <h2 class="heading"><?= $select['hire_text'] ?></h2>
-                <a href="#">
+                <a href="<?php base_url("") ?>">
                     <button class="button hire_button">hire me!</button>
                 </a>
             </div>

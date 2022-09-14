@@ -1,5 +1,11 @@
 <?php
 include 'admin/config/dbConnect.php';
+
+function postDate($timestamp)
+{
+    $date = date("M d, Y", strtotime($timestamp));
+    echo $date;
+}
 ?>
 
 <!DOCTYPE html>
@@ -169,20 +175,16 @@ include 'admin/config/dbConnect.php';
                                     ?>
 
                                     <div class="swiper-slide slide_item">
-                                        <a href="post.php?slug=<?= $slide_post_result['slug'] ?>" class="w-100">
-                                            <img src="uploaded_img/<?= $slide_post_result['image'] ?>" alt="blog_img" />
+                                        <a href="<?php base_url("post.php?slug=" . $slide_post_result['slug']) ?>"
+                                            class="w-100">
+                                            <img src="<?php base_url("uploaded_img/" . $slide_post_result['image']) ?>"
+                                                alt="blog_img" />
                                         </a>
                                         <div class="slider_blog_content">
-                                            <p>
-                                                <?php
-                                                        $timestamp =  $slide_post_result['created_at'];
-                                                        $date = date("M d, Y", strtotime($timestamp));
-                                                        echo $date;
-                                                        ?>
-                                            </p>
+                                            <p><?php postDate($slide_post_result['created_at']) ?></p>
                                             <h3><?= $slide_post_result['title'] ?></h3>
-                                            <a href="post.php?slug=<?= $slide_post_result['slug'] ?>">learn more<i
-                                                    class="fa-solid fa-arrow-right-long"></i></a>
+                                            <a href="<?php base_url("post.php?slug=" . $slide_post_result['slug']) ?>">learn
+                                                more<i class="fa-solid fa-arrow-right-long"></i></a>
                                         </div>
                                     </div>
 
@@ -197,8 +199,10 @@ include 'admin/config/dbConnect.php';
                                     ?>
 
                                     <div class="swiper-slide slide_item">
-                                        <a href="post.php?slug=<?= $slide_post_result['slug'] ?>" class="w-100">
-                                            <img src="uploaded_img/<?= $slide_post_result['image'] ?>" alt="blog_img" />
+                                        <a href="<?php base_url("post.php?slug=" . $slide_post_result['slug']) ?>"
+                                            class="w-100">
+                                            <img src="<?php base_url("uploaded_img/" . $slide_post_result['image']) ?>"
+                                                alt="blog_img" />
                                         </a>
                                         <div class="slider_blog_content">
                                             <p>
@@ -209,8 +213,8 @@ include 'admin/config/dbConnect.php';
                                                         ?>
                                             </p>
                                             <h3><?= $slide_post_result['title'] ?></h3>
-                                            <a href="post.php?slug=<?= $slide_post_result['slug'] ?>">learn more<i
-                                                    class="fa-solid fa-arrow-right-long"></i></a>
+                                            <a href="<?php base_url("post.php?slug=" . $slide_post_result['slug']) ?>">learn
+                                                more<i class="fa-solid fa-arrow-right-long"></i></a>
                                         </div>
                                     </div>
 
@@ -235,7 +239,7 @@ include 'admin/config/dbConnect.php';
                                     ?>
 
                                     <div class="swiper-slide">
-                                        <img src="uploaded_img/<?= $slide_post_result['image'] ?>" />
+                                        <img src="<?php base_url("uploaded_img/" . $slide_post_result['image']) ?>" />
                                     </div>
 
                                     <?php }
@@ -249,7 +253,7 @@ include 'admin/config/dbConnect.php';
                                     ?>
 
                                     <div class="swiper-slide">
-                                        <img src="uploaded_img/<?= $slide_post_result['image'] ?>" />
+                                        <img src="<?php base_url("uploaded_img/" . $slide_post_result['image']) ?>" />
                                     </div>
 
                                     <?php }
@@ -295,8 +299,9 @@ include 'admin/config/dbConnect.php';
                         <div class="col-md-6">
                             <div class="blog_item">
                                 <div class="blog_img">
-                                    <a href="post.php?slug=<?= $post_result['slug'] ?>">
-                                        <img src="uploaded_img/<?= $post_result['image'] ?>" alt="blog_img" />
+                                    <a href="<?php base_url("post.php?slug=" . $post_result['slug']) ?>">
+                                        <img src="<?php base_url("uploaded_img/" . $post_result['image']) ?>"
+                                            alt="blog_img" />
                                     </a>
                                 </div>
                                 <div class="blog_content">
@@ -308,7 +313,7 @@ include 'admin/config/dbConnect.php';
                                                 ?>
                                     </p>
                                     <h3><?= $post_result['title'] ?></h3>
-                                    <a href="post.php?slug=<?= $post_result['slug'] ?>">learn more<i
+                                    <a href="<?php base_url("post.php?slug=" . $post_result['slug']) ?>">learn more<i
                                             class="fa-solid fa-arrow-right-long"></i></a>
                                 </div>
                             </div>
@@ -328,40 +333,40 @@ include 'admin/config/dbConnect.php';
                         echo '<ul class="myPagination mt-5">';
 
                         if ($prev_page > 0) {
-                            echo '<li><a class="page_prev" href="blog.php?page=' . $prev_page . '"><i class="fa-solid fa-angles-left"></i> Prev</a></li>';
+                            echo '<li><a class="page_prev" href="blogs.php?page=' . $prev_page . '"><i class="fa-solid fa-angles-left"></i> Prev</a></li>';
                         }
 
                         if ($total_pages > 4) {
                             if ($page_no > 3 && $page_no < $total_pages - 3) {
-                                echo '<li><a class="" href="blog.php?page=1">1</a></li>';
+                                echo '<li><a class="" href="blogs.php?page=1">1</a></li>';
                                 echo '<li><b>...</b></li>';
                                 for ($i = $page_no - 1; $i <= $page_no + 1; $i++) {
                                     if ($i == $page_no) {
                                         echo '<li><a class="active" href="javascript: void(0)">' . $i . '</a></li>';
                                     } else {
-                                        echo '<li><a class="" href="blog.php?page=' . $i . '">' . $i . '</a></li>';
+                                        echo '<li><a class="" href="blogs.php?page=' . $i . '">' . $i . '</a></li>';
                                     }
                                 }
                                 echo '<li><b>...</b></li>';
-                                echo '<li><a class="" href="blog.php?page=' . $total_pages . '">' . $total_pages . '</a></li>';
+                                echo '<li><a class="" href="blogs.php?page=' . $total_pages . '">' . $total_pages . '</a></li>';
                             } elseif ($page_no <= 3) {
                                 for ($i = 1; $i <= 4; $i++) {
                                     if ($i == $page_no) {
                                         echo '<li><a class="active" href="javascript: void(0)">' . $i . '</a></li>';
                                     } else {
-                                        echo '<li><a class="" href="blog.php?page=' . $i . '">' . $i . '</a></li>';
+                                        echo '<li><a class="" href="blogs.php?page=' . $i . '">' . $i . '</a></li>';
                                     }
                                 }
                                 echo '<li><b>...</b></li>';
-                                echo '<li><a class="" href="blog.php?page=' . $total_pages . '">' . $total_pages . '</a></li>';
+                                echo '<li><a class="" href="blogs.php?page=' . $total_pages . '">' . $total_pages . '</a></li>';
                             } else {
-                                echo '<li><a class="" href="blog.php?page=1">1</a></li>';
+                                echo '<li><a class="" href="blogs.php?page=1">1</a></li>';
                                 echo '<li><b>...</b></li>';
                                 for ($i = $total_pages - 3; $i <= $total_pages; $i++) {
                                     if ($i == $page_no) {
                                         echo '<li><a class="active" href="javascript: void(0)">' . $i . '</a></li>';
                                     } else {
-                                        echo '<li><a class="" href="blog.php?page=' . $i . '">' . $i . '</a></li>';
+                                        echo '<li><a class="" href="blogs.php?page=' . $i . '">' . $i . '</a></li>';
                                     }
                                 }
                             }
@@ -370,13 +375,13 @@ include 'admin/config/dbConnect.php';
                                 if ($i == $page_no) {
                                     echo '<li><a class="active" href="javascript: void(0)">' . $i . '</a></li>';
                                 } else {
-                                    echo '<li><a class="" href="blog.php?page=' . $i . '">' . $i . '</a></li>';
+                                    echo '<li><a class="" href="blogs.php?page=' . $i . '">' . $i . '</a></li>';
                                 }
                             }
                         }
 
                         if ($next_page - 1 < $total_pages) {
-                            echo '<li><a class="page_next" href="blog.php?page=' . $next_page . '">Next <i class="fa-solid fa-angles-right"></i></a></li>';
+                            echo '<li><a class="page_next" href="blogs.php?page=' . $next_page . '">Next <i class="fa-solid fa-angles-right"></i></a></li>';
                         }
 
                         echo '</ul>';

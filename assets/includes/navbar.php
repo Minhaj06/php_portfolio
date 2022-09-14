@@ -3,36 +3,42 @@
         <div class="container">
             <nav class="inner_nav d-flex align-items-center justify-content-between">
                 <div class="logo">
-                    <a href="index.php"><img src="assets/images/logo.png" alt="" /></a>
+                    <a href="<?php base_url("") ?>"><img src="<?php base_url("assets/images/logo.png") ?>" alt="" /></a>
                 </div>
                 <div class="main_menu">
 
                     <?php
-                    if (isset($home_index) && $home_index == "index.php") {
-                        $index = "";
-                    } else {
-                        $index = "index.php";
-                    }
+                    // if (isset($home_index) && $home_index == base_url("")) {
+                    //     function index()
+                    //     {
+                    //         echo "";
+                    //     };
+                    // } else {
+                    //     function index()
+                    //     {
+                    //         base_url("");
+                    //     };
+                    // }
                     ?>
 
                     <ul>
                         <li>
-                            <a class="menu_link active" href="<?= $index ?>#home">home</a>
+                            <a class="menu_link active" href="<?php base_url("") ?>#home">home</a>
                         </li>
                         <li>
-                            <a class="menu_link" href="<?= $index ?>#skill_area">about me</a>
+                            <a class="menu_link" href="<?php base_url("") ?>#skill_area">about me</a>
                         </li>
                         <li>
-                            <a class="menu_link" href="<?= $index ?>#services">services</a>
+                            <a class="menu_link" href="<?php base_url("") ?>#services">services</a>
                         </li>
                         <li>
-                            <a class="menu_link" href="<?= $index ?>#portfolio">portfolio</a>
+                            <a class="menu_link" href="<?php base_url("") ?>#portfolio">portfolio</a>
                         </li>
                         <li>
-                            <a class="menu_link" href="<?= $index ?>#projects">projects</a>
+                            <a class="menu_link" href="<?php base_url("") ?>#projects">projects</a>
                         </li>
                         </li>
-                        <li><a class="menu_link" href="<?= $index ?>#blogs">blogs</a></li>
+                        <li><a class="menu_link" href="<?php base_url("") ?>#blogs">blogs</a></li>
                         <li>
                             <a class="menu_link" href="#footer">contact us</a>
                         </li>
@@ -46,7 +52,8 @@
                                     <a class="dropdown_item" href="user_profile.php">my profile</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown_item" href="admin/index.php" target="_blank">dashboard</a>
+                                    <a class="dropdown_item" href="<?php base_url("admin/index.php") ?>"
+                                        target="_blank">dashboard</a>
                                 </li>
                                 <li>
                                     <a class="dropdown_item" href="logout.php">logout</a>

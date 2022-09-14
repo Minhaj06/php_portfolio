@@ -221,10 +221,13 @@ font-size: 1.8rem;
 line-height: 2.3rem;
 background: var(--dark-gray);
 color: #a7c3ff;
-padding: 0.5rem;
+padding: 1rem 1.5rem;
 border-radius: 0.5rem;
+max-height: 45rem;
 }
-
+:not(pre)>code[class*=language-], pre[class*=language-] {
+background: var(--dark-gray);
+}
 /* common css ends here */
 
 
@@ -325,6 +328,14 @@ background: var(--gray);
 color: var(--black);
 }
 
+.download_btn {
+background: var(--orange);
+border: 1px solid var(--orange);
+color: var(--white);
+padding: 1rem 3rem;
+font-size: 2rem;
+border-radius: 0.3rem;
+}
 
 /* header css ends Here */
 
@@ -337,7 +348,7 @@ $result = mysqli_fetch_assoc($sql);
 ?>
 
 .inner_hero {
-background-image: url("../../uploaded_img/<?= $result['image'] ?>");
+background-image: url(<?php base_url("uploaded_img/" . $result['image']) ?>);
 background-repeat: no-repeat;
 background-position-x: right;
 background-position-y: center;
@@ -798,7 +809,7 @@ $hire_result = mysqli_fetch_assoc($hire_query);
 ?>
 
 .hire_me_content {
-background-image: url(../../uploaded_img/<?= $hire_result['hire_bg'] ?>);
+background-image: url(<?php base_url("uploaded_img/" . $hire_result['hire_bg']) ?>);
 background-position: center;
 background-size: cover;
 background-repeat: no-repeat;

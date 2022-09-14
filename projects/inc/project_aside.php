@@ -30,7 +30,7 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
         <div id="recent_post" class="tab-pane active">
 
             <?php
-            $recent_post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `created_at` FROM `blog_posts` WHERE status = '1' ORDER BY id DESC LIMIT 5");
+            $recent_post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `created_at` FROM `project_posts` WHERE status = '1' ORDER BY id DESC LIMIT 5");
 
             if (mysqli_num_rows($recent_post_query) > 0) {
                 while ($recent_post_result = mysqli_fetch_array($recent_post_query)) {
@@ -38,13 +38,13 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
 
             <div class="recent_post d-flex mb-4">
                 <div class="recent_post_img me-3 overflow-hidden">
-                    <a href="<?php base_url("post.php?slug=" . $recent_post_result['slug']) ?>">
+                    <a href="<?php base_url("projects/post.php?slug=" . $recent_post_result['slug']) ?>">
                         <img width="100" height="70"
                             src="<?php base_url("uploaded_img/" . $recent_post_result['image']) ?>" alt="post image">
                     </a>
                 </div>
                 <div class="recent_post_content">
-                    <a href="<?php base_url("post.php?slug=" . $recent_post_result['slug']) ?>">
+                    <a href="<?php base_url("projects/post.php?slug=" . $recent_post_result['slug']) ?>">
                         <p class="recent_post_title fs-4"><?= $recent_post_result['title'] ?></p>
                     </a>
                     <p class="recent_post_date fs-5"><?php postDate($recent_post_result['created_at']) ?></p>
@@ -63,7 +63,7 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
 
             <div class="recent_comment d-flex mb-4">
                 <div class="recent_comment_img me-3">
-                    <img width="100" height="70" src="img/robot.jpg" alt="post image">
+                    <img width="100" height="70" src="<?php base_url("img/robot.jpg") ?>" alt="post image">
                 </div>
                 <div class="recent_comment_content">
                     <p class="recent_commenter_username fs-5">
@@ -82,7 +82,7 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
 
             <div class="recent_comment d-flex mb-4">
                 <div class="recent_comment_img me-3">
-                    <img width="100" height="70" src="img/robot.jpg" alt="post image">
+                    <img width="100" height="70" src="<?php base_url("img/robot.jpg") ?>" alt="post image">
                 </div>
                 <div class="recent_comment_content">
                     <p class="recent_commenter_username fs-5">
@@ -101,7 +101,7 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
 
             <div class="recent_comment d-flex mb-4">
                 <div class="recent_comment_img me-3">
-                    <img width="100" height="70" src="img/robot.jpg" alt="post image">
+                    <img width="100" height="70" src="<?php base_url("img/robot.jpg") ?>" alt="post image">
                 </div>
                 <div class="recent_comment_content">
                     <p class="recent_commenter_username fs-5">
@@ -135,7 +135,7 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
             $cat_slug = "";
         }
 
-        $category_query = mysqli_query($conn, "SELECT `name`, `slug`, `no_of_post` FROM `blog_categories` WHERE status = '1' ORDER BY id DESC");
+        $category_query = mysqli_query($conn, "SELECT `name`, `slug`, `no_of_post` FROM `project_categories` WHERE status = '1' ORDER BY id DESC");
 
         if (mysqli_num_rows($category_query) > 0) {
             while ($category_result = mysqli_fetch_array($category_query)) {
@@ -148,7 +148,7 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
         ?>
 
         <li class="<?= $active ?>">
-            <a href="<?php base_url("category.php?slug=" . $category_result['slug']) ?>"
+            <a href="<?php base_url("projects/category.php?slug=" . $category_result['slug']) ?>"
                 class="d-flex justify-content-between">
                 <span><?= $category_result['name'] ?></span>
                 <span>(<?= $category_result['no_of_post'] ?>)</span>

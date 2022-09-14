@@ -1,5 +1,5 @@
 <?php
-include 'admin/config/dbConnect.php';
+include '../admin/config/dbConnect.php';
 
 
 if (!isset($_GET['search'])) {
@@ -19,13 +19,13 @@ function postDate($timestamp)
 <html lang="en">
 
 <head>
-    <?php include_once("assets/includes/meta_links_scripts.php"); ?>
+    <?php include_once("../assets/includes/meta_links_scripts.php"); ?>
     <title>search results for <?= $search ?></title>
 </head>
 
 <body>
-    <?php include_once("assets/includes/preloader.php") ?>
-    <?php include_once("assets/includes/navbar.php") ?>
+    <?php include_once("../assets/includes/preloader.php") ?>
+    <?php include_once("../assets/includes/navbar.php") ?>
 
     <!-- blog section starts here -->
     <section class="all" id="blogs" style="margin-top: 12rem;">
@@ -37,19 +37,19 @@ function postDate($timestamp)
                     <h2 class="widget_title mb-5">search results for: <?= $search ?></h2>
 
                     <?php
-                    $search_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `description`, `created_at` FROM `blog_posts` WHERE `title` LIKE '%$search%' OR `description` LIKE '%$search%' ");
+                    $search_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `description`, `created_at` FROM `project_posts` WHERE `title` LIKE '%$search%' OR `description` LIKE '%$search%' ");
 
                     if (mysqli_num_rows($search_query) > 0) {
                         while ($search_result = mysqli_fetch_array($search_query)) {
                     ?>
 
                     <div class="search_post mb-5 pb-4">
-                        <a href="<?php base_url("post.php?slug=" . $search_result['slug']) ?>">
+                        <a href="<?php base_url("projects/post.php?slug=" . $search_result['slug']) ?>">
                             <img style="max-height: 50rem;"
                                 src="<?php base_url("uploaded_img/" . $search_result['image']) ?>" width="100%"
                                 alt="post image">
                         </a>
-                        <a href="<?php base_url("post.php?slug=" . $search_result['slug']) ?>">
+                        <a href="<?php base_url("projects/post.php?slug=" . $search_result['slug']) ?>">
                             <h2 style="font-weight: 300;" class="post_title my-4"><?= $search_result['title'] ?></h2>
                         </a>
 
@@ -76,7 +76,7 @@ function postDate($timestamp)
                                     ?>
                         </div>
 
-                        <a href="<?php base_url("post.php?slug=" . $search_result['slug']) ?>"
+                        <a href="<?php base_url("projects/post.php?slug=" . $search_result['slug']) ?>"
                             class="d-inline-block fs-2 widget_title rounded px-4 py-2 continue_reading_btn">
                             <span><i class="fa-solid fa-circle-arrow-right"></i></span>
                             Continue Reading
@@ -98,13 +98,13 @@ function postDate($timestamp)
 
                 <!-- Right aside section Starts here -->
                 <aside class="col-lg-5 col-xl-4">
-                    <?php include_once("assets/includes/blog_aside.php") ?>
+                    <?php include_once("../assets/includes/blog_aside.php") ?>
                 </aside>
                 <!-- Right aside section ends here -->
             </div>
         </div>
     </section>
-    <?php include_once("assets/includes/footer.php") ?>
+    <?php include_once("../assets/includes/footer.php") ?>
 </body>
 
 </html>
