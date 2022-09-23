@@ -43,7 +43,7 @@
                 </li>
 
                 <li class="nav_link dropdown1">
-                    <a href="#">
+                    <a href="javascript: void(0)">
                         <i class="fa-solid fa-newspaper icon"></i>
                         <span class="text nav_text">Manage blogs</span>
                         <i class='fa-solid fa-chevron-down toggle_icon drop_icon1'></i>
@@ -57,7 +57,7 @@
                 </li>
 
                 <li class="nav_link dropdown2">
-                    <a href="#">
+                    <a href="javascript: void(0)">
                         <i class="fa-solid fa-newspaper icon"></i>
                         <span class="text nav_text">Manage Q&A</span>
                         <i class='fa-solid fa-chevron-down toggle_icon drop_icon2'></i>
@@ -71,7 +71,7 @@
                 </li>
 
                 <li class="nav_link dropdown3">
-                    <a href="#">
+                    <a href="javascript: void(0)">
                         <i class="fa-solid fa-gear icon"></i>
                         <span class="text nav_text">section control</span>
                         <i class='fa-solid fa-chevron-down toggle_icon drop_icon3'></i>

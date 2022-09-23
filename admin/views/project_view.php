@@ -172,26 +172,27 @@
 
                         <tbody>
                             <?php
-                            $blog_post_query = mysqli_query($conn, "SELECT * FROM `blog_posts`");
+                            $project_post_query = mysqli_query($conn, "SELECT * FROM `project_posts` ORDER BY id DESC");
 
-                            if (mysqli_num_rows($blog_post_query) > 0) {
-                                while ($blog_post_result = mysqli_fetch_array($blog_post_query)) {
+                            if (mysqli_num_rows($project_post_query) > 0) {
+                                while ($project_post_result = mysqli_fetch_array($project_post_query)) {
                             ?>
 
-                            <tr class="blog<?= $blog_post_result['id'] ?>">
+                            <tr class="project<?= $project_post_result['id'] ?>">
                                 <td class="align-middle">
-                                    <a href="../post.php?<?= $blog_post_result['slug'] ?>" target="_blank">
-                                        <img src="../uploaded_img/<?= $blog_post_result['image'] ?>"
+                                    <a href="../projects/post.php?slug=<?= $project_post_result['slug'] ?>"
+                                        target="_blank">
+                                        <img src="../uploaded_img/<?= $project_post_result['image'] ?>"
                                             alt="Portfolio_image"
                                             style="width: 12rem; height: 9rem; background: var(--primary-color-light); padding: .5rem; border: 1px solid;">
                                     </a>
                                 </td>
 
-                                <td class="align-middle"><?= $blog_post_result['title'] ?></td>
+                                <td class="align-middle"><?= $project_post_result['title'] ?></td>
 
                                 <td class="align-middle">
                                     <?php
-                                            if ($blog_post_result['status'] == '1') {
+                                            if ($project_post_result['status'] == '1') {
                                                 echo "Publushed";
                                             } else {
                                                 echo "Unpublished";
@@ -199,33 +200,33 @@
                                             ?>
                                 </td>
 
-                                <td class="align-middle"><?= $blog_post_result['category'] ?></td>
+                                <td class="align-middle"><?= $project_post_result['category'] ?></td>
 
-                                <td class="align-middle"><?= $blog_post_result['views'] ?></td>
+                                <td class="align-middle"><?= $project_post_result['views'] ?></td>
 
                                 <td class="align-middle" style="min-width: 13rem;">
                                     <?php
-                                            $timestamp =  $blog_post_result['created_at'];
+                                            $timestamp =  $project_post_result['created_at'];
                                             $date = date("M d, Y", strtotime($timestamp));
                                             echo $date;
                                             ?>
                                 </td>
 
                                 <td class="align-middle" style="min-width: 10rem;">
-                                    <span data-id="<?= $blog_post_result['id'] ?>"
-                                        class="fs-4 text-capitalize text-success" id="view_blog_post_btn" role="button"
-                                        data-bs-target="#view_blog_post_modal" data-bs-toggle="modal">
+                                    <span data-id="<?= $project_post_result['id'] ?>"
+                                        class="fs-4 text-capitalize text-success" id="view_project_post_btn"
+                                        role="button" data-bs-target="#view_project_post_modal" data-bs-toggle="modal">
                                         <i class="fa-solid fa-eye"></i>
                                     </span>
 
-                                    <span data-id="<?= $blog_post_result['id'] ?>"
-                                        class="fs-4 text-capitalize text-info ms-4" id="edit_blog_post_btn"
-                                        role="button" data-bs-target="#edit_blog_post_modal" data-bs-toggle="modal">
+                                    <span data-id="<?= $project_post_result['id'] ?>"
+                                        class="fs-4 text-capitalize text-info ms-4" id="edit_project_post_btn"
+                                        role="button" data-bs-target="#edit_project_post_modal" data-bs-toggle="modal">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </span>
 
-                                    <span data-id="<?= $blog_post_result['id'] ?>"
-                                        class="fs-4 text-capitalize text-danger ms-4" id="delete_blog_post_btn"
+                                    <span data-id="<?= $project_post_result['id'] ?>"
+                                        class="fs-4 text-capitalize text-danger ms-4" id="delete_project_post_btn"
                                         role="button">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </span>
@@ -238,7 +239,7 @@
                                 ?>
 
                             <tr>
-                                <td class="text-center py-5 fs-1" colspan="8">No portfolio founded!</td>
+                                <td class="text-center py-5 fs-1" colspan="8">No project founded!</td>
                             </tr>
 
                             <?php } ?>
@@ -497,17 +498,13 @@
                         </div>
 
                         <div class="form-group col-12 col-lg-6">
-                            <label for="add_post_php_code" class="label-control">PHP Code (Optional: <span
-                                    class="text-warning">Don't use
-                                    "&lt;php ?&gt;"</span>)</label>
+                            <label for="add_post_php_code" class="label-control">PHP Code (Optional)</label>
                             <textarea class="form-control fs-3" placeholder="Type or paste PHP code here"
                                 id="add_post_php_code" name="add_post_php_code" rows="10"></textarea>
                         </div>
 
                         <div class="form-group  col-12 col-lg-6">
-                            <label for="add_post_code_files" class="label-control">Codes Files (Optional <span
-                                    class="text-warning">Use compressed to upload
-                                    multiple files</span>)</label>
+                            <label for="add_post_code_files" class="label-control">Codes Files (Optional)</label>
                             <input class="form-control fs-4" type="file" id="add_post_code_files"
                                 name="add_post_code_files">
                         </div>
@@ -581,20 +578,20 @@
 <!-- Add Project Post Modal Ends -->
 
 
-<!-- View Blog Post Modal Starts -->
-<div class="modal fade" id="view_blog_post_modal" data-bs-backdrop="static">
-    <div class="modal-dialog modal-lg">
+<!-- View Project Post Modal Starts -->
+<div class="modal fade" id="view_project_post_modal" data-bs-backdrop="static">
+    <div class="modal-dialog modal-fullscreen-xl-down modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">View Portfolio</h2>
                 <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
             </div>
-            <div class="modal-body">
+            <div style="max-height: fit-content;" class="modal-body">
 
                 <div style="border-bottom: 1px solid var(--primary-color);" class="home_img text-center pb-3 mb-4">
 
                     <a href="" id="" target="_blank">
-                        <img id="view_post_image" style="height: 40rem; border: 2px solid; border-radius: .5rem;"
+                        <img id="view_post_image" style="height: 55rem; border: 2px solid; border-radius: .5rem;"
                             width="100%" class="home_modal_img p-2" src="" alt="Portfolio Image">
                     </a>
 
@@ -641,26 +638,22 @@
                     </tbody>
                 </table>
             </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>
-            </div>
         </div>
     </div>
 </div>
-<!-- View Blog Post Modal Starts -->
+<!-- View Project Post Modal Starts -->
 
 
 <!-- Edit Blog Post Modal Starts -->
-<div class="modal fade" id="edit_blog_post_modal" data-bs-backdrop="static">
+<div class="modal fade" id="edit_project_post_modal" data-bs-backdrop="static">
     <div class="modal-dialog modal-fullscreen-xl-down modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Add Post</h2>
+                <h2 class="modal-title">Update Post</h2>
                 <i class="fa-solid fa-xmark fs-2" role="button" data-bs-dismiss="modal"></i>
             </div>
 
-            <form action="" id="edit_blog_post_form" enctype="multipart/form-data">
+            <form action="" id="edit_project_post_form" enctype="multipart/form-data">
                 <div style="max-height: fit-content;" class="modal-body pb-5">
                     <div class="row g-4">
 
@@ -683,7 +676,39 @@
                                 id="edit_post_description" required name="edit_post_description" rows="6"></textarea>
                         </div>
 
-                        <div class="form-group col-12">
+                        <div class="form-group col-12 col-lg-6">
+                            <label for="edit_post_html_code" class="label-control">HTML Code (Optional: <span
+                                    class="text-warning">Use HTML
+                                    entities</span>)</label>
+                            <textarea class="form-control fs-3" placeholder="Type or paste HTML code here"
+                                id="edit_post_html_code" name="edit_post_html_code" rows="10"></textarea>
+                        </div>
+
+                        <div class="form-group col-12 col-lg-6">
+                            <label for="edit_post_css_code" class="label-control">CSS Code (Optional)</label>
+                            <textarea class="form-control fs-3" placeholder="Type or paste CSS code here"
+                                id="edit_post_css_code" name="edit_post_css_code" rows="10"></textarea>
+                        </div>
+
+                        <div class="form-group col-12 col-lg-6">
+                            <label for="edit_post_js_code" class="label-control">JavaScript Code (Optional)</label>
+                            <textarea class="form-control fs-3" placeholder="Type or paste JavaScript code here"
+                                id="edit_post_js_code" name="edit_post_js_code" rows="10"></textarea>
+                        </div>
+
+                        <div class="form-group col-12 col-lg-6">
+                            <label for="edit_post_php_code" class="label-control">PHP Code (Optional)</label>
+                            <textarea class="form-control fs-3" placeholder="Type or paste PHP code here"
+                                id="edit_post_php_code" name="edit_post_php_code" rows="10"></textarea>
+                        </div>
+
+                        <div class="form-group  col-12 col-lg-6">
+                            <label for="edit_post_code_files" class="label-control">Codes Files (Optional)</label>
+                            <input class="form-control fs-4" type="file" id="edit_post_code_files"
+                                name="edit_post_code_files">
+                        </div>
+
+                        <div class="form-group col-12 col-lg-6">
                             <label for="edit_post_meta_title" class="label-control">Meta Title</label>
                             <input class="form-control fs-4" type="text" id="edit_post_meta_title" required
                                 name="edit_post_meta_title" placeholder="Type meta title">
@@ -717,7 +742,7 @@
                                 <option value="uncategorized">Uncategorized</option>
 
                                 <?php
-                                $category_query = mysqli_query($conn, "SELECT name FROM `blog_categories` WHERE status ='1' ");
+                                $category_query = mysqli_query($conn, "SELECT name FROM `project_categories` WHERE status ='1' ");
 
                                 if (mysqli_num_rows($category_query) > 0) {
                                     while ($category_result = mysqli_fetch_array($category_query)) {
@@ -737,7 +762,7 @@
                             <label class="form-check-label" for="edit_post_status">Status</label>
                         </div>
 
-                        <input type="hidden" required id="update_blog_post_id" name="update_blog_post_id">
+                        <input type="hidden" required id="update_project_post_id" name="update_project_post_id">
 
                     </div>
                 </div>

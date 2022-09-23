@@ -170,7 +170,7 @@
 
                         <tbody>
                             <?php
-                            $blog_post_query = mysqli_query($conn, "SELECT * FROM `blog_posts`");
+                            $blog_post_query = mysqli_query($conn, "SELECT * FROM `blog_posts` ORDER BY id DESC");
 
                             if (mysqli_num_rows($blog_post_query) > 0) {
                                 while ($blog_post_result = mysqli_fetch_array($blog_post_query)) {
@@ -597,10 +597,6 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

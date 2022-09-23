@@ -93,7 +93,7 @@ function postDate($timestamp)
                                         ?>
                         </div>
 
-                        <a href="<?php base_url("projects/post.php?slug=" . $cat_wise_post_result['slug']) ?>"
+                        <a href="<?php base_url("post.php?slug=" . $cat_wise_post_result['slug']) ?>"
                             class="d-inline-block fs-2 widget_title rounded px-4 py-2 continue_reading_btn">
                             <span><i class="fa-solid fa-circle-arrow-right"></i></span>
                             Continue Reading

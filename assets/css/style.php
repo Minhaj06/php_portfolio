@@ -43,13 +43,25 @@ font-family: "Poppins", sans-serif;
 color: var(--white);
 font-size: 1.6rem;
 }
+
+p {
+line-height: 1.6;
+}
+
 a {
 color: var(--white);
 text-decoration: none;
 }
+
 a:hover {
 color: var(--orange);
 }
+
+img {
+max-width: 100%;
+max-height: 100%;
+}
+
 #preloader {
 position: fixed;
 top: 0;
@@ -221,12 +233,17 @@ font-size: 1.8rem;
 line-height: 2.3rem;
 background: var(--dark-gray);
 color: #a7c3ff;
+color: #e6db74;
 padding: 1rem 1.5rem;
 border-radius: 0.5rem;
 max-height: 45rem;
 }
 :not(pre)>code[class*=language-], pre[class*=language-] {
 background: var(--dark-gray);
+}
+
+img.note-float-left {
+margin-right: 1.5rem;
 }
 /* common css ends here */
 
@@ -330,11 +347,16 @@ color: var(--black);
 
 .download_btn {
 background: var(--orange);
-border: 1px solid var(--orange);
+border: 2px solid var(--orange);
 color: var(--white);
 padding: 1rem 3rem;
 font-size: 2rem;
 border-radius: 0.3rem;
+}
+
+.download_btn:hover {
+opacity: 80%;
+color: var(--white)!important;
 }
 
 /* header css ends Here */
@@ -861,8 +883,15 @@ background: var(--black);
 
 .blog_item {
 background: var(--dark-gray);
-overflow: hidden
+overflow: hidden;
+border-radius: .5rem;
 }
+
+.blog_item img {
+width: 100%;
+height: 100%;
+}
+
 .blog_item .blog_img {
 overflow: hidden;
 }
@@ -870,7 +899,7 @@ overflow: hidden;
 transform: scale(1.1) rotate(2deg);
 }
 
-.blog_item img {
+.blog_img img {
 width: 100%;
 height: 23rem;
 }

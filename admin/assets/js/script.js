@@ -2187,6 +2187,179 @@ $(document).on("click", "#add_project_post", function(e) {
     });
 });
 
+
+// View Project Post
+$(document).on("click", "#view_project_post_btn", function(e) {
+    e.preventDefault();
+
+    let project_post_id = $(this).data("id");
+
+    $.ajax({
+        type: "POST",
+        url: "code.php",
+        dataType: "json",
+        data: {
+            getProjectPostView: 1,
+            project_post_id: project_post_id,
+        },
+        success: function(data) {
+            $("#view_post_image").attr("src", "../uploaded_img/" + data.image);
+
+            $("#view_post_title").html(data.title);
+            $("#view_post_slug").html(data.slug);
+            $("#view_post_category").html(data.category);
+
+            if (data.status == "1") {
+                $("#view_post_status").html("Published");
+            } else {
+                $("#view_post_status").html("Unpublished");
+            }
+
+            $("#view_post_created_at").html(data.created_at);
+            $("#view_post_meta_title").html(data.meta_title);
+            $("#view_post_meta_keywords").html(data.meta_keywords);
+            $("#view_post_meta_description").html(data.meta_description);
+            $("#view_post_description").html(data.description);
+        },
+    });
+});
+
+
+
+// Update Project Post
+$(document).on("click", "#edit_project_post_btn", function(e) {
+    e.preventDefault();
+
+    modalDismiss();
+
+    let edit_project_post_id = $(this).data("id");
+
+    $.ajax({
+        type: "POST",
+        url: "code.php",
+        dataType: "json",
+        data: {
+            getProjectPostData: 1,
+            edit_project_post_id: edit_project_post_id,
+        },
+        success: function(data) {
+            $("#update_project_post_id").val(data.id);
+            $("#edit_post_title").val(data.title);
+            $("#edit_post_slug").val(data.slug);
+            $("#edit_post_description").summernote("code", data.description);
+
+            // Decode Entities function
+            function decodeEntities(input) {
+                var parser = new DOMParser().parseFromString(input, "text/html");
+
+                return parser.documentElement.textContent;
+            }
+
+            $("#edit_post_html_code").val(decodeEntities(data.html_code));
+            $("#edit_post_css_code").val(decodeEntities(data.css_code));
+            $("#edit_post_js_code").val(decodeEntities(data.js_code));
+            $("#edit_post_php_code").val(decodeEntities(data.php_code));
+
+            $("#edit_post_meta_title").val(data.meta_title);
+            $("#edit_post_meta_description").val(data.meta_description);
+            $("#edit_post_meta_keywords").val(data.meta_keywords);
+
+            // Select option by category
+            let options = document.querySelectorAll("#edit_post_category option");
+            options.forEach((element) => {
+                let option = element.value;
+
+                if (option == $("#edit_post_category").val(data.category)) {
+                    element.setAttribute("selected", true);
+                }
+            });
+
+            data.status == 1 ? $("#edit_post_status").prop("checked", true) : $("#edit_post_status").prop("checked", false);
+
+            // Check project category slug exist or not
+            $("#edit_post_slug").keyup(function(e) {
+                let edit_project_post_slug = $.trim($("#edit_post_slug").val());
+
+                $.ajax({
+                    type: "POST",
+                    url: "code.php",
+                    data: {
+                        checkEditProjectPostSlug: 1,
+                        edit_project_post_slug: edit_project_post_slug,
+                    },
+                    success: function(response) {
+                        let slug = edit_project_post_slug.replace(/[^A-Za-z0-9\-]+/g, "-");
+
+                        if (
+                            response != "0" &&
+                            slug.toLowerCase() != data.slug.toLowerCase()
+                        ) {
+                            $(".edit_post_slug_error").html(
+                                "<span class='text-danger'>Slug already taken!</span>"
+                            );
+
+                            $("#update_post_btn").attr("disabled", true);
+                        } else {
+                            $(".edit_post_slug_error").html(
+                                "<span class='text-success'>It's available</span>"
+                            );
+
+                            $("#update_post_btn").attr("disabled", false);
+                        }
+                    },
+                });
+            });
+        },
+    });
+
+    // update post
+    $(document).on("submit", "#edit_project_post_form", function(e) {
+        e.preventDefault();
+
+        let post_title = $("#edit_post_title").val();
+        let post_slug = $("#edit_post_slug").val();
+        let post_description = $("#edit_post_description").val();
+        let post_meta_title = $("#edit_post_meta_title").val();
+        let post_meta_keywords = $("#edit_post_meta_keywords").val();
+        let post_meta_description = $("#edit_post_meta_description").val();
+
+        if (
+            post_title == "" ||
+            post_slug == "" ||
+            post_description == "" ||
+            post_meta_title == "" ||
+            post_meta_keywords == "" ||
+            post_meta_description == ""
+        ) {
+            emptyAlert();
+        } else {
+            $.ajax({
+                url: "code.php",
+                type: "POST",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    // hide modal
+                    $("#edit_project_post_modal").modal("toggle");
+
+                    // Messsage Show
+                    showMessage();
+                    $(".message_show .ation_message").html(response);
+
+                    // Refresh Form
+                    $("#edit_project_post_form")[0].reset();
+
+                    // Refresh Table
+                    $("#project_category").load(location.href + " #project_category>*", "");
+                    $("#project_posts").load(location.href + " #project_posts>*", "");
+                },
+            });
+        }
+    });
+    edit_project_post_id = "";
+});
+
 // Project Section Ends Here
 
 // Testimonials Section Starts Here

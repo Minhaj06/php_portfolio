@@ -976,23 +976,16 @@ if (isset($_POST['add_project_post'])) {
     $post_php_code = htmlentities($_POST['add_post_php_code'], ENT_QUOTES);
 
     // Optional File
-
-
     $post_code_file = $_FILES['add_post_code_files']['name'];
     $post_code_file_tmp_name = $_FILES['add_post_code_files']['tmp_name'];
     $rand = rand(100000, 1000000);
-    $rename_post_code_file = $rand . $post_code_file;
+    $rename_post_code_file = $rand . "-" . $post_code_file;
     $code_file_folder = '../assets/files/' . $rename_post_code_file;
 
     if (empty($post_code_file)) {
         $rename_post_code_file = "";
     }
 
-
-
-
-
-    // $sql = "INSERT INTO `project_posts`(`title`, `slug`, `description`, `image`, `meta_title`, `meta_description`, `meta_keywords`, `status`, `category`) VALUES ('$post_title','$post_slug','$post_description', '$rename_post_image','$post_meta_title','$post_meta_description','$post_meta_keywords', '$post_status', '$post_category');";
 
     $sql = "INSERT INTO `project_posts`(`title`, `slug`, `description`, `html_code`, `css_code`, `js_code`, `php_code`, `code_file`, `image`, `meta_title`, `meta_description`, `meta_keywords`, `status`, `category`) VALUES ('$post_title','$post_slug','$post_description', '$post_html_code', '$post_css_code', '$post_js_code', '$post_php_code', '$rename_post_code_file' , '$rename_post_image','$post_meta_title','$post_meta_description','$post_meta_keywords', '$post_status', '$post_category');";
 
@@ -1005,6 +998,283 @@ if (isset($_POST['add_project_post'])) {
         echo "Post added successfully";
     } else {
         echo '<span class="text-danger">Something went wrong!</span>';
+    }
+}
+
+
+
+// get data from db
+function getProjectPostData($id)
+{
+    global $conn;
+
+    $query = mysqli_query($conn, "SELECT * FROM `project_posts` WHERE id = '$id'");
+    $result = json_encode(mysqli_fetch_assoc($query));
+
+    echo $result;
+}
+
+// View Project Post in Modal
+if (isset($_POST['getProjectPostView'])) {
+    $id = $_POST['project_post_id'];
+
+    getProjectPostData($id);
+}
+
+// Show Data in Modal input
+if (isset($_POST['getProjectPostData'])) {
+    $id = $_POST['edit_project_post_id'];
+
+    getProjectPostData($id);
+}
+
+
+
+// Update Project Post
+// Check Slug for update data
+if (isset($_POST['checkEditProjectPostSlug'])) {
+
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['edit_project_post_slug']);
+    $project_post_slug = preg_replace('/-+/', '-', $string);
+
+    $check_project_post_slug_query = mysqli_query($conn, "SELECT `slug` FROM `project_posts` WHERE slug = '$project_post_slug'");
+
+    echo mysqli_num_rows($check_project_post_slug_query);
+}
+
+// update
+if (isset($_POST['update_project_post_id'])) {
+    $post_id = $_POST['update_project_post_id'];
+    $post_title = mysqli_real_escape_string($conn, $_POST['edit_post_title']);
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['edit_post_slug']);
+    $post_slug = strtolower(preg_replace('/-+/', '-', $string));
+    $post_description = mysqli_real_escape_string($conn, $_POST['edit_post_description']);
+    $post_meta_title = mysqli_real_escape_string($conn, $_POST['edit_post_meta_title']);
+    $post_meta_keywords = mysqli_real_escape_string($conn, $_POST['edit_post_meta_keywords']);
+    $post_meta_description = mysqli_real_escape_string($conn, $_POST['edit_post_meta_description']);
+
+    $post_category = $_POST['edit_post_category'];
+
+    if (isset($_POST['edit_post_status'])) {
+        $post_status = '1';
+    } else {
+        $post_status = '0';
+    }
+
+    $post_image = $_FILES['edit_post_image']['name'];
+
+
+    // Optional Data
+    $post_html_code = htmlentities($_POST['edit_post_html_code'], ENT_QUOTES);
+    $post_css_code = htmlentities($_POST['edit_post_css_code'], ENT_QUOTES);
+    $post_js_code = htmlentities($_POST['edit_post_js_code'], ENT_QUOTES);
+    $post_php_code = htmlentities($_POST['edit_post_php_code'], ENT_QUOTES);
+
+    // Optional File
+    $post_code_file = $_FILES['edit_post_code_files']['name'];
+    $post_code_file_tmp_name = $_FILES['edit_post_code_files']['tmp_name'];
+    $rand = rand(100000, 1000000);
+    $rename_post_code_file = $rand . "-" . $post_code_file;
+    $code_file_folder = '../assets/files/' . $rename_post_code_file;
+
+    // old file
+    $old_code_file_name = mysqli_fetch_assoc(mysqli_query($conn, "SELECT code_file FROM `project_posts` WHERE id = '$post_id' "))['code_file'];
+    $old_code_file_folder = '../assets/files/' . $old_code_file_name;
+
+    function updatePostCodeFile()
+    {
+        global $old_code_file_folder, $post_code_file_tmp_name, $code_file_folder;
+
+        if (file_exists($old_code_file_folder)) {
+            unlink($old_code_file_folder);
+
+            move_uploaded_file($post_code_file_tmp_name, $code_file_folder);
+        } else {
+
+            move_uploaded_file($post_code_file_tmp_name, $code_file_folder);
+        }
+    }
+
+    $prev_category = mysqli_fetch_assoc(mysqli_query($conn, "SELECT category FROM `project_posts` WHERE id = '$post_id' "))['category'];
+
+
+    if (empty($post_image)) {
+
+
+        if (!empty($post_code_file)) {
+
+
+
+            $query = mysqli_query($conn, "UPDATE `project_posts` SET `title`='$post_title',`slug`='$post_slug',`description`='$post_description',`html_code`='$post_html_code',`css_code`='$post_css_code',`js_code`='$post_js_code',`php_code`='$post_php_code',`code_file`='$rename_post_code_file',`meta_title`='$post_meta_title',`meta_description`='$post_meta_description',`meta_keywords`='$post_meta_keywords',`status`='$post_status',`category`='$post_category' WHERE `id` = '$post_id' ");
+            if ($query) {
+
+                updatePostCodeFile();
+
+                if (($post_category !== $prev_category) && ($post_category == "uncategorized")) {
+
+                    $query_no_of = mysqli_query($conn, "UPDATE `project_categories` SET no_of_post = no_of_post - 1 WHERE name = '$prev_category'");
+
+                    if ($query_no_of) {
+                        echo 'Post Updated Successfully';
+                    }
+                } elseif (($post_category !== $prev_category) && ($prev_category == "uncategorized")) {
+
+
+                    $query_no_of = mysqli_query($conn, "UPDATE `project_categories` SET no_of_post = no_of_post + 1 WHERE name = '$post_category'");
+
+                    if ($query_no_of) {
+                        echo 'Post Updated Successfully';
+                    }
+                } elseif ($post_category !== $prev_category) {
+
+                    $query_sql = "UPDATE `project_categories` SET no_of_post = no_of_post - 1 WHERE name = '$prev_category';";
+                    $query_sql .= "UPDATE `project_categories` SET no_of_post = no_of_post + 1 WHERE name = '$post_category'";
+
+                    if (mysqli_multi_query($conn, $query_sql)) {
+                        echo 'Post Updated Successfully';
+                    }
+                } else {
+                    echo "Post Updated Successfully";
+                }
+            }
+        } else {
+
+            $query = mysqli_query($conn, "UPDATE `project_posts` SET `title`='$post_title',`slug`='$post_slug',`description`='$post_description',`html_code`='$post_html_code',`css_code`='$post_css_code',`js_code`='$post_js_code',`php_code`='$post_php_code',`meta_title`='$post_meta_title',`meta_description`='$post_meta_description',`meta_keywords`='$post_meta_keywords',`status`='$post_status',`category`='$post_category' WHERE `id` = '$post_id' ");
+
+            if ($query) {
+
+                if (($post_category !== $prev_category) && ($post_category == "uncategorized")) {
+
+                    $query_no_of = mysqli_query($conn, "UPDATE `project_categories` SET no_of_post = no_of_post - 1 WHERE name = '$prev_category'");
+
+                    if ($query_no_of) {
+                        echo 'Post Updated Successfully';
+                    }
+                } elseif (($post_category !== $prev_category) && ($prev_category == "uncategorized")) {
+
+
+                    $query_no_of = mysqli_query($conn, "UPDATE `project_categories` SET no_of_post = no_of_post + 1 WHERE name = '$post_category'");
+
+                    if ($query_no_of) {
+                        echo 'Post Updated Successfully';
+                    }
+                } elseif ($post_category !== $prev_category) {
+
+                    $query_sql = "UPDATE `project_categories` SET no_of_post = no_of_post - 1 WHERE name = '$prev_category';";
+                    $query_sql .= "UPDATE `project_categories` SET no_of_post = no_of_post + 1 WHERE name = '$post_category'";
+
+                    if (mysqli_multi_query($conn, $query_sql)) {
+                        echo 'Post Updated Successfully';
+                    }
+                } else {
+
+                    echo "Post Updated Successfully";
+                }
+            }
+        }
+    } else {
+
+        $post_image_tmp_name = $_FILES['edit_post_image']['tmp_name'];
+        $dotpos = stripos($post_image, '.') + 1;
+        $ext = substr($post_image, $dotpos);
+        $rand = rand(100000, 1000000);
+        $rename_post_image = $rand . '.' . $ext;
+        $img_folder = '../uploaded_img/' . $rename_post_image;
+
+
+        $image_query = mysqli_query($conn, "SELECT image FROM `project_posts` WHERE id = '$post_id' ");
+        $old_image_name = mysqli_fetch_assoc($image_query)['image'];
+        $old_img_folder = '../uploaded_img/' . $old_image_name;
+
+        function updatePostImg()
+        {
+
+            global $old_img_folder, $post_image_tmp_name, $img_folder;
+
+            if (file_exists($old_img_folder)) {
+                unlink($old_img_folder);
+
+                move_uploaded_file($post_image_tmp_name, $img_folder);
+            } else {
+
+                move_uploaded_file($post_image_tmp_name, $img_folder);
+            }
+        }
+
+        if (!empty($post_code_file)) {
+
+            $query = mysqli_query($conn, "UPDATE `project_posts` SET `title`='$post_title',`slug`='$post_slug',`description`='$post_description',`html_code`='$post_html_code',`css_code`='$post_css_code',`js_code`='$post_js_code',`php_code`='$post_php_code',`code_file`='$rename_post_code_file',`image`='$rename_post_image',`meta_title`='$post_meta_title',`meta_description`='$post_meta_description',`meta_keywords`='$post_meta_keywords',`status`='$post_status',`category`='$post_category' WHERE `id` = '$post_id' ");
+
+            if ($query) {
+
+                updatePostImg();
+                updatePostCodeFile();
+
+                if (($post_category !== $prev_category) && ($post_category == "uncategorized")) {
+
+                    $query_no_of = mysqli_query($conn, "UPDATE `project_categories` SET no_of_post = no_of_post - 1 WHERE name = '$prev_category'");
+
+                    if ($query_no_of) {
+                        echo "Post updated successfully";
+                    }
+                } elseif (($post_category !== $prev_category) && ($prev_category == "uncategorized")) {
+
+                    $query_no_of = mysqli_query($conn, "UPDATE `project_categories` SET no_of_post = no_of_post + 1 WHERE name = '$post_category'");
+
+                    if ($query_no_of) {
+                        echo "Post updated successfully";
+                    }
+                } elseif ($post_category !== $prev_category) {
+
+                    $query_sql = "UPDATE `project_categories` SET no_of_post = no_of_post - 1 WHERE name = '$prev_category';";
+                    $query_sql .= "UPDATE `project_categories` SET no_of_post = no_of_post + 1 WHERE name = '$post_category'";
+
+                    if (mysqli_multi_query($conn, $query_sql)) {
+                        echo "Post updated successfully";
+                    }
+                } else {
+
+                    echo "Post updated successfully";
+                }
+            }
+        } else {
+
+            $query = mysqli_query($conn, "UPDATE `project_posts` SET `title`='$post_title',`slug`='$post_slug',`description`='$post_description',`html_code`='$post_html_code',`css_code`='$post_css_code',`js_code`='$post_js_code',`php_code`='$post_php_code',`image`='$rename_post_image',`meta_title`='$post_meta_title',`meta_description`='$post_meta_description',`meta_keywords`='$post_meta_keywords',`status`='$post_status',`category`='$post_category' WHERE `id` = '$post_id' ");
+
+
+            // $query = mysqli_query($conn, "UPDATE `project_posts` SET `title`='$post_title',`slug`='$post_slug',`description`='$post_description',`image`='$rename_post_image',`meta_title`='$post_meta_title',`meta_description`='$post_meta_description',`meta_keywords`='$post_meta_keywords',`status`='$post_status',`category`='$post_category' WHERE `id` = '$post_id' ");
+            if ($query) {
+
+                updatePostImg();
+
+                if (($post_category !== $prev_category) && ($post_category == "uncategorized")) {
+
+                    $query_no_of = mysqli_query($conn, "UPDATE `project_categories` SET no_of_post = no_of_post - 1 WHERE name = '$prev_category'");
+
+                    if ($query_no_of) {
+                        echo "Post updated successfully";
+                    }
+                } elseif (($post_category !== $prev_category) && ($prev_category == "uncategorized")) {
+
+                    $query_no_of = mysqli_query($conn, "UPDATE `project_categories` SET no_of_post = no_of_post + 1 WHERE name = '$post_category'");
+
+                    if ($query_no_of) {
+                        echo "Post updated successfully";
+                    }
+                } elseif ($post_category !== $prev_category) {
+
+                    $query_sql = "UPDATE `project_categories` SET no_of_post = no_of_post - 1 WHERE name = '$prev_category';";
+                    $query_sql .= "UPDATE `project_categories` SET no_of_post = no_of_post + 1 WHERE name = '$post_category'";
+
+                    if (mysqli_multi_query($conn, $query_sql)) {
+                        echo "Post updated successfully";
+                    }
+                } else {
+
+                    echo "Post updated successfully";
+                }
+            }
+        }
     }
 }
 
@@ -1367,7 +1637,7 @@ function getPostData($id)
     echo $result;
 }
 
-// View Post in Modal
+// View Blog Post in Modal
 if (isset($_POST['getBlogPostView'])) {
     $id = $_POST['blog_post_id'];
 
@@ -1418,15 +1688,7 @@ if (isset($_POST['update_blog_post_id'])) {
     $prev_category = mysqli_fetch_assoc(mysqli_query($conn, "SELECT category FROM `blog_posts` WHERE id = '$post_id' "))['category'];
 
 
-    // $sql = "UPDATE `blog_posts` SET `title`='$post_title',`slug`='$post_slug',`description`='$post_description',`image`='$rename_port_image',`meta_title`='$post_meta_title',`meta_description`='$post_meta_description',`meta_keywords`='$post_meta_keywords',`status`='$post_status,`category`='$post_category WHERE `id` = '$post_id' ";
-
-    // $sql .= "UPDATE `blog_categories` SET no_of_post = no_of_post + 1 WHERE category = '$post_category'";
-
-
-
     if (empty($post_image)) {
-
-        // $query = mysqli_query($conn, "UPDATE `blog_posts` SET `title`='$post_title',`slug`='$post_slug',`description`='$post_description',`meta_title`='$post_meta_title',`meta_description`='$post_meta_description',`meta_keywords`='$post_meta_keywords',`status`='$post_status',`category`='$post_category' WHERE `id` = '$post_id' ");
 
         $query = mysqli_query($conn, "UPDATE `blog_posts` SET `title`='$post_title',`slug`='$post_slug',`description`='$post_description',`meta_title`='$post_meta_title',`meta_description`='$post_meta_description',`meta_keywords`='$post_meta_keywords',`status`='$post_status',`category`='$post_category' WHERE `id` = '$post_id' ");
 
@@ -1531,26 +1793,5 @@ if (isset($_POST['update_blog_post_id'])) {
             }
         }
     }
-
-
-
-
-
-    // $prev_category = mysqli_query($conn, "SELECT category FROM `blog_posts`");
-
-    // // $sql = "INSERT INTO `blog_posts`(`title`, `slug`, `description`, `image`, `meta_title`, `meta_description`, `meta_keywords`, `status`, `category`) VALUES ('$post_title','$post_slug','$post_description', '$rename_post_image','$post_meta_title','$post_meta_description','$post_meta_keywords', '$post_status', '$post_category');";
-
-    // $sql = "UPDATE `blog_posts` SET `title`='$post_title',`slug`='$post_slug',`description`='$post_description',`image`='$rename_port_image',`meta_title`='$post_meta_title',`meta_description`='$post_meta_description',`meta_keywords`='$post_meta_keywords',`status`='$post_status,`category`='$post_category WHERE `id` = '$post_id' ";
-
-    // $sql .= "UPDATE `blog_categories` SET no_of_post = no_of_post + 1 WHERE name = '$post_category'";
-
-    // if (mysqli_multi_query($conn, $sql)) {
-
-    //     move_uploaded_file($post_image_tmp_name, $img_folder);
-    //     echo "Post added successfully";
-    // } else {
-    //     echo '<span class="text-danger">Something went wrong!</span>';
-    // }
-
 }
 // Blog Section Ends Here

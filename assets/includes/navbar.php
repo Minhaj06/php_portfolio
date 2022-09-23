@@ -35,7 +35,7 @@
                             <a class="menu_link" href="<?php base_url("") ?>#portfolio">portfolio</a>
                         </li>
                         <li>
-                            <a class="menu_link" href="<?php base_url("") ?>#projects">projects</a>
+                            <a class="menu_link" href="<?php base_url("") ?>#projects">code projects</a>
                         </li>
                         </li>
                         <li><a class="menu_link" href="<?php base_url("") ?>#blogs">blogs</a></li>
@@ -49,7 +49,7 @@
                             </a>
                             <ul class="dropdown_menu flex-column">
                                 <li>
-                                    <a class="dropdown_item" href="user_profile.php">my profile</a>
+                                    <a class="dropdown_item" href="<?php base_url("user_profile.php") ?>">my profile</a>
                                 </li>
                                 <li>
                                     <a class="dropdown_item" href="<?php base_url("admin/index.php") ?>"

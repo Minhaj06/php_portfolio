@@ -13,7 +13,7 @@ if (isset($_GET['slug'])) {
         if (strtolower($category) != 'uncategorized') {
             $category_slug = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `slug` FROM `blog_categories` WHERE name = '$category' "))['slug'];
         } else {
-            $category_slug = "";
+            $category_slug = "javascript: void(0)";
         }
 
         if ($category_slug == "") {

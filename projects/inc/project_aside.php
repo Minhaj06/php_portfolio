@@ -6,7 +6,7 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
 <h2 class="widget_title">Search Here</h2>
 <form action="search.php" method="GET">
     <div class="input-group mb-5 pb-4">
-        <input type="search" name="search" class="form-control rounded fs-3 px-3" placeholder="Search blog"
+        <input type="search" name="search" class="form-control rounded fs-3 px-3" placeholder="Search project"
             aria-label="Search" />
         <input type="submit" name="search_btn" value="Search" class="btn fs-3 search_btn" />
     </div>

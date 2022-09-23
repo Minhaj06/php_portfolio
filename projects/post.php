@@ -98,6 +98,8 @@ function postDate($timestamp)
                                 <!-- Source Code -->
                                 <div class="code_area_wrapper">
 
+
+                                    <!-- HTML Code -->
                                     <?php
                                         if (!empty($single_post_result['html_code'])) {
                                         ?>
@@ -112,6 +114,8 @@ function postDate($timestamp)
                                     <?php   }
                                         ?>
 
+
+                                    <!-- CSS Code -->
                                     <?php
                                         if (!empty($single_post_result['css_code'])) {
                                         ?>
@@ -126,6 +130,8 @@ function postDate($timestamp)
                                     <?php   }
                                         ?>
 
+
+                                    <!-- JS Code -->
                                     <?php
                                         if (!empty($single_post_result['js_code'])) {
                                         ?>
@@ -140,6 +146,8 @@ function postDate($timestamp)
                                     <?php   }
                                         ?>
 
+
+                                    <!-- PHP Code -->
                                     <?php
                                         if (!empty($single_post_result['php_code'])) {
                                         ?>
@@ -155,14 +163,22 @@ function postDate($timestamp)
                                         ?>
 
 
-
-
                                     <!-- Download Button -->
+                                    <?php
+                                        if (!empty($single_post_result['code_file'])) {
+                                        ?>
+
                                     <div class="text-center mt-5">
-                                        <button class="download_btn"><span class="me-2"><i
+                                        <a download="<?= $single_post_result['code_file'] ?>"
+                                            href="../assets/files/<?= $single_post_result['code_file'] ?>"
+                                            class="download_btn"><span class="me-2"><i
                                                     class="fa-sharp fa-solid fa-download"></i></span>Source
-                                            Codes</button>
+                                            Codes</a>
                                     </div>
+                                    <?php   }
+                                        ?>
+
+
 
                                 </div>
 
@@ -225,7 +241,7 @@ function postDate($timestamp)
 
                         <div class="row g-4">
                             <?php
-                                $related_post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `created_at` FROM `blog_posts` WHERE status = '1' AND `category` = '$category' AND `slug` != '$slug' ORDER BY id DESC");
+                                $related_post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `created_at` FROM `project_posts` WHERE status = '1' AND `category` = '$category' AND `slug` != '$slug' ORDER BY id DESC");
 
                                 if (mysqli_num_rows($related_post_query) > 0) {
                                     while ($related_post_result = mysqli_fetch_array($related_post_query)) {

@@ -284,7 +284,7 @@ function postDate($timestamp)
                             $next_page = $page_no + 1;
                             $offset = ($page_no - 1) * $limit;
                         } else {
-                            $page_no = 0;
+                            $page_no = 1;
                             $offset = 0;
                             $prev_page = 0;
                             $next_page = 2;

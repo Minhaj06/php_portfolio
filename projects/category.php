@@ -3,7 +3,7 @@ include '../admin/config/dbConnect.php';
 
 if (isset($_GET['slug'])) {
     $slug = $_GET['slug'];
-    $category_query = mysqli_query($conn, "SELECT * FROM `project_categories` WHERE slug = '$slug' ");
+    $category_query = mysqli_query($conn, "SELECT `name` FROM `project_categories` WHERE slug = '$slug' ");
 
     $count_post = mysqli_num_rows($category_query);
 
@@ -60,12 +60,12 @@ function postDate($timestamp)
                             while ($cat_wise_post_result = mysqli_fetch_array($cat_wise_post_query)) {
                         ?>
                     <div class="category_wise_post mb-5 pb-4">
-                        <a href="<?php base_url("post.php?slug=" . $cat_wise_post_result['slug']) ?>">
+                        <a href="<?php base_url("projects/post.php?slug=" . $cat_wise_post_result['slug']) ?>">
                             <img style="max-height: 50rem;"
                                 src="<?php base_url("uploaded_img/" . $cat_wise_post_result['image']) ?>" width="100%"
                                 alt="post image">
                         </a>
-                        <a href="<?php base_url("post.php?slug=" . $cat_wise_post_result['slug']) ?>">
+                        <a href="<?php base_url("projects/post.php?slug=" . $cat_wise_post_result['slug']) ?>">
                             <h2 style="font-weight: 300;" class="post_title my-4"><?= $cat_wise_post_result['title'] ?>
                             </h2>
                         </a>

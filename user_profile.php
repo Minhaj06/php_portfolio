@@ -439,7 +439,7 @@ if (isset($_POST['change_pass'])) {
                                                 </div>
                                                 <div class="col-6">
                                                     <a class="option_btn btn w-100 text-capitalize fs-4"
-                                                        href="blog.php">read
+                                                        href="<?php base_url("blogs.php") ?>">read
                                                         blogs</a>
                                                 </div>
                                             </div>
