@@ -192,8 +192,9 @@ background-color: var(--white);
 color: var(--orange);
 display: flex;
 justify-content: center;
-padding: 0.5rem 2rem;
+padding: 0.5rem;
 border-radius: 3rem;
+overflow: hidden;
 }
 
 .myPagination li {
@@ -1094,7 +1095,7 @@ left: -2rem;
 }
 }
 
-@media (max-width: 1275px) {
+@media (max-width: 1274.98px) {
 .button {
 min-width: 20rem;
 min-height: 5rem;
@@ -1164,7 +1165,8 @@ left: auto;
 }
 }
 
-@media (max-width: 991px) {
+
+@media (max-width: 991.98px) {
 .content {
 max-width: 100%;
 }
@@ -1208,7 +1210,7 @@ margin-top: 10rem;
 
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
 .hero_content h1 {
 font-size: 8vw;
 }
@@ -1218,6 +1220,38 @@ margin: 1.5rem 0;
 .bottom_space {
 margin-bottom: 0 !important;
 margin-left: 2rem !important;
+}
+.myPagination li {
+margin: 0 .5rem;
+}
+.myPagination li a {
+font-size: 1.6rem;
+width: 4rem;
+height: 4rem;
+}
+.myPagination li a.page_prev,.myPagination li a.page_next {
+padding: 0 1.4rem;
+gap: 0.3rem;
+}
+}
+
+@media (max-width: 575.98px) {
+.myPagination li {
+margin: 0 .5rem;
+}
+.myPagination li a {
+font-size: 1.6rem;
+width: 4rem;
+}
+.myPagination li a.page_prev,.myPagination li a.page_next {
+width: 4rem;
+border-radius: 50%;
+padding: 0 1.4rem;
+gap: 0.3rem;
+border: 0;
+}
+.myPagination li a.page_prev span,.myPagination li a.page_next span {
+display: none;
 }
 }
 

@@ -1794,4 +1794,31 @@ if (isset($_POST['update_blog_post_id'])) {
         }
     }
 }
+
+
+// Delete blog post
+if (isset($_POST['delete_blog_post'])) {
+    $delete_blog_post_id = $_POST['delete_blog_post_id'];
+
+    $select = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `image`, `category` FROM `blog_posts` WHERE id = '$delete_blog_post_id' "));
+
+    $image = $select['image'];
+    $category = $select['category'];
+
+    $sql = "DELETE FROM `blog_posts` WHERE id = '$delete_blog_post_id';";
+    $sql .= "UPDATE `blog_categories` SET no_of_post = no_of_post - 1 WHERE name = '$category'";
+
+
+    if (mysqli_multi_query($conn, $sql)) {
+
+        if (file_exists("../uploaded_img/" . $image)) {
+            unlink("../uploaded_img/" . $image);
+        }
+
+        echo "Post deleted succfully";
+    } else {
+        echo '<span class="text-danger">Post not deleted!</span>';
+    }
+}
+
 // Blog Section Ends Here

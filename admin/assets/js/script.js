@@ -3184,4 +3184,37 @@ $(document).on("click", "#edit_blog_post_btn", function(e) {
     edit_blog_post_id = "";
 });
 
+
+// Delete Blog Post
+$(document).on("click", "#delete_blog_post_btn", function(e) {
+    e.preventDefault();
+
+    $("#confirmBox").modal("show");
+    let delete_blog_post_id = $(this).data("id");
+    modalDismiss();
+
+    $("#confirm_ok").click(function() {
+        $.ajax({
+            url: "code.php",
+            type: "POST",
+            data: {
+                delete_blog_post: 1,
+                delete_blog_post_id: delete_blog_post_id,
+            },
+            success: function(response) {
+                // hide confirm box
+                $("#confirmBox").modal("toggle");
+
+                // Refresh Table
+                $("#blog_category").load(location.href + " #blog_category>*", "");
+                $("#blog_posts").load(location.href + " #blog_posts>*", "");
+
+                // Messsage Show
+                showMessage();
+                $(".message_show .ation_message").html(response);
+            },
+        });
+    });
+});
+
 // Blog Section Ends Here

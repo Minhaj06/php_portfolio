@@ -275,7 +275,7 @@ function postDate($timestamp)
                         <?php
                         $total_records = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM `blog_posts` WHERE status = '1'"));
 
-                        $limit = 6;
+                        $limit = 10;
                         $total_pages = ceil($total_records / $limit);
 
                         if (isset($_GET['page'])) {
@@ -332,12 +332,12 @@ function postDate($timestamp)
 
                         echo '<ul class="myPagination mt-5">';
 
-                        if ($prev_page > 0) {
-                            echo '<li><a class="page_prev" href="blogs.php?page=' . $prev_page . '"><i class="fa-solid fa-angles-left"></i> Prev</a></li>';
+                        if ($prev_page > 2) {
+                            echo '<li><a class="page_prev" href="blogs.php?page=' . $prev_page . '"><i class="fa-solid fa-angles-left"></i><span> Prev</span></a></li>';
                         }
 
                         if ($total_pages > 4) {
-                            if ($page_no > 3 && $page_no < $total_pages - 3) {
+                            if ($page_no > 3 && $page_no < $total_pages - 2) {
                                 echo '<li><a class="" href="blogs.php?page=1">1</a></li>';
                                 echo '<li><b>...</b></li>';
                                 for ($i = $page_no - 1; $i <= $page_no + 1; $i++) {
@@ -350,7 +350,8 @@ function postDate($timestamp)
                                 echo '<li><b>...</b></li>';
                                 echo '<li><a class="" href="blogs.php?page=' . $total_pages . '">' . $total_pages . '</a></li>';
                             } elseif ($page_no <= 3) {
-                                for ($i = 1; $i <= 4; $i++) {
+
+                                for ($i = 1; $i <= 3; $i++) {
                                     if ($i == $page_no) {
                                         echo '<li><a class="active" href="javascript: void(0)">' . $i . '</a></li>';
                                     } else {
@@ -360,9 +361,10 @@ function postDate($timestamp)
                                 echo '<li><b>...</b></li>';
                                 echo '<li><a class="" href="blogs.php?page=' . $total_pages . '">' . $total_pages . '</a></li>';
                             } else {
+
                                 echo '<li><a class="" href="blogs.php?page=1">1</a></li>';
                                 echo '<li><b>...</b></li>';
-                                for ($i = $total_pages - 3; $i <= $total_pages; $i++) {
+                                for ($i = $total_pages - 2; $i <= $total_pages; $i++) {
                                     if ($i == $page_no) {
                                         echo '<li><a class="active" href="javascript: void(0)">' . $i . '</a></li>';
                                     } else {
@@ -371,6 +373,7 @@ function postDate($timestamp)
                                 }
                             }
                         } else {
+
                             for ($i = 1; $i <= $total_pages; $i++) {
                                 if ($i == $page_no) {
                                     echo '<li><a class="active" href="javascript: void(0)">' . $i . '</a></li>';
@@ -380,8 +383,8 @@ function postDate($timestamp)
                             }
                         }
 
-                        if ($next_page - 1 < $total_pages) {
-                            echo '<li><a class="page_next" href="blogs.php?page=' . $next_page . '">Next <i class="fa-solid fa-angles-right"></i></a></li>';
+                        if ($next_page + 1 < $total_pages) {
+                            echo '<li><a class="page_next" href="blogs.php?page=' . $next_page . '"><span>Next </span><i class="fa-solid fa-angles-right"></i></a></li>';
                         }
 
                         echo '</ul>';

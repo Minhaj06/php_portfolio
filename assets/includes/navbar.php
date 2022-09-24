@@ -23,22 +23,22 @@
 
                     <ul>
                         <li>
-                            <a class="menu_link active" href="<?php base_url("") ?>#home">home</a>
+                            <a class="menu_link active" href="<?php base_url("#home") ?>">home</a>
                         </li>
                         <li>
-                            <a class="menu_link" href="<?php base_url("") ?>#skill_area">about me</a>
+                            <a class="menu_link" href="<?php base_url("#skill_area") ?>">about me</a>
                         </li>
                         <li>
-                            <a class="menu_link" href="<?php base_url("") ?>#services">services</a>
+                            <a class="menu_link" href="<?php base_url("#services") ?>">services</a>
                         </li>
                         <li>
-                            <a class="menu_link" href="<?php base_url("") ?>#portfolio">portfolio</a>
+                            <a class="menu_link" href="<?php base_url("#portfolio") ?>">portfolio</a>
                         </li>
                         <li>
-                            <a class="menu_link" href="<?php base_url("") ?>#projects">code projects</a>
+                            <a class="menu_link" href="<?php base_url("#projects") ?>">code projects</a>
                         </li>
                         </li>
-                        <li><a class="menu_link" href="<?php base_url("") ?>#blogs">blogs</a></li>
+                        <li><a class="menu_link" href="<?php base_url("#blogs") ?>">blogs</a></li>
                         <li>
                             <a class="menu_link" href="#footer">contact us</a>
                         </li>
@@ -83,7 +83,7 @@
                         </li>
                         <?php } ?>
                         <li>
-                            <a class="hire_btn" href="index.php#hire_me">hire me!</a>
+                            <a class="hire_btn" href="<?php base_url("#hire_me") ?>">hire me!</a>
                         </li>
                     </ul>
                 </div>
