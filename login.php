@@ -148,122 +148,125 @@ if (isset($_SESSION['auth'])) {
     }
 }
 
+if (isset($_GET["action"]) == "user-registration") {
+    $title = "Registration || Coder";
+    $og_url = "login.php?action=user-registration";
+} else {
+    $title = "Login || Coder";
+    $og_url = "login.php";
+}
+
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php include_once("assets/includes/head.php") ?>
 
-<head>
+<style>
+body {
+    background: #01202c;
+}
 
-    <?php include_once("assets/includes/meta_links_scripts.php") ?>
-    <title>Coder || User Login</title>
-    <style>
-    /* body {
-        background: #01202c;
-    } */
-
-    .card {
-        color: #fff;
-        background: #000;
-        border: 1px solid var(--gray);
-    }
+.card {
+    color: #fff;
+    background: #000;
+    border: 1px solid var(--gray);
+}
 
 
-    .signInWith a {
-        color: #fff;
-    }
+.signInWith a {
+    color: #fff;
+}
 
-    .signInWith a:hover {
-        color: #ccc;
-    }
+.signInWith a:hover {
+    color: #ccc;
+}
 
-    .submit_btn {
-        color: #fff;
-        background: #000;
-        border: 1px solid var(--gray);
-        text-transform: capitalize;
-        border-radius: .2rem;
-    }
+.submit_btn {
+    color: #fff;
+    background: #000;
+    border: 1px solid var(--gray);
+    text-transform: capitalize;
+    border-radius: .2rem;
+}
 
-    .submit_btn:hover {
-        color: #fff;
-        background: var(--orange);
-    }
+.submit_btn:hover {
+    color: #fff;
+    background: var(--orange);
+}
 
-    .forgot_text:hover {
-        color: var(--gray) !important;
-    }
+.forgot_text:hover {
+    color: var(--gray) !important;
+}
 
-    p {
-        margin-bottom: 0;
-    }
+p {
+    margin-bottom: 0;
+}
 
-    .google {
-        background: #DB4437;
-        border-radius: .2rem;
-    }
+.google {
+    background: #DB4437;
+    border-radius: .2rem;
+}
 
-    .facebook {
-        background: #3b5998;
-        border-radius: .2rem;
-    }
+.facebook {
+    background: #3b5998;
+    border-radius: .2rem;
+}
 
-    .twitter {
-        background: #00acee;
-        border-radius: .2rem;
-    }
+.twitter {
+    background: #00acee;
+    border-radius: .2rem;
+}
 
-    .input_icon {
-        background: #01202c;
-        border-radius: .2rem;
-    }
+.input_icon {
+    background: #01202c;
+    border-radius: .2rem;
+}
 
-    .input {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        padding: .7rem;
-    }
+.input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: .7rem;
+}
 
-    .input_icon input:focus {
-        outline: 0px !important;
-        -webkit-appearance: none;
-        box-shadow: none !important;
-    }
+.input_icon input:focus {
+    outline: 0px !important;
+    -webkit-appearance: none;
+    box-shadow: none !important;
+}
 
-    .or_container {
-        align-items: center;
-        color: #fff;
-        display: flex;
-        margin: 2rem 0;
-    }
+.or_container {
+    align-items: center;
+    color: #fff;
+    display: flex;
+    margin: 2rem 0;
+}
 
-    .line_separator {
-        background-color: #fff;
-        flex-grow: 5;
-        height: 1px
-    }
+.line_separator {
+    background-color: #fff;
+    flex-grow: 5;
+    height: 1px
+}
 
-    .or_label {
-        flex-grow: 1;
-        text-align: center
-    }
+.or_label {
+    flex-grow: 1;
+    text-align: center
+}
 
-    .no_account {
-        border-top: 1px solid;
-    }
+.no_account {
+    border-top: 1px solid;
+}
 
-    .no_account a {
-        text-decoration: none;
-        color: #3b5998;
-    }
+.no_account a {
+    text-decoration: none;
+    color: #3b5998;
+}
 
-    .no_account a:hover {
-        color: var(--gray) !important;
-    }
-    </style>
+.no_account a:hover {
+    color: var(--gray) !important;
+}
+</style>
 </head>
 
-<body>
+<body class="line-numbers">
 
     <?php include_once 'assets/includes/navbar.php'; ?>
     <section class="d-flex align-items-center min-vh-100">

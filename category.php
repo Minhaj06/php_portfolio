@@ -4,11 +4,12 @@ include 'admin/config/dbConnect.php';
 if (isset($_GET['slug'])) {
     $slug = $_GET['slug'];
     $category_query = mysqli_query($conn, "SELECT * FROM `blog_categories` WHERE slug = '$slug' ");
+    $category_result = mysqli_fetch_assoc($category_query);
 
     $count_post = mysqli_num_rows($category_query);
 
     if ($count_post > 0) {
-        $category = mysqli_fetch_assoc($category_query)['name'];
+        $category = $category_result['name'];
     } else {
         $category = "";
     }
@@ -16,33 +17,38 @@ if (isset($_GET['slug'])) {
     $count_post = 0;
 }
 
-if (isset($category)) {
-    $title = $category;
-} else {
-    $title = "Post not found";
-}
-
 function postDate($timestamp)
 {
     $date = date("M d, Y", strtotime($timestamp));
     echo $date;
 }
+
+if (isset($category) && !empty($category)) {
+    $title = $category . " || Coder";
+    $meta_title = $category_result['meta_title'];
+    $meta_description = $category_result['meta_description'];
+    $meta_keywords = $category_result['meta_keywords'];
+
+    $og_url = "category.php?slug=" . $category_result['slug'];
+    $og_title = $category_result['name'];
+    $og_description = $category_result['description'];
+} else {
+    $title = "Post not found! || Coder";
+}
+
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php include_once("assets/includes/head.php"); ?>
 
-<head>
-    <?php include_once("assets/includes/meta_links_scripts.php"); ?>
-    <title><?= $title ?> || Coder</title>
 </head>
 
 <body>
-    <?php include_once("assets/includes/preloader.php") ?>
+    <?php // include_once("assets/includes/preloader.php") 
+    ?>
     <?php include_once("assets/includes/navbar.php") ?>
 
     <!-- blog section starts here -->
-    <section class="all" id="blogs" style="margin-top: 12rem;">
+    <section class="all" id="blogs">
 
         <div class="inner_blog container m-auto">
 

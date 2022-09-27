@@ -26,10 +26,18 @@ if (isset($_GET['slug'])) {
     $count_post = 0;
 }
 
-if (isset($single_post_result['title'])) {
-    $title = ($single_post_result['title']);
+if (isset($single_post_result['title']) && !empty($single_post_result['title'])) {
+    $title = $single_post_result['title'] . " || Coder";
+    $meta_title = $single_post_result['meta_title'];
+    $meta_description = $single_post_result['meta_description'];
+    $meta_keywords = $single_post_result['meta_keywords'];
+
+    $og_url = "post.php?slug=" . $single_post_result['slug'];
+    $og_title = $single_post_result['title'];
+    $og_description = $single_post_result['meta_description'];
+    $og_image_path = "uploaded_img/" . $single_post_result['image'];
 } else {
-    $title = "Post not found";
+    $title = "Post not found! || Coder";
 }
 
 function postDate($timestamp)
@@ -39,12 +47,8 @@ function postDate($timestamp)
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <?php include_once("../assets/includes/meta_links_scripts.php"); ?>
-    <title><?= $title ?> || Coder</title>
+<?php include_once("../assets/includes/head.php"); ?>
+</title>
 </head>
 
 <body class="line-numbers">
@@ -52,7 +56,7 @@ function postDate($timestamp)
     <?php include_once("../assets/includes/navbar.php") ?>
 
     <!-- blog section starts here -->
-    <section class="all" id="blogs" style="margin-top: 12rem;">
+    <section class="all" id="blogs">
 
         <div class="inner_blog container m-auto">
 
@@ -166,6 +170,7 @@ function postDate($timestamp)
                                     <!-- Download Button -->
                                     <?php
                                         if (!empty($single_post_result['code_file'])) {
+                                            if (isset($_SESSION['auth_user'])) {
                                         ?>
 
                                     <div class="text-center mt-5">
@@ -175,7 +180,18 @@ function postDate($timestamp)
                                                     class="fa-sharp fa-solid fa-download"></i></span>Source
                                             Codes</a>
                                     </div>
-                                    <?php   }
+                                    <?php
+                                            } else {
+                                            ?>
+
+                                    <div class="text-center mt-5">
+                                        <a href="<?php base_url("login.php") ?>" class="download_btn"><span
+                                                class="me-2"><i class="fa-sharp fa-solid fa-download"></i></span>Source
+                                            Codes</a>
+                                    </div>
+
+                                    <?php }
+                                        }
                                         ?>
 
 
@@ -223,7 +239,7 @@ function postDate($timestamp)
 
                                 <div class="col">
                                     <a style="color: #FFF; background: #3f729b;" href="#" class="btn d-block fs-1"><i
-                                            class="fa-brands fa-twitter"></i></a>
+                                            class="fa-brands fa-instagram"></i></a>
                                 </div>
 
                                 <div class="col">

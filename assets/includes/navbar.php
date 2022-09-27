@@ -42,7 +42,9 @@
                         <li>
                             <a class="menu_link" href="#footer">contact us</a>
                         </li>
+
                         <?php if (isset($_SESSION['auth_user']) && $_SESSION['auth_role'] == 1) { ?>
+
                         <li class="dropdown">
                             <a class="menu_link" href="javascript: void(0)">
                                 <?= $_SESSION['auth_user']['username']; ?><i class="fa-solid fa-chevron-down ps-3"></i>
@@ -56,32 +58,39 @@
                                         target="_blank">dashboard</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown_item" href="logout.php">logout</a>
+                                    <a class="dropdown_item" href="<?php base_url("logout.php") ?>">logout</a>
                                 </li>
                             </ul>
                         </li>
+
                         <?php } elseif (isset($_SESSION['auth_user'])) { ?>
+
                         <li class="dropdown">
                             <a class="menu_link" href="#">
                                 <?= $_SESSION['auth_user']['username']; ?><i class="fa-solid fa-chevron-down ps-3"></i>
                             </a>
                             <ul class="dropdown_menu flex-column">
                                 <li>
-                                    <a class="dropdown_item" href="user_profile.php">my profile</a>
+                                    <a class="dropdown_item" href="<?php base_url("user_profile.php") ?>">my profile</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown_item" href="logout.php">logout</a>
+                                    <a class="dropdown_item" href="<?php base_url("logout.php") ?>">logout</a>
                                 </li>
                             </ul>
                         </li>
+
                         <?php } else { ?>
+
                         <li>
-                            <a class="menu_link" href="login.php">login</a>
+                            <a class="menu_link" href="<?php base_url("login.php") ?>">login</a>
                         </li>
                         <li>
-                            <a class="menu_link" href="login.php?action=user-registration">Register</a>
+                            <a class=" menu_link"
+                                href="<?php base_url("login.php?action=user-registration") ?>">Register</a>
                         </li>
+
                         <?php } ?>
+
                         <li>
                             <a class="hire_btn" href="<?php base_url("#hire_me") ?>">hire me!</a>
                         </li>

@@ -12,6 +12,8 @@ if (!$conn) {
     die();
 }
 
+$url = "";
+
 function base_url($url)
 {
     echo "http://localhost/coder/" . $url;

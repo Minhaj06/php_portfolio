@@ -134,6 +134,19 @@ function emptyAlert() {
     $(".alertMessage").html("Oops! Fill up all the fields...");
 }
 
+
+// Initialize Summernote
+$("#add_post_description").summernote({
+    placeholder: 'Post description goes here',
+    height: 300
+});
+$("#edit_post_description").summernote({
+    placeholder: 'Post description goes here',
+    height: 300
+});
+$('.dropdown-toggle').dropdown();
+
+
 // $(document).ready(function() {
 // check username exists or not
 $("#add_username").keyup(function(e) {

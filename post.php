@@ -26,11 +26,22 @@ if (isset($_GET['slug'])) {
     $count_post = 0;
 }
 
-if (isset($single_post_result['title'])) {
-    $title = ($single_post_result['title']);
+if (isset($single_post_result['title']) && !empty($single_post_result['title'])) {
+    $title = $single_post_result['title'] . " || Coder";
+    $meta_title = $single_post_result['meta_title'];
+    $meta_description = $single_post_result['meta_description'];
+    $meta_keywords = $single_post_result['meta_keywords'];
+
+    $og_url = "post.php?slug=" . $single_post_result['slug'];
+    $og_title = $single_post_result['title'];
+    $og_description = $single_post_result['meta_description'];
+    $og_image_path = "uploaded_img/" . $single_post_result['image'];
 } else {
-    $title = "Post not found";
+    $title = "Post not found! || Coder";
 }
+
+
+
 
 function postDate($timestamp)
 {
@@ -39,20 +50,18 @@ function postDate($timestamp)
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php include_once("assets/includes/head.php"); ?>
 
-<head>
-    <?php include_once("assets/includes/meta_links_scripts.php"); ?>
-    <title><?= $title ?></title>
 </head>
 
-<body>
-    <?php include_once("assets/includes/preloader.php") ?>
-    <?php include_once("assets/includes/navbar.php") ?>
+<body class="line-numbers">
+    <?php
+    // include_once("assets/includes/preloader.php");
+    include_once("assets/includes/navbar.php");
+    ?>
 
     <!-- blog section starts here -->
-    <section class="all" id="blogs" style="margin-top: 12rem;">
+    <section class="all" id="blogs">
 
         <div class="inner_blog container m-auto">
 
@@ -88,7 +97,8 @@ function postDate($timestamp)
                                 <a href="<?php base_url("") ?>"><i class="fa-solid fa-comment"></i> Leave A Comment</a>
                             </p>
 
-                            <div class="post_description mb-5 pb-4"><?= $single_post_result['description'] ?></div>
+                            <div class="post_description overflow-hidden mb-5 pb-4">
+                                <?= $single_post_result['description'] ?></div>
                         </div>
 
                         <!-- Post Share Options -->
@@ -98,41 +108,61 @@ function postDate($timestamp)
                             <div class="row g-3 g-xl-4">
                                 <style>
                                 .post_share_option .btn {
-                                    padding: .2rem .75rem;
+                                    padding: .2rem 3.5rem;
                                 }
 
                                 .post_share_option a:hover {
                                     opacity: .8;
                                 }
                                 </style>
+
                                 <div class="col">
-                                    <a style="color: #FFF; background: #4267B2;" href="#" class="btn d-block fs-1"><i
+                                    <a style="color: #FFF; background: #4267B2;"
+                                        href="http://www.facebook.com/sharer/sharer.php?u=<?php base_url("post.php?" . $slug) ?>"
+                                        target="_blank" class="btn d-block fs-1"><i
                                             class="fa-brands fa-facebook-f"></i></a>
                                 </div>
 
                                 <div class="col">
-                                    <a style="color: #FFF; background: #9A30ED;" href="#" class="btn d-block fs-1"><i
+                                    <a style="color: #FFF; background: #9A30ED;"
+                                        href="http://www.facebook.com/share.php?u=<?php base_url("post.php?" . $slug) ?>"
+                                        target="_blank" class="btn d-block fs-1"><i
                                             class="fa-brands fa-facebook-messenger"></i></a>
                                 </div>
 
                                 <div class="col">
-                                    <a style="color: #FFF; background: #25D366;" href="#" class="btn d-block fs-1"><i
+                                    <a style="color: #FFF; background: #25D366;"
+                                        href="http://www.facebook.com/share.php?u=<?php base_url("post.php?" . $slug) ?>"
+                                        target="_blank" class="btn d-block fs-1"><i
                                             class="fa-brands fa-whatsapp"></i></a>
                                 </div>
 
                                 <div class="col">
-                                    <a style="color: #FFF; background: #00acee;" href="#" class="btn d-block fs-1"><i
+                                    <a style="color: #FFF; background: #00acee;"
+                                        href="http://www.twitter.com/share?u=<?php base_url("post.php?" . $slug) ?>"
+                                        target="_blank" class="btn d-block fs-1"><i
                                             class="fa-brands fa-twitter"></i></a>
                                 </div>
 
                                 <div class="col">
-                                    <a style="color: #FFF; background: #3f729b;" href="#" class="btn d-block fs-1"><i
-                                            class="fa-brands fa-twitter"></i></a>
+                                    <a style="color: #FFF; background: #3f729b;"
+                                        href="http://www.facebook.com/share.php?u=<?php base_url("post.php?" . $slug) ?>"
+                                        target="_blank" class="btn d-block fs-1"><i
+                                            class="fa-brands fa-instagram"></i></a>
                                 </div>
 
                                 <div class="col">
-                                    <a style="color: #FFF; background: #E60023;" href="#" class="btn d-block fs-1"><i
+                                    <a style="color: #FFF; background: #E60023;"
+                                        href="http://www.facebook.com/share.php?u=<?php base_url("post.php?" . $slug) ?>"
+                                        target="_blank" class="btn d-block fs-1"><i
                                             class="fa-brands fa-pinterest-p"></i></a>
+                                </div>
+
+                                <div class="col">
+                                    <a style="color: #FFF; background: #0072B1;"
+                                        href="http://www.linkedin.com/shareArticle?mini=true&url=<?php base_url("post.php?" . $slug) ?>"
+                                        target="_blank" class="btn d-block fs-1"><i
+                                            class="fa-brands fa-linkedin-in"></i></a>
                                 </div>
 
                             </div>

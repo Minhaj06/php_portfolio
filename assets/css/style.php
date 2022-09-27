@@ -14,7 +14,6 @@ ul {
 box-sizing: border-box;
 padding: 0;
 margin: 0;
-transition: all 0.2s linear;
 }
 
 ul,
@@ -55,11 +54,7 @@ text-decoration: none;
 
 a:hover {
 color: var(--orange);
-}
-
-img {
-max-width: 100%;
-max-height: 100%;
+transition: all 0.2s linear;
 }
 
 #preloader {
@@ -81,6 +76,10 @@ margin-top: 10rem;
 section {
 overflow: hidden;
 padding-top: 10rem;
+}
+
+.all {
+padding-top: 12rem;
 }
 
 /* @media (min-width: 1600px) {
@@ -105,10 +104,6 @@ max-width: 1250px;
 .container {
 max-width: 1320px;
 }
-}
-
-.all {
-padding-top: 0;
 }
 
 .vertical_path {
@@ -138,6 +133,7 @@ font-size: 2.2rem;
 text-transform: capitalize;
 min-width: 24rem;
 min-height: 8rem;
+transition: all 0.2s linear;
 }
 
 .button:hover {
@@ -211,6 +207,7 @@ height: 4.5rem;
 display: flex;
 justify-content: center;
 align-items: center;
+transition: all 0.2s linear;
 }
 
 .myPagination li a:hover {
@@ -310,16 +307,17 @@ color: var(--white);
 font-weight: 400;
 padding: 6rem 1rem .5rem 1rem;
 text-transform: capitalize;
+transition: all 0.2s linear;
 }
 
 .main_menu ul li a:hover {
 background: var(--orange);
-color: var(--black);
+color: var(--white);
 }
 
 .main_menu ul li a.active {
 background: var(--orange);
-color: var(--black);
+color: var(--white);
 }
 
 .link_active {
@@ -334,6 +332,7 @@ padding: 1rem 2rem !important;
 margin-top: 3.8rem;
 margin-left: 1rem;
 border-radius: 0.5rem;
+transition: all 0.2s linear;
 }
 
 .main_menu ul li a.hire_btn:hover {
@@ -342,8 +341,9 @@ color: var(--white);
 }
 
 .continue_reading_btn:hover {
-background: var(--gray);
+background: var(--orange);
 color: var(--black);
+transition: all 0.2s linear;
 }
 
 .download_btn {
@@ -353,6 +353,7 @@ color: var(--white);
 padding: 1rem 3rem;
 font-size: 2rem;
 border-radius: 0.3rem;
+transition: all 0.2s linear;
 }
 
 .download_btn:hover {
@@ -587,6 +588,7 @@ padding: 2rem 4rem 2rem 1rem;
 border-radius: 0.5rem;
 position: relative;
 cursor: pointer;
+transition: all 0.2s linear;
 }
 
 .serv_item>div:hover {
@@ -650,6 +652,7 @@ background-position: 0 0, 0 0, 100% 0, 0 100%;
 background-repeat: no-repeat;
 padding: 5rem 1rem;
 border-radius: 10px;
+transition: all 0.2s linear;
 }
 
 .achive_item>div:hover {
@@ -684,6 +687,7 @@ cursor: pointer;
 .port_menu ul li:hover .p_cat {
 color: var(--orange);
 border-bottom: 3px solid var(--orange);
+transition: all 0.2s linear;
 }
 
 .bottom_space {
@@ -708,6 +712,7 @@ border-bottom: 3px solid var(--orange);
 position: relative;
 overflow: hidden;
 height: 100%;
+transition: all 0.2s linear;
 }
 
 .port_single>div img {
@@ -891,6 +896,7 @@ border-radius: .5rem;
 .blog_item img {
 width: 100%;
 height: 100%;
+transition: all 0.2s linear;
 }
 
 .blog_item .blog_img {
@@ -907,6 +913,7 @@ height: 23rem;
 
 .blog_content {
 padding: 2rem 2rem 3rem 2rem;
+transition: all 0.2s linear;
 }
 
 .blog_content .para {
@@ -951,11 +958,13 @@ color: var(--white);
 
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
 border-color: var(--orange);
+transition: all 0.2s linear;
 }
 
 
 .recent_post_comment li:hover button {
 color: var(--white);
+transition: all 0.2s linear;
 }
 
 .recent_post_comment li button.active {
@@ -967,6 +976,7 @@ border-color: var(--orange) !important;
 .search_btn {
 background: var(--orange);
 color: var(--white);
+transition: all 0.2s linear;
 }
 
 .search_btn:hover {
@@ -976,6 +986,7 @@ color: var(--white);
 .categories ul li {
 line-height: 2;
 border-bottom: 1px solid var(--dark-gray);
+transition: all 0.2s linear;
 }
 
 .categories ul li:hover {
@@ -998,6 +1009,7 @@ display: block;
 
 .recent_post_img img:hover {
 transform: scale(1.1) rotate(1deg);
+transition: all 0.2s linear;
 }
 
 /* blog section ends here */
@@ -1055,6 +1067,7 @@ padding: 0.5rem 0 0.5rem 1rem;
 font-size: 5rem;
 margin-right: 2rem;
 cursor: pointer;
+transition: all 0.2s linear;
 }
 
 .social_icons span:hover {
@@ -1096,6 +1109,14 @@ left: -2rem;
 }
 
 @media (max-width: 1274.98px) {
+.all {
+padding-top: 9rem;
+}
+.main_menu ul li a.hire_btn {
+margin-top: 0;
+margin-left: 0;
+padding: 0.3rem 2rem!important;
+}
 .button {
 min-width: 20rem;
 min-height: 5rem;
@@ -1121,6 +1142,7 @@ border-radius: 0.3rem;
 }
 .main_menu ul li .active {
 background: none !important;
+transition: all 0.2s linear;
 }
 .main_menu ul li a:hover {
 background: var(--orange);
@@ -1148,6 +1170,7 @@ height: calc(100vh - 0rem);
 .dropdown_menu {
 background: none;
 margin: -1rem 0 -1rem 3rem;
+transition: all 0.2s linear;
 }
 .dropdown_item {
 padding: 0 1rem !important;
@@ -1214,6 +1237,9 @@ margin-top: 10rem;
 .hero_content h1 {
 font-size: 8vw;
 }
+.skills h3 {
+font-size: 3.5rem;
+}
 .port_menu ul li {
 margin: 1.5rem 0;
 }
@@ -1277,6 +1303,9 @@ margin-bottom: 30rem;
 @media (max-width: 420px) {
 html {
 font-size: 55%;
+}
+.all {
+padding-top: 7rem;
 }
 .logo img {
 max-height: 6rem;

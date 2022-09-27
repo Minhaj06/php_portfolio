@@ -6,160 +6,158 @@ function postDate($timestamp)
     $date = date("M d, Y", strtotime($timestamp));
     echo $date;
 }
+
+$title = "Coder || Blogs";
+$og_url = "blogs.php";
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php include_once("assets/includes/head.php"); ?>
+<style>
+.swiper {
+    width: 100%;
+    height: 100%;
+}
 
-<head>
-    <?php include_once("assets/includes/meta_links_scripts.php"); ?>
-    <title>Coder || Blogs</title>
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
 
-    <style>
-    .swiper {
-        width: 100%;
-        height: 100%;
-    }
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
 
-    .swiper-slide {
-        text-align: center;
-        font-size: 18px;
-        background: #fff;
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-        /* Center slide text vertically */
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        -webkit-align-items: center;
-        align-items: center;
-    }
+.swiper {
+    width: 100%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-    .swiper-slide img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+.swiper-slide {
+    background-size: cover;
+    background-position: center;
+}
 
-    .swiper {
-        width: 100%;
-        height: 300px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+.mySwiper2 {
+    height: 80%;
+    width: 100%;
+}
 
-    .swiper-slide {
-        background-size: cover;
-        background-position: center;
-    }
+.mySwiper {
+    height: 20%;
+    box-sizing: border-box;
+    padding: 5px 0;
+}
 
+.mySwiper .swiper-slide {
+    width: 25%;
+    height: 100%;
+    opacity: 0.4;
+}
+
+.mySwiper .swiper-slide-thumb-active {
+    opacity: 1;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide_item {
+    position: relative;
+    max-height: 35rem;
+    overflow: hidden;
+}
+
+.slide_item:hover img {
+    transform: scale(1.1) rotate(2deg);
+}
+
+
+.blog_item:hover .swiper_pagi_img img {
+    transform: none;
+}
+
+.swiper-slide .slider_blog_content {
+    position: absolute;
+    background: #000000bd;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    text-align: start;
+}
+
+.swiper-slide .slider_blog_content p {
+    font-size: 1.5rem;
+}
+
+.swiper-slide .slider_blog_content a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--white);
+}
+
+.swiper-slide .slider_blog_content a:hover {
+    color: var(--orange);
+}
+
+.swiper_pagi_img img {
+    height: 10rem;
+    cursor: pointer;
+}
+
+@media (max-width: 767.98px) {
     .mySwiper2 {
-        height: 80%;
-        width: 100%;
+        height: 100%;
     }
 
     .mySwiper {
-        height: 20%;
-        box-sizing: border-box;
-        padding: 5px 0;
+        height: 0;
     }
-
-    .mySwiper .swiper-slide {
-        width: 25%;
-        height: 100%;
-        opacity: 0.4;
-    }
-
-    .mySwiper .swiper-slide-thumb-active {
-        opacity: 1;
-    }
-
-    .swiper-slide img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .slide_item {
-        position: relative;
-        max-height: 35rem;
-        overflow: hidden;
-    }
-
-    .slide_item:hover img {
-        transform: scale(1.1) rotate(2deg);
-    }
-
-
-    .blog_item:hover .swiper_pagi_img img {
-        transform: none;
-    }
-
-    .swiper-slide .slider_blog_content {
-        position: absolute;
-        background: #000000bd;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 1rem 2rem;
-        text-align: start;
-    }
-
-    .swiper-slide .slider_blog_content p {
-        font-size: 1.5rem;
-    }
-
-    .swiper-slide .slider_blog_content a {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        text-decoration: none;
-        color: var(--white);
-    }
-
-    .swiper-slide .slider_blog_content a:hover {
-        color: var(--orange);
-    }
-
-    .swiper_pagi_img img {
-        height: 10rem;
-        cursor: pointer;
-    }
-
-    @media (max-width: 767.98px) {
-        .mySwiper2 {
-            height: 100%;
-        }
-
-        .mySwiper {
-            height: 0;
-        }
-    }
-    </style>
-
+}
+</style>
 </head>
 
-<body>
-    <?php include_once("assets/includes/preloader.php") ?>
-    <?php include_once("assets/includes/navbar.php") ?>
+<body class="line-numbers">
+    <?php
+    // include_once("assets/includes/preloader.php");
+    include_once("assets/includes/navbar.php");
+    ?>
 
     <!-- blog section starts here -->
-    <section class="all" id="blogs" style="margin-top: 13rem;">
+    <section class="all" id="blogs">
 
         <div class="inner_blog container m-auto">
 
             <div class="row g-5">
                 <main class="col-lg-8 mb-5 mb-lg-0">
                     <div class="row g-0 mb-5 pb-4">
-                        <div class="blog_item">
+                        <div class="blog_item rounded-0">
 
                             <div style="--swiper-navigation-color: var(--orange); --swiper-pagination-color: var(-orange)"
                                 class="swiper mySwiper2">

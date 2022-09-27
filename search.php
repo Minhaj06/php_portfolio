@@ -13,22 +13,20 @@ function postDate($timestamp)
     $date = date("M d, Y", strtotime($timestamp));
     echo $date;
 }
+
+$title = "search results for " . $search;
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <?php include_once("assets/includes/meta_links_scripts.php"); ?>
-    <title>search results for <?= $search ?></title>
+<?php include_once("assets/includes/head.php"); ?>
 </head>
 
 <body>
-    <?php include_once("assets/includes/preloader.php") ?>
+    <?php // include_once("assets/includes/preloader.php") 
+    ?>
     <?php include_once("assets/includes/navbar.php") ?>
 
     <!-- blog section starts here -->
-    <section class="all" id="blogs" style="margin-top: 12rem;">
+    <section class="all" id="blogs">
 
         <div class="inner_blog container m-auto">
 

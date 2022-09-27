@@ -6,33 +6,33 @@ function postDate($timestamp)
     $date = date("M d, Y", strtotime($timestamp));
     echo $date;
 }
+
+$title = "Coder || Projects";
+$og_url = "projects/index.php";
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php include_once("../assets/includes/head.php"); ?>
 
-<head>
-    <?php include_once("../assets/includes/meta_links_scripts.php"); ?>
-    <title>Coder || Projects</title>
 </head>
 
 <body>
-    <?php include_once("../assets/includes/preloader.php") ?>
+    <?php // include_once("../assets/includes/preloader.php") 
+    ?>
     <?php include_once("../assets/includes/navbar.php") ?>
 
     <!-- blog section starts here -->
-    <section class="all" id="blogs" style="margin-top: 13rem;">
+    <section class="all" id="blogs">
 
         <div class="inner_blog container m-auto">
 
             <div class="row g-5">
                 <main class="col-lg-8 mb-5 mb-lg-0">
-                    <div class="row g-5 g-md-4 g-xl-5">
+                    <div class="row g-5">
 
                         <?php
                         $total_records = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM `project_posts` WHERE status = '1'"));
 
-                        $limit = 1;
+                        $limit = 4;
                         $total_pages = ceil($total_records / $limit);
 
                         if (isset($_GET['page'])) {
@@ -47,34 +47,107 @@ function postDate($timestamp)
                             $next_page = 2;
                         }
 
-                        $post_query = mysqli_query($conn, "SELECT * FROM `project_posts` WHERE status = '1' ORDER BY id DESC LIMIT $limit OFFSET $offset");
+                        $post_query = mysqli_query($conn, "SELECT `title`, `slug`, `description`, `image`, `created_at`, `category`, `code_file` FROM `project_posts` WHERE status = '1' ORDER BY id DESC LIMIT $limit OFFSET $offset");
 
                         if (mysqli_num_rows($post_query) > 0) {
                             while ($post_result = mysqli_fetch_array($post_query)) {
                         ?>
 
-                        <div class="col-md-6">
-                            <div class="blog_item">
-                                <div class="blog_img">
+
+                        <div class="col-12">
+                            <div class="blog_item row g-0 h-100">
+
+                                <div class="col-4 overflow-hidden">
                                     <a href="<?php base_url("projects/post.php?slug=" . $post_result['slug']) ?>">
                                         <img src="<?php base_url("uploaded_img/" . $post_result['image']) ?>"
-                                            alt="blog_img" />
+                                            alt="project_img" />
                                     </a>
                                 </div>
-                                <div class="blog_content">
-                                    <p class="para">
+
+                                <div class="blog_content p-4 col-8">
+
+                                    <div class="d-flex justify-content-between">
+                                        <a class="fs-5 text-capitalize mb-3"
+                                            href="<?php base_url("projects/category.php?slug=" . $category_slug) ?>">
+                                            <i class="fa-solid fa-cube fs-5 ms-0 me-3"></i>
+                                            <?= $post_result['category'] ?>
+                                        </a>
+
+                                        <h5>
+                                            <?php
+                                                    $timestamp =  $post_result['created_at'];
+                                                    $date = date("M d, Y", strtotime($timestamp));
+                                                    echo $date;
+                                                    ?>
+                                        </h5>
+                                    </div>
+
+                                    <a href="<?php base_url("projects/post.php?slug=" . $post_result['slug']) ?>">
+                                        <h2><?= $post_result['title'] ?></h2>
+                                    </a>
+
+                                    <p>
                                         <?php
-                                                $timestamp =  $post_result['created_at'];
-                                                $date = date("M d, Y", strtotime($timestamp));
-                                                echo $date;
+                                                $string = $post_result['description'];
+                                                if (strlen($string) > 80) {
+
+                                                    $stringCut = substr($string, 0, 80);
+                                                    $endPoint = strrpos($stringCut, ' ');
+
+                                                    $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                                    $string .= '....';
+
+                                                    echo $string;
+                                                } else {
+                                                    echo $string;
+                                                }
                                                 ?>
                                     </p>
-                                    <h3><?= $post_result['title'] ?></h3>
-                                    <a href="<?php base_url("projects/post.php?slug=" . $post_result['slug']) ?>">learn
-                                        more<i class="fa-solid fa-arrow-right-long"></i></a>
+
+
+                                    <div class="comment_download_counter text-end mt-4">
+
+                                        <div class="comments_counter d-inline-block">
+                                            <span><i class="fa-solid fa-comment"></i></span> 17
+                                        </div>
+
+                                        <?php
+                                                if (!empty($post_result['code_file'])) {
+                                                    if (isset($_SESSION['auth_user'])) {
+                                                ?>
+
+                                        <div class="downloads_counter d-inline-block ms-3">
+                                            <span><i class="fa-sharp fa-solid fa-download"></i></span>
+                                            Downloads: 952
+                                        </div>
+
+                                        <a download="<?= $post_result['code_file'] ?>"
+                                            href="assets/files/<?= $post_result['code_file'] ?>"
+                                            class="download_btn px-3 py-1 fs-4 d-inline-block ms-3">Download</a>
+
+                                        <?php } else { ?>
+
+                                        <div class="downloads_counter d-inline-block ms-3">
+                                            <span><i class="fa-sharp fa-solid fa-download"></i></span>
+                                            Downloads: 952
+                                        </div>
+
+                                        <a href="login.php"
+                                            class="download_btn px-3 py-1 fs-4 d-inline-block ms-3">Download</a>
+
+                                        <?php }
+                                                } ?>
+
+
+                                    </div>
+
+
+
                                 </div>
+
                             </div>
                         </div>
+
 
                         <?php }
                         } ?>

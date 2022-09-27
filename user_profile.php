@@ -146,97 +146,101 @@ if (isset($_POST['change_pass'])) {
         }
     }
 }
+
+if (isset($_GET["action"]) && $_GET["action"] == "update_profile") {
+    $title = "Profile Update || Coder";
+} elseif (isset($_GET["action"]) && $_GET["action"] == "change_password") {
+    $title = "Change Password || Coder";
+} elseif (isset($_GET["action"]) && $_GET["action"] == "show_details") {
+    $title = "User Details || Coder";
+} else {
+    $title = "User Profile || Coder";
+}
 ?>
+<?php include_once("assets/includes/head.php"); ?>
+<style>
+body {
+    background: #01202c;
+}
 
-<!DOCTYPE html>
-<html lang="en">
+.profile_heading {
+    text-align: center;
+    text-transform: capitalize;
+    padding: 1rem 0;
+    background: #000;
+    margin-top: 1rem;
+    border-radius: .3rem;
+    border: 1px solid var(--gray);
+}
 
-<head>
-    <?php include_once("assets/includes/meta_links_scripts.php"); ?>
-    <title>User Profile</title>
-    <style>
-    body {
-        background: #01202c;
-    }
+.card {
+    color: #fff;
+    background: #000;
+    border: 1px solid var(--gray);
+}
 
-    .profile_heading {
-        text-align: center;
-        text-transform: capitalize;
-        padding: 1rem 0;
-        background: #000;
-        margin-top: 1rem;
-        border-radius: .3rem;
-        border: 1px solid var(--gray);
-    }
+.profile_pic {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    margin-bottom: 2.5rem;
+    background-color: #01202c;
+}
 
-    .card {
-        color: #fff;
-        background: #000;
-        border: 1px solid var(--gray);
-    }
+.option_btn {
+    color: #fff;
+    background: #01202c;
+}
 
-    .profile_pic {
-        width: 20rem;
-        height: 20rem;
-        border-radius: 50%;
-        margin-bottom: 2.5rem;
-        background-color: #01202c;
-    }
+.option_btn:hover {
+    color: #fff;
+    background: #011922;
+}
 
-    .option_btn {
-        color: #fff;
-        background: #01202c;
-    }
+.input_icon {
+    background: #01202c;
+    border-radius: .4rem;
+}
 
-    .option_btn:hover {
-        color: #fff;
-        background: #011922;
-    }
+.input {
+    padding: .7rem;
+}
 
-    .input_icon {
-        background: #01202c;
-        border-radius: .4rem;
-    }
+.back_btn {
+    color: #fff;
+    background: var(--orange);
+}
 
-    .input {
-        padding: .7rem;
-    }
+.back_btn:hover {
+    color: #fff;
+    background: #d7460c;
+}
 
-    .back_btn {
-        color: #fff;
-        background: var(--orange);
-    }
+.about_user .profile_pic {
+    width: 15rem;
+    height: 15rem;
+}
 
-    .back_btn:hover {
-        color: #fff;
-        background: #d7460c;
-    }
+.table {
+    color: #fff;
+}
 
-    .about_user .profile_pic {
-        width: 15rem;
-        height: 15rem;
-    }
+.table tr {
+    border-color: var(--gray);
+}
 
-    .table {
-        color: #fff;
-    }
+.table th {
+    padding: 1.2rem 1rem 1.2rem 0 !important;
+}
 
-    .table tr {
-        border-color: var(--gray);
-    }
+.table td {
+    padding: 1.2rem 0 !important;
+}
 
-    .table th {
-        padding: 1.2rem 1rem 1.2rem 0 !important;
-    }
-
-    .table td {
-        padding: 1.2rem 0 !important;
-    }
-
-    .user_email {
-        word-break: break-all;
-    }
-    </style>
+.user_email {
+    word-break: break-all;
+}
+</style>
 </head>
 
 <body>
@@ -400,17 +404,6 @@ if (isset($_POST['change_pass'])) {
                                 </div>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
 
                     <?php } elseif (isset($_GET["action"]) && $_GET["action"] == "show_details") { ?>
 

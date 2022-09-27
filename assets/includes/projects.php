@@ -21,7 +21,7 @@
                     }
             ?>
 
-            <div class="col-lg-6">
+            <div class="col-xl-6">
                 <div class="blog_item row g-0 h-100">
 
                     <div class="col-4 overflow-hidden">
@@ -78,15 +78,15 @@
                                 <span><i class="fa-solid fa-comment"></i></span> 17
                             </div>
 
-                            <div class="downloads_counter d-inline-block ms-3">
-                                <span><i class="fa-sharp fa-solid fa-download"></i></span>
-                                Downloads: 952
-                            </div>
-
                             <?php
                                     if (!empty($project_post_result['code_file'])) {
                                         if (isset($_SESSION['auth_user'])) {
                                     ?>
+
+                            <div class="downloads_counter d-inline-block ms-3">
+                                <span><i class="fa-sharp fa-solid fa-download"></i></span>
+                                Downloads: 952
+                            </div>
 
                             <a download="<?= $project_post_result['code_file'] ?>"
                                 href="assets/files/<?= $project_post_result['code_file'] ?>"
