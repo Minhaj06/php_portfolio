@@ -35,6 +35,7 @@ if (isset($single_post_result['title']) && !empty($single_post_result['title']))
     $og_url = "post.php?slug=" . $single_post_result['slug'];
     $og_title = $single_post_result['title'];
     $og_description = $single_post_result['meta_description'];
+    $og_keywords = str_replace(" ", "", $meta_keywords);
     $og_image_path = "uploaded_img/" . $single_post_result['image'];
 } else {
     $title = "Post not found! || Coder";
@@ -56,7 +57,7 @@ function postDate($timestamp)
 
 <body class="line-numbers">
     <?php
-    // include_once("assets/includes/preloader.php");
+    // include_once("assets/includes/preloader.php1");
     include_once("assets/includes/navbar.php");
     ?>
 
@@ -118,28 +119,27 @@ function postDate($timestamp)
 
                                 <div class="col">
                                     <a style="color: #FFF; background: #4267B2;"
-                                        href="http://www.facebook.com/sharer/sharer.php?u=<?php base_url("post.php?" . $slug) ?>"
+                                        href="http://www.facebook.com/sharer.php?u=<?php base_url("post.php?slug=" . $slug) ?>"
                                         target="_blank" class="btn d-block fs-1"><i
                                             class="fa-brands fa-facebook-f"></i></a>
                                 </div>
 
                                 <div class="col">
                                     <a style="color: #FFF; background: #9A30ED;"
-                                        href="http://www.facebook.com/share.php?u=<?php base_url("post.php?" . $slug) ?>"
-                                        target="_blank" class="btn d-block fs-1"><i
-                                            class="fa-brands fa-facebook-messenger"></i></a>
+                                        href="fb-messenger://share/?link=<?php base_url($og_url) ?>" target="_blank"
+                                        class="btn d-block fs-1"><i class="fa-brands fa-facebook-messenger"></i></a>
                                 </div>
 
                                 <div class="col">
                                     <a style="color: #FFF; background: #25D366;"
-                                        href="http://www.facebook.com/share.php?u=<?php base_url("post.php?" . $slug) ?>"
-                                        target="_blank" class="btn d-block fs-1"><i
+                                        href="whatsapp://send?text=<?php base_url($og_url) ?>"
+                                        data-action="share/whatsapp/share" target="_blank" class="btn d-block fs-1"><i
                                             class="fa-brands fa-whatsapp"></i></a>
                                 </div>
 
                                 <div class="col">
                                     <a style="color: #FFF; background: #00acee;"
-                                        href="http://www.twitter.com/share?u=<?php base_url("post.php?" . $slug) ?>"
+                                        href="http://www.twitter.com/share?text=<?= $og_title ?> &url=<? base_url($og_url) ?> &hashtags=<?= $og_keywords ?>"
                                         target="_blank" class="btn d-block fs-1"><i
                                             class="fa-brands fa-twitter"></i></a>
                                 </div>
@@ -152,15 +152,8 @@ function postDate($timestamp)
                                 </div>
 
                                 <div class="col">
-                                    <a style="color: #FFF; background: #E60023;"
-                                        href="http://www.facebook.com/share.php?u=<?php base_url("post.php?" . $slug) ?>"
-                                        target="_blank" class="btn d-block fs-1"><i
-                                            class="fa-brands fa-pinterest-p"></i></a>
-                                </div>
-
-                                <div class="col">
                                     <a style="color: #FFF; background: #0072B1;"
-                                        href="http://www.linkedin.com/shareArticle?mini=true&url=<?php base_url("post.php?" . $slug) ?>"
+                                        href="https://www.linkedin.com/sharing/share-offsite/?url=<?php base_url($og_url) ?>"
                                         target="_blank" class="btn d-block fs-1"><i
                                             class="fa-brands fa-linkedin-in"></i></a>
                                 </div>
@@ -211,9 +204,6 @@ function postDate($timestamp)
                         ?>
 
                     </div>
-
-
-
 
                 </main>
 

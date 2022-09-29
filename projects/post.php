@@ -32,7 +32,7 @@ if (isset($single_post_result['title']) && !empty($single_post_result['title']))
     $meta_description = $single_post_result['meta_description'];
     $meta_keywords = $single_post_result['meta_keywords'];
 
-    $og_url = "post.php?slug=" . $single_post_result['slug'];
+    $og_url = "projects/post.php?slug=" . $single_post_result['slug'];
     $og_title = $single_post_result['title'];
     $og_description = $single_post_result['meta_description'];
     $og_image_path = "uploaded_img/" . $single_post_result['image'];
