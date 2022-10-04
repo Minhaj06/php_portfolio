@@ -35,6 +35,7 @@ if (isset($single_post_result['title']) && !empty($single_post_result['title']))
     $og_url = "projects/post.php?slug=" . $single_post_result['slug'];
     $og_title = $single_post_result['title'];
     $og_description = $single_post_result['meta_description'];
+    $og_keywords = str_replace(" ", "", $meta_keywords);
     $og_image_path = "uploaded_img/" . $single_post_result['image'];
 } else {
     $title = "Post not found! || Coder";
@@ -52,7 +53,8 @@ function postDate($timestamp)
 </head>
 
 <body class="line-numbers">
-    <?php include_once("../assets/includes/preloader.php") ?>
+    <?php // include_once("../assets/includes/preloader.php") 
+    ?>
     <?php include_once("../assets/includes/navbar.php") ?>
 
     <!-- blog section starts here -->
@@ -75,7 +77,7 @@ function postDate($timestamp)
                                 src="<?php base_url("uploaded_img/" . $single_post_result['image']) ?>" width="100%"
                                 alt="post image">
 
-                            <h2 style="font-weight: 300;" class="post_title my-4"><?= $single_post_result['title'] ?>
+                            <h2 class="post_title my-4"><?= $single_post_result['title'] ?>
                             </h2>
 
                             <a href="<?php base_url("projects/" . $category_slug) ?>">
@@ -210,46 +212,74 @@ function postDate($timestamp)
                             <div class="row g-3 g-xl-4">
                                 <style>
                                 .post_share_option .btn {
-                                    padding: .2rem .75rem;
+                                    padding: .2rem 3.5rem;
                                 }
 
                                 .post_share_option a:hover {
                                     opacity: .8;
                                 }
                                 </style>
+
                                 <div class="col">
-                                    <a style="color: #FFF; background: #4267B2;" href="#" class="btn d-block fs-1"><i
+                                    <a style="color: #FFF; background: #4267B2;"
+                                        href="http://www.facebook.com/sharer.php?u=<?php base_url("post.php?slug=" . $slug) ?>"
+                                        target="_blank" class="btn d-block fs-1" title="Share by Facebook"><i
                                             class="fa-brands fa-facebook-f"></i></a>
                                 </div>
 
-                                <div class="col">
-                                    <a style="color: #FFF; background: #9A30ED;" href="#" class="btn d-block fs-1"><i
+                                <div class="col d-md-none">
+                                    <a style="color: #FFF; background: #9A30ED;"
+                                        href="fb-messenger://share/?link=<?php base_url($og_url) ?>" target="_blank"
+                                        class="btn d-block fs-1" title="Share by Messenger"><i
                                             class="fa-brands fa-facebook-messenger"></i></a>
                                 </div>
 
                                 <div class="col">
-                                    <a style="color: #FFF; background: #25D366;" href="#" class="btn d-block fs-1"><i
-                                            class="fa-brands fa-whatsapp"></i></a>
+                                    <a style="color: #FFF; background: #25D366;"
+                                        href="whatsapp://send?text=<?php base_url($og_url) ?>"
+                                        data-action="share/whatsapp/share" target="_blank" class="btn d-block fs-1"
+                                        title="Share by Whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
                                 </div>
 
                                 <div class="col">
-                                    <a style="color: #FFF; background: #00acee;" href="#" class="btn d-block fs-1"><i
+                                    <a style="color: #FFF; background: #00acee;"
+                                        href="http://www.twitter.com/share?text=<?= $og_title ?> &url=<? base_url($og_url) ?> &hashtags=<?= $og_keywords ?>"
+                                        target="_blank" class="btn d-block fs-1" title="Share by Twitter"><i
                                             class="fa-brands fa-twitter"></i></a>
                                 </div>
 
                                 <div class="col">
-                                    <a style="color: #FFF; background: #3f729b;" href="#" class="btn d-block fs-1"><i
-                                            class="fa-brands fa-instagram"></i></a>
+                                    <a style="color: #FFF; background: #0072B1;"
+                                        href="https://www.linkedin.com/sharing/share-offsite/?url=<?php base_url($og_url) ?>"
+                                        target="_blank" class="btn d-block fs-1" title="Share by Linkedin"><i
+                                            class="fa-brands fa-linkedin-in"></i></a>
                                 </div>
 
                                 <div class="col">
-                                    <a style="color: #FFF; background: #E60023;" href="#" class="btn d-block fs-1"><i
+                                    <a style="color: #FFF; background: #E60023;"
+                                        href="https://www.pinterest.com/pin/create/button/?url=<?php base_url($og_url) ?>"
+                                        target="_blank" class="btn d-block fs-1" title="Share by Pinterest"><i
                                             class="fa-brands fa-pinterest-p"></i></a>
+                                </div>
+
+                                <div class="col">
+                                    <a style="color: #FFF; background: #ff4500;"
+                                        href="https://reddit.com/submit?url=<?php base_url($og_url . '&title=' . $og_title . '&description=' . $og_description) ?>"
+                                        target="_blank" class="btn d-block fs-1" title="Share by Reddit"><i
+                                            class="fa-brands fa-reddit-alien"></i></a>
+                                </div>
+
+                                <div class="col">
+                                    <a style="color: #FFF; background: #4285F4;"
+                                        href="mailto:?subject=<?= $og_title ?>&amp;body=<?php base_url($og_url) ?>"
+                                        target="_blank" class="btn d-block fs-1" title="Share by Email"><i
+                                            class="fa-solid fa-envelope"></i></a>
                                 </div>
 
                             </div>
 
                         </div>
+
 
 
                         <!-- Related Posts -->

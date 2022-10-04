@@ -156,7 +156,7 @@ $og_url = "blogs.php";
 
             <div class="row g-5">
                 <main class="col-lg-8 mb-5 mb-lg-0">
-                    <div class="row g-0 mb-5 pb-4">
+                    <div class="row g-0 mb-5 pb-4 d-none">
                         <div class="blog_item rounded-0">
 
                             <div style="--swiper-navigation-color: var(--orange); --swiper-pagination-color: var(-orange)"

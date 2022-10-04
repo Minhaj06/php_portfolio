@@ -48,7 +48,7 @@ $title = "search results for " . $search;
                                 alt="post image">
                         </a>
                         <a href="<?php base_url("projects/post.php?slug=" . $search_result['slug']) ?>">
-                            <h2 style="font-weight: 300;" class="post_title my-4"><?= $search_result['title'] ?></h2>
+                            <h2 class="post_title my-4"><?= $search_result['title'] ?></h2>
                         </a>
 
                         <p style="font-weight: 300" class="fs-4 mb-4">

@@ -41,9 +41,6 @@ if (isset($single_post_result['title']) && !empty($single_post_result['title']))
     $title = "Post not found! || Coder";
 }
 
-
-
-
 function postDate($timestamp)
 {
     $date = date("M d, Y", strtotime($timestamp));
@@ -79,7 +76,7 @@ function postDate($timestamp)
                                 src="<?php base_url("uploaded_img/" . $single_post_result['image']) ?>" width="100%"
                                 alt="post image">
 
-                            <h2 style="font-weight: 300;" class="post_title my-4"><?= $single_post_result['title'] ?>
+                            <h2 class="post_title my-4"><?= $single_post_result['title'] ?>
                             </h2>
 
                             <a href="<?php base_url("" . $category_slug) ?>">
@@ -88,14 +85,15 @@ function postDate($timestamp)
                                     <?= $single_post_result['category'] ?></h4>
                             </a>
 
-                            <p style="font-weight: 300" class="fs-4 mb-4">
+                            <p style="font-weight: 300"
+                                class="fs-4 mb-4 d-flex justify-content-between align-items-center">
                                 <span class="post_date me-3"><i class="fa-solid fa-calendar-days"></i>
                                     <?php
                                         postDate($single_post_result['created_at']);
                                         ?>
                                 </span>
 
-                                <a href="<?php base_url("") ?>"><i class="fa-solid fa-comment"></i> Leave A Comment</a>
+                                <a href="#respond"><i class="fa-solid fa-comment"></i> Leave A Comment</a>
                             </p>
 
                             <div class="post_description overflow-hidden mb-5 pb-4">
@@ -109,7 +107,7 @@ function postDate($timestamp)
                             <div class="row g-3 g-xl-4">
                                 <style>
                                 .post_share_option .btn {
-                                    padding: .2rem 3.5rem;
+                                    padding: 0 3.5rem;
                                 }
 
                                 .post_share_option a:hover {
@@ -120,42 +118,57 @@ function postDate($timestamp)
                                 <div class="col">
                                     <a style="color: #FFF; background: #4267B2;"
                                         href="http://www.facebook.com/sharer.php?u=<?php base_url("post.php?slug=" . $slug) ?>"
-                                        target="_blank" class="btn d-block fs-1"><i
+                                        target="_blank" class="btn d-block fs-1" title="Share by Facebook"><i
                                             class="fa-brands fa-facebook-f"></i></a>
                                 </div>
 
-                                <div class="col">
+                                <div class="col d-md-none">
                                     <a style="color: #FFF; background: #9A30ED;"
                                         href="fb-messenger://share/?link=<?php base_url($og_url) ?>" target="_blank"
-                                        class="btn d-block fs-1"><i class="fa-brands fa-facebook-messenger"></i></a>
+                                        class="btn d-block fs-1" title="Share by Messenger"><i
+                                            class="fa-brands fa-facebook-messenger"></i></a>
                                 </div>
 
                                 <div class="col">
                                     <a style="color: #FFF; background: #25D366;"
                                         href="whatsapp://send?text=<?php base_url($og_url) ?>"
-                                        data-action="share/whatsapp/share" target="_blank" class="btn d-block fs-1"><i
-                                            class="fa-brands fa-whatsapp"></i></a>
+                                        data-action="share/whatsapp/share" target="_blank" class="btn d-block fs-1"
+                                        title="Share by Whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
                                 </div>
 
                                 <div class="col">
                                     <a style="color: #FFF; background: #00acee;"
                                         href="http://www.twitter.com/share?text=<?= $og_title ?> &url=<? base_url($og_url) ?> &hashtags=<?= $og_keywords ?>"
-                                        target="_blank" class="btn d-block fs-1"><i
+                                        target="_blank" class="btn d-block fs-1" title="Share by Twitter"><i
                                             class="fa-brands fa-twitter"></i></a>
-                                </div>
-
-                                <div class="col">
-                                    <a style="color: #FFF; background: #3f729b;"
-                                        href="http://www.facebook.com/share.php?u=<?php base_url("post.php?" . $slug) ?>"
-                                        target="_blank" class="btn d-block fs-1"><i
-                                            class="fa-brands fa-instagram"></i></a>
                                 </div>
 
                                 <div class="col">
                                     <a style="color: #FFF; background: #0072B1;"
                                         href="https://www.linkedin.com/sharing/share-offsite/?url=<?php base_url($og_url) ?>"
-                                        target="_blank" class="btn d-block fs-1"><i
+                                        target="_blank" class="btn d-block fs-1" title="Share by Linkedin"><i
                                             class="fa-brands fa-linkedin-in"></i></a>
+                                </div>
+
+                                <div class="col">
+                                    <a style="color: #FFF; background: #E60023;"
+                                        href="https://www.pinterest.com/pin/create/button/?url=<?php base_url($og_url) ?>"
+                                        target="_blank" class="btn d-block fs-1" title="Share by Pinterest"><i
+                                            class="fa-brands fa-pinterest-p"></i></a>
+                                </div>
+
+                                <div class="col">
+                                    <a style="color: #FFF; background: #ff4500;"
+                                        href="https://reddit.com/submit?url=<?php base_url($og_url . '&title=' . $og_title . '&description=' . $og_description) ?>"
+                                        target="_blank" class="btn d-block fs-1" title="Share by Reddit"><i
+                                            class="fa-brands fa-reddit-alien"></i></a>
+                                </div>
+
+                                <div class="col">
+                                    <a style="color: #FFF; background: #4285F4;"
+                                        href="mailto:?subject=<?= $og_title ?>&amp;body=<?php base_url($og_url) ?>"
+                                        target="_blank" class="btn d-block fs-1" title="Share by Email"><i
+                                            class="fa-solid fa-envelope"></i></a>
                                 </div>
 
                             </div>
@@ -165,7 +178,7 @@ function postDate($timestamp)
                         <!-- Related Posts -->
                         <h1 class="widget_title">related posts</h1>
 
-                        <div class="row g-4">
+                        <div class="row g-4 mb-5">
                             <?php
                                 $related_post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `created_at` FROM `blog_posts` WHERE status = '1' AND `category` = '$category' AND `slug` != '$slug' ORDER BY id DESC");
 
@@ -203,6 +216,278 @@ function postDate($timestamp)
                         }
                         ?>
 
+                        <!-- Comments Section Starts Here -->
+                        <div class="comments_area_wrapper pt-5" id="respond">
+                            <h2 class="widget_title mb-5">874 Comments</h2>
+
+                            <div class="comment_box d-flex mb-5">
+
+                                <img src="<?php base_url("img/robot.jpg") ?>" alt="commenter_img"
+                                    class="commenter_img rounded-circle me-4">
+
+                                <div class="add_comment_box">
+                                    <div class="comment_input mb-2" contenteditable="true"
+                                        placeholder="Add a comment...">
+                                    </div>
+
+                                    <div class="comment_buttons text-end">
+                                        <button class="comment_cancel btn">cancel</button>
+                                        <button class="comment_submit btn">comment</button>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="all_comments">
+                                <div class="single_comment d-flex mb-4">
+                                    <img src="<?php base_url("uploaded_img/168234.png") ?>" alt="commenter_img"
+                                        class="commenter_img rounded-circle me-4">
+
+                                    <div class="add_comment_box">
+
+                                        <h4 class="commenter_name d-flex justify-content-between align-items-center">
+                                            <span>Eric Odinson</span> <span><i
+                                                    class="fa-solid fa-ellipsis-vertical"></i></span>
+                                        </h4>
+
+                                        <p class="comment_text">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                            elit. Perferendis in cumque reprehenderit iure a, et corporis. Illo
+                                            consectetur accusantium, beatae mollitia cum ipsum sint suscipit explicabo
+                                            exercitationem repellat voluptatum officia.</p>
+
+                                        <div class="comment_reacts d-flex">
+                                            <div class="me-4">
+                                                <span role="button" title="I like this comment"><i
+                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
+                                            </div>
+                                            <div>
+                                                <span role="button" title="I dislike this comment"><i
+                                                        class="fa-regular fa-thumbs-down"></i></span>
+                                                23
+                                            </div>
+                                        </div>
+
+                                        <button class="mt-3 show_replies_button"><i
+                                                class="fa-solid fa-caret-down fs-3"></i> 43
+                                            REPLIES
+                                        </button>
+
+                                        <div>
+                                            <div class="comment_replies" style="display: none;">
+                                                <div class="comment_reply_single d-flex mt-3">
+                                                    <img src="<?php base_url("img/robot.jpg") ?>" alt="commenter_img"
+                                                        class="commenter_img rounded-circle me-4">
+                                                    <div class="add_comment_box">
+
+                                                        <h4
+                                                            class="commenter_name d-flex justify-content-between align-items-center">
+                                                            <span>Eric Odinson</span> <span><i
+                                                                    class="fa-solid fa-ellipsis-vertical"></i></span>
+                                                        </h4>
+
+                                                        <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
+                                                            adipisicing elit.</p>
+
+                                                        <div class="comment_reacts d-flex">
+                                                            <div class="me-4">
+                                                                <span role="button" title="I like this comment"><i
+                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
+                                                            </div>
+                                                            <div>
+                                                                <span role="button" title="I dislike this comment"><i
+                                                                        class="fa-regular fa-thumbs-down"></i></span>
+                                                                23
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="comment_reply_single d-flex mt-3">
+                                                    <img src="<?php base_url("img/robot.jpg") ?>" alt="commenter_img"
+                                                        class="commenter_img rounded-circle me-4">
+                                                    <div class="add_comment_box">
+
+                                                        <h4
+                                                            class="commenter_name d-flex justify-content-between align-items-center">
+                                                            <span>Eric Odinson</span> <span><i
+                                                                    class="fa-solid fa-ellipsis-vertical"></i></span>
+                                                        </h4>
+
+                                                        <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
+                                                            adipisicing elit.</p>
+
+                                                        <div class="comment_reacts d-flex">
+                                                            <div class="me-4">
+                                                                <span role="button" title="I like this comment"><i
+                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
+                                                            </div>
+                                                            <div>
+                                                                <span role="button" title="I dislike this comment"><i
+                                                                        class="fa-regular fa-thumbs-down"></i></span>
+                                                                23
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="comment_reply_single d-flex mt-3">
+                                                    <img src="<?php base_url("uploaded_img/post.webp") ?>"
+                                                        alt="commenter_img" class="commenter_img rounded-circle me-4">
+                                                    <div class="add_comment_box">
+
+                                                        <h4
+                                                            class="commenter_name d-flex justify-content-between align-items-center">
+                                                            <span>Eric Odinson</span> <span><i
+                                                                    class="fa-solid fa-ellipsis-vertical"></i></span>
+                                                        </h4>
+
+                                                        <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
+                                                            adipisicing elit.</p>
+
+                                                        <div class="comment_reacts d-flex">
+                                                            <div class="me-4">
+                                                                <span role="button" title="I like this comment"><i
+                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
+                                                            </div>
+                                                            <div>
+                                                                <span role="button" title="I dislike this comment"><i
+                                                                        class="fa-regular fa-thumbs-down"></i></span>
+                                                                23
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="single_comment d-flex mb-4">
+                                    <img src="<?php base_url("uploaded_img/post.webp") ?>" alt="commenter_img"
+                                        class="commenter_img rounded-circle me-4">
+
+                                    <div class="add_comment_box">
+
+                                        <h4 class="commenter_name d-flex justify-content-between align-items-center">
+                                            <span>Eric Odinson</span> <span><i
+                                                    class="fa-solid fa-ellipsis-vertical"></i></span>
+                                        </h4>
+
+                                        <p class="comment_text">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                            elit. Perferendis in cumque reprehenderit iure a, et corporis. Illo
+                                            consectetur accusantium, beatae mollitia cum ipsum sint suscipit explicabo
+                                            exercitationem repellat voluptatum officia.</p>
+
+                                        <div class="comment_reacts d-flex">
+                                            <div class="me-4">
+                                                <span role="button" title="I like this comment"><i
+                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
+                                            </div>
+                                            <div>
+                                                <span role="button" title="I dislike this comment"><i
+                                                        class="fa-regular fa-thumbs-down"></i></span>
+                                                23
+                                            </div>
+                                        </div>
+
+                                        <button class="mt-3 show_replies_button"><i
+                                                class="fa-solid fa-caret-down fs-3"></i> 43
+                                            REPLIES
+                                        </button>
+
+                                        <div>
+                                            <div class="comment_replies" style="display: none;">
+                                                <div class="comment_reply_single d-flex mt-3">
+                                                    <img src="<?php base_url("img/robot.jpg") ?>" alt="commenter_img"
+                                                        class="commenter_img rounded-circle me-4">
+                                                    <div class="add_comment_box">
+
+                                                        <h4
+                                                            class="commenter_name d-flex justify-content-between align-items-center">
+                                                            <span>Eric Odinson</span> <span><i
+                                                                    class="fa-solid fa-ellipsis-vertical"></i></span>
+                                                        </h4>
+
+                                                        <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
+                                                            adipisicing elit.</p>
+
+                                                        <div class="comment_reacts d-flex">
+                                                            <div class="me-4">
+                                                                <span role="button" title="I like this comment"><i
+                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
+                                                            </div>
+                                                            <div>
+                                                                <span role="button" title="I dislike this comment"><i
+                                                                        class="fa-regular fa-thumbs-down"></i></span>
+                                                                23
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="comment_reply_single d-flex mt-3">
+                                                    <img src="<?php base_url("img/robot.jpg") ?>" alt="commenter_img"
+                                                        class="commenter_img rounded-circle me-4">
+                                                    <div class="add_comment_box">
+
+                                                        <h4
+                                                            class="commenter_name d-flex justify-content-between align-items-center">
+                                                            <span>Eric Odinson</span> <span><i
+                                                                    class="fa-solid fa-ellipsis-vertical"></i></span>
+                                                        </h4>
+
+                                                        <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
+                                                            adipisicing elit.</p>
+
+                                                        <div class="comment_reacts d-flex">
+                                                            <div class="me-4">
+                                                                <span role="button" title="I like this comment"><i
+                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
+                                                            </div>
+                                                            <div>
+                                                                <span role="button" title="I dislike this comment"><i
+                                                                        class="fa-regular fa-thumbs-down"></i></span>
+                                                                23
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="comment_reply_single d-flex mt-3">
+                                                    <img src="<?php base_url("uploaded_img/post.webp") ?>"
+                                                        alt="commenter_img" class="commenter_img rounded-circle me-4">
+                                                    <div class="add_comment_box">
+
+                                                        <h4
+                                                            class="commenter_name d-flex justify-content-between align-items-center">
+                                                            <span>Eric Odinson</span> <span><i
+                                                                    class="fa-solid fa-ellipsis-vertical"></i></span>
+                                                        </h4>
+
+                                                        <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
+                                                            adipisicing elit.</p>
+
+                                                        <div class="comment_reacts d-flex">
+                                                            <div class="me-4">
+                                                                <span role="button" title="I like this comment"><i
+                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
+                                                            </div>
+                                                            <div>
+                                                                <span role="button" title="I dislike this comment"><i
+                                                                        class="fa-regular fa-thumbs-down"></i></span>
+                                                                23
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- Comments Section Ends Here -->
+
                     </div>
 
                 </main>
@@ -218,13 +503,43 @@ function postDate($timestamp)
 
             </div>
 
-
-
         </div>
 
     </section>
 
     <?php include_once("assets/includes/footer.php") ?>
+
+
+    <script>
+    window.addEventListener("load", () => {
+        document.querySelector(".comment_input").innerHTML = "";
+    });
+
+    // Comment Replies Toggle
+    document.querySelectorAll(".show_replies_button").forEach(btn => btn.onclick = ev => {
+        const x = ev.target.nextElementSibling.querySelector(".comment_replies");
+        x.style.display = x.style.display === "none" ? "" : "none";
+    });
+
+    // document.querySelectorAll(".show_replies_button").forEach((element) => {
+    //     element.addEventListener("click", (replies) => {
+    //         const targetedReplies = replies.target.nextElementSibling.querySelector(".comment_replies");
+    //         targetedReplies.style.display = targetedReplies.style.display === "none" ? "" : "none";
+    //     });
+    // });
+    // document.querySelectorAll(".show_replies_button").forEach((element) => {
+    //     element.addEventListener("click", (replies) => {
+    //         const targetedReplies = replies.target.nextElementSibling.querySelector(".comment_replies");
+
+    //         if (targetedReplies.style.display === "none") {
+    //             targetedReplies.style.display = "";
+    //         } else {
+    //             targetedReplies.style.display = "none";
+    //         }
+    //     });
+    // });
+    </script>
+
 </body>
 
 </html>

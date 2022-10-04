@@ -72,7 +72,7 @@ if (isset($category) && !empty($category)) {
                                 alt="post image">
                         </a>
                         <a href="<?php base_url("post.php?slug=" . $cat_wise_post_result['slug']) ?>">
-                            <h2 style="font-weight: 300;" class="post_title my-4"><?= $cat_wise_post_result['title'] ?>
+                            <h2 class="post_title my-4"><?= $cat_wise_post_result['title'] ?>
                             </h2>
                         </a>
 

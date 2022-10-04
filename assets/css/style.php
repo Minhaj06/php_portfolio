@@ -142,6 +142,10 @@ color: var(--white);
 border: none;
 }
 
+.btn:focus {
+box-shadow: none;
+}
+
 .content {
 max-width: 70%;
 text-align: center;
@@ -896,6 +900,8 @@ border-radius: .5rem;
 .blog_item img {
 width: 100%;
 height: 100%;
+min-height: 22rem;
+max-height: 25rem;
 transition: all 0.2s linear;
 }
 
@@ -925,7 +931,6 @@ line-height: 1;
 
 .blog_content h3 {
 font-size: 1.6rem;
-font-weight: 300;
 margin-bottom: 1rem;
 }
 
@@ -1005,14 +1010,107 @@ color: var(--orange);
 display: block;
 }
 
-
-
 .recent_post_img img:hover {
 transform: scale(1.1) rotate(1deg);
 transition: all 0.2s linear;
 }
 
 /* blog section ends here */
+
+
+/* Comment section starts here */
+.commenter_img {
+width: 4.5rem;
+height: 4.5rem;
+}
+
+.add_comment_box {
+width: calc(100% - 4.5rem);
+height: max-content;
+}
+
+.comment_input {
+position: relative;
+border-bottom: 1px solid var(--gray);
+cursor: text;
+}
+
+.comment_input:focus {
+outline: none;
+transition: .3s;
+}
+
+[contenteditable="true"][placeholder]:empty::before {
+content: attr(placeholder);
+color: var(--gray);
+}
+
+.comment_input::after {
+position: absolute;
+bottom: -2px;
+left: 50%;
+content: "";
+width: 0;
+height: 2px;
+transition: .5s linear;
+}
+
+.comment_input:focus::after {
+position: absolute;
+bottom: -2px;
+left: 0;
+content: "";
+width: 100%;
+height: 2px;
+background: var(--white);
+transition: .5s linear;
+}
+
+.comment_cancel {
+font-size: 1.6rem;
+color: var(--gray);
+text-transform: uppercase;
+}
+
+.comment_cancel:hover {
+color: var(--white);
+}
+
+.comment_submit {
+font-size: 1.6rem;
+color: var(--white);
+text-transform: uppercase;
+background: var(--orange);
+border-radius: 0;
+}
+
+.comment_submit:hover {
+color: var(--white);
+opacity: .85;
+}
+
+.comment_text {
+font-size: 1.5rem;
+font-weight: 300;
+line-height: 1.3;
+}
+
+/*.comment_replies {
+display: none;
+}*/
+
+.comment_replies .commenter_img {
+width: 3.5rem;
+height: 3.5rem;
+}
+
+.show_replies_button {
+color: var(--orange);
+background: transparent;
+}
+
+/* Comment section ends here */
+
 
 
 /* footer starts here */
@@ -1315,11 +1413,7 @@ top: 5.5rem;
 }
 }*/
 @media (max-width: 420px) {
-html {
-font-size: 55%;
-}
-
-.btn {
+.button {
 min-width: 18rem;
 }
 .logo img {
@@ -1332,7 +1426,7 @@ top: 5.5rem;
 
 @media (max-width: 375px) {
 html {
-font-size: 48%;
+font-size: 55%;
 }
 #skill_area {
 padding-bottom: 0;
