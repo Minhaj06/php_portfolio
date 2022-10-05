@@ -113,15 +113,13 @@ modal_p_cats.addEventListener("click", (event) => {
 
     }
 });
-z
 
 
 // Achivements counter
-
 window.addEventListener("load", () => {
     setTimeout(function() {
         let counters = document.querySelectorAll(".counter");
-        let time = 300;
+        let time = 700;
 
         counters.forEach((counter) => {
             let updateCount = () => {
@@ -141,6 +139,7 @@ window.addEventListener("load", () => {
         });
     }, 600);
 });
+
 //testimonial swiper
 var swiper = new Swiper(".testimonial_slider", {
     loop: true,

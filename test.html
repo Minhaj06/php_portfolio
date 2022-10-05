@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Fonts CDN -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;700&display=swap" rel="stylesheet" />
+
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+
+    <style>
+        /* common css starts here */
+        
+        *,
+        *::after,
+        *::before,
+        ul {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        
+        ul,
+        ol,
+        li {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        
+        html {
+            font-size: 62.5%;
+        }
+        
+         :root {
+            --white: #cccccc;
+            --black: #000;
+            --orange: #cc3a00;
+            --dark-gray: #111111;
+            --gray: #707070;
+        }
+        
+        body {
+            background: var(--black);
+            font-family: "Poppins", sans-serif;
+            color: var(--white);
+            font-size: 1.6rem;
+        }
+        
+        p {
+            line-height: 1.6;
+        }
+        
+        a {
+            color: var(--white);
+            text-decoration: none;
+        }
+        /* Common CSS Ends Here */
+        /* Comment section starts here */
+        
+        .commenter_img {
+            width: 4.5rem;
+            height: 4.5rem;
+        }
+        
+        .add_comment_box {
+            width: calc(100% - 4.5rem);
+            height: max-content;
+        }
+        
+        .comment_input {
+            position: relative;
+            border-bottom: 1px solid var(--gray);
+            cursor: text;
+        }
+        
+        .comment_input:focus {
+            outline: none;
+            transition: .3s;
+        }
+        
+        [contenteditable="true"][placeholder]:empty::before {
+            content: attr(placeholder);
+            color: var(--gray);
+        }
+        
+        .comment_input::after {
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            content: "";
+            width: 0;
+            height: 2px;
+            transition: .5s linear;
+        }
+        
+        .comment_input:focus::after {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            content: "";
+            width: 100%;
+            height: 2px;
+            background: var(--white);
+            transition: .5s linear;
+        }
+        
+        .comment_cancel {
+            font-size: 1.6rem;
+            color: var(--gray);
+            text-transform: uppercase;
+        }
+        
+        .comment_cancel:hover {
+            color: var(--white);
+        }
+        
+        .comment_submit {
+            font-size: 1.6rem;
+            color: var(--white);
+            text-transform: uppercase;
+            background: var(--orange);
+            border-radius: 0;
+        }
+        
+        .comment_submit:hover {
+            color: var(--white);
+            opacity: .85;
+        }
+        
+        .comment_text {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.3;
+        }
+        
+        .comment_replies .commenter_img {
+            width: 3.5rem;
+            height: 3.5rem;
+        }
+        
+        .show_replies_button {
+            color: var(--orange);
+            background: transparent;
+        }
+        
+        .comment_edit_delete_ellipsis {
+            background: transparent;
+            color: var(--white);
+            width: 3.5rem;
+            height: 3.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 1.8rem;
+        }
+        
+        .comment_edit_delete_icons_area {
+            position: relative;
+        }
+        
+        .comment_edit_delete_icons {
+            position: absolute;
+            top: 3.5rem;
+            right: 0;
+            width: 12rem;
+            background: var(--dark-gray);
+            padding: 0.75rem 0;
+            z-index: 1;
+        }
+        
+        .comment_edit_delete_icons button {
+            background: transparent;
+            color: var(--white);
+            display: block;
+            width: 100%;
+            text-align: left;
+            border: navajowhite;
+            padding: 0.5rem 2rem;
+            font-weight: 300;
+        }
+        
+        .comment_edit_delete_icons button:hover {
+            background: var(--bs-dark);
+        }
+        
+        .comment_edit_delete_icons button i {
+            margin-right: 1rem;
+        }
+        /* Comment section ends here */
+    </style>
+</head>
+
+<body>
+    <!-- Comments Section Starts Here -->
+    <div class="comments_area_wrapper pt-5" id="respond">
+        <h2 class="widget_title mb-5">874 Comments</h2>
+
+        <div class="comment_box d-flex mb-5">
+
+            <img src="http://localhost/coder/img/robot.jpg" alt="commenter_img" class="commenter_img rounded-circle me-4">
+
+            <div class="add_comment_box">
+                <div class="comment_input mb-2" contenteditable="true" placeholder="Add a comment...">
+                </div>
+
+                <div class="comment_buttons text-end">
+                    <button class="comment_cancel btn">cancel</button>
+                    <button class="comment_submit btn">comment</button>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="all_comments">
+            <div class="single_comment d-flex mb-4">
+                <img src="http://localhost/coder/uploaded_img/168234.png" alt="commenter_img" class="commenter_img rounded-circle me-4">
+
+                <div class="add_comment_box">
+
+                    <div class="d-flex justify-content-between">
+                        <h4 class="commenter_name">Eric Odinson</h4>
+                        <div class="comment_edit_delete_icons_area">
+                            <button class="comment_edit_delete_ellipsis"><i
+                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
+                            <div>
+                                <div class="comment_edit_delete_icons" style="display: none">
+                                    <button><i class="fa-solid fa-pen-fancy"></i> Edit</button>
+                                    <button><i class="fa-solid fa-trash-can"></i> Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="comment_text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis in cumque reprehenderit iure a, et corporis. Illo consectetur accusantium, beatae mollitia cum ipsum sint suscipit explicabo exercitationem repellat voluptatum officia.</p>
+
+                    <div class="comment_reacts d-flex">
+                        <div class="me-4">
+                            <span role="button" title="I like this comment"><i
+                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
+                        </div>
+                        <div>
+                            <span role="button" title="I dislike this comment"><i
+                                                        class="fa-regular fa-thumbs-down"></i></span> 23
+                        </div>
+                    </div>
+
+                    <button class="mt-3 show_replies_button"><i
+                                                class="fa-solid fa-caret-down fs-3"></i> 43
+                                            REPLIES
+                                        </button>
+
+                    <div>
+                        <div class="comment_replies" style="display: none;">
+                            <div class="comment_reply_single d-flex mt-3">
+                                <img src="http://localhost/coder/img/robot.jpg" alt="commenter_img" class="commenter_img rounded-circle me-4">
+                                <div class="add_comment_box">
+
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="commenter_name">Eric Odinson</h4>
+                                        <div class="comment_edit_delete_icons_area">
+                                            <button class="comment_edit_delete_ellipsis"><i
+                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
+                                            <div>
+                                                <div class="comment_edit_delete_icons" style="display: none">
+                                                    <button><i class="fa-solid fa-pen-fancy"></i>
+                                                                            Edit</button>
+                                                    <button><i class="fa-solid fa-trash-can"></i>
+                                                                            Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p class="comment_text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+
+                                    <div class="comment_reacts d-flex">
+                                        <div class="me-4">
+                                            <span role="button" title="I like this comment"><i
+                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
+                                        </div>
+                                        <div>
+                                            <span role="button" title="I dislike this comment"><i
+                                                                        class="fa-regular fa-thumbs-down"></i></span> 23
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comment_reply_single d-flex mt-3">
+                                <img src="http://localhost/coder/img/robot.jpg" alt="commenter_img" class="commenter_img rounded-circle me-4">
+                                <div class="add_comment_box">
+
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="commenter_name">Eric Odinson</h4>
+                                        <div class="comment_edit_delete_icons_area">
+                                            <button class="comment_edit_delete_ellipsis"><i
+                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
+                                            <div>
+                                                <div class="comment_edit_delete_icons" style="display: none">
+                                                    <button><i class="fa-solid fa-pen-fancy"></i>
+                                                                            Edit</button>
+                                                    <button><i class="fa-solid fa-trash-can"></i>
+                                                                            Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p class="comment_text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+
+                                    <div class="comment_reacts d-flex">
+                                        <div class="me-4">
+                                            <span role="button" title="I like this comment"><i
+                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
+                                        </div>
+                                        <div>
+                                            <span role="button" title="I dislike this comment"><i
+                                                                        class="fa-regular fa-thumbs-down"></i></span> 23
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comment_reply_single d-flex mt-3">
+                                <img src="http://localhost/coder/uploaded_img/post.webp" alt="commenter_img" class="commenter_img rounded-circle me-4">
+                                <div class="add_comment_box">
+
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="commenter_name">Eric Odinson</h4>
+                                        <div class="comment_edit_delete_icons_area">
+                                            <button class="comment_edit_delete_ellipsis"><i
+                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
+                                            <div>
+                                                <div class="comment_edit_delete_icons" style="display: none">
+                                                    <button><i class="fa-solid fa-pen-fancy"></i>
+                                                                            Edit</button>
+                                                    <button><i class="fa-solid fa-trash-can"></i>
+                                                                            Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p class="comment_text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+
+                                    <div class="comment_reacts d-flex">
+                                        <div class="me-4">
+                                            <span role="button" title="I like this comment"><i
+                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
+                                        </div>
+                                        <div>
+                                            <span role="button" title="I dislike this comment"><i
+                                                                        class="fa-regular fa-thumbs-down"></i></span> 23
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="single_comment d-flex mb-4">
+                <img src="http://localhost/coder/uploaded_img/post.webp" alt="commenter_img" class="commenter_img rounded-circle me-4">
+
+                <div class="add_comment_box">
+
+                    <div class="d-flex justify-content-between">
+                        <h4 class="commenter_name">Eric Odinson</h4>
+                        <div class="comment_edit_delete_icons_area">
+                            <button class="comment_edit_delete_ellipsis"><i
+                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
+                            <div>
+                                <div class="comment_edit_delete_icons" style="display: none">
+                                    <button><i class="fa-solid fa-pen-fancy"></i> Edit</button>
+                                    <button><i class="fa-solid fa-trash-can"></i> Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="comment_text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis in cumque reprehenderit iure a, et corporis. Illo consectetur accusantium, beatae mollitia cum ipsum sint suscipit explicabo exercitationem repellat voluptatum officia.</p>
+
+                    <div class="comment_reacts d-flex">
+                        <div class="me-4">
+                            <span role="button" title="I like this comment"><i
+                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
+                        </div>
+                        <div>
+                            <span role="button" title="I dislike this comment"><i
+                                                        class="fa-regular fa-thumbs-down"></i></span> 23
+                        </div>
+                    </div>
+
+                    <button class="mt-3 show_replies_button"><i
+                                                class="fa-solid fa-caret-down fs-3"></i> 43
+                                            REPLIES
+                                        </button>
+
+                    <div>
+                        <div class="comment_replies" style="display: none;">
+                            <div class="comment_reply_single d-flex mt-3">
+                                <img src="http://localhost/coder/img/robot.jpg" alt="commenter_img" class="commenter_img rounded-circle me-4">
+                                <div class="add_comment_box">
+
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="commenter_name">Eric Odinson</h4>
+                                        <div class="comment_edit_delete_icons_area">
+                                            <button class="comment_edit_delete_ellipsis"><i
+                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
+                                            <div>
+                                                <div class="comment_edit_delete_icons" style="display: none">
+                                                    <button><i class="fa-solid fa-pen-fancy"></i>
+                                                                            Edit</button>
+                                                    <button><i class="fa-solid fa-trash-can"></i>
+                                                                            Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p class="comment_text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+
+                                    <div class="comment_reacts d-flex">
+                                        <div class="me-4">
+                                            <span role="button" title="I like this comment"><i
+                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
+                                        </div>
+                                        <div>
+                                            <span role="button" title="I dislike this comment"><i
+                                                                        class="fa-regular fa-thumbs-down"></i></span> 23
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comment_reply_single d-flex mt-3">
+                                <img src="http://localhost/coder/img/robot.jpg" alt="commenter_img" class="commenter_img rounded-circle me-4">
+                                <div class="add_comment_box">
+
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="commenter_name">Eric Odinson</h4>
+                                        <div class="comment_edit_delete_icons_area">
+                                            <button class="comment_edit_delete_ellipsis"><i
+                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
+                                            <div>
+                                                <div class="comment_edit_delete_icons" style="display: none">
+                                                    <button><i class="fa-solid fa-pen-fancy"></i>
+                                                                            Edit</button>
+                                                    <button><i class="fa-solid fa-trash-can"></i>
+                                                                            Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p class="comment_text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+
+                                    <div class="comment_reacts d-flex">
+                                        <div class="me-4">
+                                            <span role="button" title="I like this comment"><i
+                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
+                                        </div>
+                                        <div>
+                                            <span role="button" title="I dislike this comment"><i
+                                                                        class="fa-regular fa-thumbs-down"></i></span> 23
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comment_reply_single d-flex mt-3">
+                                <img src="http://localhost/coder/uploaded_img/post.webp" alt="commenter_img" class="commenter_img rounded-circle me-4">
+                                <div class="add_comment_box">
+
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="commenter_name">Eric Odinson</h4>
+                                        <div class="comment_edit_delete_icons_area">
+                                            <button class="comment_edit_delete_ellipsis"><i
+                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
+                                            <div>
+                                                <div class="comment_edit_delete_icons" style="display: none">
+                                                    <button><i class="fa-solid fa-pen-fancy"></i>
+                                                                            Edit</button>
+                                                    <button><i class="fa-solid fa-trash-can"></i>
+                                                                            Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p class="comment_text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+
+                                    <div class="comment_reacts d-flex">
+                                        <div class="me-4">
+                                            <span role="button" title="I like this comment"><i
+                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
+                                        </div>
+                                        <div>
+                                            <span role="button" title="I dislike this comment"><i
+                                                                        class="fa-regular fa-thumbs-down"></i></span> 23
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Comments Section Ends Here -->
+
+    <script>
+        window.addEventListener("load", () => {
+            document.querySelector(".comment_input").innerHTML = "";
+        });
+
+        // Comment Replies Toggle
+        document.querySelectorAll(".show_replies_button").forEach(btn => btn.onclick = ev => {
+            const x = ev.target.nextElementSibling.querySelector(".comment_replies");
+            x.style.display = x.style.display === "none" ? "" : "none";
+        });
+
+        // document.querySelectorAll(".show_replies_button").forEach((element) => {
+        //     element.addEventListener("click", (replies) => {
+        //         const targetedReplies = replies.target.nextElementSibling.querySelector(".comment_replies");
+        //         targetedReplies.style.display = targetedReplies.style.display === "none" ? "" : "none";
+        //     });
+        // });
+
+        // Comment Edit Icons Toggle
+        document.querySelectorAll(".comment_edit_delete_ellipsis").forEach((element) => {
+            element.addEventListener("click", (ellipsis) => {
+                const singleEllipsis = ellipsis.target.nextElementSibling.querySelector(
+                    ".comment_edit_delete_icons");
+                singleEllipsis.style.display = singleEllipsis.style.display === "none" ? "" : "none";
+            });
+        });
+
+        // document.querySelectorAll(".show_replies_button").forEach((element) => {
+        //     element.addEventListener("click", (replies) => {
+        //         const targetedReplies = replies.target.nextElementSibling.querySelector(".comment_replies");
+
+        //         if (targetedReplies.style.display === "none") {
+        //             targetedReplies.style.display = "";
+        //         } else {
+        //             targetedReplies.style.display = "none";
+        //         }
+        //     });
+        // });
+    </script>
+
+</body>
+
+</html>

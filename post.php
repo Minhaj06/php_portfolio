@@ -247,10 +247,19 @@ function postDate($timestamp)
 
                                     <div class="add_comment_box">
 
-                                        <h4 class="commenter_name d-flex justify-content-between align-items-center">
-                                            <span>Eric Odinson</span> <span><i
-                                                    class="fa-solid fa-ellipsis-vertical"></i></span>
-                                        </h4>
+                                        <div class="d-flex justify-content-between">
+                                            <h4 class="commenter_name">Eric Odinson</h4>
+                                            <div class="comment_edit_delete_icons_area">
+                                                <button class="comment_edit_delete_ellipsis"><i
+                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
+                                                <div>
+                                                    <div class="comment_edit_delete_icons" style="display: none">
+                                                        <button><i class="fa-solid fa-pen-fancy"></i> Edit</button>
+                                                        <button><i class="fa-solid fa-trash-can"></i> Delete</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <p class="comment_text">Lorem ipsum, dolor sit amet consectetur adipisicing
                                             elit. Perferendis in cumque reprehenderit iure a, et corporis. Illo
@@ -281,11 +290,22 @@ function postDate($timestamp)
                                                         class="commenter_img rounded-circle me-4">
                                                     <div class="add_comment_box">
 
-                                                        <h4
-                                                            class="commenter_name d-flex justify-content-between align-items-center">
-                                                            <span>Eric Odinson</span> <span><i
-                                                                    class="fa-solid fa-ellipsis-vertical"></i></span>
-                                                        </h4>
+                                                        <div class="d-flex justify-content-between">
+                                                            <h4 class="commenter_name">Eric Odinson</h4>
+                                                            <div class="comment_edit_delete_icons_area">
+                                                                <button class="comment_edit_delete_ellipsis"><i
+                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
+                                                                <div>
+                                                                    <div class="comment_edit_delete_icons"
+                                                                        style="display: none">
+                                                                        <button><i class="fa-solid fa-pen-fancy"></i>
+                                                                            Edit</button>
+                                                                        <button><i class="fa-solid fa-trash-can"></i>
+                                                                            Delete</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                         <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
                                                             adipisicing elit.</p>
@@ -308,11 +328,22 @@ function postDate($timestamp)
                                                         class="commenter_img rounded-circle me-4">
                                                     <div class="add_comment_box">
 
-                                                        <h4
-                                                            class="commenter_name d-flex justify-content-between align-items-center">
-                                                            <span>Eric Odinson</span> <span><i
-                                                                    class="fa-solid fa-ellipsis-vertical"></i></span>
-                                                        </h4>
+                                                        <div class="d-flex justify-content-between">
+                                                            <h4 class="commenter_name">Eric Odinson</h4>
+                                                            <div class="comment_edit_delete_icons_area">
+                                                                <button class="comment_edit_delete_ellipsis"><i
+                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
+                                                                <div>
+                                                                    <div class="comment_edit_delete_icons"
+                                                                        style="display: none">
+                                                                        <button><i class="fa-solid fa-pen-fancy"></i>
+                                                                            Edit</button>
+                                                                        <button><i class="fa-solid fa-trash-can"></i>
+                                                                            Delete</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                         <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
                                                             adipisicing elit.</p>
@@ -335,11 +366,22 @@ function postDate($timestamp)
                                                         alt="commenter_img" class="commenter_img rounded-circle me-4">
                                                     <div class="add_comment_box">
 
-                                                        <h4
-                                                            class="commenter_name d-flex justify-content-between align-items-center">
-                                                            <span>Eric Odinson</span> <span><i
-                                                                    class="fa-solid fa-ellipsis-vertical"></i></span>
-                                                        </h4>
+                                                        <div class="d-flex justify-content-between">
+                                                            <h4 class="commenter_name">Eric Odinson</h4>
+                                                            <div class="comment_edit_delete_icons_area">
+                                                                <button class="comment_edit_delete_ellipsis"><i
+                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
+                                                                <div>
+                                                                    <div class="comment_edit_delete_icons"
+                                                                        style="display: none">
+                                                                        <button><i class="fa-solid fa-pen-fancy"></i>
+                                                                            Edit</button>
+                                                                        <button><i class="fa-solid fa-trash-can"></i>
+                                                                            Delete</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                         <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
                                                             adipisicing elit.</p>
@@ -368,10 +410,19 @@ function postDate($timestamp)
 
                                     <div class="add_comment_box">
 
-                                        <h4 class="commenter_name d-flex justify-content-between align-items-center">
-                                            <span>Eric Odinson</span> <span><i
-                                                    class="fa-solid fa-ellipsis-vertical"></i></span>
-                                        </h4>
+                                        <div class="d-flex justify-content-between">
+                                            <h4 class="commenter_name">Eric Odinson</h4>
+                                            <div class="comment_edit_delete_icons_area">
+                                                <button class="comment_edit_delete_ellipsis"><i
+                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
+                                                <div>
+                                                    <div class="comment_edit_delete_icons" style="display: none">
+                                                        <button><i class="fa-solid fa-pen-fancy"></i> Edit</button>
+                                                        <button><i class="fa-solid fa-trash-can"></i> Delete</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <p class="comment_text">Lorem ipsum, dolor sit amet consectetur adipisicing
                                             elit. Perferendis in cumque reprehenderit iure a, et corporis. Illo
@@ -402,11 +453,22 @@ function postDate($timestamp)
                                                         class="commenter_img rounded-circle me-4">
                                                     <div class="add_comment_box">
 
-                                                        <h4
-                                                            class="commenter_name d-flex justify-content-between align-items-center">
-                                                            <span>Eric Odinson</span> <span><i
-                                                                    class="fa-solid fa-ellipsis-vertical"></i></span>
-                                                        </h4>
+                                                        <div class="d-flex justify-content-between">
+                                                            <h4 class="commenter_name">Eric Odinson</h4>
+                                                            <div class="comment_edit_delete_icons_area">
+                                                                <button class="comment_edit_delete_ellipsis"><i
+                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
+                                                                <div>
+                                                                    <div class="comment_edit_delete_icons"
+                                                                        style="display: none">
+                                                                        <button><i class="fa-solid fa-pen-fancy"></i>
+                                                                            Edit</button>
+                                                                        <button><i class="fa-solid fa-trash-can"></i>
+                                                                            Delete</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                         <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
                                                             adipisicing elit.</p>
@@ -429,11 +491,22 @@ function postDate($timestamp)
                                                         class="commenter_img rounded-circle me-4">
                                                     <div class="add_comment_box">
 
-                                                        <h4
-                                                            class="commenter_name d-flex justify-content-between align-items-center">
-                                                            <span>Eric Odinson</span> <span><i
-                                                                    class="fa-solid fa-ellipsis-vertical"></i></span>
-                                                        </h4>
+                                                        <div class="d-flex justify-content-between">
+                                                            <h4 class="commenter_name">Eric Odinson</h4>
+                                                            <div class="comment_edit_delete_icons_area">
+                                                                <button class="comment_edit_delete_ellipsis"><i
+                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
+                                                                <div>
+                                                                    <div class="comment_edit_delete_icons"
+                                                                        style="display: none">
+                                                                        <button><i class="fa-solid fa-pen-fancy"></i>
+                                                                            Edit</button>
+                                                                        <button><i class="fa-solid fa-trash-can"></i>
+                                                                            Delete</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                         <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
                                                             adipisicing elit.</p>
@@ -456,11 +529,22 @@ function postDate($timestamp)
                                                         alt="commenter_img" class="commenter_img rounded-circle me-4">
                                                     <div class="add_comment_box">
 
-                                                        <h4
-                                                            class="commenter_name d-flex justify-content-between align-items-center">
-                                                            <span>Eric Odinson</span> <span><i
-                                                                    class="fa-solid fa-ellipsis-vertical"></i></span>
-                                                        </h4>
+                                                        <div class="d-flex justify-content-between">
+                                                            <h4 class="commenter_name">Eric Odinson</h4>
+                                                            <div class="comment_edit_delete_icons_area">
+                                                                <button class="comment_edit_delete_ellipsis"><i
+                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
+                                                                <div>
+                                                                    <div class="comment_edit_delete_icons"
+                                                                        style="display: none">
+                                                                        <button><i class="fa-solid fa-pen-fancy"></i>
+                                                                            Edit</button>
+                                                                        <button><i class="fa-solid fa-trash-can"></i>
+                                                                            Delete</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                         <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
                                                             adipisicing elit.</p>
@@ -527,6 +611,16 @@ function postDate($timestamp)
     //         targetedReplies.style.display = targetedReplies.style.display === "none" ? "" : "none";
     //     });
     // });
+
+    // Comment Edit Icons Toggle
+    document.querySelectorAll(".comment_edit_delete_ellipsis").forEach((element) => {
+        element.addEventListener("click", (ellipsis) => {
+            const singleEllipsis = ellipsis.target.nextElementSibling.querySelector(
+                ".comment_edit_delete_icons");
+            singleEllipsis.style.display = singleEllipsis.style.display === "none" ? "" : "none";
+        });
+    });
+
     // document.querySelectorAll(".show_replies_button").forEach((element) => {
     //     element.addEventListener("click", (replies) => {
     //         const targetedReplies = replies.target.nextElementSibling.querySelector(".comment_replies");

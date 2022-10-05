@@ -1093,11 +1093,8 @@ opacity: .85;
 font-size: 1.5rem;
 font-weight: 300;
 line-height: 1.3;
+margin-top: -1.3rem;
 }
-
-/*.comment_replies {
-display: none;
-}*/
 
 .comment_replies .commenter_img {
 width: 3.5rem;
@@ -1108,6 +1105,52 @@ height: 3.5rem;
 color: var(--orange);
 background: transparent;
 }
+
+.comment_edit_delete_ellipsis {
+background: transparent;
+color: var(--white);
+width: 3.5rem;
+height: 3.5rem;
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 50%;
+font-size: 1.8rem;
+}
+
+.comment_edit_delete_icons_area {
+position: relative;
+}
+
+.comment_edit_delete_icons {
+position: absolute;
+top: 3.5rem;
+right: 0;
+width: 12rem;
+background: var(--dark-gray);
+padding: 0.75rem 0;
+z-index: 1;
+}
+
+.comment_edit_delete_icons button {
+background: transparent;
+color: var(--white);
+display: block;
+width: 100%;
+text-align: left;
+border: navajowhite;
+padding: 0.5rem 2rem;
+font-weight: 300;
+}
+
+.comment_edit_delete_icons button:hover {
+background: var(--bs-dark);
+}
+
+.comment_edit_delete_icons button i {
+margin-right: 1rem;
+}
+
 
 /* Comment section ends here */
 
