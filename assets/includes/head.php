@@ -85,8 +85,7 @@ if (!isset($og_image_path)) {
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
     <!-- JQuery -->
-    <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <!-- Code Highlight JS CDN -->
     <script src="<?php base_url("assets/prisomJs/okaidia/prism.js") ?>"></script>

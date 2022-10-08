@@ -146,6 +146,13 @@ border: none;
 box-shadow: none;
 }
 
+.btnLoading {
+display: inline-flex;
+justify-content: center;
+align-items: center;
+gap: 0.5rem;
+}
+
 .content {
 max-width: 70%;
 text-align: center;
@@ -234,11 +241,12 @@ pre {
 font-size: 1.8rem;
 line-height: 2.3rem;
 background: var(--dark-gray);
-color: #a7c3ff;
 color: #e6db74;
-padding: 1rem 1.5rem;
+color: #a7c3ff;
+padding: 1.5rem 2rem;
 border-radius: 0.5rem;
 max-height: 45rem;
+border-left: 4px solid;
 }
 :not(pre)>code[class*=language-], pre[class*=language-] {
 background: var(--dark-gray);

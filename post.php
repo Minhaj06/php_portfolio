@@ -46,6 +46,15 @@ function postDate($timestamp)
     $date = date("M d, Y", strtotime($timestamp));
     echo $date;
 }
+
+
+// Adding Comment
+if (isset($_POST["commentText"])) {
+    $comment = $_POST["commentText"];
+
+    echo "<pre>$comment</pre>";
+}
+
 ?>
 
 <?php include_once("assets/includes/head.php"); ?>
@@ -226,13 +235,13 @@ function postDate($timestamp)
                                     class="commenter_img rounded-circle me-4">
 
                                 <div class="add_comment_box">
-                                    <div class="comment_input mb-2" contenteditable="true"
+                                    <div id="comment_input" class="comment_input mb-2" contenteditable="true"
                                         placeholder="Add a comment...">
                                     </div>
 
                                     <div class="comment_buttons text-end">
-                                        <button class="comment_cancel btn">cancel</button>
-                                        <button class="comment_submit btn">comment</button>
+                                        <button id="comment_cancel" class="comment_cancel btn">cancel</button>
+                                        <button id="comment_submit" class="comment_submit btn" disabled>comment</button>
 
                                     </div>
                                 </div>
@@ -591,48 +600,9 @@ function postDate($timestamp)
 
     </section>
 
+    <?php include("assets/includes/messageBox.php") ?>
     <?php include_once("assets/includes/footer.php") ?>
-
-
-    <script>
-    window.addEventListener("load", () => {
-        document.querySelector(".comment_input").innerHTML = "";
-    });
-
-    // Comment Replies Toggle
-    document.querySelectorAll(".show_replies_button").forEach(btn => btn.onclick = ev => {
-        const x = ev.target.nextElementSibling.querySelector(".comment_replies");
-        x.style.display = x.style.display === "none" ? "" : "none";
-    });
-
-    // document.querySelectorAll(".show_replies_button").forEach((element) => {
-    //     element.addEventListener("click", (replies) => {
-    //         const targetedReplies = replies.target.nextElementSibling.querySelector(".comment_replies");
-    //         targetedReplies.style.display = targetedReplies.style.display === "none" ? "" : "none";
-    //     });
-    // });
-
-    // Comment Edit Icons Toggle
-    document.querySelectorAll(".comment_edit_delete_ellipsis").forEach((element) => {
-        element.addEventListener("click", (ellipsis) => {
-            const singleEllipsis = ellipsis.target.nextElementSibling.querySelector(
-                ".comment_edit_delete_icons");
-            singleEllipsis.style.display = singleEllipsis.style.display === "none" ? "" : "none";
-        });
-    });
-
-    // document.querySelectorAll(".show_replies_button").forEach((element) => {
-    //     element.addEventListener("click", (replies) => {
-    //         const targetedReplies = replies.target.nextElementSibling.querySelector(".comment_replies");
-
-    //         if (targetedReplies.style.display === "none") {
-    //             targetedReplies.style.display = "";
-    //         } else {
-    //             targetedReplies.style.display = "none";
-    //         }
-    //     });
-    // });
-    </script>
+    <script src="assets/JS/comments.js"></script>
 
 </body>
 

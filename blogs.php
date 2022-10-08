@@ -155,7 +155,7 @@ $og_url = "blogs.php";
         <div class="inner_blog container m-auto">
 
             <div class="row g-5">
-                <main class="col-lg-8 mb-5 mb-lg-0">
+                <main class="col-lg-7 col-xl-8 mb-5 mb-lg-0">
                     <div class="row g-0 mb-5 pb-4 d-none">
                         <div class="blog_item rounded-0">
 
@@ -294,7 +294,7 @@ $og_url = "blogs.php";
                             while ($post_result = mysqli_fetch_array($post_query)) {
                         ?>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-lg-12 col-xl-6 g-lg-5 g-xl-4">
                             <div class="blog_item">
                                 <div class="blog_img">
                                     <a href="<?php base_url("post.php?slug=" . $post_result['slug']) ?>">
@@ -394,10 +394,8 @@ $og_url = "blogs.php";
 
 
                 <!-- Right aside section Starts here -->
-                <aside class="col-lg-4">
-
+                <aside class="col-lg-5 col-xl-4">
                     <?php include_once("assets/includes/blog_aside.php") ?>
-
                 </aside>
                 <!-- Right aside section ends here -->
 
