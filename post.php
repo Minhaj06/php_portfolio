@@ -46,22 +46,13 @@ function postDate($timestamp)
     $date = date("M d, Y", strtotime($timestamp));
     echo $date;
 }
-
-
-// Adding Comment
-if (isset($_POST["commentText"])) {
-    $comment = $_POST["commentText"];
-
-    echo "<pre>$comment</pre>";
-}
-
 ?>
 
 <?php include_once("assets/includes/head.php"); ?>
 
 </head>
 
-<body class="line-numbers">
+<body class="line-numbers" id="body">
     <?php
     // include_once("assets/includes/preloader.php1");
     include_once("assets/includes/navbar.php");
@@ -116,7 +107,8 @@ if (isset($_POST["commentText"])) {
                             <div class="row g-3 g-xl-4">
                                 <style>
                                 .post_share_option .btn {
-                                    padding: 0 3.5rem;
+                                    padding: .2rem 3.5rem;
+                                    font-size: 2rem;
                                 }
 
                                 .post_share_option a:hover {
@@ -127,56 +119,56 @@ if (isset($_POST["commentText"])) {
                                 <div class="col">
                                     <a style="color: #FFF; background: #4267B2;"
                                         href="http://www.facebook.com/sharer.php?u=<?php base_url("post.php?slug=" . $slug) ?>"
-                                        target="_blank" class="btn d-block fs-1" title="Share by Facebook"><i
+                                        target="_blank" class="btn d-block" title="Share by Facebook"><i
                                             class="fa-brands fa-facebook-f"></i></a>
                                 </div>
 
                                 <div class="col d-md-none">
                                     <a style="color: #FFF; background: #9A30ED;"
                                         href="fb-messenger://share/?link=<?php base_url($og_url) ?>" target="_blank"
-                                        class="btn d-block fs-1" title="Share by Messenger"><i
+                                        class="btn d-block" title="Share by Messenger"><i
                                             class="fa-brands fa-facebook-messenger"></i></a>
                                 </div>
 
                                 <div class="col">
                                     <a style="color: #FFF; background: #25D366;"
                                         href="whatsapp://send?text=<?php base_url($og_url) ?>"
-                                        data-action="share/whatsapp/share" target="_blank" class="btn d-block fs-1"
+                                        data-action="share/whatsapp/share" target="_blank" class="btn d-block"
                                         title="Share by Whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
                                 </div>
 
                                 <div class="col">
                                     <a style="color: #FFF; background: #00acee;"
                                         href="http://www.twitter.com/share?text=<?= $og_title ?> &url=<? base_url($og_url) ?> &hashtags=<?= $og_keywords ?>"
-                                        target="_blank" class="btn d-block fs-1" title="Share by Twitter"><i
+                                        target="_blank" class="btn d-block" title="Share by Twitter"><i
                                             class="fa-brands fa-twitter"></i></a>
                                 </div>
 
                                 <div class="col">
                                     <a style="color: #FFF; background: #0072B1;"
                                         href="https://www.linkedin.com/sharing/share-offsite/?url=<?php base_url($og_url) ?>"
-                                        target="_blank" class="btn d-block fs-1" title="Share by Linkedin"><i
+                                        target="_blank" class="btn d-block" title="Share by Linkedin"><i
                                             class="fa-brands fa-linkedin-in"></i></a>
                                 </div>
 
                                 <div class="col">
                                     <a style="color: #FFF; background: #E60023;"
                                         href="https://www.pinterest.com/pin/create/button/?url=<?php base_url($og_url) ?>"
-                                        target="_blank" class="btn d-block fs-1" title="Share by Pinterest"><i
+                                        target="_blank" class="btn d-block" title="Share by Pinterest"><i
                                             class="fa-brands fa-pinterest-p"></i></a>
                                 </div>
 
                                 <div class="col">
                                     <a style="color: #FFF; background: #ff4500;"
                                         href="https://reddit.com/submit?url=<?php base_url($og_url . '&title=' . $og_title . '&description=' . $og_description) ?>"
-                                        target="_blank" class="btn d-block fs-1" title="Share by Reddit"><i
+                                        target="_blank" class="btn d-block" title="Share by Reddit"><i
                                             class="fa-brands fa-reddit-alien"></i></a>
                                 </div>
 
                                 <div class="col">
                                     <a style="color: #FFF; background: #4285F4;"
                                         href="mailto:?subject=<?= $og_title ?>&amp;body=<?php base_url($og_url) ?>"
-                                        target="_blank" class="btn d-block fs-1" title="Share by Email"><i
+                                        target="_blank" class="btn d-block" title="Share by Email"><i
                                             class="fa-solid fa-envelope"></i></a>
                                 </div>
 
@@ -195,7 +187,7 @@ if (isset($_POST["commentText"])) {
                                     while ($related_post_result = mysqli_fetch_array($related_post_query)) {
                                 ?>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-lg-12 col-xl-6">
                                 <div class="blog_item">
                                     <div class="blog_img">
                                         <a href="<?php base_url("post.php?slug=" . $related_post_result['slug']) ?>">
@@ -220,366 +212,14 @@ if (isset($_POST["commentText"])) {
                             <?php } ?>
                         </div>
 
+                        <!-- Comments Section Starts Here -->
+                        <?php include("assets/includes/comments.php") ?>
+                        <!-- Comments Section Ends Here -->
+
                         <?php } else {
                             include "assets/includes/post_not_found.php";
                         }
                         ?>
-
-                        <!-- Comments Section Starts Here -->
-                        <div class="comments_area_wrapper pt-5" id="respond">
-                            <h2 class="widget_title mb-5">874 Comments</h2>
-
-                            <div class="comment_box d-flex mb-5">
-
-                                <img src="<?php base_url("img/robot.jpg") ?>" alt="commenter_img"
-                                    class="commenter_img rounded-circle me-4">
-
-                                <div class="add_comment_box">
-                                    <div id="comment_input" class="comment_input mb-2" contenteditable="true"
-                                        placeholder="Add a comment...">
-                                    </div>
-
-                                    <div class="comment_buttons text-end">
-                                        <button id="comment_cancel" class="comment_cancel btn">cancel</button>
-                                        <button id="comment_submit" class="comment_submit btn" disabled>comment</button>
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                            <div class="all_comments">
-                                <div class="single_comment d-flex mb-4">
-                                    <img src="<?php base_url("uploaded_img/168234.png") ?>" alt="commenter_img"
-                                        class="commenter_img rounded-circle me-4">
-
-                                    <div class="add_comment_box">
-
-                                        <div class="d-flex justify-content-between">
-                                            <h4 class="commenter_name">Eric Odinson</h4>
-                                            <div class="comment_edit_delete_icons_area">
-                                                <button class="comment_edit_delete_ellipsis"><i
-                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
-                                                <div>
-                                                    <div class="comment_edit_delete_icons" style="display: none">
-                                                        <button><i class="fa-solid fa-pen-fancy"></i> Edit</button>
-                                                        <button><i class="fa-solid fa-trash-can"></i> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <p class="comment_text">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                            elit. Perferendis in cumque reprehenderit iure a, et corporis. Illo
-                                            consectetur accusantium, beatae mollitia cum ipsum sint suscipit explicabo
-                                            exercitationem repellat voluptatum officia.</p>
-
-                                        <div class="comment_reacts d-flex">
-                                            <div class="me-4">
-                                                <span role="button" title="I like this comment"><i
-                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
-                                            </div>
-                                            <div>
-                                                <span role="button" title="I dislike this comment"><i
-                                                        class="fa-regular fa-thumbs-down"></i></span>
-                                                23
-                                            </div>
-                                        </div>
-
-                                        <button class="mt-3 show_replies_button"><i
-                                                class="fa-solid fa-caret-down fs-3"></i> 43
-                                            REPLIES
-                                        </button>
-
-                                        <div>
-                                            <div class="comment_replies" style="display: none;">
-                                                <div class="comment_reply_single d-flex mt-3">
-                                                    <img src="<?php base_url("img/robot.jpg") ?>" alt="commenter_img"
-                                                        class="commenter_img rounded-circle me-4">
-                                                    <div class="add_comment_box">
-
-                                                        <div class="d-flex justify-content-between">
-                                                            <h4 class="commenter_name">Eric Odinson</h4>
-                                                            <div class="comment_edit_delete_icons_area">
-                                                                <button class="comment_edit_delete_ellipsis"><i
-                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
-                                                                <div>
-                                                                    <div class="comment_edit_delete_icons"
-                                                                        style="display: none">
-                                                                        <button><i class="fa-solid fa-pen-fancy"></i>
-                                                                            Edit</button>
-                                                                        <button><i class="fa-solid fa-trash-can"></i>
-                                                                            Delete</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
-                                                            adipisicing elit.</p>
-
-                                                        <div class="comment_reacts d-flex">
-                                                            <div class="me-4">
-                                                                <span role="button" title="I like this comment"><i
-                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
-                                                            </div>
-                                                            <div>
-                                                                <span role="button" title="I dislike this comment"><i
-                                                                        class="fa-regular fa-thumbs-down"></i></span>
-                                                                23
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="comment_reply_single d-flex mt-3">
-                                                    <img src="<?php base_url("img/robot.jpg") ?>" alt="commenter_img"
-                                                        class="commenter_img rounded-circle me-4">
-                                                    <div class="add_comment_box">
-
-                                                        <div class="d-flex justify-content-between">
-                                                            <h4 class="commenter_name">Eric Odinson</h4>
-                                                            <div class="comment_edit_delete_icons_area">
-                                                                <button class="comment_edit_delete_ellipsis"><i
-                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
-                                                                <div>
-                                                                    <div class="comment_edit_delete_icons"
-                                                                        style="display: none">
-                                                                        <button><i class="fa-solid fa-pen-fancy"></i>
-                                                                            Edit</button>
-                                                                        <button><i class="fa-solid fa-trash-can"></i>
-                                                                            Delete</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
-                                                            adipisicing elit.</p>
-
-                                                        <div class="comment_reacts d-flex">
-                                                            <div class="me-4">
-                                                                <span role="button" title="I like this comment"><i
-                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
-                                                            </div>
-                                                            <div>
-                                                                <span role="button" title="I dislike this comment"><i
-                                                                        class="fa-regular fa-thumbs-down"></i></span>
-                                                                23
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="comment_reply_single d-flex mt-3">
-                                                    <img src="<?php base_url("uploaded_img/post.webp") ?>"
-                                                        alt="commenter_img" class="commenter_img rounded-circle me-4">
-                                                    <div class="add_comment_box">
-
-                                                        <div class="d-flex justify-content-between">
-                                                            <h4 class="commenter_name">Eric Odinson</h4>
-                                                            <div class="comment_edit_delete_icons_area">
-                                                                <button class="comment_edit_delete_ellipsis"><i
-                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
-                                                                <div>
-                                                                    <div class="comment_edit_delete_icons"
-                                                                        style="display: none">
-                                                                        <button><i class="fa-solid fa-pen-fancy"></i>
-                                                                            Edit</button>
-                                                                        <button><i class="fa-solid fa-trash-can"></i>
-                                                                            Delete</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
-                                                            adipisicing elit.</p>
-
-                                                        <div class="comment_reacts d-flex">
-                                                            <div class="me-4">
-                                                                <span role="button" title="I like this comment"><i
-                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
-                                                            </div>
-                                                            <div>
-                                                                <span role="button" title="I dislike this comment"><i
-                                                                        class="fa-regular fa-thumbs-down"></i></span>
-                                                                23
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="single_comment d-flex mb-4">
-                                    <img src="<?php base_url("uploaded_img/post.webp") ?>" alt="commenter_img"
-                                        class="commenter_img rounded-circle me-4">
-
-                                    <div class="add_comment_box">
-
-                                        <div class="d-flex justify-content-between">
-                                            <h4 class="commenter_name">Eric Odinson</h4>
-                                            <div class="comment_edit_delete_icons_area">
-                                                <button class="comment_edit_delete_ellipsis"><i
-                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
-                                                <div>
-                                                    <div class="comment_edit_delete_icons" style="display: none">
-                                                        <button><i class="fa-solid fa-pen-fancy"></i> Edit</button>
-                                                        <button><i class="fa-solid fa-trash-can"></i> Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <p class="comment_text">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                            elit. Perferendis in cumque reprehenderit iure a, et corporis. Illo
-                                            consectetur accusantium, beatae mollitia cum ipsum sint suscipit explicabo
-                                            exercitationem repellat voluptatum officia.</p>
-
-                                        <div class="comment_reacts d-flex">
-                                            <div class="me-4">
-                                                <span role="button" title="I like this comment"><i
-                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
-                                            </div>
-                                            <div>
-                                                <span role="button" title="I dislike this comment"><i
-                                                        class="fa-regular fa-thumbs-down"></i></span>
-                                                23
-                                            </div>
-                                        </div>
-
-                                        <button class="mt-3 show_replies_button"><i
-                                                class="fa-solid fa-caret-down fs-3"></i> 43
-                                            REPLIES
-                                        </button>
-
-                                        <div>
-                                            <div class="comment_replies" style="display: none;">
-                                                <div class="comment_reply_single d-flex mt-3">
-                                                    <img src="<?php base_url("img/robot.jpg") ?>" alt="commenter_img"
-                                                        class="commenter_img rounded-circle me-4">
-                                                    <div class="add_comment_box">
-
-                                                        <div class="d-flex justify-content-between">
-                                                            <h4 class="commenter_name">Eric Odinson</h4>
-                                                            <div class="comment_edit_delete_icons_area">
-                                                                <button class="comment_edit_delete_ellipsis"><i
-                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
-                                                                <div>
-                                                                    <div class="comment_edit_delete_icons"
-                                                                        style="display: none">
-                                                                        <button><i class="fa-solid fa-pen-fancy"></i>
-                                                                            Edit</button>
-                                                                        <button><i class="fa-solid fa-trash-can"></i>
-                                                                            Delete</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
-                                                            adipisicing elit.</p>
-
-                                                        <div class="comment_reacts d-flex">
-                                                            <div class="me-4">
-                                                                <span role="button" title="I like this comment"><i
-                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
-                                                            </div>
-                                                            <div>
-                                                                <span role="button" title="I dislike this comment"><i
-                                                                        class="fa-regular fa-thumbs-down"></i></span>
-                                                                23
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="comment_reply_single d-flex mt-3">
-                                                    <img src="<?php base_url("img/robot.jpg") ?>" alt="commenter_img"
-                                                        class="commenter_img rounded-circle me-4">
-                                                    <div class="add_comment_box">
-
-                                                        <div class="d-flex justify-content-between">
-                                                            <h4 class="commenter_name">Eric Odinson</h4>
-                                                            <div class="comment_edit_delete_icons_area">
-                                                                <button class="comment_edit_delete_ellipsis"><i
-                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
-                                                                <div>
-                                                                    <div class="comment_edit_delete_icons"
-                                                                        style="display: none">
-                                                                        <button><i class="fa-solid fa-pen-fancy"></i>
-                                                                            Edit</button>
-                                                                        <button><i class="fa-solid fa-trash-can"></i>
-                                                                            Delete</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
-                                                            adipisicing elit.</p>
-
-                                                        <div class="comment_reacts d-flex">
-                                                            <div class="me-4">
-                                                                <span role="button" title="I like this comment"><i
-                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
-                                                            </div>
-                                                            <div>
-                                                                <span role="button" title="I dislike this comment"><i
-                                                                        class="fa-regular fa-thumbs-down"></i></span>
-                                                                23
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="comment_reply_single d-flex mt-3">
-                                                    <img src="<?php base_url("uploaded_img/post.webp") ?>"
-                                                        alt="commenter_img" class="commenter_img rounded-circle me-4">
-                                                    <div class="add_comment_box">
-
-                                                        <div class="d-flex justify-content-between">
-                                                            <h4 class="commenter_name">Eric Odinson</h4>
-                                                            <div class="comment_edit_delete_icons_area">
-                                                                <button class="comment_edit_delete_ellipsis"><i
-                                                                        class="fa-solid fa-ellipsis-vertical"></i></button>
-                                                                <div>
-                                                                    <div class="comment_edit_delete_icons"
-                                                                        style="display: none">
-                                                                        <button><i class="fa-solid fa-pen-fancy"></i>
-                                                                            Edit</button>
-                                                                        <button><i class="fa-solid fa-trash-can"></i>
-                                                                            Delete</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
-                                                            adipisicing elit.</p>
-
-                                                        <div class="comment_reacts d-flex">
-                                                            <div class="me-4">
-                                                                <span role="button" title="I like this comment"><i
-                                                                        class="fa-regular fa-thumbs-up"></i></span> 5.3k
-                                                            </div>
-                                                            <div>
-                                                                <span role="button" title="I dislike this comment"><i
-                                                                        class="fa-regular fa-thumbs-down"></i></span>
-                                                                23
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- Comments Section Ends Here -->
 
                     </div>
 

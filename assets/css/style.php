@@ -246,10 +246,14 @@ color: #a7c3ff;
 padding: 1.5rem 2rem;
 border-radius: 0.5rem;
 max-height: 45rem;
-border-left: 4px solid;
+border-left: 4px solid var(--gray);
 }
+
 :not(pre)>code[class*=language-], pre[class*=language-] {
 background: var(--dark-gray);
+border-left: 0.6rem solid var(--gray);
+border-top-left-radius: 0!important;
+border-bottom-left-radius: 0!important;
 }
 
 img.note-float-left {
