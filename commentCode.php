@@ -1,14 +1,31 @@
 <?php
 include 'admin/config/dbConnect.php';
-// Adding Comment
-// function addComment($commentFor)
-// {
-//     if (isset($_POST["addComment"]) && $_POST["addComment"] == $commentFor) {
-//         $comment = $_POST["commentText"];
 
-//         echo $comment;
-//     }
-// }
+// Fetching all comments data
+function fetchingCommentsData($commentsFor)
+{
+    global $conn;
+    if (isset($_POST['commentsFor']) && $_POST['commentsFor'] == $commentsFor) {
+
+        $commentsTable = $_POST['commentsTable'];
+        $postID = $_POST['postID'];
+
+        $query = mysqli_query($conn, "SELECT * FROM `$commentsTable` WHERE blog_id = $postID");
+
+        if (mysqli_num_rows($query) > 0) {
+            $commentsData = array();
+            while ($row = mysqli_fetch_assoc($query)) {
+                $commentsData[] = $row;
+            }
+        }
+        echo json_encode($commentsData);
+    }
+}
+fetchingCommentsData("blogComments");
+
+
+
+
 
 // addComment("addBlogComment");
 

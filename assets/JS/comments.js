@@ -2,6 +2,24 @@ window.addEventListener("load", () => {
     document.querySelector(".comment_input").innerHTML = "";
 });
 
+window.addEventListener("load", () => {
+    document.querySelectorAll(".reply_input").forEach((eachInput) => {
+        eachInput.innerHTML = "";
+    });
+});
+
+// Cancel Reply
+document.querySelectorAll(".reply_btn").forEach(btn => btn.onclick = ev => {
+    const x = ev.target.nextElementSibling.querySelector(".reply_box");
+    x.style.display = x.style.display === "none" ? "flex" : "none";
+});
+
+// Reply Box Toggle
+document.querySelectorAll(".reply_btn").forEach(btn => btn.onclick = ev => {
+    const x = ev.target.nextElementSibling.querySelector(".reply_box");
+    x.style.display = x.style.display === "none" ? "flex" : "none";
+});
+
 // Comment Replies Toggle
 document.querySelectorAll(".show_replies_button").forEach(btn => btn.onclick = ev => {
     const x = ev.target.nextElementSibling.querySelector(".comment_replies");
@@ -44,17 +62,27 @@ document.querySelectorAll(".comment_edit_delete_ellipsis").forEach((element) => 
 
 $(document).ready(function() {
 
-    function fetchComments() {
+    // Fetching all comments data
+    function fetchComments(pageURL, commentsFor, commentsTable) {
+        let postID = $("#comment_submit").data("post-id");
         $.ajax({
-            type: "method",
-            url: "url",
-            data: "data",
-            dataType: "dataType",
-            success: function(response) {
-
+            type: "POST",
+            url: pageURL,
+            data: {
+                commentsFor: commentsFor,
+                commentsTable: commentsTable,
+                postID: postID
+            },
+            dataType: "json",
+            success: function(data) {
+                for (i = 0; i < data.length; i++) {
+                    console.log(data[i].comment)
+                }
             }
         });
     }
+    // fetchComments("commentCode.php", "blogComments", "blog_comments");
+
 
     $("#comment_input").keyup(function(e) {
         e.preventDefault();
@@ -102,8 +130,7 @@ $(document).ready(function() {
                     showMessage(response);
                     $("#comment_input").html("");
                     // Refresh Comments Area
-                    $("#all_comments").load(location.href + " #all_comments>*", "");
-                    console.log(response);
+                    // $("#all_comments").load(location.href + " #all_comments>*", "");
                 }
             });
         });
