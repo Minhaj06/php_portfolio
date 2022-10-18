@@ -96,6 +96,7 @@ if (isset($_POST['login_btn'])) {
             $email = $login_data['email'];
             $contact_no = $login_data['contact_no'];
             $role_as = $login_data['role_as'];
+            $image = $login_data['image'];
         }
 
         $_SESSION['auth'] = true;
@@ -107,6 +108,7 @@ if (isset($_POST['login_btn'])) {
             'username' => $username,
             'email' => $email,
             'contact_no' => $contact_no,
+            'image' => $image,
         ];
 
         if ($_SESSION['auth_role'] == 1) // 1=admin

@@ -265,10 +265,9 @@ $og_url = "blogs.php";
                     </div>
 
 
-                    <h2 style="border-left: 6px solid var(--gray); border-bottom: 1px solid var(--gray)"
-                        class="widget_title text-uppercase mb-4 fs-2">Latest news are on top all times</h2>
+                    <h2 class="widget_title text-uppercase mb-4 fs-2">Latest news are on top all times</h2>
 
-                    <div class="row g-5 g-md-4 g-xl-5">
+                    <div class="row g-5 g-md-4 g-lg-5 g-xl-4 g-xxl-5">
 
                         <?php
                         $total_records = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM `blog_posts` WHERE status = '1'"));
@@ -294,7 +293,7 @@ $og_url = "blogs.php";
                             while ($post_result = mysqli_fetch_array($post_query)) {
                         ?>
 
-                        <div class="col-md-6 col-lg-12 col-xl-6 g-lg-5 g-xl-4">
+                        <div class="col-md-6 col-lg-12 col-xl-6">
                             <div class="blog_item">
                                 <div class="blog_img">
                                     <a href="<?php base_url("post.php?slug=" . $post_result['slug']) ?>">

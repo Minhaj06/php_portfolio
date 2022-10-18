@@ -1,18 +1,44 @@
 window.addEventListener("load", () => {
-    document.querySelector(".comment_input").innerHTML = "";
+    document.querySelector("#comment_input").innerHTML = "";
 });
 
-window.addEventListener("load", () => {
-    document.querySelectorAll(".reply_input").forEach((eachInput) => {
-        eachInput.innerHTML = "";
-    });
+// cancel comment
+$(".comment_cancel").click(function(e) {
+    e.preventDefault();
+    $("#comment_input").html("");
+    $("#comment_submit").attr("disabled", "true");
 });
+
+
+// enable/disable reply button on keyup
+$(".reply_input").keyup(function(e) {
+    let comment_id = $(this).data("comment-id");
+
+    let replyText = $.trim($("#reply_input" + comment_id).text());
+
+    if (replyText == "") {
+        $("#reply_submit" + comment_id).attr("disabled", true);
+    } else {
+        $("#reply_submit" + comment_id).removeAttr("disabled");
+    }
+});
+
+
+// cancel reply
+$(".reply_cancel").click(function(e) {
+    e.preventDefault();
+    let comment_id = $(this).data("comment-id");
+
+    $("#reply_box" + comment_id).css("display", "none");
+});
+
+
 
 // Cancel Reply
-document.querySelectorAll(".reply_btn").forEach(btn => btn.onclick = ev => {
-    const x = ev.target.nextElementSibling.querySelector(".reply_box");
-    x.style.display = x.style.display === "none" ? "flex" : "none";
-});
+// document.querySelectorAll(".reply_calcel").forEach(btn => btn.onclick = ev => {
+//     const x = ev.target.previousElementSibling.querySelector(".reply_box");
+//     x.style.display = x.style.display === "none" ? "flex" : "none";
+// });
 
 // Reply Box Toggle
 document.querySelectorAll(".reply_btn").forEach(btn => btn.onclick = ev => {

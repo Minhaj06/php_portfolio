@@ -6,8 +6,17 @@ $post_id = $single_post_result['id'];
     <h2 class="widget_title mb-4">874 Comments</h2>
 
     <div class="comment_box d-flex mb-4">
+        <?php
+        if (!isset($_SESSION['auth'])) {
+        ?>
+        <img src="<?php base_url("img/avatar2.jpg") ?>" alt="commenter_img" class="commenter_img rounded-circle me-4">
+        <?php
+        } else { ?>
+        <img src="<?php base_url("uploaded_img/" . $_SESSION['auth_user']['image']) ?>" alt="commenter_img"
+            class="commenter_img rounded-circle me-4">
+        <?php } ?>
 
-        <img src="<?php base_url("img/robot.jpg") ?>" alt="commenter_img" class="commenter_img rounded-circle me-4">
+
 
         <div class="add_comment_box">
             <div id="comment_input" class="comment_input mb-2" contenteditable="true" placeholder="Add a comment...">
@@ -29,23 +38,32 @@ $post_id = $single_post_result['id'];
         $comments = mysqli_query($conn, "SELECT * FROM `blog_comments` WHERE `blog_id` = '$post_id'");
         if (mysqli_num_rows($comments) > 0) {
             while ($comments_result = mysqli_fetch_array($comments)) {
+
+                // $post_id = $comments_result['blog_id'];
+                $comment_id = $comments_result['comment_id'];
+                $user_id = $comments_result['user_id'];
+
+                $commenter_data = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `first_name`, `last_name`, `image` FROM `users_info` WHERE id = '$user_id' "));
         ?>
 
         <div class="single_comment d-flex mb-4">
-            <img src="<?php base_url("uploaded_img/168234.png") ?>" alt="commenter_img"
+            <img src="<?php base_url("uploaded_img/" . $commenter_data['image']) ?>" alt="commenter_img"
                 class="commenter_img rounded-circle me-4">
 
             <div class="add_comment_box">
 
                 <div class="d-flex justify-content-between">
-                    <h4 class="commenter_name">Eric Odinson</h4>
+                    <h4 class="commenter_name"><?= $commenter_data['first_name'] . ' ' . $commenter_data['last_name'] ?>
+                    </h4>
                     <div class="comment_edit_delete_icons_area">
                         <button class="comment_edit_delete_ellipsis"><i
                                 class="fa-solid fa-ellipsis-vertical"></i></button>
                         <div>
                             <div class="comment_edit_delete_icons" style="display: none">
-                                <button><i class="fa-solid fa-pen-fancy"></i> Edit</button>
-                                <button><i class="fa-solid fa-trash-can"></i> Delete</button>
+                                <button data-comment-id="<?= $comment_id ?>"><i class="fa-solid fa-pen-fancy"></i>
+                                    Edit</button>
+                                <button data-comment-id="<?= $comment_id ?>"><i class="fa-solid fa-trash-can"></i>
+                                    Delete</button>
                             </div>
                         </div>
                     </div>
@@ -68,21 +86,24 @@ $post_id = $single_post_result['id'];
                 <button class="reply_btn">reply</button>
 
                 <div>
-                    <div class="reply_box mt-2" style="display: none; margin-bottom: -2rem;">
+                    <div id="reply_box<?= $comment_id ?>" class="reply_box mt-2"
+                        style="display: none; margin-bottom: -2.5rem;">
                         <img src="<?php base_url("img/robot.jpg") ?>" alt="replier_img"
                             class="replier_img rounded-circle me-4">
 
                         <div class="add_reply_box">
-                            <div id="reply_input" class="reply_input mb-2" contenteditable="true"
-                                placeholder="Add a reply...">
+                            <div id="reply_input<?= $comment_id ?>" data-comment-id="<?= $comment_id ?>"
+                                class="reply_input mb-2" contenteditable="true" placeholder="Add a reply...">
+                                <?= '@' . $commenter_data['first_name'] . ' ' . $commenter_data['last_name'] ?> &nbsp;
                             </div>
 
-                            <!-- <div class="comment_buttons text-end"> -->
-                            <button id="reply_cancel" class="reply_cancel btn">cancel</button>
-                            <button id="reply_submit" data-post-id="<?= $post_id ?>" class="reply_submit btn px-4"
-                                disabled>reply</button>
-
-                            <!-- </div> -->
+                            <div class="text-end">
+                                <button id="reply_cancel<?= $comment_id ?>" data-comment-id="<?= $comment_id ?>"
+                                    class="reply_cancel btn px-4">cancel</button>
+                                <button id="reply_submit<?= $comment_id ?>" data-comment-id="<?= $comment_id ?>" class="reply_submit btn
+                                    px-4" disabled>reply</button>
+                            </div>
+                            <!-- <button id="reply_cancel" class="reply_cancel btn float-end">cancel</button> -->
                         </div>
                     </div>
                 </div>
