@@ -35,7 +35,7 @@ $post_id = $single_post_result['id'];
 
     <div class="all_comments" id="all_comments">
         <?php
-        $comments = mysqli_query($conn, "SELECT * FROM `blog_comments` WHERE `blog_id` = '$post_id'");
+        $comments = mysqli_query($conn, "SELECT * FROM `blog_comments` WHERE `blog_id` = '$post_id' ORDER BY COMMENT_ID DESC");
         if (mysqli_num_rows($comments) > 0) {
             while ($comments_result = mysqli_fetch_array($comments)) {
 
@@ -46,15 +46,22 @@ $post_id = $single_post_result['id'];
                 $commenter_data = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `first_name`, `last_name`, `image` FROM `users_info` WHERE id = '$user_id' "));
         ?>
 
-        <div class="single_comment d-flex mb-4">
+        <div id="single_comment<?= $comment_id ?>" class="single_comment d-flex mb-4">
             <img src="<?php base_url("uploaded_img/" . $commenter_data['image']) ?>" alt="commenter_img"
                 class="commenter_img rounded-circle me-4">
 
             <div class="add_comment_box">
 
+                <?php
+                        if (isset($_SESSION['auth']) && $_SESSION['auth_user']['user_id'] === $user_id) {
+                        ?>
                 <div class="d-flex justify-content-between">
-                    <h4 class="commenter_name"><?= $commenter_data['first_name'] . ' ' . $commenter_data['last_name'] ?>
-                    </h4>
+                    <div class="commenter_comment">
+                        <h4 class="commenter_name mb-4 pb-1">
+                            <?= $commenter_data['first_name'] . ' ' . $commenter_data['last_name'] ?>
+                        </h4>
+                        <p class="comment_text"><?= $comments_result['comment'] ?></p>
+                    </div>
                     <div class="comment_edit_delete_icons_area">
                         <button class="comment_edit_delete_ellipsis"><i
                                 class="fa-solid fa-ellipsis-vertical"></i></button>
@@ -68,8 +75,14 @@ $post_id = $single_post_result['id'];
                         </div>
                     </div>
                 </div>
-
-                <p class="comment_text"><?= $comments_result['comment'] ?></p>
+                <?php  } else {  ?>
+                <div class="commenter_comment">
+                    <h4 class="commenter_name mb-4 pb-1">
+                        <?= $commenter_data['first_name'] . ' ' . $commenter_data['last_name'] ?>
+                    </h4>
+                    <p class="comment_text"><?= $comments_result['comment'] ?></p>
+                </div>
+                <?php } ?>
 
                 <div class="comment_reacts d-flex align-items-center float-start">
                     <div class="me-4">
@@ -110,13 +123,13 @@ $post_id = $single_post_result['id'];
 
 
 
-                <button class="mt-3 show_replies_button"><i class="fa-solid fa-caret-down fs-3"></i> 43
+                <button class="show_replies_button mt-2"><i class="fa-solid fa-caret-down fs-3"></i> 43
                     REPLIES
                 </button>
 
                 <div>
                     <div class="comment_replies" style="display: none;">
-                        <div class="comment_reply_single d-flex mt-3">
+                        <div class="comment_reply_single d-flex mt-2">
                             <img src="<?php base_url("img/robot.jpg") ?>" alt="replier_img"
                                 class="replier_img rounded-circle me-4">
                             <div class="add_comment_box">
