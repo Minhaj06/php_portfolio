@@ -207,7 +207,7 @@ function postDate($timestamp)
 
                         <!-- Post Share Options -->
                         <div class="post_share_option mb-5 pb-4">
-                            <h1 class="widget_title">Share On</h1>
+                            <h2 class="widget_title">Share On</h2>
 
                             <div class="row g-3 g-xl-4">
                                 <style>
@@ -283,7 +283,7 @@ function postDate($timestamp)
 
 
                         <!-- Related Posts -->
-                        <h1 class="widget_title">related posts</h1>
+                        <h2 class="widget_title">related posts</h2>
 
                         <div class="row g-4">
                             <?php
@@ -320,15 +320,15 @@ function postDate($timestamp)
                             <?php } ?>
                         </div>
 
+                        <!-- Comments Section Starts Here -->
+                        <?php include("../assets/includes/comments.php") ?>
+                        <!-- Comments Section Ends Here -->
+
                         <?php } else {
                             include "inc/post_not_found.php";
                         } ?>
 
                     </div>
-
-
-
-
                 </main>
 
 
@@ -338,11 +338,7 @@ function postDate($timestamp)
                 </aside>
                 <!-- Right aside section ends here -->
 
-
-
             </div>
-
-
 
         </div>
 

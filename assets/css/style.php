@@ -1046,23 +1046,23 @@ width: calc(100% - 3.5rem);
 height: max-content;
 }
 
-.comment_input, .reply_input {
-position: relative;
-border-bottom: 1px solid var(--gray);
-cursor: text;
-}
-
-.comment_input:focus, .reply_input:focus {
-outline: none;
-transition: .3s;
-}
-
 [contenteditable="true"][placeholder]:empty::before {
 content: attr(placeholder);
 color: var(--gray);
 }
 
-.comment_input::after, .reply_input::after {
+.edit_content {
+position: relative;
+border-bottom: 1px solid var(--gray);
+cursor: text;
+}
+
+.edit_content:focus {
+outline: none;
+transition: .3s;
+}
+
+.edit_content::after {
 position: absolute;
 bottom: -2px;
 left: 50%;
@@ -1072,7 +1072,7 @@ height: 2px;
 transition: .5s linear;
 }
 
-.comment_input:focus::after, .reply_input:focus::after {
+.edit_content:focus::after {
 position: absolute;
 bottom: -2px;
 left: 0;
@@ -1083,17 +1083,17 @@ background: var(--white);
 transition: .5s linear;
 }
 
-.comment_cancel, .reply_cancel {
+.cancel_btn {
 font-size: 1.6rem;
 color: var(--gray);
 text-transform: uppercase;
 }
 
-.comment_cancel:hover, .reply_cancel:hover {
+.cancel_btn:hover {
 color: var(--white);
 }
 
-.comment_submit, .reply_submit {
+.submit_btn {
 font-size: 1.6rem;
 color: var(--white);
 text-transform: uppercase;
@@ -1101,7 +1101,7 @@ background: var(--orange);
 border-radius: 0;
 }
 
-.comment_submit:hover, .reply_submit:hover {
+.submit_btn:hover {
 color: var(--white);
 opacity: .85;
 }
@@ -1120,6 +1120,7 @@ height: 3.5rem;
 
 .show_replies_button {
 color: var(--orange);
+border: none;
 background: transparent;
 }
 
@@ -1131,6 +1132,7 @@ height: 3.5rem;
 display: flex;
 justify-content: center;
 align-items: center;
+border: none;
 border-radius: 50%;
 font-size: 1.8rem;
 }

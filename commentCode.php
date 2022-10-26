@@ -24,9 +24,6 @@ function fetchingCommentsData($commentsFor)
 fetchingCommentsData("blogComments");
 
 
-
-
-
 // addComment("addBlogComment");
 
 if (isset($_POST["addComment"])) {
@@ -40,3 +37,50 @@ if (isset($_POST["addComment"])) {
         echo "Comment added successfully";
     }
 }
+
+
+// Showing comment in input
+function showingCommentInInput($showingCommentFor, $commentsTable)
+{
+    global $conn;
+
+    if (isset($_GET['commentTextInInput']) && $_GET['commentTextInInput'] == $showingCommentFor) {
+
+        $comment_id = $_GET['comment_id'];
+
+        $query = mysqli_query($conn, "SELECT comment FROM `$commentsTable` WHERE comment_id = $comment_id");
+
+        if ($query) {
+            $comment = mysqli_fetch_assoc($query)['comment'];
+            echo $comment;
+        } else {
+            return false;
+        }
+    }
+}
+
+showingCommentInInput("showingBlogCommentText", "blog_comments");
+
+
+// Update Comment
+function updateComment($updateCommentFor, $commentsTable)
+{
+    global $conn;
+
+    if (isset($_POST['updateCommentFor']) && $_POST['updateCommentFor'] == $updateCommentFor) {
+
+        $comment_id = $_POST['comment_id'];
+        $comment = $_POST['updatedComment'];
+
+        $query = mysqli_query($conn, "UPDATE `$commentsTable` SET `comment` = '$comment' WHERE comment_id = $comment_id");
+
+        if ($query) {
+            echo "Comment Updated Successfully.";
+        } else {
+            echo "Error";
+            return false;
+        }
+    }
+}
+
+updateComment("updateBlogComment", "blog_comments");

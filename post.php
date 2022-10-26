@@ -222,7 +222,6 @@ function postDate($timestamp)
                         ?>
 
                     </div>
-
                 </main>
 
 
@@ -231,8 +230,6 @@ function postDate($timestamp)
                     <?php include_once("assets/includes/blog_aside.php") ?>
                 </aside>
                 <!-- Right aside section ends here -->
-
-
 
             </div>
 
