@@ -45,12 +45,6 @@ document.querySelectorAll(".show_replies_button").forEach(btn => btn.onclick = e
     x.style.display = x.style.display === "none" ? "" : "none";
 });
 
-// document.querySelectorAll(".show_replies_button").forEach((element) => {
-//     element.addEventListener("click", (replies) => {
-//         const targetedReplies = replies.target.nextElementSibling.querySelector(".comment_replies");
-//         targetedReplies.style.display = targetedReplies.style.display === "none" ? "" : "none";
-//     });
-// });
 
 // Comment Edit Icons Toggle
 document.querySelectorAll(".comment_edit_delete_ellipsis").forEach((element) => {
@@ -61,23 +55,6 @@ document.querySelectorAll(".comment_edit_delete_ellipsis").forEach((element) => 
     });
 });
 
-// document.querySelectorAll(".show_replies_button").forEach((element) => {
-//     element.addEventListener("click", (replies) => {
-//         const targetedReplies = replies.target.nextElementSibling.querySelector(".comment_replies");
-
-//         if (targetedReplies.style.display === "none") {
-//             targetedReplies.style.display = "";
-//         } else {
-//             targetedReplies.style.display = "none";
-//         }
-//     });
-// });
-
-// Adding comments
-
-// document.querySelector(".comment_submit").addEventListener("click", () => {
-//     alert("hello")
-// });
 
 // $(document).ready(function() {
 

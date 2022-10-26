@@ -36,7 +36,7 @@ $post_id = $single_post_result['id'];
 
     <div class="all_comments" id="all_comments">
         <?php
-        $comments = mysqli_query($conn, "SELECT * FROM `blog_comments` WHERE `blog_id` = '$post_id' ORDER BY COMMENT_ID DESC");
+        $comments = mysqli_query($conn, "SELECT * FROM `$comment_table` WHERE `blog_id` = '$post_id' ORDER BY COMMENT_ID DESC");
         if (mysqli_num_rows($comments) > 0) {
             while ($comments_result = mysqli_fetch_array($comments)) {
 

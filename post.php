@@ -213,7 +213,11 @@ function postDate($timestamp)
                         </div>
 
                         <!-- Comments Section Starts Here -->
-                        <?php include("assets/includes/comments.php") ?>
+
+                        <?php
+                            $comment_table = "blog_comments";
+                            include("assets/includes/comments.php");
+                            ?>
                         <!-- Comments Section Ends Here -->
 
                         <?php } else {
@@ -237,9 +241,9 @@ function postDate($timestamp)
 
     </section>
 
-    <?php include("assets/includes/messageBox.php") ?>
     <?php include_once("assets/includes/footer.php") ?>
-    <script src="assets/JS/comments.js"></script>
+    <script src="assets/JS/blogComments.js"></script>
+    <?php include_once("assets/includes/messageBox.php") ?>
 
 </body>
 
