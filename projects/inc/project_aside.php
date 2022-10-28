@@ -135,7 +135,7 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
             $cat_slug = "";
         }
 
-        $category_query = mysqli_query($conn, "SELECT `name`, `slug`, `no_of_post` FROM `project_categories` WHERE status = '1' ORDER BY id DESC");
+        $category_query = mysqli_query($conn, "SELECT `name`, `slug`, `no_of_post` FROM `project_categories` WHERE status = '1' AND no_of_post > 0 ORDER BY id DESC");
 
         if (mysqli_num_rows($category_query) > 0) {
             while ($category_result = mysqli_fetch_array($category_query)) {

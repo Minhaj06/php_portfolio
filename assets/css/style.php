@@ -1034,6 +1034,7 @@ transition: all 0.2s linear;
 .commenter_img {
 width: 4.5rem;
 height: 4.5rem;
+background: var(--bs-dark);
 }
 
 .add_comment_box {
@@ -1116,6 +1117,7 @@ margin-top: -1.3rem;
 .replier_img {
 width: 3.5rem;
 height: 3.5rem;
+background: var(--bs-dark);
 }
 
 .show_replies_button {

@@ -137,7 +137,7 @@ function submitComment(pageURL, commentFor) {
                 $("#comment_input").html("");
 
                 // Refresh Comments Area
-                $("#all_comments").load(location.href + " #all_comments>*", "");
+                $("#comments").load(location.href + " #comments>*", "");
             }
         });
     });
@@ -237,7 +237,7 @@ function showingCommentInInput(pageURL, commentTextInInputFor, updateCommentFor)
                             showMessage(response);
 
                             // Refresh Comments Area
-                            $("#all_comments").load(location.href + " #all_comments>*", "");
+                            $("#comments").load(location.href + " #comments>*", "");
                         }
                     });
 

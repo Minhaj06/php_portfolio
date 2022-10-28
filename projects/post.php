@@ -93,7 +93,7 @@ function postDate($timestamp)
                                         ?>
                                 </span>
 
-                                <a href="<?php base_url("") ?>"><i class="fa-solid fa-comment"></i> Leave A Comment</a>
+                                <a href="#comments"><i class="fa-solid fa-comment"></i> Leave A Comment</a>
                             </p>
 
                             <div class="post_description mb-5 pb-4">

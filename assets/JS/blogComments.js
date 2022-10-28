@@ -131,7 +131,7 @@ function submitComment(pageURL, commentFor) {
                 $("#comment_input").html("");
 
                 // Refresh Comments Area
-                $("#all_comments").load(location.href + " #all_comments>*", "");
+                $("#comments").load(location.href + " #comments>*", "");
             }
         });
     });
@@ -232,7 +232,7 @@ function showingCommentInInput(pageURL, commentTextInInputFor, updateCommentFor)
                             showMessage(response);
 
                             // Refresh Comments Area
-                            $("#all_comments").load(location.href + " #all_comments>*", "");
+                            $("#comments").load(location.href + " #comments>*", "");
                         }
                     });
 
@@ -247,12 +247,69 @@ showingCommentInInput("commentCode.php", "showingBlogCommentText", "updateBlogCo
 
 
 
-// Comment Reply
-$(".reply_submit").on("click", function() {
+// Delete Comment
+$(".delete_comment_btn").on("click", function() {
     let comment_id = $(this).data("comment-id");
 
+    $(this).attr("disabled", true);
+
+    $.ajax({
+        type: "POST",
+        url: "commentCode.php",
+        data: {
+            deleteCommentFor: "deleteBlogComment",
+            comment_id: comment_id,
+        },
+        success: function(response) {
+
+            showMessage(response);
+
+            // Refresh Comments Area
+            $("#comments").load(location.href + " #comments>*", "");
+
+            $("#delete_comment_btn" + comment_id).removeAttr("disabled");
+        }
+    });
+});
+
+
+
+
+// ************************Reply Codes************************
+
+// Cancel Reply
+$(".reply_cancel").on("click", function() {
+    let comment_id = $(this).data("comment-id");
+
+    $("#reply_input" + comment_id).html("");
+});
+
+
+
+// Add Reply
+$(".reply_submit").on("click", function() {
+    let comment_id = $(this).data("comment-id");
     let replyText = $.trim($("#reply_input" + comment_id).text());
 
+    $.ajax({
+        type: "POST",
+        url: "commentCode.php",
+        data: {
+            addReply: "addBlogReply",
+            comment_id: comment_id,
+            replyText: replyText,
+        },
+        beforeSend: function() {
+            btnLoading("#reply_submit" + comment_id);
+        },
+        success: function(response) {
+            removeBtnLoading("#reply_submit" + comment_id, "reply");
+            showMessage(response);
+            ("#reply_input" + comment_id).html("");
 
+            // Refresh Comments Area
+            $("#comments").load(location.href + " #comments>*", "");
+        }
+    });
 
 });

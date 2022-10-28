@@ -1,27 +1,21 @@
-<div class="comments_area_wrapper pt-5" id="comments">
+<?php
+$post_id = $single_post_result['id'];
+?>
 
-    <?php
-    $post_id = $single_post_result['id'];
-
-    $comments = mysqli_query($conn, "SELECT * FROM `$comment_table` WHERE `blog_id` = '$post_id' ORDER BY COMMENT_ID DESC");
-
-    $total_comments = mysqli_num_rows($comments);
-
-    ?>
-
-    <h2 class="widget_title mb-4"><?= str_pad($total_comments, 2, '0', STR_PAD_LEFT) ?> Comments</h2>
+<div class="comments_area_wrapper pt-5" id="respond">
+    <h2 class="widget_title mb-4">874 Comments</h2>
 
     <div class="comment_box d-flex mb-4">
         <?php
         if (!isset($_SESSION['auth'])) {
         ?>
-        <img src="<?php base_url("assets/images/avatar.jpg") ?>" alt="commenter_img"
-            class="commenter_img rounded-circle me-4">
+        <img src="<?php base_url("img/avatar2.jpg") ?>" alt="commenter_img" class="commenter_img rounded-circle me-4">
         <?php
         } else { ?>
         <img src="<?php base_url("uploaded_img/" . $_SESSION['auth_user']['image']) ?>" alt="commenter_img"
             class="commenter_img rounded-circle me-4">
         <?php } ?>
+
 
 
         <div class="add_comment_box">
@@ -42,7 +36,8 @@
 
     <div class="all_comments" id="all_comments">
         <?php
-        if ($total_comments > 0) {
+        $comments = mysqli_query($conn, "SELECT * FROM `blog_comments` WHERE `blog_id` = '$post_id' ORDER BY COMMENT_ID DESC");
+        if (mysqli_num_rows($comments) > 0) {
             while ($comments_result = mysqli_fetch_array($comments)) {
 
                 // $post_id = $comments_result['blog_id'];
@@ -74,11 +69,11 @@
                         <button class="comment_edit_delete_ellipsis fa-solid fa-ellipsis-vertical"></button>
                         <div>
                             <div class="comment_edit_delete_icons" style="display: none">
-                                <button id="edit_comment_btn<?= $comment_id ?>" class="edit_comment_btn"
-                                    data-comment-id="<?= $comment_id ?>"><i class="fa-solid fa-pen-fancy"></i>
+                                <button class="edit_comment_btn" data-comment-id="<?= $comment_id ?>"><i
+                                        class="fa-solid fa-pen-fancy"></i>
                                     Edit</button>
-                                <button id="delete_comment_btn<?= $comment_id ?>" class="delete_comment_btn"
-                                    data-comment-id="<?= $comment_id ?>"><i class="fa-solid fa-trash-can"></i>
+                                <button class="edit_comment_btn" data-comment-id="<?= $comment_id ?>"><i
+                                        class="fa-solid fa-trash-can"></i>
                                     Delete</button>
                             </div>
                         </div>
@@ -87,7 +82,7 @@
                 </div>
 
 
-                <div class="comment_edit d-none" style="margin-bottom: -1rem;">
+                <div class="comment_edit d-none" style="margin-bottom: -2rem;">
                     <div id="update_comment_input<?= $comment_id ?>" data-comment-id="<?= $comment_id ?>"
                         class="update_comment_input edit_content mb-2" contenteditable="true"
                         placeholder="Type to update..."></div>
@@ -126,8 +121,8 @@
 
                 <div>
                     <div id="reply_box<?= $comment_id ?>" class="reply_box mt-2"
-                        style="display: none; margin-bottom: -1rem;">
-                        <img src="<?php base_url("assets/images/avatar.jpg") ?>" alt="replier_img"
+                        style="display: none; margin-bottom: -2rem;">
+                        <img src="<?php base_url("img/robot.jpg") ?>" alt="replier_img"
                             class="replier_img rounded-circle me-4">
 
                         <div class="add_reply_box">
@@ -150,45 +145,19 @@
 
 
 
-                <?php
-
-
-                        $replies_query = mysqli_query($conn, "SELECT * FROM `$reply_table` WHERE `comment_id` = $comment_id");
-
-                        $total_replies = mysqli_num_rows($replies_query);
-
-                        if ($total_replies > 0) {
-
-                            if ($total_replies > 2) {
-                                echo '<button class="show_replies_button mt-2"><i class="fa-solid fa-caret-down fs-3"></i> ' . $total_replies . ' REPLIES</button>';
-
-                                $display = "none";
-                            } else {
-                                $display = "";
-                            }
-
-                        ?>
+                <button class="show_replies_button mt-2"><i class="fa-solid fa-caret-down fs-3"></i> 43
+                    REPLIES
+                </button>
 
                 <div>
-                    <div class="comment_replies" style="display: <?= $display ?>;">
-
-
-                        <?php
-                                    while ($replies_result = mysqli_fetch_array($replies_query)) {
-
-                                        $replier_id = $replies_result['user_id'];
-
-                                        $replier_data = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `first_name`, `last_name`, `image` FROM `users_info` WHERE id = '$replier_id' "));
-                                    ?>
-
+                    <div class="comment_replies" style="display: none;">
                         <div class="comment_reply_single d-flex mt-2">
-                            <img src="<?php base_url("uploaded_img/" . $replier_data['image']) ?>" alt="replier_img"
+                            <img src="<?php base_url("img/robot.jpg") ?>" alt="replier_img"
                                 class="replier_img rounded-circle me-4">
                             <div class="add_comment_box">
 
                                 <div class="d-flex justify-content-between">
-                                    <h4 class="commenter_name">
-                                        <?= $replier_data['first_name'] . ' ' . $replier_data['last_name'] ?></h4>
+                                    <h4 class="commenter_name">Eric Odinson</h4>
                                     <div class="comment_edit_delete_icons_area">
                                         <button
                                             class="comment_edit_delete_ellipsis fa-solid fa-ellipsis-vertical"></button>
@@ -203,7 +172,8 @@
                                     </div>
                                 </div>
 
-                                <p class="comment_text"><?= $replies_result['reply'] ?></p>
+                                <p class="comment_text">Lorem ipsum, dolor sit amet consectetur
+                                    adipisicing elit.</p>
 
                                 <div class="comment_reacts d-flex">
                                     <div class="me-4">
@@ -218,23 +188,9 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-                        <?php
-                                    }
-                                    ?>
-
                     </div>
                 </div>
 
-                <?php
-
-                        }
-
-                        ?>
             </div>
         </div>
 

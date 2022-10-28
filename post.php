@@ -93,7 +93,7 @@ function postDate($timestamp)
                                         ?>
                                 </span>
 
-                                <a href="#respond"><i class="fa-solid fa-comment"></i> Leave A Comment</a>
+                                <a href="#comments"><i class="fa-solid fa-comment"></i> Leave A Comment</a>
                             </p>
 
                             <div class="post_description overflow-hidden mb-5 pb-4">
@@ -216,6 +216,7 @@ function postDate($timestamp)
 
                         <?php
                             $comment_table = "blog_comments";
+                            $reply_table = "blog_replies";
                             include("assets/includes/comments.php");
                             ?>
                         <!-- Comments Section Ends Here -->

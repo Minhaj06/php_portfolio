@@ -36,7 +36,7 @@ function addComment($comment_table)
     $query = mysqli_query($conn, "INSERT INTO `$comment_table` (`blog_id`, `user_id`, `comment`) VALUES ('$blog_id','$user_id','$comment')");
 
     if ($query) {
-        echo "Comment added successfully";
+        echo "Comment Added Successfully.";
     }
 }
 
@@ -84,9 +84,6 @@ function updateComment($commentsTable)
 
     if ($query) {
         echo "Comment Updated Successfully.";
-    } else {
-        echo "Error";
-        return false;
     }
 }
 
@@ -95,4 +92,53 @@ if (isset($_POST['updateCommentFor']) && $_POST['updateCommentFor'] == "updateBl
     updateComment("blog_comments");
 } elseif (isset($_POST['updateCommentFor']) && $_POST['updateCommentFor'] == "updateProjectComment") {
     updateComment("project_comments");
+}
+
+
+
+// Delete Comment
+function deleteComment($commentsTable)
+{
+    global $conn;
+
+    $comment_id = $_POST['comment_id'];
+
+    $query = mysqli_query($conn, "DELETE FROM `$commentsTable` WHERE comment_id = $comment_id");
+
+    if ($query) {
+        echo "Comment Deleted Successfully.";
+    }
+}
+
+
+if (isset($_POST['deleteCommentFor']) && $_POST['deleteCommentFor'] == "deleteBlogComment") {
+    deleteComment("blog_comments");
+} elseif (isset($_POST['deleteCommentFor']) && $_POST['deleteCommentFor'] == "deleteProjectComment") {
+    deleteComment("project_comments");
+}
+
+
+
+// ************************Reply Codes************************
+
+// Add Reply
+function addReply($comment_table)
+{
+    global $conn;
+
+    $comment_id = $_POST['comment_id'];
+    $user_id = $_SESSION['auth_user']['user_id'];
+    $reply = mysqli_real_escape_string($conn, $_POST["replyText"]);
+
+    $query = mysqli_query($conn, "INSERT INTO `$comment_table` (`comment_id`, `user_id`, `reply`) VALUES ('$comment_id','$user_id','$reply')");
+
+    if ($query) {
+        echo "Reply Added Successfully.";
+    }
+}
+
+if (isset($_POST["addReply"]) && $_POST["addReply"] == "addBlogReply") {
+    addReply("blog_replies");
+} elseif (isset($_POST["addReply"]) && $_POST["addReply"] == "addProjectReply") {
+    addReply("project_replies");
 }
