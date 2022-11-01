@@ -27,6 +27,9 @@ if (isset($_GET['slug'])) {
 }
 
 if (isset($single_post_result['title']) && !empty($single_post_result['title'])) {
+
+    $post_id = $single_post_result['id'];
+
     $title = $single_post_result['title'] . " || Coder";
     $meta_title = $single_post_result['meta_title'];
     $meta_description = $single_post_result['meta_description'];

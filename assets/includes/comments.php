@@ -1,8 +1,6 @@
 <div class="comments_area_wrapper pt-5" id="comments">
 
     <?php
-    $post_id = $single_post_result['id'];
-
     $comments = mysqli_query($conn, "SELECT * FROM `$comment_table` WHERE `blog_id` = '$post_id' ORDER BY COMMENT_ID DESC");
 
     $total_comments = mysqli_num_rows($comments);
