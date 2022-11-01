@@ -70,7 +70,7 @@ if (!isset($og_image_path)) {
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
 
     <!-- Code Highlight CSS CDN -->
-    <link rel="stylesheet" href="<?php base_url("assets/prisomJs/okaidia/prism.css") ?>">
+    <link rel="stylesheet" href="<?php base_url("assets/css/prism.css") ?>">
 
     <!-- Custom CSS Link -->
     <link rel="stylesheet" type="text/css" href="<?php base_url("assets/css/style.php") ?>" />
@@ -88,7 +88,7 @@ if (!isset($og_image_path)) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <!-- Code Highlight JS CDN -->
-    <script src="<?php base_url("assets/prisomJs/okaidia/prism.js") ?>"></script>
+    <script src="<?php base_url("assets/js/prism.js") ?>"></script>
 
     <!-- Custom JavaScript -->
     <script defer src="<?php base_url("assets/JS/script.js") ?>"></script>

@@ -159,18 +159,29 @@
 
                         if ($total_replies > 0) {
 
-                            if ($total_replies > 2) {
-                                echo '<button class="show_replies_button mt-2"><i class="fa-solid fa-caret-down fs-3"></i> ' . $total_replies . ' REPLIES</button>';
+                            // echo '<button class="show_replies_button mt-2"><i class="fa-solid fa-caret-down fs-3"></i> ' . $total_replies . ' REPLIES</button>';
 
-                                $display = "none";
-                            } else {
-                                $display = "";
-                            }
+                            // if ($total_replies > 2) {
+
+                            //     $display = "none";
+                            // } else {
+                            //     $display = "";
+                            // }
 
                         ?>
 
+                <button class="show_replies_button mt-2"><i class="fa-solid fa-caret-down fs-3"></i>
+                    <?php
+                                echo $total_replies;
+                                if ($total_replies > 1) {
+                                    echo " REPLIES";
+                                } else {
+                                    echo " REPLY";
+                                }
+                                ?>
+                </button>
                 <div>
-                    <div class="comment_replies" style="display: <?= $display ?>;">
+                    <div class="comment_replies" style="display: none;">
 
 
                         <?php
@@ -187,8 +198,13 @@
                             <div class="add_comment_box">
 
                                 <div class="d-flex justify-content-between">
-                                    <h4 class="commenter_name">
+                                    <h4 class="commenter_name mb-4 pb-1">
                                         <?= $replier_data['first_name'] . ' ' . $replier_data['last_name'] ?></h4>
+
+                                    <?php
+                                                    if (isset($_SESSION['auth']) && $_SESSION['auth_user']['user_id'] === $user_id) {
+                                                    ?>
+
                                     <div class="comment_edit_delete_icons_area">
                                         <button
                                             class="comment_edit_delete_ellipsis fa-solid fa-ellipsis-vertical"></button>
@@ -201,6 +217,9 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <?php } ?>
+
                                 </div>
 
                                 <p class="comment_text"><?= $replies_result['reply'] ?></p>
@@ -218,10 +237,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
 
                         <?php
                                     }

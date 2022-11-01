@@ -27,6 +27,9 @@ if (isset($_GET['slug'])) {
 }
 
 if (isset($single_post_result['title']) && !empty($single_post_result['title'])) {
+
+    $post_id = $single_post_result['id'];
+
     $title = $single_post_result['title'] . " || Coder";
     $meta_title = $single_post_result['meta_title'];
     $meta_description = $single_post_result['meta_description'];
@@ -214,11 +217,13 @@ function postDate($timestamp)
 
                         <!-- Comments Section Starts Here -->
 
-                        <?php
-                            $comment_table = "blog_comments";
-                            $reply_table = "blog_replies";
-                            include("assets/includes/comments.php");
-                            ?>
+                        <div class="comment_container" id="comment_container" data-post-id="<?= $post_id ?>">
+                            <?php
+                                $comment_table = "blog_comments";
+                                $reply_table = "blog_replies";
+                                include("assets/includes/comments.php");
+                                ?>
+                        </div>
                         <!-- Comments Section Ends Here -->
 
                         <?php } else {

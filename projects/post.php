@@ -323,6 +323,7 @@ function postDate($timestamp)
                         <!-- Comments Section Starts Here -->
                         <?php
                             $comment_table = "project_comments";
+                            $reply_table = "project_replies";
                             include("../assets/includes/comments.php");
                             ?>
                         <!-- Comments Section Ends Here -->

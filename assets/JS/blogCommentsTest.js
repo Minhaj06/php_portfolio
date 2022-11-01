@@ -56,31 +56,29 @@ document.querySelectorAll(".comment_edit_delete_ellipsis").forEach((element) => 
 });
 
 
-$(document).ready(function() {
+// $(document).ready(function() {
 
-    // Fetching all comments data
-    function fetchComments(pageURL, commentsFor, commentsTable) {
-        let postID = $("#comment_submit").data("post-id");
-        $.ajax({
-            type: "POST",
-            url: pageURL,
-            data: {
-                commentsFor: commentsFor,
-                commentsTable: commentsTable,
-                postID: postID
-            },
-            dataType: "json",
-            success: function(data) {
-                // for (i = 0; i < data.length; i++) {
-                //     console.log(data)
-                // }
-                console.table(data)
+// Fetching all comments data
+function fetchComments(pageURL, commentsFor, commentsTable) {
+    let postID = $("#comment_submit").data("post-id");
+    $.ajax({
+        type: "POST",
+        url: pageURL,
+        data: {
+            commentsFor: commentsFor,
+            commentsTable: commentsTable,
+            postID: postID
+        },
+        dataType: "json",
+        success: function(data) {
+            for (i = 0; i < data.length; i++) {
+                console.log(data[i])
             }
-        });
-    }
-    fetchComments("commentCode.php", "blogComments", "blog_comments");
+        }
+    });
+}
+fetchComments("commentCode.php", "blogComments", "blog_comments");
 
-});
 
 $("#comment_input").keyup(function(e) {
     e.preventDefault();
@@ -161,6 +159,8 @@ function showMessage(message) {
         $("#messageBox").modal("hide");
     }, 2000);
 }
+// });
+
 
 
 
