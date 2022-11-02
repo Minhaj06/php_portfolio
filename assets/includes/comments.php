@@ -1,6 +1,8 @@
 <div class="comments_area_wrapper pt-5" id="comments">
 
     <?php
+    $post_id = $single_post_result['id'];
+
     $comments = mysqli_query($conn, "SELECT * FROM `$comment_table` WHERE `blog_id` = '$post_id' ORDER BY COMMENT_ID DESC");
 
     $total_comments = mysqli_num_rows($comments);
@@ -69,17 +71,18 @@
                     </div>
 
                     <div class="comment_edit_delete_icons_area">
-                        <button class="comment_edit_delete_ellipsis fa-solid fa-ellipsis-vertical"></button>
-                        <div>
-                            <div class="comment_edit_delete_icons" style="display: none">
-                                <button id="edit_comment_btn<?= $comment_id ?>" class="edit_comment_btn"
-                                    data-comment-id="<?= $comment_id ?>"><i class="fa-solid fa-pen-fancy"></i>
-                                    Edit</button>
-                                <button id="delete_comment_btn<?= $comment_id ?>" class="delete_comment_btn"
-                                    data-comment-id="<?= $comment_id ?>"><i class="fa-solid fa-trash-can"></i>
-                                    Delete</button>
-                            </div>
+                        <button class="comment_edit_delete_ellipsis fa-solid fa-ellipsis-vertical"
+                            data-comment-id="<?= $comment_id ?>"></button>
+                        <!-- <div> -->
+                        <div id="comment_edit_delete_icons<?= $comment_id ?>" class="comment_edit_delete_icons d-none">
+                            <button id="edit_comment_btn<?= $comment_id ?>" class="edit_comment_btn"
+                                data-comment-id="<?= $comment_id ?>"><i class="fa-solid fa-pen-fancy"></i>
+                                Edit</button>
+                            <button id="delete_comment_btn<?= $comment_id ?>" class="delete_comment_btn"
+                                data-comment-id="<?= $comment_id ?>"><i class="fa-solid fa-trash-can"></i>
+                                Delete</button>
                         </div>
+                        <!-- </div> -->
                     </div>
 
                 </div>
@@ -120,11 +123,11 @@
                     </div>
                 </div>
 
-                <button class="reply_btn">reply</button>
+                <button class="reply_btn" data-comment-id="<?= $comment_id ?>">reply</button>
 
                 <div>
-                    <div id="reply_box<?= $comment_id ?>" class="reply_box mt-2"
-                        style="display: none; margin-bottom: -1rem;">
+                    <div id="reply_box<?= $comment_id ?>" class="reply_box mt-2 d-flex d-none"
+                        style="margin-bottom: -1rem;">
                         <img src="<?php base_url("assets/images/avatar.jpg") ?>" alt="replier_img"
                             class="replier_img rounded-circle me-4">
 
@@ -149,26 +152,15 @@
 
 
                 <?php
-
-
                         $replies_query = mysqli_query($conn, "SELECT * FROM `$reply_table` WHERE `comment_id` = $comment_id");
 
                         $total_replies = mysqli_num_rows($replies_query);
 
                         if ($total_replies > 0) {
-
-                            // echo '<button class="show_replies_button mt-2"><i class="fa-solid fa-caret-down fs-3"></i> ' . $total_replies . ' REPLIES</button>';
-
-                            // if ($total_replies > 2) {
-
-                            //     $display = "none";
-                            // } else {
-                            //     $display = "";
-                            // }
-
                         ?>
 
-                <button class="show_replies_button mt-2"><i class="fa-solid fa-caret-down fs-3"></i>
+                <button class="show_replies_button mt-2" data-comment-id="<?= $comment_id ?>"><i
+                        class="fa-solid fa-caret-down fs-3"></i>
                     <?php
                                 echo $total_replies;
                                 if ($total_replies > 1) {
@@ -178,69 +170,65 @@
                                 }
                                 ?>
                 </button>
-                <div>
-                    <div class="comment_replies" style="display: none;">
+                <div id="comment_replies<?= $comment_id ?>" class="comment_replies d-none">
 
+                    <?php
+                                while ($replies_result = mysqli_fetch_array($replies_query)) {
 
-                        <?php
-                                    while ($replies_result = mysqli_fetch_array($replies_query)) {
+                                    $replier_id = $replies_result['user_id'];
 
-                                        $replier_id = $replies_result['user_id'];
+                                    $replier_data = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `first_name`, `last_name`, `image` FROM `users_info` WHERE id = '$replier_id' "));
+                                ?>
 
-                                        $replier_data = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `first_name`, `last_name`, `image` FROM `users_info` WHERE id = '$replier_id' "));
-                                    ?>
+                    <div class="comment_reply_single d-flex mt-2">
+                        <img src="<?php base_url("uploaded_img/" . $replier_data['image']) ?>" alt="replier_img"
+                            class="replier_img rounded-circle me-4">
+                        <div class="add_comment_box">
 
-                        <div class="comment_reply_single d-flex mt-2">
-                            <img src="<?php base_url("uploaded_img/" . $replier_data['image']) ?>" alt="replier_img"
-                                class="replier_img rounded-circle me-4">
-                            <div class="add_comment_box">
+                            <div class="d-flex justify-content-between">
+                                <h4 class="commenter_name mb-4 pb-1">
+                                    <?= $replier_data['first_name'] . ' ' . $replier_data['last_name'] ?></h4>
 
-                                <div class="d-flex justify-content-between">
-                                    <h4 class="commenter_name mb-4 pb-1">
-                                        <?= $replier_data['first_name'] . ' ' . $replier_data['last_name'] ?></h4>
+                                <?php
+                                                if (isset($_SESSION['auth']) && $_SESSION['auth_user']['user_id'] === $user_id) {
+                                                ?>
 
-                                    <?php
-                                                    if (isset($_SESSION['auth']) && $_SESSION['auth_user']['user_id'] === $user_id) {
-                                                    ?>
-
-                                    <div class="comment_edit_delete_icons_area">
-                                        <button
-                                            class="comment_edit_delete_ellipsis fa-solid fa-ellipsis-vertical"></button>
-                                        <div>
-                                            <div class="comment_edit_delete_icons" style="display: none">
-                                                <button><i class="fa-solid fa-pen-fancy"></i>
-                                                    Edit</button>
-                                                <button><i class="fa-solid fa-trash-can"></i>
-                                                    Delete</button>
-                                            </div>
+                                <div class="comment_edit_delete_icons_area">
+                                    <button class="comment_edit_delete_ellipsis fa-solid fa-ellipsis-vertical"></button>
+                                    <div>
+                                        <div class="comment_edit_delete_icons" style="display: none">
+                                            <button><i class="fa-solid fa-pen-fancy"></i>
+                                                Edit</button>
+                                            <button><i class="fa-solid fa-trash-can"></i>
+                                                Delete</button>
                                         </div>
                                     </div>
-
-                                    <?php } ?>
-
                                 </div>
 
-                                <p class="comment_text"><?= $replies_result['reply'] ?></p>
+                                <?php } ?>
 
-                                <div class="comment_reacts d-flex">
-                                    <div class="me-4">
-                                        <span role="button" title="I like this comment"><i
-                                                class="fa-regular fa-thumbs-up"></i></span> 5.3k
-                                    </div>
-                                    <div>
-                                        <span role="button" title="I dislike this comment"><i
-                                                class="fa-regular fa-thumbs-down"></i></span>
-                                        23
-                                    </div>
+                            </div>
+
+                            <p class="comment_text"><?= $replies_result['reply'] ?></p>
+
+                            <div class="comment_reacts d-flex">
+                                <div class="me-4">
+                                    <span role="button" title="I like this comment"><i
+                                            class="fa-regular fa-thumbs-up"></i></span> 5.3k
+                                </div>
+                                <div>
+                                    <span role="button" title="I dislike this comment"><i
+                                            class="fa-regular fa-thumbs-down"></i></span>
+                                    23
                                 </div>
                             </div>
                         </div>
-
-                        <?php
-                                    }
-                                    ?>
-
                     </div>
+
+                    <?php
+                                }
+                                ?>
+
                 </div>
 
                 <?php

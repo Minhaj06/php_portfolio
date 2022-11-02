@@ -3,7 +3,7 @@ window.addEventListener("load", () => {
 });
 
 // cancel comment
-$(".comment_cancel").click(function(e) {
+$(document).on("click", ".comment_cancel", function(e) {
     e.preventDefault();
     $("#comment_input").html("");
     $("#comment_submit").attr("disabled", "true");
@@ -11,9 +11,8 @@ $(".comment_cancel").click(function(e) {
 
 
 // enable/disable reply button on keyup
-$(".reply_input").keyup(function(e) {
+$(document).on("keyup", ".reply_input", function(e) {
     let comment_id = $(this).data("comment-id");
-
     let replyText = $.trim($("#reply_input" + comment_id).text());
 
     if (replyText == "") {
@@ -25,64 +24,44 @@ $(".reply_input").keyup(function(e) {
 
 
 // cancel reply
-$(".reply_cancel").click(function(e) {
+$(document).on("click", ".reply_cancel", function(e) {
     e.preventDefault();
     let comment_id = $(this).data("comment-id");
-
-    $("#reply_box" + comment_id).css("display", "none");
+    $("#reply_box" + comment_id).toggleClass("d-none");
+    $("#reply_box" + comment_id).load(location.href + " #reply_box" + comment_id + ">*", "");
 });
 
 
 // Reply Box Toggle
-document.querySelectorAll(".reply_btn").forEach(btn => btn.onclick = ev => {
-    const x = ev.target.nextElementSibling.querySelector(".reply_box");
-    x.style.display = x.style.display === "none" ? "flex" : "none";
+$(document).on("click", ".reply_btn", function(e) {
+    e.preventDefault();
+    let comment_id = $(this).data("comment-id");
+    $("#reply_box" + comment_id).toggleClass("d-none");
+    $("#reply_box" + comment_id).load(location.href + " #reply_box" + comment_id + ">*", "");
 });
 
+
 // Comment Replies Toggle
-document.querySelectorAll(".show_replies_button").forEach(btn => btn.onclick = ev => {
-    const x = ev.target.nextElementSibling.querySelector(".comment_replies");
-    x.style.display = x.style.display === "none" ? "" : "none";
+$(document).on("click", ".show_replies_button", function(e) {
+    e.preventDefault();
+    let comment_id = $(this).data("comment-id");
+    $("#comment_replies" + comment_id).toggleClass("d-none");
 });
 
 
 // Comment Edit Icons Toggle
-document.querySelectorAll(".comment_edit_delete_ellipsis").forEach((element) => {
-    element.addEventListener("click", (ellipsis) => {
-        const singleEllipsis = ellipsis.target.nextElementSibling.querySelector(
-            ".comment_edit_delete_icons");
-        singleEllipsis.style.display = singleEllipsis.style.display === "none" ? "" : "none";
-    });
+$(document).on("click", ".comment_edit_delete_ellipsis", function(e) {
+    e.preventDefault();
+
+    let comment_id = $(this).data("comment-id");
+
+    console.log(comment_id)
+
+    $("#comment_edit_delete_icons" + comment_id).toggleClass("d-none");
 });
 
-
-$(document).ready(function() {
-
-    // Fetching all comments data
-    function fetchComments(pageURL, commentsFor, commentsTable) {
-        let postID = $("#comment_submit").data("post-id");
-        $.ajax({
-            type: "POST",
-            url: pageURL,
-            data: {
-                commentsFor: commentsFor,
-                commentsTable: commentsTable,
-                postID: postID
-            },
-            dataType: "json",
-            success: function(data) {
-                // for (i = 0; i < data.length; i++) {
-                //     console.log(data)
-                // }
-                console.table(data)
-            }
-        });
-    }
-    fetchComments("commentCode.php", "blogComments", "blog_comments");
-
-});
-
-$("#comment_input").keyup(function(e) {
+// enable/disable comment submit button
+$(document).on("keyup", "#comment_input", function(e) {
     e.preventDefault();
     if ($("#comment_input").html() !== "") {
         $("#comment_submit").removeAttr("disabled");
@@ -112,7 +91,9 @@ $(".reply_input").focus(function(e) {
 
 // Add Comment
 function submitComment(pageURL, commentFor) {
-    $("#comment_submit").on("click", function() {
+    $(document).on("click", "#comment_submit", function(e) {
+        e.preventDefault();
+
         let commentText = $("#comment_input").text();
         let blogID = $(this).data("post-id");
 
@@ -163,9 +144,8 @@ function showMessage(message) {
 }
 
 
-
 // Cancel Comment Update
-$(".comment_update_cancel").on("click", function() {
+$(document).on("click", ".comment_update_cancel", function() {
     let comment_id = $(this).data("comment-id");
     toggleDivClass("#single_comment" + comment_id);
 });
@@ -182,7 +162,7 @@ function toggleDivClass(selector) {
 
 // Showing Comment Update Input
 function showingCommentInInput(pageURL, commentTextInInputFor, updateCommentFor) {
-    $(".edit_comment_btn").on("click", function() {
+    $(document).on("click", ".edit_comment_btn", function() {
         let comment_id = $(this).data("comment-id");
 
         // showing update input
