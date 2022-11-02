@@ -122,42 +122,12 @@ function submitComment(pageURL, commentFor) {
 
 submitComment("commentCode.php", "addBlogComment");
 
-function btnLoading(btnSelector) {
-    $(btnSelector).prepend('<div class="spinner-border spinner-border" disabled role="status"></div>');
-    $(btnSelector).addClass("btnLoading");
-    $(btnSelector).attr("disabled", true);
-}
-
-function removeBtnLoading(btnSelector, btnText) {
-    $(btnSelector).text(btnText);
-    $(btnSelector).removeClass("btnLoading");
-    $(btnSelector).removeAttr("disabled");
-}
-
-function showMessage(message) {
-    $("#messageBox").modal("show");
-    $(".messageShow").html(message);
-
-    setTimeout(function() {
-        $("#messageBox").modal("hide");
-    }, 2000);
-}
-
 
 // Cancel Comment Update
 $(document).on("click", ".comment_update_cancel", function() {
     let comment_id = $(this).data("comment-id");
     toggleDivClass("#single_comment" + comment_id);
 });
-
-// Toggle Div Class
-function toggleDivClass(selector) {
-    $(selector + " .comment_data").toggleClass("d-none");
-    $(selector + " .comment_reacts").toggleClass("d-none");
-    $(selector + " .reply_btn").toggleClass("d-none");
-    $(selector + " .comment_edit").toggleClass("d-none");
-    $(selector + " .comment_edit_delete_icons").css("display", "none");
-}
 
 
 // Showing Comment Update Input
@@ -228,7 +198,7 @@ showingCommentInInput("commentCode.php", "showingBlogCommentText", "updateBlogCo
 
 
 // Delete Comment
-$(".delete_comment_btn").on("click", function() {
+$(document).on("click", ".delete_comment_btn", function() {
     let comment_id = $(this).data("comment-id");
 
     $(this).attr("disabled", true);
@@ -258,7 +228,7 @@ $(".delete_comment_btn").on("click", function() {
 // ************************Reply Codes************************
 
 // Cancel Reply
-$(".reply_cancel").on("click", function() {
+$(document).on("click", ".reply_cancel", function() {
     let comment_id = $(this).data("comment-id");
 
     $("#reply_input" + comment_id).html("");
@@ -267,7 +237,7 @@ $(".reply_cancel").on("click", function() {
 
 
 // Add Reply
-$(".reply_submit").on("click", function() {
+$(document).on("click", ".reply_submit", function() {
     let comment_id = $(this).data("comment-id");
     let replyText = $.trim($("#reply_input" + comment_id).text());
 
@@ -285,7 +255,7 @@ $(".reply_submit").on("click", function() {
         success: function(response) {
             removeBtnLoading("#reply_submit" + comment_id, "reply");
             showMessage(response);
-            ("#reply_input" + comment_id).html("");
+            $("#reply_input" + comment_id).html("");
 
             // Refresh Comments Area
             $("#comments").load(location.href + " #comments>*", "");
@@ -293,3 +263,39 @@ $(".reply_submit").on("click", function() {
     });
 
 });
+
+
+
+// *******************************************
+// Add button loading
+function btnLoading(btnSelector) {
+    $(btnSelector).prepend('<div class="spinner-border spinner-border" disabled role="status"></div>');
+    $(btnSelector).addClass("btnLoading");
+    $(btnSelector).attr("disabled", true);
+}
+
+// Remove button loading
+function removeBtnLoading(btnSelector, btnText) {
+    $(btnSelector).text(btnText);
+    $(btnSelector).removeClass("btnLoading");
+    $(btnSelector).removeAttr("disabled");
+}
+
+// Show Message
+function showMessage(message) {
+    $("#messageBox").modal("show");
+    $(".messageShow").html(message);
+
+    setTimeout(function() {
+        $("#messageBox").modal("hide");
+    }, 2000);
+}
+
+// Toggle Div Class
+function toggleDivClass(selector) {
+    $(selector + " .comment_data").toggleClass("d-none");
+    $(selector + " .comment_reacts").toggleClass("d-none");
+    $(selector + " .reply_btn").toggleClass("d-none");
+    $(selector + " .comment_edit").toggleClass("d-none");
+    $(selector + " .comment_edit_delete_icons").css("display", "none");
+}

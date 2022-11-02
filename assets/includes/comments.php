@@ -186,17 +186,20 @@
                         <div class="add_comment_box">
 
                             <div class="d-flex justify-content-between">
-                                <h4 class="commenter_name mb-4 pb-1">
-                                    <?= $replier_data['first_name'] . ' ' . $replier_data['last_name'] ?></h4>
+                                <div>
+                                    <h4 class="commenter_name mb-4 pb-1">
+                                        <?= $replier_data['first_name'] . ' ' . $replier_data['last_name'] ?></h4>
+                                    <p class="comment_text"><?= $replies_result['reply'] ?></p>
+                                </div>
 
                                 <?php
-                                                if (isset($_SESSION['auth']) && $_SESSION['auth_user']['user_id'] === $user_id) {
+                                                if (isset($_SESSION['auth']) && $_SESSION['auth_user']['user_id'] === $replier_id) {
                                                 ?>
 
                                 <div class="comment_edit_delete_icons_area">
                                     <button class="comment_edit_delete_ellipsis fa-solid fa-ellipsis-vertical"></button>
-                                    <div>
-                                        <div class="comment_edit_delete_icons" style="display: none">
+                                    <div class="classs">
+                                        <div class="comment_edit_delete_icons" style="display: non">
                                             <button><i class="fa-solid fa-pen-fancy"></i>
                                                 Edit</button>
                                             <button><i class="fa-solid fa-trash-can"></i>
@@ -209,7 +212,7 @@
 
                             </div>
 
-                            <p class="comment_text"><?= $replies_result['reply'] ?></p>
+                            <!-- <p class="comment_text"><?= $replies_result['reply'] ?></p> -->
 
                             <div class="comment_reacts d-flex">
                                 <div class="me-4">

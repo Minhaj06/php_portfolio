@@ -1150,6 +1150,8 @@ right: 3.5rem;
 width: 12rem;
 background: var(--dark-gray);
 padding: 0.75rem 0;
+border-top: 0.3rem solid var(--black);
+margin-top: -0.5rem;
 z-index: 1;
 }
 
