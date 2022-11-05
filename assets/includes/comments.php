@@ -175,6 +175,7 @@
                     <?php
                                 while ($replies_result = mysqli_fetch_array($replies_query)) {
 
+                                    $reply_id = $replies_result['reply_id'];
                                     $replier_id = $replies_result['user_id'];
 
                                     $replier_data = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `first_name`, `last_name`, `image` FROM `users_info` WHERE id = '$replier_id' "));
@@ -196,13 +197,17 @@
                                                 if (isset($_SESSION['auth']) && $_SESSION['auth_user']['user_id'] === $replier_id) {
                                                 ?>
 
-                                <div class="comment_edit_delete_icons_area">
-                                    <button class="comment_edit_delete_ellipsis fa-solid fa-ellipsis-vertical"></button>
-                                    <div class="classs">
-                                        <div class="comment_edit_delete_icons" style="display: non">
-                                            <button><i class="fa-solid fa-pen-fancy"></i>
-                                                Edit</button>
-                                            <button><i class="fa-solid fa-trash-can"></i>
+                                <div class="reply_edit_delete_icons_area">
+                                    <button class="reply_edit_delete_ellipsis fa-solid fa-ellipsis-vertical"
+                                        data-reply-id="<?= $reply_id ?>"></button>
+                                    <div>
+                                        <div id="reply_edit_delete_icons<?= $reply_id ?>"
+                                            class="reply_edit_delete_icons d-none">
+                                            <button id="delete_reply_btn<?= $reply_id ?>" class="delete_reply_btn"
+                                                data-reply-id="<?= $reply_id ?>"><i class="fa-solid fa-pen-fancy"></i>
+                                                Delete</button>
+                                            <button id="delete_reply_btn<?= $reply_id ?>" class="delete_reply_btn"
+                                                data-reply-id="<?= $reply_id ?>"><i class="fa-solid fa-trash-can"></i>
                                                 Delete</button>
                                         </div>
                                     </div>
@@ -211,8 +216,6 @@
                                 <?php } ?>
 
                             </div>
-
-                            <!-- <p class="comment_text"><?= $replies_result['reply'] ?></p> -->
 
                             <div class="comment_reacts d-flex">
                                 <div class="me-4">

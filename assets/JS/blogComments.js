@@ -2,13 +2,6 @@ window.addEventListener("load", () => {
     document.querySelector("#comment_input").innerHTML = "";
 });
 
-// cancel comment
-$(document).on("click", ".comment_cancel", function(e) {
-    e.preventDefault();
-    $("#comment_input").html("");
-    $("#comment_submit").attr("disabled", "true");
-});
-
 
 // enable/disable reply button on keyup
 $(document).on("keyup", ".reply_input", function(e) {
@@ -23,42 +16,28 @@ $(document).on("keyup", ".reply_input", function(e) {
 });
 
 
-// cancel reply
-$(document).on("click", ".reply_cancel", function(e) {
+// cancel comment
+$(document).on("click", ".comment_cancel", function(e) {
     e.preventDefault();
-    let comment_id = $(this).data("comment-id");
-    $("#reply_box" + comment_id).toggleClass("d-none");
-    $("#reply_box" + comment_id).load(location.href + " #reply_box" + comment_id + ">*", "");
-});
-
-
-// Reply Box Toggle
-$(document).on("click", ".reply_btn", function(e) {
-    e.preventDefault();
-    let comment_id = $(this).data("comment-id");
-    $("#reply_box" + comment_id).toggleClass("d-none");
-    $("#reply_box" + comment_id).load(location.href + " #reply_box" + comment_id + ">*", "");
-});
-
-
-// Comment Replies Toggle
-$(document).on("click", ".show_replies_button", function(e) {
-    e.preventDefault();
-    let comment_id = $(this).data("comment-id");
-    $("#comment_replies" + comment_id).toggleClass("d-none");
+    $("#comment_input").html("");
+    $("#comment_submit").attr("disabled", "true");
 });
 
 
 // Comment Edit Icons Toggle
-$(document).on("click", ".comment_edit_delete_ellipsis", function(e) {
-    e.preventDefault();
+function toggleEditDeleteIcons(toggleFor) {
+    $(document).on("click", "." + toggleFor + "_edit_delete_ellipsis", function(e) {
+        e.preventDefault();
 
-    let comment_id = $(this).data("comment-id");
+        let comment_id = $(this).data(toggleFor + "-id");
 
-    console.log(comment_id)
+        $("#" + toggleFor + "_edit_delete_icons" + comment_id).toggleClass("d-none");
+    });
+}
 
-    $("#comment_edit_delete_icons" + comment_id).toggleClass("d-none");
-});
+toggleEditDeleteIcons("comment");
+toggleEditDeleteIcons("reply");
+
 
 // enable/disable comment submit button
 $(document).on("keyup", "#comment_input", function(e) {
@@ -227,14 +206,28 @@ $(document).on("click", ".delete_comment_btn", function() {
 
 // ************************Reply Codes************************
 
-// Cancel Reply
-$(document).on("click", ".reply_cancel", function() {
+// Reply Box Toggle
+$(document).on("click", ".reply_btn", function(e) {
+    e.preventDefault();
     let comment_id = $(this).data("comment-id");
-
-    $("#reply_input" + comment_id).html("");
+    $("#reply_box" + comment_id).toggleClass("d-none");
+    $("#reply_box" + comment_id).load(location.href + " #reply_box" + comment_id + ">*", "");
 });
 
+// Comment Replies Toggle
+$(document).on("click", ".show_replies_button", function(e) {
+    e.preventDefault();
+    let comment_id = $(this).data("comment-id");
+    $("#comment_replies" + comment_id).toggleClass("d-none");
+});
 
+// cancel reply
+$(document).on("click", ".reply_cancel", function(e) {
+    e.preventDefault();
+    let comment_id = $(this).data("comment-id");
+    $("#reply_box" + comment_id).toggleClass("d-none");
+    $("#reply_box" + comment_id).load(location.href + " #reply_box" + comment_id + ">*", "");
+});
 
 // Add Reply
 $(document).on("click", ".reply_submit", function() {

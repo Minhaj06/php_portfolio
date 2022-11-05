@@ -264,7 +264,7 @@ margin-right: 1.5rem;
 }
 
 .main, .aside {
-max-height: calc(100vh - 12rem);
+max-height: calc(100vh - 10rem);
 overflow-y: scroll;
 }
 
@@ -1136,7 +1136,7 @@ border: none;
 background: transparent;
 }
 
-.comment_edit_delete_ellipsis {
+.comment_edit_delete_ellipsis, .reply_edit_delete_ellipsis {
 background: transparent;
 color: var(--white);
 width: 3.5rem;
@@ -1149,11 +1149,13 @@ border-radius: 50%;
 font-size: 1.8rem;
 }
 
-.comment_edit_delete_icons_area {
+.comment_edit_delete_icons_area,
+.reply_edit_delete_icons_area {
 position: relative;
 }
 
-.comment_edit_delete_icons {
+.comment_edit_delete_icons,
+.reply_edit_delete_icons {
 position: absolute;
 top: 1rem;
 right: 3.5rem;
@@ -1165,7 +1167,8 @@ margin-top: -0.5rem;
 z-index: 1;
 }
 
-.comment_edit_delete_icons button {
+.comment_edit_delete_icons button,
+.reply_edit_delete_icons button {
 background: transparent;
 color: var(--white);
 display: block;
@@ -1176,11 +1179,13 @@ padding: 0.5rem 2rem;
 font-weight: 300;
 }
 
-.comment_edit_delete_icons button:hover {
+.comment_edit_delete_icons button:hover,
+.reply_edit_delete_icons button:hover {
 background: var(--bs-dark);
 }
 
-.comment_edit_delete_icons button i {
+.comment_edit_delete_icons button i,
+.reply_edit_delete_icons button i {
 margin-right: 1rem;
 }
 
