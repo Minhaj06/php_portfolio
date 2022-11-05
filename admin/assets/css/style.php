@@ -224,6 +224,7 @@ border: solid;
 
 .modal-body {
 max-height: 55rem;
+overflow-y: auto;
 }
 
 #view_all_skills .modal-content {

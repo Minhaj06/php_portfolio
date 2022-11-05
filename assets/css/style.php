@@ -30,10 +30,13 @@ font-size: 62.5%;
 
 :root {
 --white: #cccccc;
+--white: #FFFFFF;
 --black: #000;
 --orange: #cc3a00;
 --dark-gray: #111111;
 --gray: #707070;
+--gray: #2A2A2C;
+--gray: #585868;
 }
 
 body {
@@ -259,6 +262,15 @@ border-bottom-left-radius: 0!important;
 img.note-float-left {
 margin-right: 1.5rem;
 }
+
+.main, .aside {
+max-height: calc(100vh - 12rem);
+overflow-y: scroll;
+}
+
+.main::-webkit-scrollbar, .aside::-webkit-scrollbar {
+display: none;
+}
 /* common css ends here */
 
 
@@ -343,7 +355,6 @@ background: var(--orange);
 .main_menu ul li a.hire_btn {
 background: var(--orange);
 border: 2px solid var(--orange);
-color: var(--black);
 padding: 1rem 2rem !important;
 margin-top: 3.8rem;
 margin-left: 1rem;
@@ -353,7 +364,6 @@ transition: all 0.2s linear;
 
 .main_menu ul li a.hire_btn:hover {
 background: transparent;
-color: var(--white);
 }
 
 .continue_reading_btn:hover {

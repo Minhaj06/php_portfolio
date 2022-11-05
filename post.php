@@ -67,7 +67,7 @@ function postDate($timestamp)
         <div class="inner_blog container m-auto">
 
             <div class="row g-5">
-                <main class="col-lg-7 col-xl-8 mb-5 mb-lg-0">
+                <main class="main col-lg-7 col-xl-8 mb-5 mb-lg-0">
 
                     <!-- Singel post view -->
                     <div class="single_post_view">
@@ -236,7 +236,7 @@ function postDate($timestamp)
 
 
                 <!-- Right aside section Starts here -->
-                <aside class="col-lg-5 col-xl-4">
+                <aside class="col-lg-5 col-xl-4 aside">
                     <?php include_once("assets/includes/blog_aside.php") ?>
                 </aside>
                 <!-- Right aside section ends here -->

@@ -155,7 +155,7 @@ $og_url = "blogs.php";
         <div class="inner_blog container m-auto">
 
             <div class="row g-5">
-                <main class="col-lg-7 col-xl-8 mb-5 mb-lg-0">
+                <main class="main col-lg-7 col-xl-8 mb-5 mb-lg-0">
                     <div class="row g-0 mb-5 pb-4 d-none">
                         <div class="blog_item rounded-0">
 
@@ -393,7 +393,7 @@ $og_url = "blogs.php";
 
 
                 <!-- Right aside section Starts here -->
-                <aside class="col-lg-5 col-xl-4">
+                <aside class="aside col-lg-5 col-xl-4">
                     <?php include_once("assets/includes/blog_aside.php") ?>
                 </aside>
                 <!-- Right aside section ends here -->

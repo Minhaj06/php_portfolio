@@ -160,7 +160,7 @@
                         ?>
 
                 <button class="show_replies_button mt-2" data-comment-id="<?= $comment_id ?>"><i
-                        class="fa-solid fa-caret-down fs-3"></i>
+                        class="fa-solid fa-caret-down fs-3 me-2"></i>
                     <?php
                                 echo $total_replies;
                                 if ($total_replies > 1) {

@@ -31,7 +31,7 @@ $title = "search results for " . $search;
         <div class="inner_blog container m-auto">
 
             <div class="row g-5">
-                <main class="col-lg-7 col-xl-8 mb-5 mb-lg-0">
+                <main class="main col-lg-7 col-xl-8 mb-5 mb-lg-0">
                     <h2 class="widget_title mb-5">search results for: <?= $search ?></h2>
 
                     <?php
@@ -95,7 +95,7 @@ $title = "search results for " . $search;
 
 
                 <!-- Right aside section Starts here -->
-                <aside class="col-lg-5 col-xl-4">
+                <aside class="aside col-lg-5 col-xl-4">
                     <?php include_once("inc/project_aside.php") ?>
                 </aside>
                 <!-- Right aside section ends here -->

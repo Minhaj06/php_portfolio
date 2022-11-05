@@ -26,7 +26,7 @@ $og_url = "projects/index.php";
         <div class="inner_blog container m-auto">
 
             <div class="row g-5">
-                <main class="col-lg-8 mb-5 mb-lg-0">
+                <main class="main col-lg-8 mb-5 mb-lg-0">
                     <div class="row g-5">
 
                         <?php
@@ -227,7 +227,7 @@ $og_url = "projects/index.php";
 
 
                 <!-- Right aside section Starts here -->
-                <aside class="col-lg-4">
+                <aside class="aside col-lg-4">
 
                     <?php include_once("inc/project_aside.php") ?>
 
