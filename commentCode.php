@@ -142,3 +142,50 @@ if (isset($_POST["addReply"]) && $_POST["addReply"] == "addBlogReply") {
 } elseif (isset($_POST["addReply"]) && $_POST["addReply"] == "addProjectReply") {
     addReply("project_replies");
 }
+
+
+// Showing comment in input
+function showingReplyInInput($repliesTable)
+{
+    global $conn;
+
+    $reply_id = $_GET['reply_id'];
+
+    $query = mysqli_query($conn, "SELECT reply FROM `$repliesTable` WHERE reply_id = $reply_id");
+
+    if ($query) {
+        $reply = mysqli_fetch_assoc($query)['reply'];
+        echo $reply;
+    } else {
+        return false;
+    }
+}
+
+if (isset($_GET['replyTextInInput']) && $_GET['replyTextInInput'] == "showingBlogReplyText") {
+    showingReplyInInput("blog_replies");
+} elseif (isset($_GET['replyTextInInput']) && $_GET['replyTextInInput'] == "showingProjectReplyText") {
+    showingReplyInInput("project_replies");
+}
+
+
+// Update Reply
+function updateReply($repliesTable)
+{
+    global $conn;
+
+    $reply_id = $_POST['reply_id'];
+    $reply = $_POST['updatedReply'];
+
+    $query = mysqli_query($conn, "UPDATE `$repliesTable` SET `reply` = '$reply' WHERE reply_id = $reply_id");
+
+    if ($query) {
+        echo "Reply Updated Successfully.";
+    }
+}
+
+
+if (isset($_POST['updateReplyFor']) && $_POST['updateReplyFor'] == "updateBlogReply") {
+    updateReply("blog_replies");
+} elseif (isset($_POST['updateReplyFor']) && $_POST['updateReplyFor'] == "updateProjectReply") {
+    updateReply("project_replies");
+}

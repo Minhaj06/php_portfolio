@@ -84,7 +84,7 @@ function postDate($timestamp)
                             </h2>
 
                             <a href="<?php base_url("projects/" . $category_slug) ?>">
-                                <h4 style="background: var(--orange); color: var(--black)"
+                                <h4 style="background: var(--orange);"
                                     class="post_category d-inline-block px-4 py-3 fs-3 rounded mb-3 text-capitalize">
                                     <?= $single_post_result['category'] ?></h4>
                             </a>

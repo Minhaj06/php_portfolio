@@ -181,21 +181,21 @@
                                     $replier_data = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `first_name`, `last_name`, `image` FROM `users_info` WHERE id = '$replier_id' "));
                                 ?>
 
-                    <div class="comment_reply_single d-flex mt-2">
+                    <div id="single_reply<?= $reply_id ?>" class="single_reply d-flex mt-2">
                         <img src="<?php base_url("uploaded_img/" . $replier_data['image']) ?>" alt="replier_img"
                             class="replier_img rounded-circle me-4">
                         <div class="add_comment_box">
 
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <h4 class="commenter_name mb-4 pb-1">
-                                        <?= $replier_data['first_name'] . ' ' . $replier_data['last_name'] ?></h4>
-                                    <p class="comment_text"><?= $replies_result['reply'] ?></p>
-                                </div>
+                            <?php
+                                            if (isset($_SESSION['auth']) && $_SESSION['auth_user']['user_id'] === $replier_id) {
+                                            ?>
 
-                                <?php
-                                                if (isset($_SESSION['auth']) && $_SESSION['auth_user']['user_id'] === $replier_id) {
-                                                ?>
+                            <div class="d-flex justify-content-between reply_data">
+                                <div>
+                                    <h4 class="replier_name mb-4 pb-1">
+                                        <?= $replier_data['first_name'] . ' ' . $replier_data['last_name'] ?></h4>
+                                    <p class="reply_text"><?= $replies_result['reply'] ?></p>
+                                </div>
 
                                 <div class="reply_edit_delete_icons_area">
                                     <button class="reply_edit_delete_ellipsis fa-solid fa-ellipsis-vertical"
@@ -203,27 +203,52 @@
                                     <div>
                                         <div id="reply_edit_delete_icons<?= $reply_id ?>"
                                             class="reply_edit_delete_icons d-none">
-                                            <button id="delete_reply_btn<?= $reply_id ?>" class="delete_reply_btn"
+
+                                            <button id="edit_reply_btn<?= $reply_id ?>" class="edit_reply_btn"
                                                 data-reply-id="<?= $reply_id ?>"><i class="fa-solid fa-pen-fancy"></i>
-                                                Delete</button>
+                                                Edit</button>
+
                                             <button id="delete_reply_btn<?= $reply_id ?>" class="delete_reply_btn"
                                                 data-reply-id="<?= $reply_id ?>"><i class="fa-solid fa-trash-can"></i>
                                                 Delete</button>
+
                                         </div>
                                     </div>
                                 </div>
-
-                                <?php } ?>
-
                             </div>
 
-                            <div class="comment_reacts d-flex">
+                            <div class="reply_edit d-none" style="margin-bottom: -1rem;">
+                                <div id="update_reply_input<?= $reply_id ?>" data-reply-id="<?= $reply_id ?>"
+                                    class="update_reply_input edit_content mb-2" contenteditable="true"
+                                    placeholder="Type to update..."></div>
+
+                                <div class="text-end">
+                                    <button id="reply_update_cancel<?= $reply_id ?>" data-reply-id="<?= $reply_id ?>"
+                                        class="reply_update_cancel cancel_btn btn px-4">cancel</button>
+                                    <button id="reply_update<?= $reply_id ?>" data-reply-id="<?= $reply_id ?>" class="reply_update submit_btn btn
+                                    px-4" disabled>update</button>
+                                </div>
+                            </div>
+
+                            <?php } else { ?>
+
+                            <div>
+                                <h4 class="replier_name mb-4 pb-1">
+                                    <?= $replier_data['first_name'] . ' ' . $replier_data['last_name'] ?></h4>
+                                <p class="reply_text"><?= $replies_result['reply'] ?></p>
+                            </div>
+
+
+                            <?php } ?>
+
+
+                            <div class="reply_reacts d-flex">
                                 <div class="me-4">
-                                    <span role="button" title="I like this comment"><i
+                                    <span role="button" title="I like this reply"><i
                                             class="fa-regular fa-thumbs-up"></i></span> 5.3k
                                 </div>
                                 <div>
-                                    <span role="button" title="I dislike this comment"><i
+                                    <span role="button" title="I dislike this reply"><i
                                             class="fa-regular fa-thumbs-down"></i></span>
                                     23
                                 </div>

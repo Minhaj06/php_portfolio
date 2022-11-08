@@ -263,6 +263,7 @@ img.note-float-left {
 margin-right: 1.5rem;
 }
 
+@media (min-width: 992px) {
 .main, .aside {
 max-height: calc(100vh - 10rem);
 overflow-y: scroll;
@@ -270,6 +271,7 @@ overflow-y: scroll;
 
 .main::-webkit-scrollbar, .aside::-webkit-scrollbar {
 display: none;
+}
 }
 /* common css ends here */
 
@@ -1032,6 +1034,10 @@ color: var(--orange);
 display: block;
 }
 
+.recent_post_img {
+border-radius: .4rem;
+}
+
 .recent_post_img img:hover {
 transform: scale(1.1) rotate(1deg);
 transition: all 0.2s linear;
@@ -1117,7 +1123,8 @@ color: var(--white);
 opacity: .85;
 }
 
-.comment_text {
+.comment_text,
+.reply_text {
 font-size: 1.5rem;
 font-weight: 300;
 line-height: 1.3;
