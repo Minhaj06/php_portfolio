@@ -329,6 +329,32 @@ $(document).on("click", ".edit_reply_btn", function() {
 
 
 
+// Delete Reply
+$(document).on("click", ".delete_reply_btn", function() {
+    let reply_id = $(this).data("reply-id");
+
+    $(this).attr("disabled", true);
+
+    $.ajax({
+        type: "POST",
+        url: "commentCode.php",
+        data: {
+            deleteReplyFor: "deleteBlogReply",
+            reply_id: reply_id,
+        },
+        success: function(response) {
+
+            showMessage(response);
+
+            // Refresh Comments Area
+            $("#comments").load(location.href + " #comments>*", "");
+
+            $("#delete_reply_btn" + comment_id).removeAttr("disabled");
+        }
+    });
+});
+
+
 
 // *******************************************
 // Add button loading
@@ -352,7 +378,7 @@ function showMessage(message) {
 
     setTimeout(function() {
         $("#messageBox").modal("hide");
-    }, 2000);
+    }, 2500);
 }
 
 // Toggle Div Class

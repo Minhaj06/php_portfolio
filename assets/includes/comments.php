@@ -1,4 +1,4 @@
-<div class="comments_area_wrapper pt-5" id="comments">
+<div class="comments_area_wrapper" id="comments">
 
     <?php
     $post_id = $single_post_result['id'];
@@ -242,17 +242,19 @@
                             <?php } ?>
 
 
-                            <div class="reply_reacts d-flex">
+                            <div class="reply_reacts d-flex align-items-center">
                                 <div class="me-4">
                                     <span role="button" title="I like this reply"><i
                                             class="fa-regular fa-thumbs-up"></i></span> 5.3k
                                 </div>
-                                <div>
+                                <div class="me-4">
                                     <span role="button" title="I dislike this reply"><i
                                             class="fa-regular fa-thumbs-down"></i></span>
                                     23
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
 

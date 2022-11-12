@@ -26,6 +26,7 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
 
 
     <div class="tab-content">
+
         <!-- recent posts -->
         <div id="recent_post" class="tab-pane active">
 
@@ -61,62 +62,54 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
         <!-- recent comments -->
         <div id="recent_comment" class="tab-pane fade">
 
-            <div class="recent_comment d-flex mb-4">
-                <div class="recent_comment_img me-3">
-                    <img width="100" height="70" src="img/robot.jpg" alt="post image">
-                </div>
-                <div class="recent_comment_content">
-                    <p class="recent_commenter_username fs-5">
-                        <strong>Sumon11 </strong> commented on
-                        <a href="<?php base_url("") ?>" style="color: var(--orange);" class="commented_post_title">I
-                            Used The
-                            Web For A Day On A 50 MB
-                            Budget</a>: <span class="comment">স্তাদ দ্য ফ্রান্স স্টেডিয়ামে সোমবার
-                            রাতে এ-লিগের....</span>
-                    </p>
-                    <a href="<?php base_url("") ?>">
-                        <p class="recent_comment_date fs-5">26th August, 2022</p>
-                    </a>
-                </div>
-            </div>
+            <?php
+            $recent_comment_query = mysqli_query($conn, "SELECT * FROM `blog_comments` ORDER BY comment_id DESC LIMIT 5");
+
+            if (mysqli_num_rows($recent_comment_query) > 0) {
+                while ($recent_comment_result = mysqli_fetch_array($recent_comment_query)) {
+                    $commenter_id = $recent_comment_result['user_id'];
+                    $blog_id = $recent_comment_result['blog_id'];
+
+                    $commenter_data = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `first_name`, `last_name`, `image` FROM `users_info` WHERE id = '$commenter_id' "));
+                    $post_data = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `title`, `slug` FROM `blog_posts` WHERE id = '$blog_id' "));
+            ?>
 
             <div class="recent_comment d-flex mb-4">
                 <div class="recent_comment_img me-3">
-                    <img width="100" height="70" src="img/robot.jpg" alt="post image">
+                    <img width="100" height="70" src="<?php base_url("uploaded_img/" . $commenter_data['image']) ?>"
+                        alt="commenter image" title="Commeter Image">
                 </div>
                 <div class="recent_comment_content">
-                    <p class="recent_commenter_username fs-5">
-                        <strong>Sumon11 </strong> commented on
-                        <a href="<?php base_url("") ?>" style="color: var(--orange);" class="commented_post_title">I
-                            Used The
-                            Web For A Day On A 50 MB
-                            Budget</a>: <span class="comment">স্তাদ দ্য ফ্রান্স স্টেডিয়ামে সোমবার
-                            রাতে এ-লিগের....</span>
-                    </p>
-                    <a href="<?php base_url("") ?>">
-                        <p class="recent_comment_date fs-5">26th August, 2022</p>
-                    </a>
+                    <div class="recent_commenter_username fs-5 mb-2">
+                        <strong
+                            title="Commenter Name"><?= $commenter_data['first_name'] . " " . $commenter_data['last_name'] ?></strong>
+                        commented
+                        on
+                        <a href="<?php base_url("post.php?slug=" . $post_data['slug']) ?>" style="color: var(--orange);"
+                            class="commented_post_title"><?= $post_data['title'] ?></a>: <span class="comment">
+                            <?php
+                                    $string = $recent_comment_result['comment'];
+                                    if (strlen($string) > 100) {
+
+                                        $stringCut = substr($string, 0, 100);
+                                        $endPoint = strrpos($stringCut, ' ');
+
+                                        $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                        $string .= " ...";
+
+                                        echo $string;
+                                    } else {
+                                        echo $string;
+                                    }
+                                    ?>
+                        </span>
+                    </div>
+                    <p class="recent_comment_date fs-5 mb-0"><?php postDate($recent_comment_result['created_at']) ?></p>
                 </div>
             </div>
 
-            <div class="recent_comment d-flex mb-4">
-                <div class="recent_comment_img me-3">
-                    <img width="100" height="70" src="img/robot.jpg" alt="post image">
-                </div>
-                <div class="recent_comment_content">
-                    <p class="recent_commenter_username fs-5">
-                        <strong>Sumon11 </strong> commented on
-                        <a href="<?php base_url("") ?>" style="color: var(--orange);" class="commented_post_title">I
-                            Used The
-                            Web For A Day On A 50 MB
-                            Budget</a>: <span class="comment">স্তাদ দ্য ফ্রান্স স্টেডিয়ামে সোমবার
-                            রাতে এ-লিগের....</span>
-                    </p>
-                    <a href="<?php base_url("") ?>">
-                        <p class="recent_comment_date fs-5">26th August, 2022</p>
-                    </a>
-                </div>
-            </div>
+            <?php }
+            } ?>
 
         </div>
     </div>
@@ -168,7 +161,7 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
     src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0&appId=750629119040166&autoLogAppEvents=1"
     nonce="e26vHkB4"></script>
 
-<div style="overflow-x: auto;" class="facebook_page mb-5" id="">
+<div style="overflow-x: auto;" class="facebook_page" id="">
     <h2 class="widget_title">Our Facebook Page</h2>
     <div style="min-width: 400px;" class="fb-page" data-href="https://www.facebook.com/mindthegraph/"
         data-tabs="timeline, events" data-width="500" data-height="" data-small-header="false"

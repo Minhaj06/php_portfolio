@@ -75,7 +75,7 @@ function postDate($timestamp)
                         <?php if ($count_post > 0) { ?>
 
                         <div class="post_details">
-                            <img style="max-height: 50rem;"
+                            <img class="post_thumbnail"
                                 src="<?php base_url("uploaded_img/" . $single_post_result['image']) ?>" width="100%"
                                 alt="post image">
 
@@ -179,10 +179,19 @@ function postDate($timestamp)
 
                         </div>
 
+                        <!-- Comments Section Starts Here -->
+                        <div class="comment_container pb-5 pt-5" id="comment_container" data-post-id="<?= $post_id ?>">
+                            <?php
+                                $comment_table = "blog_comments";
+                                $reply_table = "blog_replies";
+                                include("assets/includes/comments.php");
+                                ?>
+                        </div>
+                        <!-- Comments Section Ends Here -->
+
                         <!-- Related Posts -->
                         <h2 class="widget_title">related posts</h2>
-
-                        <div class="row g-4 mb-5">
+                        <div class="row g-4">
                             <?php
                                 $related_post_query = mysqli_query($conn, "SELECT `title`, `slug`, `image`, `created_at` FROM `blog_posts` WHERE status = '1' AND `category` = '$category' AND `slug` != '$slug' ORDER BY id DESC");
 
@@ -214,17 +223,6 @@ function postDate($timestamp)
 
                             <?php } ?>
                         </div>
-
-                        <!-- Comments Section Starts Here -->
-
-                        <div class="comment_container" id="comment_container" data-post-id="<?= $post_id ?>">
-                            <?php
-                                $comment_table = "blog_comments";
-                                $reply_table = "blog_replies";
-                                include("assets/includes/comments.php");
-                                ?>
-                        </div>
-                        <!-- Comments Section Ends Here -->
 
                         <?php } else {
                             include "assets/includes/post_not_found.php";

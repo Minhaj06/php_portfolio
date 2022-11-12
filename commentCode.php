@@ -97,24 +97,28 @@ if (isset($_POST['updateCommentFor']) && $_POST['updateCommentFor'] == "updateBl
 
 
 // Delete Comment
-function deleteComment($commentsTable)
+function deleteComment($commentsTable, $repliesTable)
 {
     global $conn;
 
     $comment_id = $_POST['comment_id'];
 
-    $query = mysqli_query($conn, "DELETE FROM `$commentsTable` WHERE comment_id = $comment_id");
+    // $query = mysqli_query($conn, "DELETE FROM `$commentsTable` WHERE comment_id = $comment_id");
 
-    if ($query) {
+    // $query = mysqli_query($conn, "DELETE FROM `$commentsTable` WHERE reply_id = $reply_id");
+    $sql = "DELETE FROM `$commentsTable` WHERE comment_id = '$comment_id';";
+    $sql .= "DELETE FROM `$repliesTable` WHERE comment_id = '$comment_id'";
+
+    if (mysqli_multi_query($conn, $sql)) {
         echo "Comment Deleted Successfully.";
     }
 }
 
 
 if (isset($_POST['deleteCommentFor']) && $_POST['deleteCommentFor'] == "deleteBlogComment") {
-    deleteComment("blog_comments");
+    deleteComment("blog_comments", "blog_replies");
 } elseif (isset($_POST['deleteCommentFor']) && $_POST['deleteCommentFor'] == "deleteProjectComment") {
-    deleteComment("project_comments");
+    deleteComment("project_comments", "project_replies");
 }
 
 
@@ -136,6 +140,7 @@ function addReply($comment_table)
         echo "Reply Added Successfully.";
     }
 }
+
 
 if (isset($_POST["addReply"]) && $_POST["addReply"] == "addBlogReply") {
     addReply("blog_replies");
@@ -188,4 +193,26 @@ if (isset($_POST['updateReplyFor']) && $_POST['updateReplyFor'] == "updateBlogRe
     updateReply("blog_replies");
 } elseif (isset($_POST['updateReplyFor']) && $_POST['updateReplyFor'] == "updateProjectReply") {
     updateReply("project_replies");
+}
+
+
+// Delete Reply
+function deleteReply($repliesTable)
+{
+    global $conn;
+
+    $reply_id = $_POST['reply_id'];
+
+    $query = mysqli_query($conn, "DELETE FROM `$repliesTable` WHERE reply_id = $reply_id");
+
+    if ($query) {
+        echo "Reply Deleted Successfully.";
+    }
+}
+
+
+if (isset($_POST['deleteReplyFor']) && $_POST['deleteReplyFor'] == "deleteBlogReply") {
+    deleteReply("blog_replies");
+} elseif (isset($_POST['deleteReplyFor']) && $_POST['deleteReplyFor'] == "deleteProjectReply") {
+    deleteReply("project_replies");
 }
