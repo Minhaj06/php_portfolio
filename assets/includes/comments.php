@@ -128,8 +128,18 @@
                 <div>
                     <div id="reply_box<?= $comment_id ?>" class="reply_box mt-2 d-flex d-none"
                         style="margin-bottom: -1rem;">
+
+                        <?php
+                                if (!isset($_SESSION['auth'])) {
+                                ?>
                         <img src="<?php base_url("assets/images/avatar.jpg") ?>" alt="replier_img"
                             class="replier_img rounded-circle me-4">
+                        <?php
+                                } else { ?>
+                        <img src="<?php base_url("uploaded_img/" . $_SESSION['auth_user']['image']) ?>"
+                            alt="replier_img" class="replier_img rounded-circle me-4">
+                        <?php } ?>
+
 
                         <div class="add_reply_box">
                             <div id="reply_input<?= $comment_id ?>" data-comment-id="<?= $comment_id ?>"

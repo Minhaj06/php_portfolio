@@ -62,7 +62,7 @@ function rediretToLogin(url, redirectPage) {
 $(".comment_input").focus(function(e) {
     rediretToLogin("session_check.php", "login.php");
 });
-$(".reply_input").focus(function(e) {
+$(document).on("focus", ".reply_input", function() {
     rediretToLogin("session_check.php", "login.php");
 });
 

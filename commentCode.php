@@ -2,26 +2,26 @@
 include 'admin/config/dbConnect.php';
 
 // Fetching all comments data
-function fetchingCommentsData($commentsFor)
-{
-    global $conn;
-    if (isset($_POST['commentsFor']) && $_POST['commentsFor'] == $commentsFor) {
+// function fetchingCommentsData($commentsFor)
+// {
+//     global $conn;
+//     if (isset($_POST['commentsFor']) && $_POST['commentsFor'] == $commentsFor) {
 
-        $commentsTable = $_POST['commentsTable'];
-        $postID = $_POST['postID'];
+//         $commentsTable = $_POST['commentsTable'];
+//         $postID = $_POST['postID'];
 
-        $query = mysqli_query($conn, "SELECT * FROM `$commentsTable` WHERE blog_id = $postID");
+//         $query = mysqli_query($conn, "SELECT * FROM `$commentsTable` WHERE blog_id = $postID");
 
-        if (mysqli_num_rows($query) > 0) {
-            $commentsData = array();
-            while ($row = mysqli_fetch_assoc($query)) {
-                $commentsData[] = $row;
-            }
-        }
-        echo json_encode($commentsData);
-    }
-}
-fetchingCommentsData("blogComments");
+//         if (mysqli_num_rows($query) > 0) {
+//             $commentsData = array();
+//             while ($row = mysqli_fetch_assoc($query)) {
+//                 $commentsData[] = $row;
+//             }
+//         }
+//         echo json_encode($commentsData);
+//     }
+// }
+// fetchingCommentsData("blogComments");
 
 
 // Add Comment
@@ -103,9 +103,6 @@ function deleteComment($commentsTable, $repliesTable)
 
     $comment_id = $_POST['comment_id'];
 
-    // $query = mysqli_query($conn, "DELETE FROM `$commentsTable` WHERE comment_id = $comment_id");
-
-    // $query = mysqli_query($conn, "DELETE FROM `$commentsTable` WHERE reply_id = $reply_id");
     $sql = "DELETE FROM `$commentsTable` WHERE comment_id = '$comment_id';";
     $sql .= "DELETE FROM `$repliesTable` WHERE comment_id = '$comment_id'";
 

@@ -2373,6 +2373,42 @@ $(document).on("click", "#edit_project_post_btn", function(e) {
     edit_project_post_id = "";
 });
 
+
+
+
+// Delete Project Post
+$(document).on("click", "#delete_project_post_btn", function(e) {
+    e.preventDefault();
+
+    $("#confirmBox").modal("show");
+    let delete_project_post_id = $(this).data("id");
+    modalDismiss();
+
+    $("#confirm_ok").click(function() {
+        $.ajax({
+            url: "code.php",
+            type: "POST",
+            data: {
+                delete_project_post: 1,
+                delete_project_post_id: delete_project_post_id,
+            },
+            success: function(response) {
+                // hide confirm box
+                $("#confirmBox").modal("toggle");
+
+                // Refresh Table
+                $("#project_category").load(location.href + " #project_category>*", "");
+                $("#project_posts").load(location.href + " #project_posts>*", "");
+
+                // Messsage Show
+                showMessage();
+                $(".message_show .ation_message").html(response);
+            },
+        });
+    });
+});
+
+
 // Project Section Ends Here
 
 // Testimonials Section Starts Here

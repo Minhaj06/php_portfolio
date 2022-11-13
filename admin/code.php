@@ -1278,6 +1278,38 @@ if (isset($_POST['update_project_post_id'])) {
     }
 }
 
+
+
+// Delete project post
+if (isset($_POST['delete_project_post'])) {
+    $delete_project_post_id = $_POST['delete_project_post_id'];
+
+    $select = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `code_file`, `image`, `category` FROM `project_posts` WHERE id = '$delete_project_post_id' "));
+
+    $code_file = $select['code_file'];
+    $image = $select['image'];
+    $category = $select['category'];
+
+    $sql = "DELETE FROM `project_posts` WHERE id = '$delete_project_post_id';";
+    $sql .= "UPDATE `project_categories` SET no_of_post = no_of_post - 1 WHERE name = '$category'";
+
+
+    if (mysqli_multi_query($conn, $sql)) {
+
+        if (file_exists("../uploaded_img/" . $image)) {
+            unlink("../uploaded_img/" . $image);
+        }
+
+        if (file_exists("../assets/files/" . $code_file)) {
+            unlink("../assets/files/" . $code_file);
+        }
+
+        echo "Post deleted succfully";
+    } else {
+        echo '<span class="text-danger">Post not deleted!</span>';
+    }
+}
+
 // Project Section Ends Here
 
 

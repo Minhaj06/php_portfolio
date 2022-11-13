@@ -2,18 +2,10 @@ window.addEventListener("load", () => {
     document.querySelector("#comment_input").innerHTML = "";
 });
 
-// cancel comment
-$(".comment_cancel").click(function(e) {
-    e.preventDefault();
-    $("#comment_input").html("");
-    $("#comment_submit").attr("disabled", "true");
-});
-
 
 // enable/disable reply button on keyup
-$(".reply_input").keyup(function(e) {
+$(document).on("keyup", ".reply_input", function(e) {
     let comment_id = $(this).data("comment-id");
-
     let replyText = $.trim($("#reply_input" + comment_id).text());
 
     if (replyText == "") {
@@ -24,69 +16,31 @@ $(".reply_input").keyup(function(e) {
 });
 
 
-// cancel reply
-$(".reply_cancel").click(function(e) {
+// cancel comment
+$(document).on("click", ".comment_cancel", function(e) {
     e.preventDefault();
-    let comment_id = $(this).data("comment-id");
-
-    $("#reply_box" + comment_id).css("display", "none");
+    $("#comment_input").html("");
+    $("#comment_submit").attr("disabled", "true");
 });
 
-
-// Reply Box Toggle
-document.querySelectorAll(".reply_btn").forEach(btn => btn.onclick = ev => {
-    const x = ev.target.nextElementSibling.querySelector(".reply_box");
-    x.style.display = x.style.display === "none" ? "flex" : "none";
-});
-
-// Comment Replies Toggle
-document.querySelectorAll(".show_replies_button").forEach(btn => btn.onclick = ev => {
-    const x = ev.target.nextElementSibling.querySelector(".comment_replies");
-    x.style.display = x.style.display === "none" ? "" : "none";
-});
-
-// document.querySelectorAll(".show_replies_button").forEach((element) => {
-//     element.addEventListener("click", (replies) => {
-//         const targetedReplies = replies.target.nextElementSibling.querySelector(".comment_replies");
-//         targetedReplies.style.display = targetedReplies.style.display === "none" ? "" : "none";
-//     });
-// });
 
 // Comment Edit Icons Toggle
-document.querySelectorAll(".comment_edit_delete_ellipsis").forEach((element) => {
-    element.addEventListener("click", (ellipsis) => {
-        const singleEllipsis = ellipsis.target.nextElementSibling.querySelector(
-            ".comment_edit_delete_icons");
-        singleEllipsis.style.display = singleEllipsis.style.display === "none" ? "" : "none";
-    });
-});
+function toggleEditDeleteIcons(toggleFor) {
+    $(document).on("click", "." + toggleFor + "_edit_delete_ellipsis", function(e) {
+        e.preventDefault();
 
+        let comment_id = $(this).data(toggleFor + "-id");
 
-// $(document).ready(function() {
-
-// Fetching all comments data
-function fetchComments(pageURL, commentsFor, commentsTable) {
-    let postID = $("#comment_submit").data("post-id");
-    $.ajax({
-        type: "POST",
-        url: pageURL,
-        data: {
-            commentsFor: commentsFor,
-            commentsTable: commentsTable,
-            postID: postID
-        },
-        dataType: "json",
-        success: function(data) {
-            for (i = 0; i < data.length; i++) {
-                console.log(data[i].comment)
-            }
-        }
+        $("#" + toggleFor + "_edit_delete_icons" + comment_id).toggleClass("d-none");
     });
 }
-// fetchComments("commentCode.php", "blogComments", "blog_comments");
+
+toggleEditDeleteIcons("comment");
+toggleEditDeleteIcons("reply");
 
 
-$("#comment_input").keyup(function(e) {
+// enable/disable comment submit button
+$(document).on("keyup", "#comment_input", function(e) {
     e.preventDefault();
     if ($("#comment_input").html() !== "") {
         $("#comment_submit").removeAttr("disabled");
@@ -108,7 +62,7 @@ function rediretToLogin(url, redirectPage) {
 $(".comment_input").focus(function(e) {
     rediretToLogin("../session_check.php", "../login.php");
 });
-$(".reply_input").focus(function(e) {
+$(document).on("focus", ".reply_input", function() {
     rediretToLogin("../session_check.php", "../login.php");
 });
 
@@ -116,7 +70,9 @@ $(".reply_input").focus(function(e) {
 
 // Add Comment
 function submitComment(pageURL, commentFor) {
-    $("#comment_submit").on("click", function() {
+    $(document).on("click", "#comment_submit", function(e) {
+        e.preventDefault();
+
         let commentText = $("#comment_input").text();
         let blogID = $(this).data("post-id");
 
@@ -142,56 +98,24 @@ function submitComment(pageURL, commentFor) {
         });
     });
 }
+
 submitComment("../commentCode.php", "addProjectComment");
-
-function btnLoading(btnSelector) {
-    $(btnSelector).prepend('<div class="spinner-border spinner-border" disabled role="status"></div>');
-    $(btnSelector).addClass("btnLoading");
-    $(btnSelector).attr("disabled", true);
-}
-
-function removeBtnLoading(btnSelector, btnText) {
-    $(btnSelector).text(btnText);
-    $(btnSelector).removeClass("btnLoading");
-    $(btnSelector).removeAttr("disabled");
-}
-
-function showMessage(message) {
-    $("#messageBox").modal("show");
-    $(".messageShow").html(message);
-
-    setTimeout(function() {
-        $("#messageBox").modal("hide");
-    }, 2000);
-}
-// });
-
-
 
 
 // Cancel Comment Update
-$(".comment_update_cancel").on("click", function() {
+$(document).on("click", ".comment_update_cancel", function() {
     let comment_id = $(this).data("comment-id");
-    toggleDivClass("#single_comment" + comment_id);
+    toggleDivClass("#single_comment" + comment_id, "comment");
 });
-
-// Toggle Div Class
-function toggleDivClass(selector) {
-    $(selector + " .comment_data").toggleClass("d-none");
-    $(selector + " .comment_reacts").toggleClass("d-none");
-    $(selector + " .reply_btn").toggleClass("d-none");
-    $(selector + " .comment_edit").toggleClass("d-none");
-    $(selector + " .comment_edit_delete_icons").css("display", "none");
-}
 
 
 // Showing Comment Update Input
 function showingCommentInInput(pageURL, commentTextInInputFor, updateCommentFor) {
-    $(".edit_comment_btn").on("click", function() {
+    $(document).on("click", ".edit_comment_btn", function() {
         let comment_id = $(this).data("comment-id");
 
         // showing update input
-        toggleDivClass("#single_comment" + comment_id);
+        toggleDivClass("#single_comment" + comment_id, "comment");
 
         $.ajax({
             type: "GET",
@@ -202,6 +126,7 @@ function showingCommentInInput(pageURL, commentTextInInputFor, updateCommentFor)
             },
             success: function(response) {
                 $("#update_comment_input" + comment_id).text(response);
+                console.log(response)
 
                 // button enable/disable
                 $(".update_comment_input").keyup(function(e) {
@@ -252,12 +177,216 @@ showingCommentInInput("../commentCode.php", "showingProjectCommentText", "update
 
 
 
-// Comment Reply
-$(".reply_submit").on("click", function() {
+// Delete Comment
+$(document).on("click", ".delete_comment_btn", function() {
     let comment_id = $(this).data("comment-id");
 
+    $(this).attr("disabled", true);
+
+    $.ajax({
+        type: "POST",
+        url: "../commentCode.php",
+        data: {
+            deleteCommentFor: "deleteProjectComment",
+            comment_id: comment_id,
+        },
+        success: function(response) {
+
+            showMessage(response);
+
+            // Refresh Comments Area
+            $("#comments").load(location.href + " #comments>*", "");
+
+            $("#delete_comment_btn" + comment_id).removeAttr("disabled");
+        }
+    });
+});
+
+
+
+
+// ************************Reply Codes************************
+
+// Reply Box Toggle
+$(document).on("click", ".reply_btn", function(e) {
+    e.preventDefault();
+    let comment_id = $(this).data("comment-id");
+    $("#reply_box" + comment_id).toggleClass("d-none");
+    $("#reply_box" + comment_id).load(location.href + " #reply_box" + comment_id + ">*", "");
+});
+
+// Comment Replies Toggle
+$(document).on("click", ".show_replies_button", function(e) {
+    e.preventDefault();
+    let comment_id = $(this).data("comment-id");
+    $("#comment_replies" + comment_id).toggleClass("d-none");
+});
+
+// cancel reply
+$(document).on("click", ".reply_cancel", function(e) {
+    e.preventDefault();
+    let comment_id = $(this).data("comment-id");
+    $("#reply_box" + comment_id).toggleClass("d-none");
+    $("#reply_box" + comment_id).load(location.href + " #reply_box" + comment_id + ">*", "");
+});
+
+// Add Reply
+$(document).on("click", ".reply_submit", function() {
+    let comment_id = $(this).data("comment-id");
     let replyText = $.trim($("#reply_input" + comment_id).text());
 
+    $.ajax({
+        type: "POST",
+        url: "../commentCode.php",
+        data: {
+            addReply: "addProjectReply",
+            comment_id: comment_id,
+            replyText: replyText,
+        },
+        beforeSend: function() {
+            btnLoading("#reply_submit" + comment_id);
+        },
+        success: function(response) {
+            removeBtnLoading("#reply_submit" + comment_id, "reply");
+            showMessage(response);
+            $("#reply_input" + comment_id).html("");
 
+            // Refresh Comments Area
+            $("#comments").load(location.href + " #comments>*", "");
+        }
+    });
 
 });
+
+
+// Cancel Reply Update
+$(document).on("click", ".reply_update_cancel", function() {
+    let reply_id = $(this).data("reply-id");
+    toggleDivClass("#single_reply" + reply_id, "reply");
+});
+
+
+// Edit Reply
+$(document).on("click", ".edit_reply_btn", function() {
+
+    let reply_id = $(this).data("reply-id");
+
+    // showing update input
+    toggleDivClass("#single_reply" + reply_id, "reply");
+
+    $.ajax({
+        type: "GET",
+        url: "../commentCode.php",
+        data: {
+            replyTextInInput: "showingProjectReplyText",
+            reply_id: reply_id,
+        },
+        success: function(response) {
+            $("#update_reply_input" + reply_id).text(response);
+
+            // button enable/disable
+            $(".update_reply_input").keyup(function(e) {
+                let replyText = $.trim($("#update_reply_input" + reply_id).text());
+
+                if (replyText == response || replyText == "") {
+                    $("#reply_update" + reply_id).attr("disabled", true);
+                } else {
+                    $("#reply_update" + reply_id).removeAttr("disabled");
+                }
+            });
+
+            // update reply
+            $("#reply_update" + reply_id).click(function(e) {
+                e.preventDefault();
+
+                let updatedReply = $.trim($("#update_reply_input" + reply_id).text());
+
+                $.ajax({
+                    type: "POST",
+                    url: "../commentCode.php",
+                    data: {
+                        reply_id: reply_id,
+                        updateReplyFor: "updateProjectReply",
+                        updatedReply: updatedReply,
+                    },
+                    beforeSend: function() {
+                        btnLoading("#reply_update" + reply_id);
+                    },
+                    success: function(response) {
+                        removeBtnLoading("#reply_update" + reply_id, "update");
+
+                        showMessage(response);
+
+                        // Refresh comments Area
+                        $("#comments").load(location.href + " #comments>*", "");
+                    }
+                });
+
+            });
+
+        }
+    });
+});
+
+
+
+// Delete Reply
+$(document).on("click", ".delete_reply_btn", function() {
+    let reply_id = $(this).data("reply-id");
+
+    $(this).attr("disabled", true);
+
+    $.ajax({
+        type: "POST",
+        url: "../commentCode.php",
+        data: {
+            deleteReplyFor: "deleteProjectReply",
+            reply_id: reply_id,
+        },
+        success: function(response) {
+
+            showMessage(response);
+
+            // Refresh Comments Area
+            $("#comments").load(location.href + " #comments>*", "");
+
+            $("#delete_reply_btn" + comment_id).removeAttr("disabled");
+        }
+    });
+});
+
+
+
+// *******************************************
+// Add button loading
+function btnLoading(btnSelector) {
+    $(btnSelector).prepend('<div class="spinner-border spinner-border" disabled role="status"></div>');
+    $(btnSelector).addClass("btnLoading");
+    $(btnSelector).attr("disabled", true);
+}
+
+// Remove button loading
+function removeBtnLoading(btnSelector, btnText) {
+    $(btnSelector).text(btnText);
+    $(btnSelector).removeClass("btnLoading");
+    $(btnSelector).removeAttr("disabled");
+}
+
+// Show Message
+function showMessage(message) {
+    $("#messageBox").modal("show");
+    $(".messageShow").html(message);
+
+    setTimeout(function() {
+        $("#messageBox").modal("hide");
+    }, 2500);
+}
+
+// Toggle Div Class
+function toggleDivClass(selector, editFor) {
+    $(selector + " ." + editFor + "_data").toggleClass("d-none");
+    $(selector + " ." + editFor + "_reacts").toggleClass("d-none");
+    $(selector + " .reply_btn").toggleClass("d-none");
+    $(selector + " ." + editFor + "_edit").toggleClass("d-none");
+    $(selector + " ." + editFor + "_edit_delete_icons").addClass("d-none");
+}
