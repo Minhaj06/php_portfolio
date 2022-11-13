@@ -277,6 +277,10 @@ overflow-y: scroll;
 display: none;
 }
 }
+.post_category:hover {
+color: var(--white);
+opacity: 80%;
+}
 /* common css ends here */
 
 

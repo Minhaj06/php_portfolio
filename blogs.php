@@ -173,15 +173,14 @@ $og_url = "blogs.php";
                                     ?>
 
                                     <div class="swiper-slide slide_item">
-                                        <a href="<?php base_url("post.php?slug=" . $slide_post_result['slug']) ?>"
-                                            class="w-100">
+                                        <a href="<?php base_url("post/" . $slide_post_result['slug']) ?>" class="w-100">
                                             <img src="<?php base_url("uploaded_img/" . $slide_post_result['image']) ?>"
                                                 alt="blog_img" />
                                         </a>
                                         <div class="slider_blog_content">
                                             <p><?php postDate($slide_post_result['created_at']) ?></p>
                                             <h3><?= $slide_post_result['title'] ?></h3>
-                                            <a href="<?php base_url("post.php?slug=" . $slide_post_result['slug']) ?>">learn
+                                            <a href="<?php base_url("post/" . $slide_post_result['slug']) ?>">learn
                                                 more<i class="fa-solid fa-arrow-right-long"></i></a>
                                         </div>
                                     </div>
@@ -197,8 +196,7 @@ $og_url = "blogs.php";
                                     ?>
 
                                     <div class="swiper-slide slide_item">
-                                        <a href="<?php base_url("post.php?slug=" . $slide_post_result['slug']) ?>"
-                                            class="w-100">
+                                        <a href="<?php base_url("post/" . $slide_post_result['slug']) ?>" class="w-100">
                                             <img src="<?php base_url("uploaded_img/" . $slide_post_result['image']) ?>"
                                                 alt="blog_img" />
                                         </a>
@@ -211,7 +209,7 @@ $og_url = "blogs.php";
                                                         ?>
                                             </p>
                                             <h3><?= $slide_post_result['title'] ?></h3>
-                                            <a href="<?php base_url("post.php?slug=" . $slide_post_result['slug']) ?>">learn
+                                            <a href="<?php base_url("post/" . $slide_post_result['slug']) ?>">learn
                                                 more<i class="fa-solid fa-arrow-right-long"></i></a>
                                         </div>
                                     </div>
@@ -296,7 +294,7 @@ $og_url = "blogs.php";
                         <div class="col-md-6 col-lg-12 col-xl-6">
                             <div class="blog_item">
                                 <div class="blog_img">
-                                    <a href="<?php base_url("post.php?slug=" . $post_result['slug']) ?>">
+                                    <a href="<?php base_url("post/" . $post_result['slug']) ?>">
                                         <img src="<?php base_url("uploaded_img/" . $post_result['image']) ?>"
                                             alt="blog_img" />
                                     </a>
@@ -310,7 +308,7 @@ $og_url = "blogs.php";
                                                 ?>
                                     </p>
                                     <h3><?= $post_result['title'] ?></h3>
-                                    <a href="<?php base_url("post.php?slug=" . $post_result['slug']) ?>">learn more<i
+                                    <a href="<?php base_url("post/" . $post_result['slug']) ?>">learn more<i
                                             class="fa-solid fa-arrow-right-long"></i></a>
                                 </div>
                             </div>

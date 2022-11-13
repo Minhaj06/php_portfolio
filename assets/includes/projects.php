@@ -25,7 +25,7 @@
                 <div class="blog_item row g-0 h-100">
 
                     <div class="col-4 overflow-hidden">
-                        <a href="<?php base_url("projects/post.php?slug=" . $project_post_result['slug']) ?>">
+                        <a href="<?php base_url("projects/post/" . $project_post_result['slug']) ?>">
                             <img src="<?php base_url("uploaded_img/" . $project_post_result['image']) ?>"
                                 alt="project_img" />
                         </a>
@@ -49,7 +49,7 @@
                             </h5>
                         </div>
 
-                        <a href="<?php base_url("projects/post.php?slug=" . $project_post_result['slug']) ?>">
+                        <a href="<?php base_url("projects/post/" . $project_post_result['slug']) ?>">
                             <h2><?= $project_post_result['title'] ?></h2>
                         </a>
 

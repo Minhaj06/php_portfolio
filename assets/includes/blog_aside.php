@@ -4,11 +4,11 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
 
 <!-- Search bar -->
 <h2 class="widget_title">Search Here</h2>
-<form action="search.php" method="GET">
+<form action="<?php base_url("search.php") ?>" method="GET">
     <div class="input-group mb-5 pb-4">
-        <input type="search" name="search" class="form-control rounded fs-3 px-3" placeholder="Search blog"
+        <input type="search" name="keywords" class="form-control rounded fs-3 px-3" placeholder="Search blog"
             aria-label="Search" />
-        <input type="submit" name="search_btn" value="Search" class="btn fs-3 search_btn" />
+        <input type="submit" value="Search" class="btn fs-3 search_btn" />
     </div>
 </form>
 
@@ -39,13 +39,13 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
 
             <div class="recent_post d-flex mb-4">
                 <div class="recent_post_img me-3 overflow-hidden">
-                    <a href="<?php base_url("post.php?slug=" . $recent_post_result['slug']) ?>">
+                    <a href="<?php base_url("post/" . $recent_post_result['slug']) ?>">
                         <img width="100" height="70"
                             src="<?php base_url("uploaded_img/" . $recent_post_result['image']) ?>" alt="post image">
                     </a>
                 </div>
                 <div class="recent_post_content">
-                    <a href="<?php base_url("post.php?slug=" . $recent_post_result['slug']) ?>">
+                    <a href="<?php base_url("post/" . $recent_post_result['slug']) ?>">
                         <p class="recent_post_title fs-4"><?= $recent_post_result['title'] ?></p>
                     </a>
                     <p class="recent_post_date fs-5"><?php postDate($recent_post_result['created_at']) ?></p>
@@ -85,7 +85,7 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
                             title="Commenter Name"><?= $commenter_data['first_name'] . " " . $commenter_data['last_name'] ?></strong>
                         commented
                         on
-                        <a href="<?php base_url("post.php?slug=" . $post_data['slug']) ?>" style="color: var(--orange);"
+                        <a href="<?php base_url("post/" . $post_data['slug']) ?>" style="color: var(--orange);"
                             class="commented_post_title"><?= $post_data['title'] ?></a>: <span class="comment">
                             <?php
                                     $string = $recent_comment_result['comment'];
@@ -141,8 +141,7 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
         ?>
 
         <li class="<?= $active ?>">
-            <a href="<?php base_url("category.php?slug=" . $category_result['slug']) ?>"
-                class="d-flex justify-content-between">
+            <a href="<?php base_url("category/" . $category_result['slug']) ?>" class="d-flex justify-content-between">
                 <span><?= $category_result['name'] ?></span>
                 <span>(<?= $category_result['no_of_post'] ?>)</span>
             </a>

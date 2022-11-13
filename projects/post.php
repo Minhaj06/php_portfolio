@@ -35,7 +35,7 @@ if (isset($single_post_result['title']) && !empty($single_post_result['title']))
     $meta_description = $single_post_result['meta_description'];
     $meta_keywords = $single_post_result['meta_keywords'];
 
-    $og_url = "projects/post.php?slug=" . $single_post_result['slug'];
+    $og_url = "projects/post/" . $single_post_result['slug'];
     $og_title = $single_post_result['title'];
     $og_description = $single_post_result['meta_description'];
     $og_keywords = str_replace(" ", "", $meta_keywords);
@@ -244,7 +244,7 @@ function postDate($timestamp)
 
                                 <div class="col">
                                     <a style="color: #FFF; background: #00acee;"
-                                        href="http://www.twitter.com/share?text=<?= $og_title ?> &url=<? base_url($og_url) ?> &hashtags=<?= $og_keywords ?>"
+                                        href="http://www.twitter.com/share?text=<?= $og_title ?> &url=<?php base_url($og_url) ?> &hashtags=<?= $og_keywords ?>"
                                         target="_blank" class="btn d-block fs-1" title="Share by Twitter"><i
                                             class="fa-brands fa-twitter"></i></a>
                                 </div>
@@ -305,8 +305,7 @@ function postDate($timestamp)
                                 <div class="blog_item row g-0 h-100">
 
                                     <div class="col-4 overflow-hidden">
-                                        <a
-                                            href="<?php base_url("projects/post.php?slug=" . $related_post_result['slug']) ?>">
+                                        <a href="<?php base_url("projects/post/" . $related_post_result['slug']) ?>">
                                             <img src="<?php base_url("uploaded_img/" . $related_post_result['image']) ?>"
                                                 alt="project_img" />
                                         </a>
@@ -330,8 +329,7 @@ function postDate($timestamp)
                                             </h5>
                                         </div>
 
-                                        <a
-                                            href="<?php base_url("projects/post.php?slug=" . $related_post_result['slug']) ?>">
+                                        <a href="<?php base_url("projects/post/" . $related_post_result['slug']) ?>">
                                             <h2><?= $related_post_result['title'] ?></h2>
                                         </a>
 
@@ -405,7 +403,7 @@ function postDate($timestamp)
                                 <div class="blog_item">
                                     <div class="blog_img">
                                         <a
-                                            href="<?php base_url("projects/post.php?slug=" . $related_post_result['slug']) ?>">
+                                            href="<?php base_url("projects/post/" . $related_post_result['slug']) ?>">
                                             <img src="<?php base_url("uploaded_img/" . $related_post_result['image']) ?>"
                                                 alt="blog_img" />
                                         </a>
@@ -414,7 +412,7 @@ function postDate($timestamp)
                                         <p class="para"><?php postDate($related_post_result['created_at']) ?></p>
                                         <h3><?= $related_post_result['title'] ?></h3>
                                         <a
-                                            href="<?php base_url("projects/post.php?slug=" . $related_post_result['slug']) ?>">learn
+                                            href="<?php base_url("projects/post/" . $related_post_result['slug']) ?>">learn
                                             more<i class="fa-solid fa-arrow-right-long"></i></a>
                                     </div>
                                 </div>

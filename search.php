@@ -2,10 +2,10 @@
 include 'admin/config/dbConnect.php';
 
 
-if (!isset($_GET['search'])) {
-    header("Location: blogs..php");
+if (!isset($_GET['keywords'])) {
+    header("Location: blogs.php");
 } else {
-    $search = $_GET['search'];
+    $search = $_GET['keywords'];
 }
 
 function postDate($timestamp)

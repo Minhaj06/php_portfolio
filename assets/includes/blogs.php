@@ -17,7 +17,7 @@
             <div class="col-xl-4 col-md-6">
                 <div class="blog_item">
                     <div class="blog_img">
-                        <a href="<?php base_url("post.php?slug=" . $blog_post_result['slug']) ?>">
+                        <a href="<?php base_url("post/" . $blog_post_result['slug']) ?>">
                             <img src="<?php base_url("uploaded_img/" . $blog_post_result['image']) ?>" alt="blog_img" />
                         </a>
                     </div>
@@ -32,7 +32,7 @@
 
                         <h3><?= $blog_post_result['title'] ?></h3>
 
-                        <a href="<?php base_url("post.php?slug=" . $blog_post_result['slug']) ?>">learn more<i
+                        <a href="<?php base_url("post/" . $blog_post_result['slug']) ?>">learn more<i
                                 class="fa-solid fa-arrow-right-long"></i></a>
                     </div>
                 </div>

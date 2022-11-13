@@ -29,7 +29,7 @@ if (isset($category) && !empty($category)) {
     $meta_description = $category_result['meta_description'];
     $meta_keywords = $category_result['meta_keywords'];
 
-    $og_url = "projects/category.php?slug=" . $category_result['slug'];
+    $og_url = "projects/category/" . $category_result['slug'];
     $og_title = $category_result['name'];
     $og_description = $category_result['description'];
 } else {
