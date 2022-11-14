@@ -3314,7 +3314,37 @@ $(document).on("click", "#update_site_info", function(e) {
 });
 
 
+// Change Site Logo
+$(document).on("submit", "#change_logo_form", function(e) {
+    e.preventDefault();
 
+    $.ajax({
+        url: "code",
+        type: "POST",
+        data: new FormData(this),
+        processData: false,
+        contentType: false,
+        beforeSend: function() {
+            btnLoading("#change_logo");
+        },
+        success: function(response) {
+            removeBtnLoading("#change_logo", "Change Logo");
+
+            // hide modal
+            $("#change_logo_modal").modal("toggle");
+
+            // Messsage Show
+            showMessage();
+            $(".message_show .ation_message").html(response);
+
+            // Refresh Form
+            $("#change_logo_form")[0].reset();
+
+            // Refresh Content
+            $("#site_info").load(location.href + " #site_info>*", "");
+        },
+    });
+});
 
 
 // ===========================================

@@ -56,7 +56,7 @@
                 <h2 class="modal-title">Edit Hire Me Content</h2>
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form action="" id="update_hire_me_form">
+            <form action="" id="update_hire_me_form" enctype="multipart/form-data">
                 <div class="modal-body">
 
                     <div class="form-group mb-4">

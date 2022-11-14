@@ -1874,3 +1874,34 @@ if (isset($_POST['update_site_info'])) {
         echo "Site Info Not Updated";
     }
 }
+
+
+// Change Site Logo
+if (isset($_FILES['logo_input'])) {
+    $logo = $_FILES['logo_input']['name'];
+    $logo_tmp_name = $_FILES['logo_input']['tmp_name'];
+    $dotpos = stripos($logo, '.') + 1;
+    $ext = substr($logo, $dotpos);
+    $rand = rand(100000, 1000000);
+    $rename_logo = $rand . time() . '.' . $ext;
+    $logo_folder = '../uploaded_img/' . $rename_logo;
+
+    $prev_logo = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `site_logo` FROM `site_settings` WHERE id = '1'"))['site_logo'];
+
+    $query = mysqli_query($conn, "UPDATE `site_settings` SET `site_logo` = '$rename_logo' WHERE id = '1'");
+    // $query = mysqli_query($conn, "UPDATE `site_settings` SET `site_logo` = '$rename_logo' WHERE id = '1'");
+
+    if ($query) {
+
+        if (file_exists('../uploaded_img/' . $prev_logo)) {
+            unlink('../uploaded_img/' . $prev_logo);
+            move_uploaded_file($logo_tmp_name, $logo_folder);
+            echo "Logo updated successfully";
+        } else {
+            move_uploaded_file($logo_tmp_name, $logo_folder);
+            echo "Logo updated successfully";
+        }
+    } else {
+        echo "Logo not updated!";
+    }
+}

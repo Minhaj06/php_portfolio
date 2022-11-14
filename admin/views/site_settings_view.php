@@ -70,10 +70,12 @@
             </div>
 
         </div>
-        <div class="card-footer text-end">
-            <button class="btn btn-secondary fs-4" data-bs-toggle="modal"
+        <div class="card-footer text-end py-4">
+            <button class="btn btn-secondary fs-4 me-3" data-bs-toggle="modal"
                 data-bs-target="#change_site_info_modal">Change Data</button>
-            <button class="btn btn-secondary fs-4">Change Logo</button>
+            <button class="btn btn-secondary fs-4 me-3" data-bs-toggle="modal"
+                data-bs-target="#change_logo_modal">Change
+                Logo</button>
             <button class="btn btn-secondary fs-4">Change Image</button>
         </div>
     </div>
@@ -83,12 +85,11 @@
 
 
 <!-- Update Site Info Modal Starts Here -->
-
 <div class="modal fade text-capitalize" id="change_site_info_modal" data-bs-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Edit Hire Me Content</h2>
+                <h2 class="modal-title">Update Site Info</h2>
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
@@ -145,3 +146,28 @@
     </div>
 </div>
 <!-- Update Site Info Modal Ends Here -->
+
+
+<!-- Change Logo Modal -->
+<div class="modal fade" id="change_logo_modal" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Change Site Logo</h2>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="" id="change_logo_form" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <label class="label-control" for="logo_input">Choose a logo</label>
+                    <input class="form-control fs-4" name="logo_input" id="logo_input" type="file" accept="image/png"
+                        required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger fs-4" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id="change_logo" name="change_logo" class="btn btn-secondary fs-4">Change
+                        Logo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

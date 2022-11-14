@@ -3,23 +3,12 @@
         <div class="container">
             <nav class="inner_nav d-flex align-items-center justify-content-between">
                 <div class="logo">
-                    <a href="<?php base_url("") ?>"><img src="<?php base_url("assets/images/logo.png") ?>" alt="" /></a>
+                    <?php
+                    $logo = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `site_logo` FROM `site_settings` WHERE id = '1'"))['site_logo'];
+                    ?>
+                    <a href="<?php base_url("") ?>"><img src="<?php base_url("uploaded_img/" . $logo) ?>" alt="" /></a>
                 </div>
                 <div class="main_menu">
-
-                    <?php
-                    // if (isset($home_index) && $home_index == base_url("")) {
-                    //     function index()
-                    //     {
-                    //         echo "";
-                    //     };
-                    // } else {
-                    //     function index()
-                    //     {
-                    //         base_url("");
-                    //     };
-                    // }
-                    ?>
 
                     <ul>
                         <li>
