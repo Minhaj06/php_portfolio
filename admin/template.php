@@ -70,8 +70,8 @@ include_once("assets/includes/alertBox.php");
         } elseif ($view == "hire_me_update") {
 
             include_once("views/hire_me_view.php");
-        } else {
-            include_once("views/404_view.php");
+        } elseif ($view == "site_settings") {
+            include_once("views/site_settings_view.php");
         }
     }
 

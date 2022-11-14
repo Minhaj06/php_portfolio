@@ -154,7 +154,7 @@ $("#add_username").keyup(function(e) {
 
     $.ajax({
         type: "POST",
-        url: "code.php",
+        url: "code",
         data: {
             CheckAddUsername: 1,
             username: username,
@@ -184,7 +184,7 @@ $("#add_email").keyup(function(e) {
 
     $.ajax({
         type: "POST",
-        url: "code.php",
+        url: "code",
         data: {
             CheckAddEmail: 1,
             email: email,
@@ -233,7 +233,7 @@ $(document).on("submit", "#add_user_form", function(e) {
 
         if (pattern.test(email)) {
             $.ajax({
-                url: "code.php",
+                url: "code",
                 type: "POST",
                 // dataType: "json",
                 data: new FormData(this),
@@ -332,7 +332,7 @@ $(document).on("click", "span[data-role=edit]", function() {
         let username = $("#username").val();
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 checkUsername: 1,
                 username: username,
@@ -369,7 +369,7 @@ $(document).on("click", "span[data-role=edit]", function() {
         let email = $("#email").val();
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 checkEmail: 1,
                 email: email,
@@ -420,7 +420,7 @@ $(document).on("click", "span[data-role=edit]", function() {
 
             if (pattern.test(email)) {
                 $.ajax({
-                    url: "code.php",
+                    url: "code",
                     method: "POST",
                     data: {
                         fname: fname,
@@ -544,7 +544,7 @@ $(document).on("click", "span[data-role=delete]", function() {
 
     $("#confirm_ok").click(function() {
         $.ajax({
-            url: "code.php",
+            url: "code",
             type: "POST",
             data: { delete_id: id },
             success: function(response) {
@@ -604,7 +604,7 @@ $(".edit_home_btn").click(function(e) {
             let home_form = document.getElementById("update_home_form");
 
             $.ajax({
-                url: "code.php",
+                url: "code",
                 type: "POST",
                 // dataType: "json",
                 data: new FormData(home_form),
@@ -656,7 +656,7 @@ $(".edit_about_btn").click(function(e) {
             let about_form = document.getElementById("update_about_form");
 
             $.ajax({
-                url: "code.php",
+                url: "code",
                 type: "POST",
                 data: new FormData(about_form),
                 processData: false,
@@ -701,7 +701,7 @@ $("#add_skill_btn").click(function(e) {
         let add_skill_form = document.getElementById("add_skill_form");
 
         $.ajax({
-            url: "code.php",
+            url: "code",
             type: "POST",
             data: {
                 add_skill: 1,
@@ -777,7 +777,7 @@ $(document).on("click", ".edit_skill_btn", function(e) {
 
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 update_skill: 1,
                 skill_id: skill_id,
@@ -809,7 +809,7 @@ $(document).on("click", ".delete_skill_btn", function(e) {
 
     $("#confirm_ok").click(function() {
         $.ajax({
-            url: "code.php",
+            url: "code",
             type: "POST",
             data: {
                 delete_skill: 1,
@@ -846,7 +846,7 @@ $("#update_service_content_btn").click(function(e) {
     } else {
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 update_service_content: 1,
                 service_title: service_title,
@@ -879,7 +879,7 @@ $("#add_service").click(function(e) {
 
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 checkAddServiceName: 1,
                 add_service_name: service_name,
@@ -933,7 +933,7 @@ $("#add_service").click(function(e) {
         } else {
             $.ajax({
                 type: "POST",
-                url: "code.php",
+                url: "code",
                 data: {
                     add_service: 1,
                     service_name: service_name,
@@ -997,7 +997,7 @@ $(document).on("click", "#edit_service_btn", function(e) {
 
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 checkEditServiceName: 1,
                 edit_service_name: service_name,
@@ -1065,7 +1065,7 @@ $(document).on("click", "#edit_service_btn", function(e) {
 
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 update_service: 1,
                 service_id: service_id,
@@ -1099,7 +1099,7 @@ $(document).on("click", "#delete_service_btn", function(e) {
 
     $("#confirm_ok").click(function() {
         $.ajax({
-            url: "code.php",
+            url: "code",
             type: "POST",
             data: {
                 delete_service: 1,
@@ -1162,7 +1162,7 @@ $(document).on("click", "#update_achivements", function(e) {
 
     $.ajax({
         type: "POST",
-        url: "code.php",
+        url: "code",
         data: {
             update_achievements: 1,
             clients_all: clients_all,
@@ -1197,7 +1197,7 @@ $(document).on("click", "#update_clients", function(e) {
 
     $.ajax({
         type: "POST",
-        url: "code.php",
+        url: "code",
         data: {
             update_clients: 1,
             clients_total: clients_total,
@@ -1229,7 +1229,7 @@ $(document).on("click", "#update_projects", function(e) {
 
     $.ajax({
         type: "POST",
-        url: "code.php",
+        url: "code",
         data: {
             update_projects: 1,
             projects_total: projects_total,
@@ -1261,7 +1261,7 @@ $(document).on("click", "#update_awards", function(e) {
 
     $.ajax({
         type: "POST",
-        url: "code.php",
+        url: "code",
         data: {
             update_awards: 1,
             awards_total: awards_total,
@@ -1293,7 +1293,7 @@ $(document).on("click", "#update_experience", function(e) {
 
     $.ajax({
         type: "POST",
-        url: "code.php",
+        url: "code",
         data: {
             update_experience: 1,
             experience_total: experience_total,
@@ -1332,7 +1332,7 @@ $("#update_portfolio_content_btn").click(function(e) {
     } else {
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 update_portfolio_content: 1,
                 portfolio_title: portfolio_title,
@@ -1363,7 +1363,7 @@ $("#port_cat_name").keyup(function(e) {
 
     $.ajax({
         type: "POST",
-        url: "code.php",
+        url: "code",
         data: {
             checkPortCat: 1,
             port_cat_name: port_cat_name,
@@ -1397,7 +1397,7 @@ $("#add_portfolio_category_btn").click(function(e) {
     } else {
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 addPortfolioCategory: 1,
                 port_cat_name: port_cat_name,
@@ -1460,7 +1460,7 @@ $(document).on("click", "#edit_port_cat_btn", function(e) {
 
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 checkEditPortCat: 1,
                 port_cat_name: port_cat_name,
@@ -1498,7 +1498,7 @@ $(document).on("click", "#edit_port_cat_btn", function(e) {
 
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 update_portfolio_category: 1,
                 port_cat_id: port_cat_id,
@@ -1533,7 +1533,7 @@ $(document).on("click", "#delete_port_cat_btn", function(e) {
 
     $("#confirm_ok").click(function() {
         $.ajax({
-            url: "code.php",
+            url: "code",
             type: "POST",
             data: {
                 delete_port_cat: 1,
@@ -1579,7 +1579,7 @@ $(document).on("submit", "#add_portfolio_form", function(e) {
         emptyAlert();
     } else {
         $.ajax({
-            url: "code.php",
+            url: "code",
             type: "POST",
             data: new FormData(this),
             processData: false,
@@ -1706,7 +1706,7 @@ $(document).on("click", "#edit_portfolio_btn", function(e) {
         e.preventDefault();
 
         $.ajax({
-            url: "code.php",
+            url: "code",
             type: "POST",
             data: new FormData(this),
             processData: false,
@@ -1749,7 +1749,7 @@ $(document).on("click", "#delete_portfolio_btn", function(e) {
 
     $("#confirm_ok").click(function() {
         $.ajax({
-            url: "code.php",
+            url: "code",
             type: "POST",
             data: {
                 delete_portfolio: 1,
@@ -1790,7 +1790,7 @@ $("#update_project_content_btn").click(function(e) {
     } else {
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 update_project_content: 1,
                 project_title: project_title,
@@ -1819,7 +1819,7 @@ $(document).on("click", "#add_project_category", function(e) {
 
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 checkProjectCat: 1,
                 project_cat_name: project_cat_name,
@@ -1846,7 +1846,7 @@ $(document).on("click", "#add_project_category", function(e) {
 
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 checkProjectCatSlug: 1,
                 project_cat_slug: project_cat_slug,
@@ -1892,7 +1892,7 @@ $(document).on("click", "#add_project_category", function(e) {
         } else {
             $.ajax({
                 type: "POST",
-                url: "code.php",
+                url: "code",
                 data: {
                     addProjectCategory: 1,
                     project_cat_name: project_cat_name,
@@ -1938,7 +1938,7 @@ $(document).on("click", "#edit_project_cat_btn", function(e) {
 
     $.ajax({
         type: "POST",
-        url: "code.php",
+        url: "code",
         dataType: "json",
         data: {
             getProjectCatData: 1,
@@ -1962,7 +1962,7 @@ $(document).on("click", "#edit_project_cat_btn", function(e) {
 
                 $.ajax({
                     type: "POST",
-                    url: "code.php",
+                    url: "code",
                     data: {
                         checkEditProjectCat: 1,
                         edit_project_cat_name: edit_project_cat_name,
@@ -1994,7 +1994,7 @@ $(document).on("click", "#edit_project_cat_btn", function(e) {
 
                 $.ajax({
                     type: "POST",
-                    url: "code.php",
+                    url: "code",
                     data: {
                         checkEditProjectCatSlug: 1,
                         edit_project_cat_slug: edit_project_cat_slug,
@@ -2049,7 +2049,7 @@ $(document).on("click", "#edit_project_cat_btn", function(e) {
         } else {
             $.ajax({
                 type: "POST",
-                url: "code.php",
+                url: "code",
                 data: {
                     updateProjectCategory: 1,
                     edit_project_cat_id: project_cat_id,
@@ -2091,7 +2091,7 @@ $(document).on("click", "#delete_project_cat_btn", function(e) {
 
     $("#confirm_ok").click(function() {
         $.ajax({
-            url: "code.php",
+            url: "code",
             type: "POST",
             data: {
                 delete_project_cat: 1,
@@ -2124,7 +2124,7 @@ $(document).on("click", "#add_project_post", function(e) {
 
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 checkAddProjectPostSlug: 1,
                 add_project_post_slug: add_project_post_slug,
@@ -2174,7 +2174,7 @@ $(document).on("click", "#add_project_post", function(e) {
             emptyAlert();
         } else {
             $.ajax({
-                url: "code.php",
+                url: "code",
                 type: "POST",
                 data: new FormData(this),
                 processData: false,
@@ -2209,7 +2209,7 @@ $(document).on("click", "#view_project_post_btn", function(e) {
 
     $.ajax({
         type: "POST",
-        url: "code.php",
+        url: "code",
         dataType: "json",
         data: {
             getProjectPostView: 1,
@@ -2249,7 +2249,7 @@ $(document).on("click", "#edit_project_post_btn", function(e) {
 
     $.ajax({
         type: "POST",
-        url: "code.php",
+        url: "code",
         dataType: "json",
         data: {
             getProjectPostData: 1,
@@ -2295,7 +2295,7 @@ $(document).on("click", "#edit_project_post_btn", function(e) {
 
                 $.ajax({
                     type: "POST",
-                    url: "code.php",
+                    url: "code",
                     data: {
                         checkEditProjectPostSlug: 1,
                         edit_project_post_slug: edit_project_post_slug,
@@ -2347,7 +2347,7 @@ $(document).on("click", "#edit_project_post_btn", function(e) {
             emptyAlert();
         } else {
             $.ajax({
-                url: "code.php",
+                url: "code",
                 type: "POST",
                 data: new FormData(this),
                 processData: false,
@@ -2386,7 +2386,7 @@ $(document).on("click", "#delete_project_post_btn", function(e) {
 
     $("#confirm_ok").click(function() {
         $.ajax({
-            url: "code.php",
+            url: "code",
             type: "POST",
             data: {
                 delete_project_post: 1,
@@ -2424,7 +2424,7 @@ $("#update_testimonial_content_btn").click(function(e) {
     } else {
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 update_testimonial_content: 1,
                 testimonial_title: testimonial_title,
@@ -2467,7 +2467,7 @@ $(document).on("submit", "#add_testimonial_form", function(e) {
         emptyAlert();
     } else {
         $.ajax({
-            url: "code.php",
+            url: "code",
             type: "POST",
             data: new FormData(this),
             processData: false,
@@ -2564,7 +2564,7 @@ $(document).on("click", "#edit_testimonial_btn", function(e) {
             emptyAlert();
         } else {
             $.ajax({
-                url: "code.php",
+                url: "code",
                 type: "POST",
                 data: new FormData(this),
                 processData: false,
@@ -2600,7 +2600,7 @@ $(document).on("click", "#delete_testiomonial_btn", function(e) {
 
     $("#confirm_ok").click(function() {
         $.ajax({
-            url: "code.php",
+            url: "code",
             type: "POST",
             data: {
                 delete_testiomonial: 1,
@@ -2637,7 +2637,7 @@ $(document).on("submit", "#update_hire_me_form", function(e) {
         emptyAlert();
     } else {
         $.ajax({
-            url: "code.php",
+            url: "code",
             type: "POST",
             data: new FormData(this),
             processData: false,
@@ -2677,7 +2677,7 @@ $("#update_blog_content_btn").click(function(e) {
     } else {
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 update_blog_content: 1,
                 blog_title: blog_title,
@@ -2706,7 +2706,7 @@ $(document).on("click", "#add_blog_category", function(e) {
 
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 checkBlogCat: 1,
                 blog_cat_name: blog_cat_name,
@@ -2733,7 +2733,7 @@ $(document).on("click", "#add_blog_category", function(e) {
 
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 checkBlogCatSlug: 1,
                 blog_cat_slug: blog_cat_slug,
@@ -2779,7 +2779,7 @@ $(document).on("click", "#add_blog_category", function(e) {
         } else {
             $.ajax({
                 type: "POST",
-                url: "code.php",
+                url: "code",
                 data: {
                     addblogCategory: 1,
                     blog_cat_name: blog_cat_name,
@@ -2822,7 +2822,7 @@ $(document).on("click", "#edit_blog_cat_btn", function(e) {
 
     $.ajax({
         type: "POST",
-        url: "code.php",
+        url: "code",
         dataType: "json",
         data: {
             getBlogCatData: 1,
@@ -2846,7 +2846,7 @@ $(document).on("click", "#edit_blog_cat_btn", function(e) {
 
                 $.ajax({
                     type: "POST",
-                    url: "code.php",
+                    url: "code",
                     data: {
                         checkEditBlogCat: 1,
                         edit_blog_cat_name: edit_blog_cat_name,
@@ -2878,7 +2878,7 @@ $(document).on("click", "#edit_blog_cat_btn", function(e) {
 
                 $.ajax({
                     type: "POST",
-                    url: "code.php",
+                    url: "code",
                     data: {
                         checkEditBlogCatSlug: 1,
                         edit_blog_cat_slug: edit_blog_cat_slug,
@@ -2932,7 +2932,7 @@ $(document).on("click", "#edit_blog_cat_btn", function(e) {
         } else {
             $.ajax({
                 type: "POST",
-                url: "code.php",
+                url: "code",
                 data: {
                     updateBlogCategory: 1,
                     edit_blog_cat_id: blog_cat_id,
@@ -2971,7 +2971,7 @@ $(document).on("click", "#delete_blog_cat_btn", function(e) {
 
     $("#confirm_ok").click(function() {
         $.ajax({
-            url: "code.php",
+            url: "code",
             type: "POST",
             data: {
                 delete_blog_cat: 1,
@@ -3003,7 +3003,7 @@ $(document).on("click", "#add_blog_post", function(e) {
 
         $.ajax({
             type: "POST",
-            url: "code.php",
+            url: "code",
             data: {
                 checkAddBlogPostSlug: 1,
                 add_blog_post_slug: add_blog_post_slug,
@@ -3048,7 +3048,7 @@ $(document).on("click", "#add_blog_post", function(e) {
             emptyAlert();
         } else {
             $.ajax({
-                url: "code.php",
+                url: "code",
                 type: "POST",
                 data: new FormData(this),
                 processData: false,
@@ -3082,7 +3082,7 @@ $(document).on("click", "#view_blog_post_btn", function(e) {
 
     $.ajax({
         type: "POST",
-        url: "code.php",
+        url: "code",
         dataType: "json",
         data: {
             getBlogPostView: 1,
@@ -3120,7 +3120,7 @@ $(document).on("click", "#edit_blog_post_btn", function(e) {
 
     $.ajax({
         type: "POST",
-        url: "code.php",
+        url: "code",
         dataType: "json",
         data: {
             getBlogPostData: 1,
@@ -3155,7 +3155,7 @@ $(document).on("click", "#edit_blog_post_btn", function(e) {
 
                 $.ajax({
                     type: "POST",
-                    url: "code.php",
+                    url: "code",
                     data: {
                         checkEditBlogPostSlug: 1,
                         edit_blog_post_slug: edit_blog_post_slug,
@@ -3207,7 +3207,7 @@ $(document).on("click", "#edit_blog_post_btn", function(e) {
             emptyAlert();
         } else {
             $.ajax({
-                url: "code.php",
+                url: "code",
                 type: "POST",
                 data: new FormData(this),
                 processData: false,
@@ -3244,7 +3244,7 @@ $(document).on("click", "#delete_blog_post_btn", function(e) {
 
     $("#confirm_ok").click(function() {
         $.ajax({
-            url: "code.php",
+            url: "code",
             type: "POST",
             data: {
                 delete_blog_post: 1,
@@ -3267,3 +3267,67 @@ $(document).on("click", "#delete_blog_post_btn", function(e) {
 });
 
 // Blog Section Ends Here
+
+
+
+// Update Site Info
+$(document).on("click", "#update_site_info", function(e) {
+    e.preventDefault();
+    let site_title = $.trim($("#site_title").val());
+    let site_title2 = $.trim($("#site_title2").val());
+    let site_description = $.trim($("#site_description").val());
+    let site_keywords = $.trim($("#site_keywords").val());
+    let og_title = $.trim($("#og_title").val());
+    let og_url = $.trim($("#og_url").val());
+    let og_description = $.trim($("#og_description").val());
+
+    $.ajax({
+        type: "POST",
+        url: "code",
+        data: {
+            update_site_info: 1,
+            site_title: site_title,
+            site_title2: site_title2,
+            site_description: site_description,
+            site_keywords: site_keywords,
+            og_title: og_title,
+            og_url: og_url,
+            og_description: og_description
+        },
+        beforeSend: function() {
+            btnLoading("#update_site_info");
+        },
+        success: function(response) {
+            removeBtnLoading("#update_site_info", "Update Info")
+
+            // hide modal
+            $("#change_site_info_modal").modal("toggle");
+
+            // Messsage Show
+            showMessage();
+            $(".message_show .ation_message").html(response);
+
+            // Refresh Content
+            $("#site_info").load(location.href + " #site_info>*", "");
+        }
+    });
+});
+
+
+
+
+
+// ===========================================
+// Add button loading
+function btnLoading(btnSelector) {
+    $(btnSelector).prepend('<div style="margin-bottom: -4px" class="fs-4 me-2 spinner-border spinner-border" disabled role="status"></div>');
+    $(btnSelector).addClass("btnLoading");
+    $(btnSelector).attr("disabled", true);
+}
+
+// Remove button loading
+function removeBtnLoading(btnSelector, btnText) {
+    $(btnSelector).text(btnText);
+    $(btnSelector).removeClass("btnLoading");
+    $(btnSelector).removeAttr("disabled");
+}

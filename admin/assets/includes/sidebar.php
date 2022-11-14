@@ -1,5 +1,6 @@
 <!-- sidebar starts here -->
 <div class="sidebar hide">
+
     <div class="img_text position-relative d-flex align-items-start">
         <span class="image d-flex align-items-center me-3">
             <img src="assets/images/admin.png" alt="admin_img" />
@@ -9,12 +10,8 @@
                 class="name"><?= $_SESSION['auth_user']['user_fname'] . " " . $_SESSION['auth_user']['user_lname'] ?></span>
             <span class="profession">Web Developer</span>
         </div>
-        <!-- <i class="fa-solid fa-chevron-right toggle"></i> -->
     </div>
 
-    <!-- <div class="side_logo">
-        <a href=""><img src="assets/images/logo.png" alt=""></a>
-    </div> -->
 
     <div class="menu_bar">
         <div class="menu">
@@ -24,69 +21,74 @@
             </li>
             <ul class="menu_links p-0">
                 <li class="nav_link">
-                    <a class="active" href="index.php">
-                        <i class='fa-solid fa-gauge icon'></i>
-                        <span class="text nav_text">Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav_link">
-                    <a href="../index.php">
+                    <a href="<?php base_url("") ?>">
                         <i class='fa-solid fa-home icon'></i>
                         <span class="text nav_text">Home</span>
                     </a>
                 </li>
                 <li class="nav_link">
-                    <a href="view_register.php">
-                        <i class='fa-solid fa-users icon'></i>
-                        <span class="text nav_text">Registerd users</span>
+                    <a class="active" href="./">
+                        <i class='fa-solid fa-gauge icon'></i>
+                        <span class="text nav_text">Dashboard</span>
                     </a>
                 </li>
 
-                <li class="nav_link dropdown1">
-                    <a href="javascript: void(0)">
+                <li class="nav_link dropdown11">
+                    <a href="posts">
                         <i class="fa-solid fa-newspaper icon"></i>
-                        <span class="text nav_text">Manage blogs</span>
-                        <i class='fa-solid fa-chevron-down toggle_icon drop_icon1'></i>
+                        <span class="text nav_text">Manage Posts</span>
                     </a>
-                    <ul class="sub_menu sub_menu1">
-                        <li><a href="">add post</a></li>
-                        <li><a href="">manage posts</a></li>
-                        <li><a href="">add category</a></li>
-                        <li><a href="">mange category</a></li>
-                    </ul>
                 </li>
 
-                <li class="nav_link dropdown2">
-                    <a href="javascript: void(0)">
-                        <i class="fa-solid fa-newspaper icon"></i>
-                        <span class="text nav_text">Manage Q&A</span>
-                        <i class='fa-solid fa-chevron-down toggle_icon drop_icon2'></i>
+                <li class="nav_link dropdown22">
+                    <a href="projects">
+                        <i class="fa-solid fa-code icon"></i>
+                        <span class="text nav_text">Manage Projects</span>
                     </a>
-                    <ul class="sub_menu sub_menu2">
-                        <li><a href="">Hi</a></li>
-                        <li><a href="">manage posts</a></li>
-                        <li><a href="">add category</a></li>
-                        <li><a href="">mange category</a></li>
-                    </ul>
                 </li>
+
+                <li class="nav_link">
+                    <a href="portfolio">
+                        <i class="fa-solid fa-list-check icon"></i>
+                        <span class="text nav_text">Manage Portfolio</span>
+                    </a>
+                </li>
+
+                <li class="nav_link">
+                    <a href="testimonials">
+                        <i class="fa-regular fa-star-half-stroke icon"></i>
+                        <span class="text nav_text">Testimonials</span>
+                    </a>
+                </li>
+
 
                 <li class="nav_link dropdown3">
                     <a href="javascript: void(0)">
-                        <i class="fa-solid fa-gear icon"></i>
+                        <i class="fa-solid fa-gears icon"></i>
                         <span class="text nav_text">section control</span>
                         <i class='fa-solid fa-chevron-down toggle_icon drop_icon3'></i>
                     </a>
                     <ul class="sub_menu sub_menu3">
-                        <li><a href="home_update.php">Home</a></li>
-                        <li><a href="about_update.php">About</a></li>
-                        <li><a href="services_update.php">Services</a></li>
-                        <li><a href="achievements_update.php">Achievements</a></li>
-                        <li><a href="portfolio_update.php">Portfolio</a></li>
-                        <li><a href="project_update.php">Project</a></li>
-                        <li><a href="testimonials_update.php">Testimonials</a></li>
-                        <li><a href="hire_me_update.php">hire me</a></li>
-                        <li><a href="blog_update.php">Blog</a></li>
+                        <li><a href="home">Home</a></li>
+                        <li><a href="about">About</a></li>
+                        <li><a href="services">Services</a></li>
+                        <li><a href="achievements">Achievements</a></li>
+                        <li><a href="hire-me">hire me</a></li>
                     </ul>
+                </li>
+
+                <li class="nav_link">
+                    <a href="site-settings">
+                        <i class="fa-solid fa-gear icon"></i>
+                        <span class="text nav_text">Site Settings</span>
+                    </a>
+                </li>
+
+                <li class="nav_link">
+                    <a href="users">
+                        <i class='fa-solid fa-users icon'></i>
+                        <span class="text nav_text">Users</span>
+                    </a>
                 </li>
 
                 <li class="nav_link">

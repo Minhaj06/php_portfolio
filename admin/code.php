@@ -227,19 +227,19 @@ if (isset($_POST['home_fname'])) {
 
         homeImg();
         homeCV();
-        echo "Home content update successfylly";
+        echo "Home content updated successfully";
     } elseif (!empty($home_img)) {
 
         homeImg();
-        echo "Home content update successfylly";
+        echo "Home content updated successfully";
     } elseif (!empty($home_cv)) {
 
         homeCV();
-        echo "Home content update successfylly";
+        echo "Home content updated successfully";
     } else {
 
         mysqli_query($conn, "UPDATE home SET fname='$home_fname', lname='$home_lname',occupation='$home_occu', subtitle='$home_desc' WHERE id = 1");
-        echo "Home content update successfylly";
+        echo "Home content updated successfully";
     }
 }
 // Update home section content ends
@@ -1854,3 +1854,23 @@ if (isset($_POST['delete_blog_post'])) {
 }
 
 // Blog Section Ends Here
+
+
+// Update Site Info
+if (isset($_POST['update_site_info'])) {
+    $site_title = mysqli_real_escape_string($conn, $_POST['site_title']);
+    $site_title2 = mysqli_real_escape_string($conn, $_POST['site_title2']);
+    $site_description = mysqli_real_escape_string($conn, $_POST['site_description']);
+    $site_keywords = mysqli_real_escape_string($conn, $_POST['site_keywords']);
+    $og_title = mysqli_real_escape_string($conn, $_POST['og_title']);
+    $og_url = mysqli_real_escape_string($conn, $_POST['og_url']);
+    $og_description = mysqli_real_escape_string($conn, $_POST['og_description']);
+
+    $query = mysqli_query($conn, "UPDATE `site_settings` SET `site_title`='$site_title',`site_title2`='$site_title2',`site_description`='$site_description',`site_keywords`='$site_keywords',`og_title`='$og_title',`og_description`='$og_description',`og_url`='$og_url' WHERE id='1'");
+
+    if ($query) {
+        echo "Site Info Updated Successfully";
+    } else {
+        echo "Site Info Not Updated";
+    }
+}

@@ -18,13 +18,7 @@ RewriteRule ^projects/post/([a-zA-Z0-9-]+) projects/post.php?slug=$1
 RewriteRule ^projects/search/([a-zA-Z0-9-]+) projects/search.php?keywords=$1
 
 RewriteRule ^user-profile/([a-zA-Z0-9-]+) user-profile.php?action=$1
-
-#http://localhost/coder/login?action=user-registration
-
 RewriteRule ^user/([a-zA-Z0-9-]+) login.php?action=$1
-
-
-
 
 
 #Removing index.php

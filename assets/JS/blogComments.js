@@ -359,7 +359,7 @@ $(document).on("click", ".delete_reply_btn", function() {
 // *******************************************
 // Add button loading
 function btnLoading(btnSelector) {
-    $(btnSelector).prepend('<div class="spinner-border spinner-border" disabled role="status"></div>');
+    $(btnSelector).prepend('<div style="margin-bottom: -4px" class="fs-4 me-2 spinner-border spinner-border" disabled role="status"></div>');
     $(btnSelector).addClass("btnLoading");
     $(btnSelector).attr("disabled", true);
 }

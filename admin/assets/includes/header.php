@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <nav class="top_nav d-md-flex align-items-center justify-content-between">
             <div class="top_nav_left d-flex align-items-center justify-content-between">
-                <a href="index.php"><img class="logo" src="assets/images/logo.png" alt="logo" /></a>
+                <a href="./"><img class="logo" src="assets/images/logo.png" alt="logo" /></a>
 
                 <i class="fas fa-bars toggle ms-5"></i>
             </div>
