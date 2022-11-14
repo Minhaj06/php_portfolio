@@ -1,4 +1,5 @@
     <?php
+    $title = "404 || Not Found";
     include_once("admin/config/dbConnect.php");
     include_once("assets/includes/head.php");
     ?>

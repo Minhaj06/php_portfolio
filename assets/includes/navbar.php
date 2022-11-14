@@ -51,7 +51,7 @@
                             </a>
                             <ul class="dropdown_menu flex-column">
                                 <li>
-                                    <a class="dropdown_item" href="<?php base_url("user_profile.php") ?>">my profile</a>
+                                    <a class="dropdown_item" href="<?php base_url("user-profile") ?>">my profile</a>
                                 </li>
                                 <li>
                                     <a class="dropdown_item" href="<?php base_url("admin/index.php") ?>"
@@ -71,7 +71,7 @@
                             </a>
                             <ul class="dropdown_menu flex-column">
                                 <li>
-                                    <a class="dropdown_item" href="<?php base_url("user_profile.php") ?>">my profile</a>
+                                    <a class="dropdown_item" href="<?php base_url("user-profile") ?>">my profile</a>
                                 </li>
                                 <li>
                                     <a class="dropdown_item" href="<?php base_url("logout.php") ?>">logout</a>
@@ -80,13 +80,8 @@
                         </li>
 
                         <?php } else { ?>
-
                         <li>
-                            <a class="menu_link" href="<?php base_url("login.php") ?>">login</a>
-                        </li>
-                        <li>
-                            <a class=" menu_link"
-                                href="<?php base_url("login.php?action=user-registration") ?>">Register</a>
+                            <a class=" menu_link" href="<?php base_url("user/login") ?>">login</a>
                         </li>
 
                         <?php } ?>

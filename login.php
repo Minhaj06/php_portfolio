@@ -114,12 +114,12 @@ if (isset($_POST['login_btn'])) {
         if ($_SESSION['auth_role'] == 1) // 1=admin
         {
             $_SESSION['message'] = "Welcome to dashboard";
-            header("Location: admin/index.php");
+            header("Location: admin/");
             exit(0);
         } elseif ($_SESSION['auth_role'] == 0) // 0=user
         {
             $_SESSION['message'] = "Logged in successfully";
-            header("Location: index.php");
+            header("Location: ../");
             exit(0);
         } else {
             $_SESSION['message'] = "Invalid Email or Password";
@@ -141,16 +141,16 @@ if (isset($_POST['login_btn'])) {
 if (isset($_SESSION['auth'])) {
     if ($_SESSION['auth_role'] != "1") {
         $_SESSION['message'] = "You are already Logged IN";
-        header("Location: index.php");
+        header("Location: ../");
         exit(0);
     } else {
         $_SESSION['message'] = "You are already Logged IN";
-        header("Location: admin/index.php");
+        header("Location: ../admin/");
         exit(0);
     }
 }
 
-if (isset($_GET["action"]) == "user-registration") {
+if (isset($_GET["action"]) == "registration") {
     $title = "Registration || Coder";
     $og_url = "login.php?action=user-registration";
 } else {
@@ -279,7 +279,7 @@ p {
                         <div class="card-body p-5 fs-4 text-capitalize">
 
                             <?php
-                            if (isset($_GET["action"]) == "user-registration") {
+                            if (isset($_GET['action']) && $_GET["action"] == "registration") {
                             ?>
 
                             <h1 class="text-center mb-4">User Registration</h1>
@@ -380,12 +380,12 @@ p {
                                 <button class="submit_btn btn mt-4 mb-5 fs-3 px-5 w-100" type="submit"
                                     name="register_btn">Register Now</button>
                                 <p class="no_account text-center pt-4">Have an account? <a class="text-success"
-                                        href="login.php">Login Now</a>
+                                        href="login">Login Now</a>
                                 </p>
                             </form>
 
                             <?php
-                            } else {
+                            } elseif (isset($_GET['action']) && $_GET['action'] == 'login') {
                             ?>
 
                             <h1 class="text-center mb-4">User Login</h1>
@@ -447,11 +447,13 @@ p {
                                     </div>
                                 </div>
                                 <p class="no_account text-center pt-4">Don't have an account? <a class="text-success"
-                                        href="login.php?action=user-registration">Register Now</a>
+                                        href="registration">Register Now</a>
                                 </p>
                             </form>
 
                             <?php
+                            } else {
+                                echo "<script>window.location.href = '../404.php'</script>";
                             }
                             ?>
 

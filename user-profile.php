@@ -34,7 +34,7 @@ if (isset($_POST['update_btn'])) {
 
     if (($fetch_data['first_name'] == $fname && $fetch_data['last_name'] == $lname && $fetch_data['username'] == $username && $fetch_data['email'] == $email && $fetch_data['contact_no'] == $contact_no && empty($image))) {
         $_SESSION['message'] = '<span class="text-danger">Edit value to update data...</span>';
-        header("Location: user_profile.php?action=update_profile");
+        header("Location: user-profile/update-profile");
         exit(0);
     } else {
         // check username & email
@@ -45,29 +45,29 @@ if (isset($_POST['update_btn'])) {
         if (($fetch_data['username'] != $username && mysqli_num_rows($check_username) > 0) && ($fetch_data['email'] != $email && mysqli_num_rows($check_email) > 0)) {
 
             $_SESSION['message'] = '<span class="text-danger">username and email already exits!</span>';
-            header("Location: user_profile.php?action=update_profile");
+            header("Location: user-profile/update-profile");
             exit(0);
         } elseif ($fetch_data['username'] != $username && mysqli_num_rows($check_username) > 0) {
 
             $_SESSION['message'] = '<span class="text-danger">Username already exits!</span>';
-            header("Location: user_profile.php?action=update_profile");
+            header("Location: user-profile/update-profile");
             exit(0);
         } elseif ($fetch_data['email'] != $email && mysqli_num_rows($check_email) > 0) {
 
             $_SESSION['message'] = '<span class="text-danger">Email already exits!</span>';
-            header("Location: user_profile.php?action=update_profile");
+            header("Location: user-profile/update-profile");
             exit(0);
         } else {
             if ($fetch_data['password'] != $password) {
                 $_SESSION['message'] = '<span class="text-danger">Password does not match!</span>';
-                header("Location: user_profile.php?action=update_profile");
+                header("Location: user-profile/update-profile");
                 exit(0);
             } else {
 
                 if ($image || empty($image)) {
                     if ($image_size > 2000000) {
                         $_SESSION['message'] = '<span class="text-danger">Image is too large!</span>';
-                        header("Location: user_profile.php?action=update_profile");
+                        header("Location: user-profile/update-profile");
                         exit(0);
                     } else {
 
@@ -79,12 +79,12 @@ if (isset($_POST['update_btn'])) {
                                 $delete_prev_img = $image_path;
                                 if (!unlink($delete_prev_img)) {
                                     $_SESSION['message'] = '<span class="text-danger">Previous image could not be deleted!</span>';
-                                    header("Location: user_profile.php?action=update_profile");
+                                    header("Location: user-profile/update-profile");
                                     exit(0);
                                 } else {
                                     move_uploaded_file($image_tmp_name, $image_folder);
                                     $_SESSION['message'] = "Profile and Image updated successfully...";
-                                    header("Location: user_profile.php?action=update_profile");
+                                    header("Location: user-profile/update-profile");
                                     exit(0);
                                 }
                             }
@@ -97,24 +97,24 @@ if (isset($_POST['update_btn'])) {
                                 rename($from, $to);
 
                                 $_SESSION['message'] = "Profile updated successfully...";
-                                header("Location: user_profile.php?action=update_profile");
+                                header("Location: user-profile/update-profile");
                                 exit(0);
 
                                 if ($update_query) {
                                     $_SESSION['message'] = "Profile and Image updated successfully...";
-                                    header("Location: user_profile.php?action=update_profile");
+                                    header("Location: user-profile/update-profile");
                                     exit(0);
                                 }
                             } elseif ($update_query) {
                                 $_SESSION['message'] = "Profile updated successfully...";
-                                header("Location: user_profile.php?action=update_profile");
+                                header("Location: user-profile/update-profile");
                                 exit(0);
                             }
                         }
                     }
                 } else {
                     $_SESSION['message'] = '<span class="text-danger">Something went worong! Try again...</span>';
-                    header("Location: user_profile.php?action=update_profile");
+                    header("Location: user-profile/update-profile");
                     exit(0);
                 }
             }
@@ -132,32 +132,34 @@ if (isset($_POST['change_pass'])) {
 
         if (!($fetch_data['password'] == $old_pass)) {
             $_SESSION['message'] = '<span class="text-danger">Old password not matched!</span>';
-            header("Location: user_profile.php?action=change_password");
+            header("Location: user-profile/change-password");
             exit(0);
         } elseif ($new_pass != $confirm_new_pass) {
             $_SESSION['message'] = '<span class="text-danger">Confirm password not matched!</span>';
-            header("Location: user_profile.php?action=change_password");
+            header("Location: user-profile/change-password");
             exit(0);
         } else {
             mysqli_query($conn, "UPDATE users_info SET password='$confirm_new_pass' WHERE id = '$user_id'") or die('query failed');
             $_SESSION['message'] = "Password changed successfully";
-            header("Location: user_profile.php?action=change_password");
+            header("Location: user-profile/change-password");
             exit(0);
         }
     }
 }
 
-if (isset($_GET["action"]) && $_GET["action"] == "update_profile") {
+if (isset($_GET["action"]) && $_GET["action"] == "update-profile") {
     $title = "Profile Update || Coder";
-} elseif (isset($_GET["action"]) && $_GET["action"] == "change_password") {
+} elseif (isset($_GET["action"]) && $_GET["action"] == "change-password") {
     $title = "Change Password || Coder";
-} elseif (isset($_GET["action"]) && $_GET["action"] == "show_details") {
+} elseif (isset($_GET["action"]) && $_GET["action"] == "show-details") {
     $title = "User Details || Coder";
 } else {
     $title = "User Profile || Coder";
 }
 ?>
+
 <?php include_once("assets/includes/head.php"); ?>
+
 <style>
 body {
     background: #01202c;
@@ -251,7 +253,7 @@ body {
         <div class="container">
             <div class="row d-flex justify-content-center">
 
-                <?php if (isset($_GET["action"]) && $_GET["action"] == "update_profile") { ?>
+                <?php if (isset($_GET["action"]) && $_GET["action"] == "update-profile") { ?>
                 <div class="col-12 col-lg-8 col-xl-7 col-xxl-6">
                     <h1 class="profile_heading">update profile</h1>
                     <div class="card my-5 rounded-3">
@@ -335,7 +337,7 @@ body {
                                     </div>
                                     <div class="col-6">
                                         <a class="back_btn btn w-100 text-capitalize fs-3 mt-3 py-2"
-                                            href="user_profile.php">go
+                                            href="../user-profile">go
                                             back</a>
                                     </div>
                                 </div>
@@ -344,7 +346,7 @@ body {
                     </div>
                 </div>
 
-                <?php } elseif (isset($_GET["action"]) && $_GET["action"] == "change_password") { ?>
+                <?php } elseif (isset($_GET["action"]) && $_GET["action"] == "change-password") { ?>
 
 
                 <div class="col-12 col-md-8 col-lg-6 col-xl-4">
@@ -397,7 +399,7 @@ body {
                                         </div>
                                         <div class="col-6">
                                             <a class="back_btn btn w-100 text-capitalize fs-3 mt-3 py-2"
-                                                href="user_profile.php">go
+                                                href="../user-profile">go
                                                 back</a>
                                         </div>
                                     </div>
@@ -405,7 +407,7 @@ body {
                         </div>
                     </div>
 
-                    <?php } elseif (isset($_GET["action"]) && $_GET["action"] == "show_details") { ?>
+                    <?php } elseif (isset($_GET["action"]) && $_GET["action"] == "show-details") { ?>
 
                     <div class="col-md-12 col-xl-10">
                         <h1 class="profile_heading">About Yourself</h1>
@@ -421,18 +423,19 @@ body {
                                             <h3><?= $_SESSION['auth_user']['username'] ?></h3>
                                             <h4><?= $_SESSION['auth_user']['email'] ?></h4>
                                             <a class="btn btn-primary w-100 mt-4 text-capitalize fs-4"
-                                                href="user_profile.php?action=update_profile">update
+                                                href="user-profile/update-profile">update
                                                 profile</a>
                                             <a class="logout_btn btn btn-danger w-100 mt-3 text-capitalize fs-4"
-                                                href="logout.php">logout</a>
+                                                href="logout">logout</a>
                                             <div class="row gx-3 mt-3">
                                                 <div class="col-6">
                                                     <a class="option_btn btn w-100 text-capitalize fs-4"
-                                                        href="user_profile.php">go back</a>
+                                                        href="../user-profile">go
+                                                        back</a>
                                                 </div>
                                                 <div class="col-6">
                                                     <a class="option_btn btn w-100 text-capitalize fs-4"
-                                                        href="<?php base_url("blogs.php") ?>">read
+                                                        href="<?php base_url("blogs") ?>">read
                                                         blogs</a>
                                                 </div>
                                             </div>
@@ -482,20 +485,21 @@ body {
                                 <h3><?= $fetch_data['username'] ?></h3>
                                 <h4><?= $fetch_data['email']; ?></h4>
                                 <a class="btn btn-primary w-100 mt-4 text-capitalize fs-3"
-                                    href="user_profile.php?action=update_profile">update profile</a>
+                                    href="user-profile/update-profile">update profile</a>
                                 <a class="btn btn-danger w-100 mt-4 text-capitalize fs-3"
-                                    href="user_profile.php?action=change_password">Change Password</a>
+                                    href="user-profile/change-password">Change
+                                    Password</a>
                                 <a class="logout_btn btn btn-dark w-100 mt-3 text-capitalize fs-3"
-                                    href="logout.php">logout</a>
+                                    href="logout">logout</a>
                                 <div class="row gx-3 mt-3">
                                     <div class="col-6">
                                         <a class="option_btn btn w-100 text-capitalize fs-3"
-                                            href="user_profile.php?action=show_details">show
+                                            href="user-profile/show-details">show
                                             details</a>
                                     </div>
                                     <div class="col-6">
                                         <a class="option_btn btn w-100 text-capitalize fs-3"
-                                            href="<?php base_url("blogs.php") ?>">read
+                                            href="<?php base_url("blogs") ?>">read
                                             blogs</a>
                                     </div>
                                 </div>

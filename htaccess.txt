@@ -1,0 +1,51 @@
+#404 Error
+ErrorDocument 404 http://localhost/coder/404.php
+
+RewriteEngine On
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+================================
+#404 Error
+ErrorDocument 404 http://localhost/coder/404.php
+
+<IfModule mod_rewrite.c>
+#Enable Rewrite Engine On
+RewriteEngine on
+
+#Removing index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.\*)$ index.php/$1 [L]
+
+RewriteCond %{THE_REQUEST} /([^.]+)\.php [NC]
+RewriteRule ^ /%1 [NC,L,R]
+
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^ %{REQUEST_URI}.php [NC,L]
+
+#RewriteRule ^category/([a-zA-Z0-9-]+) category?slug=$1
+
+RewriteRule ^post/([a-zA-Z0-9-/]+)$ post?slug=$1
+RewriteRule ^post/([a-zA-Z-0-9-]+)/ post?slug=$1
+
+</IfModule>
+
+
+
+
+
+
+================================
+#Redirect Trailing Slashes If Not A Folder...
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} (.+)/$
+RewriteRule ^ %1 [L,R=301]
+
+#Remove the .php extension
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.\*)$ $1.php

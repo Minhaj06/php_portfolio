@@ -1,3 +1,6 @@
+#404 Error
+ErrorDocument 404 http://localhost/coder/404.php
+
 RewriteEngine On
 
 #Redirect Trailing Slashes If Not A Folder...
@@ -13,6 +16,16 @@ RewriteRule ^search/([a-zA-Z0-9-]+) search.php?keywords=$1
 RewriteRule ^projects/category/([a-zA-Z0-9-]+) projects/category.php?slug=$1
 RewriteRule ^projects/post/([a-zA-Z0-9-]+) projects/post.php?slug=$1
 RewriteRule ^projects/search/([a-zA-Z0-9-]+) projects/search.php?keywords=$1
+
+RewriteRule ^user-profile/([a-zA-Z0-9-]+) user-profile.php?action=$1
+
+#http://localhost/coder/login?action=user-registration
+
+RewriteRule ^user/([a-zA-Z0-9-]+) login.php?action=$1
+
+
+
+
 
 #Removing index.php
 RewriteCond %{REQUEST_FILENAME} !-f
