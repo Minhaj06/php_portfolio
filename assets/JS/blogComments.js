@@ -1,3 +1,5 @@
+const RequestURL = "http://localhost/coder/commentCode";
+
 window.addEventListener("load", () => {
     document.querySelector("#comment_input").innerHTML = "";
 });
@@ -99,7 +101,7 @@ function submitComment(pageURL, commentFor) {
     });
 }
 
-submitComment("commentCode.php", "addBlogComment");
+submitComment(RequestURL, "addBlogComment");
 
 
 // Cancel Comment Update
@@ -172,7 +174,7 @@ function showingCommentInInput(pageURL, commentTextInInputFor, updateCommentFor)
     });
 }
 
-showingCommentInInput("commentCode.php", "showingBlogCommentText", "updateBlogComment");
+showingCommentInInput(RequestURL, "showingBlogCommentText", "updateBlogComment");
 
 
 
@@ -184,7 +186,7 @@ $(document).on("click", ".delete_comment_btn", function() {
 
     $.ajax({
         type: "POST",
-        url: "commentCode.php",
+        url: RequestURL,
         data: {
             deleteCommentFor: "deleteBlogComment",
             comment_id: comment_id,
@@ -236,7 +238,7 @@ $(document).on("click", ".reply_submit", function() {
 
     $.ajax({
         type: "POST",
-        url: "commentCode.php",
+        url: RequestURL,
         data: {
             addReply: "addBlogReply",
             comment_id: comment_id,
@@ -275,7 +277,7 @@ $(document).on("click", ".edit_reply_btn", function() {
 
     $.ajax({
         type: "GET",
-        url: "commentCode.php",
+        url: RequestURL,
         data: {
             replyTextInInput: "showingBlogReplyText",
             reply_id: reply_id,
@@ -302,7 +304,7 @@ $(document).on("click", ".edit_reply_btn", function() {
 
                 $.ajax({
                     type: "POST",
-                    url: "commentCode.php",
+                    url: RequestURL,
                     data: {
                         reply_id: reply_id,
                         updateReplyFor: "updateBlogReply",
@@ -337,7 +339,7 @@ $(document).on("click", ".delete_reply_btn", function() {
 
     $.ajax({
         type: "POST",
-        url: "commentCode.php",
+        url: RequestURL,
         data: {
             deleteReplyFor: "deleteBlogReply",
             reply_id: reply_id,

@@ -448,7 +448,7 @@ function postDate($timestamp)
     </section>
 
     <?php include_once("../assets/includes/footer.php") ?>
-    <script src="../assets/js/projectComments.js"></script>
+    <script src="<?php base_url("assets/js/projectComments.js") ?>"></script>
     <?php include_once("../assets/includes/messageBox.php") ?>
 
 </body>

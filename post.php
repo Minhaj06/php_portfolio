@@ -245,8 +245,8 @@ function postDate($timestamp)
 
     </section>
 
-    <?php include_once("assets/includes/footer.php") ?>
-    <script src="assets/JS/blogComments.js"></script>
+    <?php include_once("assets/includes/footer.php") ?>=
+    <script src="<?php base_url("assets/JS/blogComments.js") ?>"></script>
     <?php include_once("assets/includes/messageBox.php") ?>
 
 </body>

@@ -1,3 +1,5 @@
+const RequestURL = "http://localhost/coder/commentCode";
+
 window.addEventListener("load", () => {
     document.querySelector("#comment_input").innerHTML = "";
 });
@@ -99,7 +101,7 @@ function submitComment(pageURL, commentFor) {
     });
 }
 
-submitComment("../commentCode.php", "addProjectComment");
+submitComment(RequestURL, "addProjectComment");
 
 
 // Cancel Comment Update
@@ -173,7 +175,7 @@ function showingCommentInInput(pageURL, commentTextInInputFor, updateCommentFor)
     });
 }
 
-showingCommentInInput("../commentCode.php", "showingProjectCommentText", "updateProjectComment");
+showingCommentInInput(RequestURL, "showingProjectCommentText", "updateProjectComment");
 
 
 
@@ -185,7 +187,7 @@ $(document).on("click", ".delete_comment_btn", function() {
 
     $.ajax({
         type: "POST",
-        url: "../commentCode.php",
+        url: RequestURL,
         data: {
             deleteCommentFor: "deleteProjectComment",
             comment_id: comment_id,
@@ -237,7 +239,7 @@ $(document).on("click", ".reply_submit", function() {
 
     $.ajax({
         type: "POST",
-        url: "../commentCode.php",
+        url: RequestURL,
         data: {
             addReply: "addProjectReply",
             comment_id: comment_id,
@@ -276,7 +278,7 @@ $(document).on("click", ".edit_reply_btn", function() {
 
     $.ajax({
         type: "GET",
-        url: "../commentCode.php",
+        url: RequestURL,
         data: {
             replyTextInInput: "showingProjectReplyText",
             reply_id: reply_id,
@@ -303,7 +305,7 @@ $(document).on("click", ".edit_reply_btn", function() {
 
                 $.ajax({
                     type: "POST",
-                    url: "../commentCode.php",
+                    url: RequestURL,
                     data: {
                         reply_id: reply_id,
                         updateReplyFor: "updateProjectReply",
@@ -338,7 +340,7 @@ $(document).on("click", ".delete_reply_btn", function() {
 
     $.ajax({
         type: "POST",
-        url: "../commentCode.php",
+        url: RequestURL,
         data: {
             deleteReplyFor: "deleteProjectReply",
             reply_id: reply_id,
