@@ -3,8 +3,8 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item breadcrumb-active"><a href="index.php">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="project_update.php">Project</a></li>
+            <li class="breadcrumb-item breadcrumb-active"><a href="./">Dashboard</a></li>
+            <li class="breadcrumb-item">Projects</li>
         </ol>
     </nav>
 
@@ -98,13 +98,16 @@
                             </td>
 
                             <td class="align-middle">
-                                <span data-id="<?= $category_result['id'] ?>" class="fs-4 text-capitalize"
+                                <a href="<?= base_url("projects/category/" . $category_result['slug']) ?>"
+                                    target="_blank" class="fs-4 text-success"><i class="fa-solid fa-eye"></i></a>
+
+                                <span data-id="<?= $category_result['id'] ?>" class="fs-4 text-info ms-4"
                                     id="edit_project_cat_btn" role="button"
                                     data-bs-target="#edit_project_cotegory_modal" data-bs-toggle="modal">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </span>
 
-                                <span data-id="<?= $category_result['id'] ?>" class="fs-4 text-capitalize ms-4"
+                                <span data-id="<?= $category_result['id'] ?>" class="fs-4 text-danger ms-4"
                                     id="delete_project_cat_btn" role="button">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </span>
@@ -180,9 +183,9 @@
 
                             <tr class="project<?= $project_post_result['id'] ?>">
                                 <td class="align-middle">
-                                    <a href="../projects/post.php?slug=<?= $project_post_result['slug'] ?>"
+                                    <a href="<?= base_url('projects/post/' . $project_post_result['slug']) ?>"
                                         target="_blank">
-                                        <img src="../uploaded_img/<?= $project_post_result['image'] ?>"
+                                        <img src="<?= base_url('uploaded_img/' . $project_post_result['image']) ?>"
                                             alt="Portfolio_image"
                                             style="width: 12rem; height: 9rem; background: var(--primary-color-light); padding: .5rem; border: 1px solid;">
                                     </a>
@@ -213,21 +216,23 @@
                                 </td>
 
                                 <td class="align-middle" style="min-width: 10rem;">
-                                    <span data-id="<?= $project_post_result['id'] ?>"
+                                    <!-- <span data-id="<?= $project_post_result['id'] ?>"
                                         class="fs-4 text-capitalize text-success" id="view_project_post_btn"
                                         role="button" data-bs-target="#view_project_post_modal" data-bs-toggle="modal">
                                         <i class="fa-solid fa-eye"></i>
-                                    </span>
+                                    </span> -->
 
-                                    <span data-id="<?= $project_post_result['id'] ?>"
-                                        class="fs-4 text-capitalize text-info ms-4" id="edit_project_post_btn"
-                                        role="button" data-bs-target="#edit_project_post_modal" data-bs-toggle="modal">
+                                    <a href="<?php base_url("projects/post/" . $project_post_result['slug']) ?>"
+                                        target="_blank" class="fs-4 text-success"><i class="fa-solid fa-eye"></i></a>
+
+                                    <span data-id="<?= $project_post_result['id'] ?>" class="fs-4 text-info ms-4"
+                                        id="edit_project_post_btn" role="button"
+                                        data-bs-target="#edit_project_post_modal" data-bs-toggle="modal">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </span>
 
-                                    <span data-id="<?= $project_post_result['id'] ?>"
-                                        class="fs-4 text-capitalize text-danger ms-4" id="delete_project_post_btn"
-                                        role="button">
+                                    <span data-id="<?= $project_post_result['id'] ?>" class="fs-4 text-danger ms-4"
+                                        id="delete_project_post_btn" role="button">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </span>
                                 </td>
@@ -579,7 +584,7 @@
 
 
 <!-- View Project Post Modal Starts -->
-<div class="modal fade" id="view_project_post_modal" data-bs-backdrop="static">
+<!-- <div class="modal fade" id="view_project_post_modal" data-bs-backdrop="static">
     <div class="modal-dialog modal-fullscreen-xl-down modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -640,7 +645,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- View Project Post Modal Starts -->
 
 

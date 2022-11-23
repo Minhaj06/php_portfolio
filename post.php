@@ -3,7 +3,7 @@ include 'admin/config/dbConnect.php';
 
 if (isset($_GET['slug'])) {
     $slug = $_GET['slug'];
-    $single_post_query = mysqli_query($conn, "SELECT * FROM `blog_posts` WHERE slug = '$slug' ");
+    $single_post_query = mysqli_query($conn, "SELECT * FROM `blog_posts` WHERE status = '1' AND slug = '$slug' ");
     $count_post = mysqli_num_rows($single_post_query);
 
     if ($count_post > 0) {
@@ -19,7 +19,7 @@ if (isset($_GET['slug'])) {
         if ($category_slug == "") {
             $category_slug = "javascript: void(0)";
         } else {
-            $category_slug = "category.php?slug=" . $category_slug;
+            $category_slug = "category/" . $category_slug;
         }
     }
 } else {
@@ -82,22 +82,31 @@ function postDate($timestamp)
                             <h2 class="post_title my-4"><?= $single_post_result['title'] ?>
                             </h2>
 
-                            <a href="<?php base_url("" . $category_slug) ?>">
-                                <h4 style="background: var(--orange);"
-                                    class="post_category d-inline-block px-4 py-3 fs-3 rounded mb-3 text-capitalize">
-                                    <?= $single_post_result['category'] ?></h4>
-                            </a>
 
-                            <p style="font-weight: 300"
+
+                            <div style="font-weight: 300"
                                 class="fs-4 mb-4 d-flex justify-content-between align-items-center">
-                                <span class="post_date me-3"><i class="fa-solid fa-calendar-days"></i>
-                                    <?php
-                                        postDate($single_post_result['created_at']);
-                                        ?>
-                                </span>
 
-                                <a href="#comments"><i class="fa-solid fa-comment"></i> Leave A Comment</a>
-                            </p>
+                                <div>
+                                    <a href="<?php base_url("" . $category_slug) ?>">
+                                        <h4 style="background: var(--orange);"
+                                            class="post_category d-inline-block px-4 py-3 rounded text-capitalize">
+                                            <?= $single_post_result['category'] ?></h4>
+                                    </a>
+                                </div>
+
+                                <div>
+                                    <span class="post_date me-3"><i class="fa-solid fa-calendar-days"></i>
+                                        <?php
+                                            postDate($single_post_result['created_at']);
+                                            ?>
+                                    </span>
+
+                                    <a href="#comments"><i class="fa-solid fa-comment" title="Leave a comment"></i>
+                                        78</a>
+                                </div>
+
+                            </div>
 
                             <div class="post_description overflow-hidden mb-5 pb-4">
                                 <?= $single_post_result['description'] ?></div>

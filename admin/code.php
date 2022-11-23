@@ -1889,7 +1889,6 @@ if (isset($_FILES['logo_input'])) {
     $prev_logo = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `site_logo` FROM `site_settings` WHERE id = '1'"))['site_logo'];
 
     $query = mysqli_query($conn, "UPDATE `site_settings` SET `site_logo` = '$rename_logo' WHERE id = '1'");
-    // $query = mysqli_query($conn, "UPDATE `site_settings` SET `site_logo` = '$rename_logo' WHERE id = '1'");
 
     if ($query) {
 
@@ -1903,5 +1902,35 @@ if (isset($_FILES['logo_input'])) {
         }
     } else {
         echo "Logo not updated!";
+    }
+}
+
+
+// Change Site Open Graph Image
+if (isset($_FILES['og_image_input'])) {
+    $og_image = $_FILES['og_image_input']['name'];
+    $og_image_tmp_name = $_FILES['og_image_input']['tmp_name'];
+    $dotpos = stripos($og_image, '.') + 1;
+    $ext = substr($og_image, $dotpos);
+    $rand = rand(100000, 1000000);
+    $rename_og_image = $rand . time() . '.' . $ext;
+    $og_image_folder = '../uploaded_img/' . $rename_og_image;
+
+    $prev_og_image = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `og_image` FROM `site_settings` WHERE id = '1'"))['og_image'];
+
+    $query = mysqli_query($conn, "UPDATE `site_settings` SET `og_image` = '$rename_og_image' WHERE id = '1'");
+
+    if ($query) {
+
+        if (file_exists('../uploaded_img/' . $prev_og_image)) {
+            unlink('../uploaded_img/' . $prev_og_image);
+            move_uploaded_file($og_image_tmp_name, $og_image_folder);
+            echo "Image updated successfully";
+        } else {
+            move_uploaded_file($og_image_tmp_name, $og_image_folder);
+            echo "Image updated successfully";
+        }
+    } else {
+        echo "Image not updated!";
     }
 }

@@ -78,7 +78,7 @@ function updateComment($commentsTable)
     global $conn;
 
     $comment_id = $_POST['comment_id'];
-    $comment = $_POST['updatedComment'];
+    $comment = mysqli_real_escape_string($conn, $_POST['updatedComment']);
 
     $query = mysqli_query($conn, "UPDATE `$commentsTable` SET `comment` = '$comment' WHERE comment_id = $comment_id");
 

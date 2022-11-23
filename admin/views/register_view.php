@@ -47,7 +47,8 @@
                         <tr class="data_row" id="<?= $row['id'] ?>">
                             <td class="align-middle"><?= $number ?></td>
                             <td class="align-middle" class="td_img">
-                                <img src="<?= '../uploaded_img/' . $row['image'] ?>" alt="Profile Pic">
+                                <img src="<?= base_url("uploaded_img/" . $row['image']) ?>" alt="Profile Pic"
+                                    loading="lazy">
                             </td>
                             <td class="align-middle" data-target="fname"><?= $row['first_name'] ?></td>
                             <td class="align-middle" data-target="lname"><?= $row['last_name'] ?></td>

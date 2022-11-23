@@ -3,8 +3,8 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item breadcrumb-active"><a href="index.php">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="blog_update.php">Blog</a></li>
+            <li class="breadcrumb-item breadcrumb-active"><a href="./">Dashboard</a></li>
+            <li class="breadcrumb-item">Blogs</li>
         </ol>
     </nav>
 
@@ -97,13 +97,16 @@
                             </td>
 
                             <td class="align-middle">
-                                <span data-id="<?= $category_result['id'] ?>" class="fs-4 text-capitalize"
+                                <a href="<?= base_url("category/" . $category_result['slug']) ?>" target="_blank"
+                                    class="fs-4 text-success"><i class="fa-solid fa-eye"></i></a>
+
+                                <span data-id="<?= $category_result['id'] ?>" class="fs-4 text-info ms-4"
                                     id="edit_blog_cat_btn" role="button" data-bs-target="#edit_blog_cotegory_modal"
                                     data-bs-toggle="modal">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </span>
 
-                                <span data-id="<?= $category_result['id'] ?>" class="fs-4 text-capitalize ms-4"
+                                <span data-id="<?= $category_result['id'] ?>" class="fs-4 text-danger ms-4"
                                     id="delete_blog_cat_btn" role="button">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </span>
@@ -178,8 +181,8 @@
 
                             <tr class="blog<?= $blog_post_result['id'] ?>">
                                 <td class="align-middle">
-                                    <a href="../post.php?slug=<?= $blog_post_result['slug'] ?>" target="_blank">
-                                        <img src="../uploaded_img/<?= $blog_post_result['image'] ?>"
+                                    <a href="<?= base_url('post/' . $blog_post_result['slug']) ?>" target="_blank">
+                                        <img src="<?= base_url('uploaded_img/' . $blog_post_result['image']) ?>"
                                             alt="Portfolio_image"
                                             style="width: 12rem; height: 9rem; background: var(--primary-color-light); padding: .5rem; border: 1px solid;">
                                     </a>
@@ -210,11 +213,14 @@
                                 </td>
 
                                 <td class="align-middle" style="min-width: 10rem;">
-                                    <span data-id="<?= $blog_post_result['id'] ?>"
+                                    <!-- <span data-id="<?= $blog_post_result['id'] ?>"
                                         class="fs-4 text-capitalize text-success" id="view_blog_post_btn" role="button"
                                         data-bs-target="#view_blog_post_modal" data-bs-toggle="modal">
                                         <i class="fa-solid fa-eye"></i>
-                                    </span>
+                                    </span> -->
+
+                                    <a href="<?php base_url("post/" . $blog_post_result['slug']) ?>" target="_blank"
+                                        class="fs-4 text-capitalize text-success"><i class="fa-solid fa-eye"></i></a>
 
                                     <span data-id="<?= $blog_post_result['id'] ?>"
                                         class="fs-4 text-capitalize text-info ms-4" id="edit_blog_post_btn"
@@ -539,7 +545,7 @@
 
 
 <!-- View Blog Post Modal Starts -->
-<div class="modal fade" id="view_blog_post_modal" data-bs-backdrop="static">
+<!-- <div class="modal fade" id="view_blog_post_modal" data-bs-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -600,7 +606,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- View Blog Post Modal Starts -->
 
 

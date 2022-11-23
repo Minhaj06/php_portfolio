@@ -3,8 +3,8 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item breadcrumb-active"><a href="index.php">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="testimonials_update.php">Testimonials</a></li>
+            <li class="breadcrumb-item breadcrumb-active"><a href="./">Dashboard</a></li>
+            <li class="breadcrumb-item">Testimonials</li>
         </ol>
     </nav>
 
@@ -69,8 +69,8 @@
                             <td data-target="<?= $test_item_result['test_item_id'] ?>">
                                 <img id="<?= $test_item_result['test_item_id'] ?>test_reviewer_image"
                                     style="width: 10rem; height: 8rem;"
-                                    src="../uploaded_img/<?= $test_item_result['test_reviewer_image'] ?>"
-                                    alt="Reviewer Image">
+                                    src="<?= base_url("uploaded_img/" . $test_item_result['test_reviewer_image']) ?>"
+                                    alt="Reviewer Image" loading="lazy">
                             </td>
 
                             <td data-target="test_reviewer_name" style="min-width: 20rem;">
@@ -245,7 +245,7 @@
 
                 <center>
                     <img id="view_test_img_modal" class="mb-4 rounded-circle" width="200" height="200" src=""
-                        alt="reviewer_img" style="background: var(--body-color);">
+                        alt="reviewer_img" style="background: var(--body-color);" loading="lazy">
                 </center>
 
                 <table class="table table-striped table-bordered">
@@ -289,7 +289,7 @@
 
                     <center>
                         <img id="edit_view_test_img_modal" class="mb-4 rounded-circle" width="200" height="200" src=""
-                            alt="reviewer_img" style="background: var(--body-color);">
+                            alt="reviewer_img" style="background: var(--body-color);" loading="lazy">
                     </center>
 
                     <div class="row g-4">

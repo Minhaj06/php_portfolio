@@ -1,7 +1,3 @@
-<?php
-$conn = mysqli_connect("localhost", "root", "", "coder");
-?>
-
 <!-- Search bar -->
 <h2 class="widget_title">Search Here</h2>
 <form action="<?php base_url("search.php") ?>" method="GET">
@@ -38,7 +34,7 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
             ?>
 
             <div class="recent_post d-flex mb-4">
-                <div class="recent_post_img me-3 overflow-hidden">
+                <div class="recent_post_img me-3 overflow-hidden rounded-3">
                     <a href="<?php base_url("post/" . $recent_post_result['slug']) ?>">
                         <img width="100" height="70"
                             src="<?php base_url("uploaded_img/" . $recent_post_result['image']) ?>" alt="post image">
@@ -88,7 +84,7 @@ $conn = mysqli_connect("localhost", "root", "", "coder");
                         <a href="<?php base_url("post/" . $post_data['slug']) ?>" style="color: var(--orange);"
                             class="commented_post_title"><?= $post_data['title'] ?></a>: <span class="comment">
                             <?php
-                                    $string = $recent_comment_result['comment'];
+                                    $string = htmlentities($recent_comment_result['comment']);
                                     if (strlen($string) > 100) {
 
                                         $stringCut = substr($string, 0, 100);

@@ -3,8 +3,8 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item breadcrumb-active"><a href="index.php">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="portfolio_update.php">Portfolio</a></li>
+            <li class="breadcrumb-item breadcrumb-active"><a href="./">Dashboard</a></li>
+            <li class="breadcrumb-item">Portfolio</li>
         </ol>
     </nav>
 
@@ -164,9 +164,10 @@
                                 <td>
                                     <a href="<?= $portfolio_result['portfolio_url'] ?>" target="_blank">
                                         <img id="<?= $portfolio_result['port_item_id'] ?>view_image"
-                                            src="../uploaded_img/<?= $portfolio_result['portfolio_image'] ?>"
+                                            src="<?= base_url('uploaded_img/' . $portfolio_result['portfolio_image']) ?>"
                                             alt="Portfolio_image"
-                                            style="width: 8rem; height: 10rem; background: var(--primary-color-light); padding: .5rem; border: 1px solid;">
+                                            style="width: 8rem; height: 10rem; background: var(--primary-color-light); padding: .5rem; border: 1px solid;"
+                                            loading="lazy">
                                     </a>
                                 </td>
 
@@ -448,7 +449,7 @@
                     <a href="" id="view_port_img_modal_url" target="_blank">
                         <img id="view_port_img_modal"
                             style="max-height: 45rem; border: 2px solid; border-radius: .5rem;" width="100%"
-                            class="home_modal_img p-2" src="" alt="Portfolio Image">
+                            class="home_modal_img p-2" src="" alt="Portfolio Image" loading="lazy">
                     </a>
 
                 </div>

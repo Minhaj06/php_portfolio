@@ -67,7 +67,7 @@
                         <h4 class="commenter_name mb-4 pb-1">
                             <?= $commenter_data['first_name'] . ' ' . $commenter_data['last_name'] ?>
                         </h4>
-                        <p class="comment_text"><?= $comments_result['comment'] ?></p>
+                        <p class="comment_text"><?= htmlentities($comments_result['comment']) ?></p>
                     </div>
 
                     <div class="comment_edit_delete_icons_area">
@@ -107,7 +107,7 @@
                     <h4 class="commenter_name mb-4 pb-1">
                         <?= $commenter_data['first_name'] . ' ' . $commenter_data['last_name'] ?>
                     </h4>
-                    <p class="comment_text"><?= $comments_result['comment'] ?></p>
+                    <p class="comment_text"><?= htmlentities($comments_result['comment']) ?></p>
                 </div>
                 <?php } ?>
 
@@ -204,7 +204,7 @@
                                 <div>
                                     <h4 class="replier_name mb-4 pb-1">
                                         <?= $replier_data['first_name'] . ' ' . $replier_data['last_name'] ?></h4>
-                                    <p class="reply_text"><?= $replies_result['reply'] ?></p>
+                                    <p class="reply_text"><?= htmlentities($replies_result['reply']) ?></p>
                                 </div>
 
                                 <div class="reply_edit_delete_icons_area">
@@ -245,7 +245,7 @@
                             <div>
                                 <h4 class="replier_name mb-4 pb-1">
                                     <?= $replier_data['first_name'] . ' ' . $replier_data['last_name'] ?></h4>
-                                <p class="reply_text"><?= $replies_result['reply'] ?></p>
+                                <p class="reply_text"><?= htmlentities($replies_result['reply']) ?></p>
                             </div>
 
 

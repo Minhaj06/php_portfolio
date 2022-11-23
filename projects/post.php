@@ -3,7 +3,7 @@ include '../admin/config/dbConnect.php';
 
 if (isset($_GET['slug'])) {
     $slug = $_GET['slug'];
-    $single_post_query = mysqli_query($conn, "SELECT * FROM `project_posts` WHERE slug = '$slug' ");
+    $single_post_query = mysqli_query($conn, "SELECT * FROM `project_posts` WHERE status = '1' AND slug = '$slug' ");
     $count_post = mysqli_num_rows($single_post_query);
 
     if ($count_post > 0) {
@@ -19,7 +19,7 @@ if (isset($_GET['slug'])) {
         if ($category_slug == "") {
             $category_slug = "javascript: void(0)";
         } else {
-            $category_slug = "category.php?slug=" . $category_slug;
+            $category_slug = "category/" . $category_slug;
         }
     }
 } else {

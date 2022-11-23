@@ -533,7 +533,12 @@ color: #fff;
 
 .sub_menu li a:hover {
 color: #b8cbed;
-padding-left: 1.5rem;
+padding-left: 2rem;
+}
+
+.sub_menu li a.sub_active {
+color: #b8cbed;
+padding-left: 2rem;
 }
 
 .toggle_icon {

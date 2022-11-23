@@ -64,7 +64,8 @@
                 <div class="col-xl-6 order-1 order-xl-2" id="og_image">
                     <div>
                         <h2 class="mb-4">Open Graph Preview Image</h2>
-                        <img class="w-100 h-100" src="assets/images/web.jpg" alt="Open Graph Image">
+                        <img class="w-100 h-100" src="<?= base_url("uploaded_img/" . $site_info_result['og_image']) ?>"
+                            alt="Open Graph Image" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -76,7 +77,8 @@
             <button class="btn btn-secondary fs-4 me-3" data-bs-toggle="modal"
                 data-bs-target="#change_logo_modal">Change
                 Logo</button>
-            <button class="btn btn-secondary fs-4">Change Image</button>
+            <button class="btn btn-secondary fs-4" data-bs-toggle="modal" data-bs-target="#change_og_image_modal">Change
+                Image</button>
         </div>
     </div>
     <!-- Hire Me Card Ends Here -->
@@ -153,7 +155,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Change Site Logo</h2>
+                <h2 class="modal-title">Change Logo</h2>
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form action="" id="change_logo_form" enctype="multipart/form-data">
@@ -166,6 +168,32 @@
                     <button type="button" class="btn btn-danger fs-4" data-bs-dismiss="modal">Close</button>
                     <button type="submit" id="change_logo" name="change_logo" class="btn btn-secondary fs-4">Change
                         Logo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Change Open Graph Image Modal -->
+<div class="modal fade" id="change_og_image_modal" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Change Open Graph Image</h2>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="" id="change_og_image_form" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <label class="label-control" for="og_image_input">Choose a image</label>
+                    <input class="form-control fs-4" name="og_image_input" id="og_image_input" type="file"
+                        accept="image/png" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger fs-4" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id="change_og_image" name="change_og_image"
+                        class="btn btn-secondary fs-4">Change
+                        Image</button>
                 </div>
             </form>
         </div>

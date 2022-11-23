@@ -4,21 +4,15 @@ include_once 'config/dbConnect.php';
 if (isset($_SESSION['auth'])) {
     if ($_SESSION['auth_role'] != "1") {
         $_SESSION['message'] = "You are not Authorised as ADMIN";
-        header("Location: ../index.php");
+        header("Location: ../");
         exit(0);
     }
 }
 
 if (!isset($_SESSION['auth'])) {
-    if ($_SESSION['auth_role'] != "1") {
-        $_SESSION['message'] = "You are not Authorised as ADMIN";
-        header("Location: ../login.php");
-        exit(0);
-    } else {
-        $_SESSION['message'] = "Login to access Dashboard";
-        header("Location: index.php");
-        exit(0);
-    }
+    $_SESSION['message'] = "Login to access Dashboard";
+    header("Location: ../user/login");
+    exit(0);
 }
 ?>
 
@@ -72,6 +66,8 @@ include_once("assets/includes/alertBox.php");
             include_once("views/hire_me_view.php");
         } elseif ($view == "site_settings") {
             include_once("views/site_settings_view.php");
+        } else {
+            include_once("views/404_view.php");
         }
     }
 
