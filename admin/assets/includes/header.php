@@ -3,8 +3,12 @@
     <div class="container-fluid">
         <nav class="top_nav d-md-flex align-items-center justify-content-between">
             <div class="top_nav_left d-flex align-items-center justify-content-between">
-                <a href="./"><img class="logo" src="assets/images/logo.png" alt="logo" /></a>
-
+                <?php
+                $logo = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `site_logo` FROM `site_settings` WHERE id = '1'"))['site_logo'];
+                ?>
+                <a href="<?php base_url("admin") ?>">
+                    <img class="logo" src="<?php base_url('uploaded_img/' . $logo) ?>" alt="logo" />
+                </a>
                 <i class="fas fa-bars toggle ms-5"></i>
             </div>
 
@@ -21,7 +25,7 @@
                         </div>
                     </div>
                     <p>Welcome, <span><?= $_SESSION['auth_user']['username']; ?></span></p>
-                    <img src="<?= "../uploaded_img/" . $_SESSION['auth_user']['username'] . ".jpg" ?>"
+                    <img src="<?php base_url('uploaded_img/' . $_SESSION['auth_user']['username'] . '.jpg') ?>"
                         alt="admin_img" />
                 </div>
             </div>

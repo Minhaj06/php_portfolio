@@ -237,6 +237,7 @@ width: 15rem;
 height: 15rem;
 border-radius: 50%;
 margin-bottom: 1rem;
+background-color: var(--body-color);
 }
 
 .input {

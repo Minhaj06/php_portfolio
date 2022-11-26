@@ -20,14 +20,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
     <!-- DataTables CSS Library -->
-    <link rel="stylesheet" href="assets/css/dataTables.custom.min.css">
+    <link rel="stylesheet" href="<?php base_url("admin/assets/css/dataTables.custom.min.css") ?>">
 
     <!-- Summernote CSS - CDN Link -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <!-- //Summernote CSS - CDN Link -->
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/style.php" />
+    <link rel="stylesheet" href="<?php base_url("admin/assets/css/style.php") ?>" />
 
 
     <!-- ############### Scripts ############## -->
@@ -40,7 +40,7 @@
     <script type="text/javascript" defer src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
     <!-- Custom JS -->
-    <script type="text/javascript" defer src="assets/js/script.js"></script>
+    <script type="text/javascript" defer src="<?php base_url("admin/assets/js/script.js") ?>"></script>
 
     <title><?= $title ?></title>
 </head>

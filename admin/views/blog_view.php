@@ -3,7 +3,7 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item breadcrumb-active"><a href="./">Dashboard</a></li>
+            <li class="breadcrumb-item breadcrumb-active"><a href="<?php base_url('admin/') ?>">Dashboard</a></li>
             <li class="breadcrumb-item">Blogs</li>
         </ol>
     </nav>
@@ -14,8 +14,6 @@
     $result = mysqli_fetch_assoc($query);
     ?>
 
-
-    <?php include("../admin/assets/includes/message.php"); ?>
 
     <!-- Blog section content card starts here -->
     <div class="card mb-4">
@@ -716,7 +714,5 @@
 <?php
 $confirm_title = "Delete Alert";
 $confirm_text = "Do you want to delete this?";
-
-include_once "../admin/assets/includes/confirmBox.php";
 ?>
 <!-- Delete Confirm Modal Ends Here -->

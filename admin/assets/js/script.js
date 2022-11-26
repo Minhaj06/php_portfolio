@@ -39,15 +39,15 @@ modeSwitch.addEventListener("click", () => {
 });
 
 // menu link active
-// const nav_link = document.querySelectorAll(".nav_link a");
+const nav_link = document.querySelectorAll(".nav_link a");
 
-// nav_link.forEach((element) => {
-//     element.addEventListener("click", function() {
-//         nav_link.forEach((link) => link.classList.remove("active"));
+nav_link.forEach((element) => {
+    element.addEventListener("click", function() {
+        nav_link.forEach((link) => link.classList.remove("active"));
 
-//         this.classList.add("active");
-//     });
-// });
+        this.classList.add("active");
+    });
+});
 
 // sidebar dropdown menu
 

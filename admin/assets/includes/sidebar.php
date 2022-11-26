@@ -3,12 +3,11 @@
 
     <div class="img_text position-relative d-flex align-items-start">
         <span class="image d-flex align-items-center me-3">
-            <img src="assets/images/admin.png" alt="admin_img" />
+            <img src="<?php base_url('admin/assets/images/admin.png') ?>" alt="Author Image" />
         </span>
         <div class="text admin_desc d-flex flex-column">
-            <span
-                class="name"><?= $_SESSION['auth_user']['user_fname'] . " " . $_SESSION['auth_user']['user_lname'] ?></span>
-            <span class="profession">Web Developer</span>
+            <span class="name" title="Author Name">Md. Minhaj Kobir</span>
+            <span class="profession" title="Author Designation">Web Developer</span>
         </div>
     </div>
 
@@ -26,6 +25,7 @@
                         <span class="text nav_text">Visit Site</span>
                     </a>
                 </li>
+
                 <li title="Dashboard" class="nav_link">
                     <a class="<?php echo $view == 'dashboard' ? 'active' : ''; ?>" href="./">
                         <i class='fa-solid fa-gauge icon'></i>
@@ -33,18 +33,50 @@
                     </a>
                 </li>
 
-                <li title="Manage Blog Posts" class="nav_link dropdown11">
-                    <a class="<?php echo $view == 'blog_update' ? 'active' : ''; ?>" href="posts">
+                <li title="Manage Blog Posts" class="nav_link dropdown1">
+                    <a class="<?php echo $view == 'blog' || $view == 'blog_comments' ? 'active' : '' ?>"
+                        href="javascript: void(0)">
                         <i class="fa-solid fa-newspaper icon"></i>
                         <span class="text nav_text">Manage Posts</span>
+                        <i class='fa-solid fa-chevron-down toggle_icon drop_icon3'></i>
                     </a>
+                    <ul class="sub_menu sub_menu1">
+                        <li>
+                            <a class="<?php echo $view == 'blog' ? 'sub_active' : ''; ?>"
+                                href="<?php base_url('admin/posts/') ?>">
+                                <i class="fa-solid fa-thumbtack me-2"></i>Posts
+                            </a>
+                        </li>
+                        <li>
+                            <a class="<?php echo $view == 'blog_comments' ? 'sub_active' : ''; ?>"
+                                href="<?php base_url('admin/posts/comments') ?>">
+                                <i class="fa-solid fa-message me-2"></i>Comments
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
-                <li title="Manage Project Posts" class="nav_link dropdown22">
-                    <a class="<?php echo $view == 'project_update' ? 'active' : ''; ?>" href="projects">
+                <li title="Manage Project Posts" class="nav_link dropdown2">
+                    <a class="<?php echo $view == 'project' || $view == 'project_comments' ? 'active' : '' ?>"
+                        href="javascript: void(0)">
                         <i class="fa-solid fa-code icon"></i>
                         <span class="text nav_text">Manage Projects</span>
+                        <i class='fa-solid fa-chevron-down toggle_icon drop_icon3'></i>
                     </a>
+                    <ul class="sub_menu sub_menu2">
+                        <li>
+                            <a class="<?php echo $view == 'project' ? 'sub_active' : ''; ?>"
+                                href="<?php base_url('admin/projects/') ?>">
+                                <i class="fa-solid fa-thumbtack me-2"></i>Projects
+                            </a>
+                        </li>
+                        <li>
+                            <a class="<?php echo $view == 'project_comments' ? 'sub_active' : ''; ?>"
+                                href="<?php base_url('admin/projects/comments') ?>">
+                                <i class="fa-solid fa-message me-2"></i>Comments
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li title="Manage Portfolio" class="nav_link">

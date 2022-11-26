@@ -3,7 +3,7 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item breadcrumb-active"><a href="./">Dashboard</a></li>
+            <li class="breadcrumb-item breadcrumb-active"><a href="<?php base_url('admin/') ?>">Dashboard</a></li>
             <li class="breadcrumb-item">Projects</li>
         </ol>
     </nav>
@@ -13,9 +13,6 @@
     $query = mysqli_query($conn, "SELECT * FROM `project_section` LIMIT 1 ");
     $result = mysqli_fetch_assoc($query);
     ?>
-
-
-    <?php include("../admin/assets/includes/message.php"); ?>
 
     <!-- Project section content card starts here -->
     <div class="card mb-4">
@@ -787,7 +784,5 @@
 <?php
 $confirm_title = "Delete Alert";
 $confirm_text = "Do you want to delete this?";
-
-include_once "../admin/assets/includes/confirmBox.php";
 ?>
 <!-- Delete Confirm Modal Ends Here -->

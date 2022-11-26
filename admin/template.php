@@ -52,12 +52,17 @@ include_once("assets/includes/alertBox.php");
         } elseif ($view == "portfolio_update") {
 
             include_once("views/portfolio_view.php");
-        } elseif ($view == "project_update") {
+        } elseif ($view == "project") {
 
             include_once("views/project_view.php");
-        } elseif ($view == "blog_update") {
+        } elseif ($view == "project_comments") {
+
+            include_once("views/project_comments_view.php");
+        } elseif ($view == "blog") {
 
             include_once("views/blog_view.php");
+        } elseif ($view == "blog_comments") {
+            include_once("views/blog_comments_view.php");
         } elseif ($view == "testimonials_update") {
 
             include_once("views/testimonials_view.php");
@@ -72,4 +77,8 @@ include_once("assets/includes/alertBox.php");
     }
 
     ?>
-    <?php include_once("assets/includes/footer.php") ?>
+    <?php
+    include_once("assets/includes/footer.php");
+    include_once("assets/includes/message.php");
+    include_once("assets/includes/confirmBox.php");
+    ?>
