@@ -39,7 +39,7 @@ if (isset($single_post_result['title']) && !empty($single_post_result['title']))
     $og_title = $single_post_result['title'];
     $og_description = $single_post_result['meta_description'];
     $og_keywords = str_replace(" ", "", $meta_keywords);
-    $og_image_path = "uploaded_img/" . $single_post_result['image'];
+    $og_imgae = $single_post_result['image'];
 } else {
     $title = "Post not found! || Coder";
 }

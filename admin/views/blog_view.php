@@ -87,9 +87,9 @@
                             <td data-target="category_status" class="align-middle">
                                 <?php
                                         if ($category_result['status'] == 1) {
-                                            echo "Visible";
+                                            echo "Published";
                                         } else {
-                                            echo "Hidden";
+                                            echo "Unpublished";
                                         }
                                         ?>
                             </td>

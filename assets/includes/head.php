@@ -1,18 +1,22 @@
 <?php
+$site_info_query = mysqli_query($conn, "SELECT `site_title`, `site_title2`, `site_description`, `site_keywords`, `site_logo`, `og_title`, `og_description`, `og_url`, `og_image` FROM `site_settings`");
+
+$site_info_result = mysqli_fetch_assoc($site_info_query);
+
 if (!isset($title)) {
     $title = "Coder || Advanced Thinking";
 }
 if (!isset($meta_title)) {
-    $meta_title = "Blog and project sharing website";
+    $meta_title = $site_info_result['og_title'];
 }
 if (!isset($meta_description)) {
-    $meta_description = "This is my personal portfolio, blog and project sharing website. Here I will share my all portfolios, projects and blogs";
+    $meta_description = $site_info_result['og_description'];
 }
 if (!isset($meta_keywords)) {
-    $meta_keywords = "programming, technologoy, tech news, html, css, bootstrap, tailwind, javascript, jquery, react, react native, angular, php, laravel, codeigniter, nodejs, expressjs, python, c, c++, c#, java, dart, flutter";
+    $meta_keywords = $site_info_result['site_keywords'];
 }
 if (!isset($og_url)) {
-    $og_url = "";
+    $og_url = $site_info_result['og_url'];
 }
 if (!isset($og_title)) {
     $og_title = $meta_title;
@@ -20,8 +24,8 @@ if (!isset($og_title)) {
 if (!isset($og_description)) {
     $og_description = $meta_description;
 }
-if (!isset($og_image_path)) {
-    $og_image_path = "assets/images/robot.png";
+if (!isset($og_imgae)) {
+    $og_imgae = $site_info_result['og_image'];
 }
 
 
@@ -48,9 +52,9 @@ if (!isset($og_image_path)) {
     <meta property="og:description" content="<?= $og_description ?>" />
 
     <!-- image -->
-    <meta property="og:image" content="<?php base_url($og_image_path) ?>" />
-    <meta property="og:image:secure_url" content="<?php base_url($og_image_path) ?>" />
-    <link rel="image_src" href="<?php base_url($og_image_path) ?>">
+    <meta property="og:image" content="<?php base_url('uploaded_img/' . $og_imgae) ?>" />
+    <meta property="og:image:secure_url" content="<?php base_url('uploaded_img/' . $og_imgae) ?>" />
+    <link rel="image_src" href="<?php base_url('uploaded_img/' . $og_imgae) ?>">
 
 
     <link rel="icon" type="image/x-icon" href="<?php base_url("assets/images/favicon.ico") ?>" />

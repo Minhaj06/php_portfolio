@@ -38,7 +38,7 @@
                         href="javascript: void(0)">
                         <i class="fa-solid fa-newspaper icon"></i>
                         <span class="text nav_text">Manage Posts</span>
-                        <i class='fa-solid fa-chevron-down toggle_icon drop_icon3'></i>
+                        <i class='fa-solid fa-chevron-down toggle_icon drop_icon1'></i>
                     </a>
                     <ul class="sub_menu sub_menu1">
                         <li>
@@ -61,7 +61,7 @@
                         href="javascript: void(0)">
                         <i class="fa-solid fa-code icon"></i>
                         <span class="text nav_text">Manage Projects</span>
-                        <i class='fa-solid fa-chevron-down toggle_icon drop_icon3'></i>
+                        <i class='fa-solid fa-chevron-down toggle_icon drop_icon2'></i>
                     </a>
                     <ul class="sub_menu sub_menu2">
                         <li>

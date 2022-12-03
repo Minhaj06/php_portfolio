@@ -193,7 +193,7 @@
                                 <td class="align-middle">
                                     <?php
                                             if ($project_post_result['status'] == '1') {
-                                                echo "Publushed";
+                                                echo "Published";
                                             } else {
                                                 echo "Unpublished";
                                             }

@@ -1042,6 +1042,16 @@ color: var(--orange);
 display: block;
 }
 
+.recent_post_img,
+.recent_comment_img {
+width: 10rem;
+}
+
+.recent_post_content,
+.recent_comment_content {
+width: calc(100% - 10rem);
+}
+
 .recent_post_img img,
 .recent_comment_img img {
 border-radius: .4rem;

@@ -14,7 +14,7 @@ if (!$conn) {
 }
 
 $url = "";
-
+$base_url = "http://localhost/coder/";
 function base_url($url)
 {
     echo "http://localhost/coder/" . $url;

@@ -34,13 +34,16 @@
             ?>
 
             <div class="recent_post d-flex mb-4">
-                <div class="recent_post_img me-3 overflow-hidden rounded-3">
-                    <a href="<?php base_url("post/" . $recent_post_result['slug']) ?>">
-                        <img width="100" height="70"
-                            src="<?php base_url("uploaded_img/" . $recent_post_result['image']) ?>" alt="post image">
-                    </a>
+                <div class="recent_post_img">
+                    <div class="overflow-hidden rounded-3">
+                        <a href="<?php base_url("post/" . $recent_post_result['slug']) ?>">
+                            <img width="100" height="70"
+                                src="<?php base_url("uploaded_img/" . $recent_post_result['image']) ?>"
+                                alt="post image">
+                        </a>
+                    </div>
                 </div>
-                <div class="recent_post_content">
+                <div class="recent_post_content ms-3">
                     <a href="<?php base_url("post/" . $recent_post_result['slug']) ?>">
                         <p class="recent_post_title fs-4"><?= $recent_post_result['title'] ?></p>
                     </a>

@@ -115,12 +115,23 @@ $(document).ready(function() {
 });
 
 // alert message function
+// function showMessage(message) {
+//     document.querySelector(".message_show").classList.remove("d-none");
+//     document.querySelector(".btn-close").addEventListener("click", function() {
+//         document.querySelector(".message_show").classList.add("d-none");
+//     });
+// }
+
+// Action Message
 function showMessage(message) {
-    document.querySelector(".message_show").classList.remove("d-none");
-    document.querySelector(".btn-close").addEventListener("click", function() {
-        document.querySelector(".message_show").classList.add("d-none");
-    });
+    $("#messageBox").modal("show");
+    $(".message_show .ation_message").html(message);
+
+    setTimeout(function() {
+        $("#messageBox").modal("hide");
+    }, 2500);
 }
+
 
 // Reload location On dismiss modal
 function modalDismiss() {
