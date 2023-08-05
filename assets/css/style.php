@@ -415,6 +415,10 @@ background-position-y: center;
 padding: 3rem 0;
 }
 
+.hero_content {
+max-width: 900px;
+}
+
 .name_indi {
 display: block;
 width: 20rem;
